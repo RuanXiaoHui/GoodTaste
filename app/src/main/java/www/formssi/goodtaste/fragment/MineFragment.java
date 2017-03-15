@@ -11,6 +11,7 @@ import www.formssi.goodtaste.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * 我的
  */
 public class MineFragment extends Fragment {
 
