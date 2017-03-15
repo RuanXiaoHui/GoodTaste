@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="home_categroy_IconName">
+        <item>美食</item>
+        <item>甜品饮食</item>
+        <item>商店超市</item>
+        <item>预定早餐</item>
+        <item>果蔬生鲜</item>
+        <item>新店特惠</item>
+        <item>准时达</item>
+        <item>准时达</item>
+        <item>夜宵</item>
+        <item>土豪推荐</item>
+        <item>鲜花蛋糕</item>
+        <item>汉堡</item>
+        <item>日韩料理</item>
+        <item>麻辣烫</item>
+        <item>披萨意面</item>
+        <item>川湘菜</item>
+        <item>包子粥店</item>
+    </array>
+
+    <array name="home_categroy_Icon">
+        <item >@mipmap/icon_categroy_1</item>
+        <item >@mipmap/icon_categroy_2</item>
+        <item >@mipmap/icon_categroy_3</item>
+        <item >@mipmap/icon_categroy_4</item>
+        <item >@mipmap/icon_categroy_5</item>
+        <item >@mipmap/icon_categroy_6</item>
+        <item >@mipmap/icon_categroy_7</item>
+        <item >@mipmap/icon_categroy_8</item>
+        <item >@mipmap/icon_categroy_9</item>
+        <item >@mipmap/icon_categroy_10</item>
+        <item >@mipmap/icon_categroy_11</item>
+        <item >@mipmap/icon_categroy_12</item>
+        <item >@mipmap/icon_categroy_13</item>
+        <item >@mipmap/icon_categroy_14</item>
+        <item >@mipmap/icon_categroy_15</item>
+        <item >@mipmap/icon_categroy_16</item>
+    </array>
+</resources>

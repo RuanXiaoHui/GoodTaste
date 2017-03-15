@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/realcontent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/activity_mian_fl_hight"
         android:layout_weight="1">
     </FrameLayout>
 
@@ -18,14 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@android:id/tabhost"
-        android:background="#f4f4f4"
+        android:background="@color/activity_main_tab_bg"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
         <FrameLayout
             android:id="@android:id/tabcontent"
-            android:layout_width="0dp"
-            android:layout_height="0dp">
+            android:layout_width="@dimen/activity_mian_fl_width"
+            android:layout_height="@dimen/activity_mian_fl_hight">
         </FrameLayout>
     </android.support.v4.app.FragmentTabHost>
 </LinearLayout>
