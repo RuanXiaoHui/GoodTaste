@@ -33,6 +33,7 @@
     <dimen name="activity_mian_fl_width">0dp</dimen>
 
     <!--MineFragment -->
-    <dimen name="fragment_mine_rl_width">match_parent</dimen>
     <dimen name="fragment_mine_rl_height">100dp</dimen>
+    <dimen name="fragment_mine_tv_width">50dp</dimen>
+    <dimen name="fragment_mine_tv_height">30dp</dimen>
 </resources>

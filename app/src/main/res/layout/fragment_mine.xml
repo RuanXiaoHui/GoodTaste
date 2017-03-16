@@ -7,7 +7,7 @@
     tools:context="www.formssi.goodtaste.fragment.MineFragment">
 
     <RelativeLayout
-        android:layout_width="@dimen/fragment_mine_rl_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_mine_rl_height"
         android:background="#1296db">
 
@@ -32,11 +32,11 @@
 
         <ImageView
             android:id="@+id/iv_mine_head"
-            android:layout_below="@+id/tv_mine"
             android:layout_width="60dp"
             android:layout_height="50dp"
+            android:layout_below="@+id/tv_mine"
             android:layout_marginLeft="35dp"
-            android:src="@mipmap/icon_mine_headprotrait"/>
+            android:src="@mipmap/icon_mine_headprotrait" />
 
     </RelativeLayout>
 
