@@ -7,4 +7,33 @@
     <string name="activity_main_taborder">订单</string>
     <string name="activity_main_tabmine">我的</string>
 
+    <string name="activity_order_info">订单信息</string>
+    <string name="activity_order_status">订单状态</string>
+    <string name="activity_order_status_complete">订单已完成</string>
+    <string name="activity_order_again">再来一单</string>
+    <string name="activity_order_cancel">取消订单</string>
+    <string name="activity_order_store_name">店铺名称</string>
+    <string name="activity_order_food_name">酸菜肉丝</string>
+    <string name="activity_order_food_price">￥10.8</string>
+    <string name="activity_order_food_count">×1</string>
+    <string name="activity_order_distribute_fee">配送费</string>
+    <string name="activity_order_discount">优惠</string>
+    <string name="activity_order_discount_text">-￥10</string>
+    <string name="activity_order_distribute_fee_text">￥5</string>
+    <string name="activity_order_actual_payment">实付</string>
+    <string name="activity_order_actual_payment_text">￥16.6</string>
+    <string name="activity_order_contact_shop">联系商家</string>
+    <string name="activity_order_number">订单号：</string>
+    <string name="activity_order_number_text">1203 4218 1723 3509 0579</string>
+    <string name="activity_order_time">下单时间：</string>
+    <string name="activity_order_time_text">2017-03-16 11:09</string>
+    <string name="activity_order_payment_time">支付时间：</string>
+    <string name="activity_order_payment_time_text">2017-03-16 11:12</string>
+    <string name="activity_order_distribute_info">配送信息</string>
+    <string name="activity_order_arrival_time">到达时间：</string>
+    <string name="activity_order_arrival_time_text">2017-03-16 11:49</string>
+    <string name="activity_order_distribute_address">送餐地址：</string>
+    <string name="activity_order_distribute_address_text">海外联谊大厦2210室</string>
+    <string name="activity_order_distributor">送餐员：</string>
+    <string name="activity_order_distributor_text">陈芝泽，15899861849</string>
 </resources>
