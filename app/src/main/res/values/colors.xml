@@ -4,6 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- 透明颜色 -->
+    <color name="transparent">#00ffffff</color>
+
+    <!-- 通用颜色值 -->
+    <color name="gray">#BDBDBD</color>
+    <color name="red">#e7262b</color>
+    <color name="black">#000000</color>
+    <color name="blue">#4aaff7</color>
+    <color name="blueDark">#156fbb</color>
+    <color name="white">#ffffff</color>
 
     <!--MainActivity-->
     <color name="activity_main_tab_text_pressed">#1296db</color>
