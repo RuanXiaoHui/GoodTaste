@@ -6,22 +6,10 @@
     <!-- 字体大小 -->
     <dimen name="text_size_micro">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
-    <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
-
-    <!-- 通用按钮margin -->
-    <dimen name="btn_small_margin">5dp</dimen>
-    <dimen name="btn_medium_margin">10dp</dimen>
-    <dimen name="btn_large_margin">15dp</dimen>
-
-    <!-- 通用按钮padding -->
-    <dimen name="btn_small_padding">5dp</dimen>
-    <dimen name="btn_medium_padding">10dp</dimen>
-    <dimen name="btn_large_padding">15dp</dimen>
 
     <!--MainActivity -->
     <dimen name="activity_mian_fl_hight">0dp</dimen>
     <dimen name="activity_mian_fl_width">0dp</dimen>
-
 </resources>

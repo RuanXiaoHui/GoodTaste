@@ -14,8 +14,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PayforActivity"></activity>
-        <activity android:name=".activity.OrderDetailActivity"></activity>
+        <activity android:name=".activity.PayforActivity" />
+        <activity android:name=".activity.OrderDetailActivity" />
+        <activity android:name=".activity.UserCenterActivity"></activity>
     </application>
 
 </manifest>
