@@ -7,19 +7,11 @@
     tools:context="www.formssi.goodtaste.fragment.MineFragment">
 
     <RelativeLayout
-        android:layout_width="@dimen/fragment_mine_rl_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_mine_rl_height"
         android:background="#1296db">
 
-        <TextView
-            android:id="@+id/tv_mine"
-            android:layout_width="@dimen/fragment_mine_tv_width"
-            android:layout_height="@dimen/fragment_mine_tv_height"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/activity_main_tabmine"
-            android:textColor="@color/fragment_mine_text_color"
-            android:textSize="@dimen/text_size_medium" />
+
 
         <ImageView
             android:id="@+id/iv_setting"
@@ -32,7 +24,6 @@
 
         <ImageView
             android:id="@+id/iv_mine_head"
-            android:layout_below="@+id/tv_mine"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_marginLeft="35dp"
