@@ -6,4 +6,5 @@
     <string name="activity_main_tabhome">主页</string>
     <string name="activity_main_taborder">订单</string>
     <string name="activity_main_tabmine">我的</string>
+
 </resources>
