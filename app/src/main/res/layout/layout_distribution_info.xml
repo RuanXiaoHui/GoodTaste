@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/large_margin"
-        android:text="@string/activity_order_info" />
+        android:text="@string/activity_order_distribute_info" />
 
     <View
         android:layout_width="match_parent"
@@ -26,14 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
-            android:text="@string/activity_order_number" />
+            android:text="@string/activity_order_distribute_address" />
 
         <TextView
             style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
-            android:text="@string/activity_order_number_text" />
+            android:text="@string/activity_order_distribute_address_text" />
 
     </LinearLayout>
 
@@ -52,14 +52,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
-            android:text="@string/activity_order_time" />
+            android:text="@string/activity_order_arrival_time" />
 
         <TextView
             style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
-            android:text="@string/activity_order_time_text" />
+            android:text="@string/activity_order_arrival_time_text" />
 
     </LinearLayout>
 
@@ -78,14 +78,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
-            android:text="@string/activity_order_payment_time" />
+            android:text="@string/activity_order_distributor" />
 
         <TextView
             style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
-            android:text="@string/activity_order_payment_time_text" />
+            android:text="@string/activity_order_distributor_text" />
 
     </LinearLayout>
 

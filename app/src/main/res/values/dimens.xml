@@ -3,11 +3,30 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="button_small_height">30dp</dimen>
+    <dimen name="button_normal_height">40dp</dimen>
+    <dimen name="button_large_height">50dp</dimen>
+
+    <dimen name="line_horizontal_large_height">10dp</dimen>
+    <dimen name="line_horizontal_bold_height">1dp</dimen>
+    <dimen name="line_horizontal_small_height">0.5dp</dimen>
+
     <!-- 字体大小 -->
     <dimen name="text_size_micro">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
+
+    <!-- 通用margin -->
+    <dimen name="small_margin">5dp</dimen>
+    <dimen name="medium_margin">10dp</dimen>
+    <dimen name="large_margin">15dp</dimen>
+
+    <!-- 通用padding -->
+    <dimen name="small_padding">5dp</dimen>
+    <dimen name="medium_padding">10dp</dimen>
+    <dimen name="large_padding">15dp</dimen>
 
     <!--MainActivity -->
     <dimen name="activity_mian_fl_hight">0dp</dimen>
