@@ -1,14 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
               tools:context="www.formssi.goodtaste.fragment.HomeFragment">
+
+    <include layout="@layout/layout_home_titlebar"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpHomeCategroy"
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="160dp">
     </android.support.v4.view.ViewPager>
 
     <www.formssi.goodtaste.widget.Indicator
@@ -19,9 +22,9 @@
         app:Indicator_number="2"
         app:Indicator_forecolor="@color/activity_main_indicator_fore"
         app:Indicator_bgcolor="@color/activity_main_indicator_bg"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignBottom="@+id/vpHomeCategroy"
-        android:layout_centerHorizontal="true">
+        android:layout_gravity="center_horizontal">
         </www.formssi.goodtaste.widget.Indicator>
 
-</RelativeLayout>
+    <include layout="@layout/layout_home_favourable"/>
+
+</LinearLayout>

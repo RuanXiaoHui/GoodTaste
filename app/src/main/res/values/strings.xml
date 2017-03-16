@@ -6,4 +6,19 @@
     <string name="activity_main_tabhome">主页</string>
     <string name="activity_main_taborder">订单</string>
     <string name="activity_main_tabmine">我的</string>
+
+    <string name="home_favourable_one_title">天天特价</string>
+    <string name="home_favourable_one_desc">美食一折起</string>
+    <string name="home_favourable_two_title">霸王餐</string>
+    <string name="home_favourable_two_desc">领20元红包</string>
+    <string name="home_favourable_three_title">满30减15</string>
+    <string name="home_favourable_three_desc">3月半价减</string>
+    <string name="home_favourable_four_title">下单减10</string>
+    <string name="home_favourable_four_desc">粤吃粤开心</string>
+    <string name="home_topbar_tv_location">深圳</string>
+    <string name="home_topbar_et_hint">搜索商家、商品名称</string>
+    <string name="home_topbar_text_one">星巴克</string>
+    <string name="home_topbar_text_two">必胜客</string>
+    <string name="home_topbar_text_three">鸭血粉丝</string>
+    <string name="home_topbar_text_four">澳门皇茶</string>
 </resources>

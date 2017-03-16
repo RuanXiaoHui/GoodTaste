@@ -7,4 +7,18 @@
     <!--MainActivity -->
     <dimen name="activity_mian_fl_hight">0dp</dimen>
     <dimen name="activity_mian_fl_width">0dp</dimen>
+
+
+    <!--HomeFragment-->
+    <dimen name="fragment_home_favourable_layout_paddingTop">3dp</dimen>
+    <dimen name="fragment_home_favourable_layout_magin">10dp</dimen>
+    <dimen name="fragment_home_favourable_text_size16">16sp</dimen>
+    <dimen name="fragment_home_favourable_text_size12">12sp</dimen>
+    <dimen name="fragment_home_favourable_img_width">50dp</dimen>
+    <dimen name="fragment_home_topbar_img_width">20dp</dimen>
+    <dimen name="fragment_home_topbar_text_size18">18sp</dimen>
+    <dimen name="fragment_home_topbar_magin10">10dp</dimen>
+    <dimen name="fragment_home_topbar_magin5">5dp</dimen>
+    <dimen name="fragment_home_topbar_hight">35dp</dimen>
+
 </resources>
