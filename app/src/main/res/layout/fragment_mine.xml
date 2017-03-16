@@ -1,13 +1,34 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="www.formssi.goodtaste.fragment.MineFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="www.formssi.goodtaste.fragment.MineFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:text="我的"/>
+    <RelativeLayout
+        android:layout_width="@dimen/fragment_mine_rl_width"
+        android:layout_height="@dimen/fragment_mine_rl_height"
+        android:background="#1296db">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_mine"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="我的"
+            android:textSize=""
+            android:textColor="#fff"/>
+
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/icon_mine_setting" />
+    </RelativeLayout>
+
+
+</LinearLayout>
