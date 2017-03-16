@@ -5,6 +5,16 @@
     <color name="colorAccent">#FF4081</color>
     <color name="appcolor">#0095fe</color>
 
+    <!-- 透明颜色 -->
+    <color name="transparent">#00ffffff</color>
+
+    <!-- 通用颜色值 -->
+    <color name="gray">#BDBDBD</color>
+    <color name="red">#e7262b</color>
+    <color name="black">#000000</color>
+    <color name="blue">#4aaff7</color>
+    <color name="blueDark">#156fbb</color>
+    <color name="white">#ffffff</color>
 
     <!--MainActivity-->
     <color name="activity_main_tab_text_pressed">#0095fe</color>
@@ -18,5 +28,9 @@
     <color name="fragment_favourable_title">#313131</color>
     <color name="fragment_favourable_desc">#818181</color>
 
+
+    <!-- MineFragment-->
+    <color name="fragment_mine_ll">#bab6b6</color>
+    <color name="fragment_mine_text_color">#fff</color>
 
 </resources>

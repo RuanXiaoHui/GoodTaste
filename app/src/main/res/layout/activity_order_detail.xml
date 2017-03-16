@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="www.formssi.goodtaste.activity.OrderDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small_margin"
+            android:src="@mipmap/ic_store_default_picture_normal" />
+
+        <TextView
+            style="@style/text_normal_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small_margin"
+            android:drawableRight="@mipmap/ic_right_arrow_normal"
+            android:gravity="center"
+            android:text="@string/activity_order_status_complete" />
+
+        <Button
+            style="@style/button_blue_text_white"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_small_height"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_button_normal"
+            android:text="@string/activity_order_again" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_large_height"
+            android:background="@color/gray" />
+
+        <TextView
+            style="@style/text_normal_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:drawableLeft="@mipmap/ic_store_default_picture_small"
+            android:drawablePadding="@dimen/small_padding"
+            android:drawableRight="@mipmap/ic_right_arrow_normal"
+            android:gravity="center|left"
+            android:text="@string/activity_order_store_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_bold_height"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="@string/activity_order_food_name" />
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/activity_order_food_count" />
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/activity_order_food_price" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="@string/activity_order_food_name" />
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/activity_order_food_count" />
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/activity_order_food_price" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_bold_height"
+            android:background="@color/gray" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin">
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_order_distribute_fee" />
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/activity_order_distribute_fee_text" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_bold_height"
+            android:background="@color/gray" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin">
+
+            <TextView
+                style="@style/text_small_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_order_discount" />
+
+            <TextView
+                style="@style/text_small_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/activity_order_discount_text" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_bold_height"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin">
+
+            <TextView
+                style="@style/text_small_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/activity_order_actual_payment" />
+
+            <TextView
+                style="@style/text_small_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/activity_order_actual_payment_text" />
+        </LinearLayout>
+
+        <Button
+            style="@style/button_text_white"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_small_height"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_button_normal"
+            android:drawableLeft="@mipmap/ic_telephone_normal"
+            android:drawablePadding="@dimen/small_padding"
+            android:padding="@dimen/small_padding"
+            android:text="@string/activity_order_contact_shop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_large_height"
+            android:background="@color/gray" />
+
+        <include layout="@layout/layout_order_info" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_horizontal_large_height"
+            android:background="@color/gray" />
+
+        <include layout="@layout/layout_distribution_info" />
+
+    </LinearLayout>
+
+</ScrollView>

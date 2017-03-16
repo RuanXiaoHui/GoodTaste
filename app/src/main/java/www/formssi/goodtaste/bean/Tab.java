@@ -1,11 +1,9 @@
 package www.formssi.goodtaste.bean;
 
 /**
- * Created by Administrator on 2017/3/15.
- * 邮箱：769006026@qq.com
- * project: GoodTaste
- * 描述：主界面底部的tab栏的实体类
+ * Created by qkldev003 on 2017/3/16.
  */
+
 public class Tab {
 
     private int TabIcon;
@@ -41,5 +39,4 @@ public class Tab {
     public void setFragments(Class fragments) {
         Fragments = fragments;
     }
-
 }
