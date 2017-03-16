@@ -19,6 +19,6 @@
     <dimen name="fragment_home_topbar_text_size18">18sp</dimen>
     <dimen name="fragment_home_topbar_magin10">10dp</dimen>
     <dimen name="fragment_home_topbar_magin5">5dp</dimen>
-    <dimen name="fragment_home_topbar_hight">34dp</dimen>
+    <dimen name="fragment_home_topbar_hight">35dp</dimen>
 
 </resources>
