@@ -15,6 +15,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.PayforActivity"></activity>
+        <activity android:name=".activity.OrderDetailActivity"></activity>
     </application>
 
 </manifest>
