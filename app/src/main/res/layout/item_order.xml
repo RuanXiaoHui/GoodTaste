@@ -54,7 +54,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/llt"
-            android:src="@mipmap/icon_right_arrow"
+            android:src="@mipmap/ic_right_arrow"
             />
 
         <TextView
@@ -122,7 +122,7 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/item_button"
+            android:background="@drawable/shape_button_order_item"
             android:text="再来一单"
             android:textColor="#1295DA"
             />
