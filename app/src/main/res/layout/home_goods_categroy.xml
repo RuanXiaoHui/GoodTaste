@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--该页面是商品分类承载ViewPager的-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpHomeCategroy"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+    </android.support.v4.view.ViewPager>
+
+    <www.formssi.goodtaste.widget.Indicator
+        android:id="@+id/IndicatorHome"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        app:Indicator_radius="7"
+        app:Indicator_number="2"
+        app:Indicator_forecolor="@color/activity_main_indicator_fore"
+        app:Indicator_bgcolor="@color/activity_main_indicator_bg"
+        android:layout_gravity="center_horizontal">
+    </www.formssi.goodtaste.widget.Indicator>
+
+    <include layout="@layout/layout_home_favourable"/>
 
 </LinearLayout>

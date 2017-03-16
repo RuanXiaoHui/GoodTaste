@@ -2,29 +2,17 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               tools:context="www.formssi.goodtaste.fragment.HomeFragment">
 
     <include layout="@layout/layout_home_titlebar"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vpHomeCategroy"
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
-    </android.support.v4.view.ViewPager>
-
-    <www.formssi.goodtaste.widget.Indicator
-        android:id="@+id/IndicatorHome"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        app:Indicator_radius="7"
-        app:Indicator_number="2"
-        app:Indicator_forecolor="@color/activity_main_indicator_fore"
-        app:Indicator_bgcolor="@color/activity_main_indicator_bg"
-        android:layout_gravity="center_horizontal">
-        </www.formssi.goodtaste.widget.Indicator>
-
-    <include layout="@layout/layout_home_favourable"/>
+    
+  <ListView
+      android:id="@+id/lvHomeGoods"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:divider="#e7e7e7"
+      android:dividerHeight="1dp">
+  </ListView>
 
 </LinearLayout>
