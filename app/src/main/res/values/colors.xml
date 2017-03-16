@@ -12,4 +12,8 @@
     <color name="activity_main_indicator_bg">#d2d1d1</color>
     <color name="activity_main_indicator_fore">#427fb4</color>
 
+    <!-- MineFragment-->
+    <color name="fragment_mine_ll">#bab6b6</color>
+    <color name="fragment_mine_text_color">#fff</color>
+
 </resources>

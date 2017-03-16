@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_mine_ll"
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.fragment.MineFragment">
 
@@ -12,22 +13,31 @@
 
         <TextView
             android:id="@+id/tv_mine"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="@dimen/fragment_mine_tv_width"
+            android:layout_height="@dimen/fragment_mine_tv_height"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="我的"
-            android:textSize=""
-            android:textColor="#fff"/>
+            android:text="@string/activity_main_tabmine"
+            android:textColor="@color/fragment_mine_text_color"
+            android:textSize="@dimen/text_size_medium" />
 
         <ImageView
-            android:id="@+id/ivSetting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/iv_setting"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
             android:background="@mipmap/icon_mine_setting" />
+
+        <ImageView
+            android:id="@+id/iv_mine_head"
+            android:layout_below="@+id/tv_mine"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="35dp"
+            android:src="@mipmap/icon_mine_headprotrait"/>
+
     </RelativeLayout>
 
 
