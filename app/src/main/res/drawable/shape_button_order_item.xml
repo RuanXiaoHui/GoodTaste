@@ -3,7 +3,7 @@
     <!-- 边框颜色值 -->
     <item>
         <shape>
-            <solid android:color="#1295DA"/>
+            <solid android:color="@color/appColor"/>
             <corners android:radius="6dp" />
         </shape>
     </item>
