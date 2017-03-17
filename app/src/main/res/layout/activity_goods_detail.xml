@@ -24,8 +24,32 @@
                android:id="@+id/ivShopimg"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_centerInParent="true"
-               android:background="@mipmap/ic_launcher"/>
+               android:layout_centerVertical="true"
+               android:layout_marginLeft="15dp"
+               android:background="@mipmap/icon_categroy_6"/>
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_centerVertical="true"
+               android:layout_marginLeft="10dp"
+               android:layout_toRightOf="@+id/ivShopimg">
+               <TextView
+                   android:id="@+id/ivShopTime"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#3e581b"
+                   android:text="平均配送时间：32分钟"/>
+               <TextView
+                   android:id="@+id/ivShopDesc"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#3e581b"
+                   android:text="店家描述：小滨外卖，吃了爽到你骨子里"/>
+
+           </LinearLayout>
+
+
        </RelativeLayout>
 
         <View
