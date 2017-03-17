@@ -21,6 +21,7 @@
         <activity android:name=".activity.ConfirmOrderActivity"></activity>
         <activity android:name=".activity.ReceiveAddressActivity"></activity>
         <activity android:name=".activity.RemarkOrderActivity"></activity>
+        <activity android:name=".activity.GoodsDetailActivity"></activity>
     </application>
 
 </manifest>
