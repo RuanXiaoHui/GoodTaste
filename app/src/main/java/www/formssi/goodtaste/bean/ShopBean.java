@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * project: GoodTaste
  * 描述：商店的实体类
  */
-public class ShopBean {
+public class ShopBean  implements Serializable{
 
     private String shopId;        //商店ID
     private String shopName;      //商店名字
@@ -20,9 +21,10 @@ public class ShopBean {
     private String shopStart;     //商店评分
     private String shopPhone;     //商店电话
     private List<GoodsMenu> shopMenu;  //商店菜单
+    private int shopCount;     //商店总销量
 
 
-    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone,List<GoodsMenu> shopMenu) {
+    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone,List<GoodsMenu> shopMenu,int shopCount) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.foods = foods;
@@ -33,6 +35,7 @@ public class ShopBean {
         this.shopStart = shopStart;
         this.shopPhone = shopPhone;
         this.shopMenu=shopMenu;
+        this.shopCount=shopCount;
     }
 
     public String getShopId() {
@@ -113,5 +116,13 @@ public class ShopBean {
 
     public void setShopMenu(List<GoodsMenu> shopMenu) {
         this.shopMenu = shopMenu;
+    }
+
+    public int getShopCount() {
+        return shopCount;
+    }
+
+    public void setShopCount(int shopCount) {
+        this.shopCount = shopCount;
     }
 }
