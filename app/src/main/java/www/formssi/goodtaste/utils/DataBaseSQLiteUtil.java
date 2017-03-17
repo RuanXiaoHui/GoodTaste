@@ -90,7 +90,6 @@ public class DataBaseSQLiteUtil {
     /**
      * 创建表的方法
      *
-     *
      * @param tableName 表名
      * @param columns   列名数组：new String[]{"id", "name varchar(20),", "phone varchar(15)"}
      * @return 创建表的数据库语句
