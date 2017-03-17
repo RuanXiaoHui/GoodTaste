@@ -31,19 +31,19 @@
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_name"
-                    style="@style/text_normal_black"
+                    style="@style/activity_text_normal_black"
                     android:text="苏妮"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_gender"
-                    style="@style/text_normal_black"
+                    style="@style/activity_text_normal_black"
                     android:layout_marginLeft="@dimen/common_margin_small"
                     android:text="女士" />
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_phone"
-                    style="@style/text_normal_black"
+                    style="@style/activity_text_normal_black"
                     android:layout_marginLeft="@dimen/common_margin_normal"
                     android:text="18376611446" />
 
@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_address"
-                style="@style/text_small_gray"
+                style="@style/activity_text_small_gray"
                 android:layout_marginTop="@dimen/common_margin_normal"
                 android:text="海外联谊大厦迎春路122210" />
 
@@ -85,7 +85,7 @@
 
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_stroeName"
-            style="@style/text_normal_gray"
+            style="@style/activity_text_normal_gray"
             android:layout_marginLeft="@dimen/common_margin_normal"
             android:text="湘江小厨" />
 
