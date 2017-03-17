@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,8 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.XAdapter;
 
 /**
- * 收货地址页面
+ * 收货地址列表页面
+ * 说明：收货地址列表显示、新增、删除、修改地址
  * Created by john on 2017/3/16.
  */
 
@@ -31,6 +33,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     private LinearLayout llt_ReceiveAddressActivity_addAddress; //新增地址栏
 
     private List<Object> list;
+    private  int ORDER_REMARK = 1002; //请求码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,12 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         operateListView();
     }
 
-
+    /**
+     * 初始化，绑定控件
+     */
     private void bindViews() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         lvAddress = (ListView) findViewById(R.id.lv_ReceiveAddressActivity_address);
         llt_ReceiveAddressActivity_addAddress = (LinearLayout) findViewById(R.id.llt_ReceiveAddressActivity_addAddress);
 
@@ -53,18 +58,29 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         llt_ReceiveAddressActivity_addAddress.setOnClickListener(this);
     }
 
+    /**
+     * 点击事件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.iv_backTitlebar_back:
-                finish();
+            case R.id.iv_backTitlebar_back: //返回
+                this.finish();
                 break;
-            case R.id.llt_ReceiveAddressActivity_addAddress:
+            case R.id.llt_ReceiveAddressActivity_addAddress: //新增地址
+                Intent intent = new Intent(ReceiveAddressActivity.this,AddressViewHolder.class);
+//                startActivityForResult(intent,);
+
                 break;
             default:
                 break;
         }
     }
+
+    /**
+     * 对ListView的操作
+     */
     private void operateListView() {
         list = new ArrayList<Object>();
         //添加数据

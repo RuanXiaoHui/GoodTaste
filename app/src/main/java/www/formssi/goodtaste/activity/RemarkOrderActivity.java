@@ -13,6 +13,7 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 
 /**
  * 订单备注页面
+ * 说明：填写订单备注
  * Created by john on 2017/3/16.
  */
 
@@ -31,9 +32,12 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
         tvTitle.setText(R.string.activity_remarkOrder_title);
     }
 
+    /**
+     * 初始化，绑定控件
+     */
     private void bindViiews() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         etRemarkOrder = (EditText) findViewById(R.id.et_RemarkOrderActivity_remark);
         btnOk = (Button) findViewById(R.id.btn_RemarkOrderActivity_ok);
 
@@ -41,6 +45,10 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
         btnOk.setOnClickListener(this);
     }
 
+    /**
+     * 点击事件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
 
