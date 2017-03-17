@@ -34,4 +34,6 @@
 
     <!--MineFragment -->
     <dimen name="fragment_mine_rl_height">100dp</dimen>
+    <dimen name="fragment_mine_tv_width">50dp</dimen>
+    <dimen name="fragment_mine_tv_height">30dp</dimen>
 </resources>
