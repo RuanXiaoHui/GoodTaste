@@ -42,7 +42,7 @@
             android:src="@mipmap/ic_add_address" />
 
         <TextView
-            style="@style/text_normal_blue"
+            style="@style/activity_text_normal_blue"
             android:layout_marginLeft="@dimen/common_margin_normal"
             android:text="@string/activity_receiveAddress_addAddress" />
 

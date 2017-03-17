@@ -27,7 +27,7 @@
             android:paddingTop="@dimen/common_padding_normal">
 
             <TextView
-                style="@style/text_normal_black"
+                style="@style/activity_text_normal_black"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:gravity="left|center_vertical"
@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_distributionCost"
-                style="@style/text_normal_black"
+                style="@style/activity_text_normal_black"
                 android:layout_marginLeft="@dimen/common_margin_normal"
                 android:text="Y4" />
 
@@ -55,7 +55,7 @@
             android:padding="@dimen/common_padding_medium">
 
             <TextView
-                style="@style/text_normal_black"
+                style="@style/activity_text_normal_black"
                 android:text="@string/activity_confirmOrder_orderRemarks" />
 
             <LinearLayout
@@ -67,7 +67,7 @@
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_remarks"
-                    style="@style/text_micro_gray"
+                    style="@style/activity_text_micro_gray"
                     android:layout_marginLeft="@dimen/common_margin_normal"
                     android:layout_marginRight="@dimen/common_margin_small"
                     android:text="@string/activity_confirmOrder_orderNote" />

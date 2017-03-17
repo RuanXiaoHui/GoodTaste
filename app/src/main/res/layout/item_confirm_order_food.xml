@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_foodName"
-            style="@style/text_small_black"
+            style="@style/activity_text_small_black"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|left"
@@ -30,23 +30,17 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/text_small_gray"
-                android:text="x" />
-
-            <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_foodNumber"
-                style="@style/text_small_gray"
+                style="@style/activity_text_small_gray"
                 android:text="2" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_foodPrice"
-            style="@style/text_small_black"
+            style="@style/activity_text_small_black"
             android:layout_marginLeft="@dimen/common_margin_super"
             android:text="Y13" />
 
-
     </LinearLayout>
-
 
 </LinearLayout>

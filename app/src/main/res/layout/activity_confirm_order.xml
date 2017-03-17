@@ -42,12 +42,12 @@
             android:paddingLeft="@dimen/common_padding_medium">
 
             <TextView
-                style="@style/text_normal_white"
+                style="@style/activity_text_normal_white"
                 android:text="@string/activity_confirmOrder_toBePay" />
 
             <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_toBePay"
-                style="@style/text_normal_white"
+                style="@style/activity_text_normal_white"
                 android:text="Y48.3"
                 android:layout_marginLeft="@dimen/common_margin_small"/>
 
