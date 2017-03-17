@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_padding_small"
+        android:paddingLeft="@dimen/common_padding_medium"
+        android:paddingRight="@dimen/common_padding_medium"
+        android:paddingTop="@dimen/common_padding_small">
+
+        <TextView
+            android:id="@+id/tv_ConfirmOrederActtivity_foodName"
+            style="@style/text_small_black"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:text="霸王鸡条" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_small_gray"
+                android:text="x" />
+
+            <TextView
+                android:id="@+id/tv_ConfirmOrederActtivity_foodNumber"
+                style="@style/text_small_gray"
+                android:text="2" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ConfirmOrederActtivity_foodPrice"
+            style="@style/text_small_black"
+            android:layout_marginLeft="@dimen/common_margin_super"
+            android:text="Y13" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/large_padding"
+    tools:context="www.formssi.goodtaste.activity.OrderDetailActivity">
+
+    <TextView
+        android:id="@id/iv_order_item_food_name"
+        style="@style/text_small_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:text="@string/activity_order_food_name" />
+
+    <TextView
+        android:id="@id/iv_order_item_food_count"
+        style="@style/text_small_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="@string/activity_order_food_count" />
+
+    <TextView
+        android:id="@id/iv_order_item_food_price"
+        style="@style/text_small_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="@string/activity_order_food_price" />
+
+</LinearLayout>

@@ -3,6 +3,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!--padding公共正常间距-->
+    <dimen name="common_padding_small">5dp</dimen>
+    <dimen name="common_padding_normal">10dp</dimen>
+    <dimen name="common_padding_medium">15dp</dimen>
+    <dimen name="common_padding_large">20dp</dimen>
+
+    <!--margin公共正常间距-->
+    <dimen name="common_margin_small">5dp</dimen>
+    <dimen name="common_margin_normal">10dp</dimen>
+    <dimen name="common_margin_medium">15dp</dimen>
+    <dimen name="common_margin_large">20dp</dimen>
+    <dimen name="common_margin_super">30dp</dimen>
+
     <dimen name="button_small_height">30dp</dimen>
     <dimen name="button_normal_height">40dp</dimen>
     <dimen name="button_large_height">50dp</dimen>
@@ -35,5 +48,57 @@
     <!-- MineFragment-->
     <dimen name="fragment_mine_iv_width">25dp</dimen>
     <dimen name="fragment_mine_iv_height">25dp</dimen>
+
+    <!--activity的返回标题栏-->
+    <dimen name="activity_back_titlebar_hight">50dp</dimen>
+    <dimen name="activity_back_titlebar_paddingLeft">15dp</dimen>
+    <dimen name="activity_back_titlebar_paddingRight">15dp</dimen>
+    <dimen name="activity_back_titlebar_marginLeft">15dp</dimen>
+
+    <!--底部栏高的 -->
+    <dimen name="activity_bottom_hight">50dp</dimen>
+
+    <!--底部栏高的 -->
+    <dimen name="layout_width_null">0dp</dimen>
+    <dimen name="layout_hight_null">0dp</dimen>
+
+    <!--小图标-->
+    <dimen name="icon_micro_width">10dp</dimen>
+    <dimen name="icon_micro_hight">10dp</dimen>
+
+    <!--小图标-->
+    <dimen name="icon_small_width">25dp</dimen>
+    <dimen name="icon_small_hight">25dp</dimen>
+
+    <!--正常图标-->
+    <dimen name="icon_normal_width">30dp</dimen>
+    <dimen name="icon_normal_hight">30dp</dimen>
+
+    <!--分割线高度-->
+    <dimen name="line_height_low">1dp</dimen>
+    <dimen name="line_height_high">10dp</dimen>
+
+    <!--列表分割线-->
+    <dimen name="listView_dividerHeight_null">0dp</dimen>
+    <dimen name="listView_dividerHeight">1dp</dimen>
+
+
+    <!--MineFragment -->
+    <dimen name="fragment_mine_rl_height">100dp</dimen>
+    <dimen name="fragment_mine_tv_width">50dp</dimen>
+    <dimen name="fragment_mine_tv_height">30dp</dimen>
+
+
+    <!--HomeFragment-->
+    <dimen name="fragment_home_favourable_layout_paddingTop">3dp</dimen>
+    <dimen name="fragment_home_favourable_layout_magin">10dp</dimen>
+    <dimen name="fragment_home_favourable_text_size16">16sp</dimen>
+    <dimen name="fragment_home_favourable_text_size12">12sp</dimen>
+    <dimen name="fragment_home_favourable_img_width">50dp</dimen>
+    <dimen name="fragment_home_topbar_img_width">20dp</dimen>
+    <dimen name="fragment_home_topbar_text_size18">18sp</dimen>
+    <dimen name="fragment_home_topbar_magin10">10dp</dimen>
+    <dimen name="fragment_home_topbar_magin5">5dp</dimen>
+    <dimen name="fragment_home_topbar_hight">34dp</dimen>
 
 </resources>

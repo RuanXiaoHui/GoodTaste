@@ -3,14 +3,38 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="commom_ok">确定</string>
+    <string name="commom_cancle">取消</string>
+
     <string name="activity_main_tabhome">主页</string>
     <string name="activity_main_taborder">订单</string>
     <string name="activity_main_tabmine">我的</string>
 
+    <string name="activity_confirmOrder_title">确认订单</string>
+    <string name="activity_confirmOrder_distributionCost">配送费</string>
+    <string name="activity_confirmOrder_orderNote">口味、偏好</string>
+    <string name="activity_confirmOrder_orderRemarks">订单备注</string>
+    <string name="activity_confirmOrder_toBePay">待支付</string>
+    <string name="activity_confirmOrder_commit">提交订单</string>
+
+    <string name="activity_receiveAddress_title">收货地址</string>
+    <string name="activity_receiveAddress_addAddress">新增地址</string>
+
+    <string name="activity_remarkOrder_title">订单备注</string>
+    <string name="activity_remarkOrder_remark">备注信息</string>
+    <string name="activity_remarkOrder_editHint">请输入备注内容（可不填）</string>
+
+
+
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>
-    <string name="activity_order_status_complete">订单已完成</string>
+    <string name="activity_order_complete">订单已完成</string>
+    <string name="activity_order_waiting_for_payment">等待支付</string>
+    <string name="activity_order_waiting_for_comment">等待评价</string>
+    <string name="activity_order_waiting_for_business_orders">等待商家接单</string>
     <string name="activity_order_again">再来一单</string>
+    <string name="activity_order_goto_pay">去支付</string>
+    <string name="activity_order_goto_comment">评价</string>
     <string name="activity_order_cancel">取消订单</string>
     <string name="activity_order_store_name">店铺名称</string>
     <string name="activity_order_food_name">酸菜肉丝</string>
@@ -48,5 +72,23 @@
     <string name="fragment_personal_security">账户与安全</string>
     <string name="fragment_personal_portrait">头像</string>
     <string name="fragment_personal_username">用户名</string>
+
+
+
+    <!--homeFragment-->
+    <string name="home_favourable_one_title">天天特价</string>
+    <string name="home_favourable_one_desc">美食一折起</string>
+    <string name="home_favourable_two_title">霸王餐</string>
+    <string name="home_favourable_two_desc">领20元红包</string>
+    <string name="home_favourable_three_title">满30减15</string>
+    <string name="home_favourable_three_desc">3月半价减</string>
+    <string name="home_favourable_four_title">下单减10</string>
+    <string name="home_favourable_four_desc">粤吃粤开心</string>
+    <string name="home_topbar_tv_location">深圳</string>
+    <string name="home_topbar_et_hint">搜索商家、商品名称</string>
+    <string name="home_topbar_text_one">星巴克</string>
+    <string name="home_topbar_text_two">必胜客</string>
+    <string name="home_topbar_text_three">鸭血粉丝</string>
+    <string name="home_topbar_text_four">澳门皇茶</string>
 
 </resources>
