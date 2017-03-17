@@ -5,9 +5,7 @@
               android:orientation="vertical">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#CDCDCD"
+        style="@style/crude_dividing_line"
         />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,9 +70,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#d6d4d3"
+        style="@style/thin_dividing_line"
         />
 
     <RelativeLayout
@@ -107,9 +103,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#d6d4d3"
+        style="@style/thin_dividing_line"
         />
 
     <RelativeLayout
@@ -124,13 +118,11 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_button_order_item"
             android:text="再来一单"
-            android:textColor="#1295DA"
+            android:textColor="@color/appColor"
             />
 
     </RelativeLayout>
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#d6d4d3"
+        style="@style/thin_dividing_line"
         />
 </LinearLayout>

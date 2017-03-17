@@ -242,4 +242,18 @@
         <item name="android:textColor">@color/activity_text_black</item>
     </style>
 
+    
+    <!--orderFragment的粗分割线-->
+    <style name="crude_dividing_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/line_horizontal</item>
+    </style>
+    <!--orderFragment的细分割线-->
+    <style name="thin_dividing_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line_horizontal</item>
+    </style>
+    
 </resources>
