@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0095fe</color>
+    <color name="colorPrimaryDark">#0095fe</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="appcolor">#0095fe</color>
 
     <!-- 透明颜色 -->
     <color name="transparent">#00ffffff</color>
@@ -16,11 +17,17 @@
     <color name="white">#ffffff</color>
 
     <!--MainActivity-->
-    <color name="activity_main_tab_text_pressed">#1296db</color>
+    <color name="activity_main_tab_text_pressed">#0095fe</color>
     <color name="activity_main_tab_text_normal">#BFBFBF</color>
     <color name="activity_main_tab_bg">#f4f4f4</color>
     <color name="activity_main_indicator_bg">#d2d1d1</color>
-    <color name="activity_main_indicator_fore">#427fb4</color>
+    <color name="activity_main_indicator_fore">#0095fe</color>
+
+
+    <!--HomeFragment-->
+    <color name="fragment_favourable_title">#313131</color>
+    <color name="fragment_favourable_desc">#818181</color>
+
 
     <!-- MineFragment-->
     <color name="fragment_mine_ll">#bab6b6</color>

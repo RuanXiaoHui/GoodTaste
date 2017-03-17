@@ -8,11 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.widget.NoScrollListView;
 
 /**
  * 订单详情Activity类
@@ -23,10 +25,12 @@ import www.formssi.goodtaste.bean.FoodBean;
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tvOrderStatus; // 订单状态
+    private NoScrollListView lvFoodList; // 食品listView
     private Button btnOK; // 确认按钮：根据状态显示不同文字：去支付、评价、再来一单
     private Button btnCancel; // 取消按钮：取消订单
     private Button btnContactBusiness; // 联系商家按钮：拨打商家电话
-    private List<FoodBean> listFoodBean;
+    private List<FoodBean> listFoodBean; // 食品列表
+    private FoodListAdapter adapter; // 适配器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,14 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      * 初始化控件
      */
     public void initViews() {
-
+        listFoodBean = new ArrayList<>();
+        listFoodBean.add(new FoodBean("", "鱼香肉丝", 0, 0));
+        listFoodBean.add(new FoodBean("", "香菜牛肉", 0, 0));
+        listFoodBean.add(new FoodBean("", "芹菜炒鸡蛋", 0, 0));
+        listFoodBean.add(new FoodBean("", "餐盒", 0, 0));
+        adapter = new FoodListAdapter();
+        lvFoodList = (NoScrollListView) findViewById(R.id.lv_order_food_list);
+        lvFoodList.setAdapter(adapter);
     }
 
     @Override
@@ -72,7 +83,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             FoodViewHolder holder = null;
-            if(convertView == null){
+            if (convertView == null) {
                 holder = new FoodViewHolder();
                 convertView = LayoutInflater.from(OrderDetailActivity.this).inflate(R.layout.item_order_food_list_viewl, null);
                 holder.tvFoodName = (TextView) convertView.findViewById(R.id.iv_order_item_food_name);
@@ -83,7 +94,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                 holder = (FoodViewHolder) convertView.getTag();
             }
             FoodBean bean = getItem(position);
-            //holder.tvFoodName.setText();
+            holder.tvFoodName.setText(bean.getGoodsName());
+            //holder.tvFoodCount.setText(bean.getGoodsName());
+            //holder.tvFoodPrice.setText(bean.getGoodsName());
             return convertView;
         }
     }

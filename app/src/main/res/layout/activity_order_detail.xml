@@ -25,7 +25,7 @@
             android:layout_margin="@dimen/small_margin"
             android:drawableRight="@mipmap/ic_right_arrow_normal"
             android:gravity="center"
-            android:text="@string/activity_order_complete" />
+            android:text="@string/activity_order_status_complete" />
 
         <Button
             style="@style/button_blue_text_white"
@@ -56,19 +56,11 @@
             android:layout_height="@dimen/line_horizontal_bold_height"
             android:background="@color/gray" />
 
-        <LinearLayout
+        <www.formssi.goodtaste.widget.NoScrollListView
+            android:id="@id/lv_order_food_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin"
-            android:orientation="vertical">
-
-            <include layout="@layout/item_order_food_list_viewl"/>
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
 
         <View
             android:layout_width="match_parent"

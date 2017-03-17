@@ -9,19 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-
+import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
+import www.formssi.goodtaste.adapter.HomeGoodsBaseAdapter;
 import www.formssi.goodtaste.adapter.MyPagerAdapter;
 import www.formssi.goodtaste.bean.HomeGoodsCategroyBean;
 import www.formssi.goodtaste.widget.Indicator;
 
 /**
  * A simple {@link Fragment} subclass.
- * 外卖页面
+ * 主页面
  */
 public class HomeFragment extends Fragment {
     private View mView;
@@ -32,6 +32,9 @@ public class HomeFragment extends Fragment {
     private LayoutInflater mInflater;
     private ViewPager vpHomeCategroy;
     private List<View> views;
+    private ListView lvHomeGoods;
+    private List<String> mDatas;
+
 
 
     @Override
@@ -58,12 +61,20 @@ public class HomeFragment extends Fragment {
                 good_Data2.add(new HomeGoodsCategroyBean(goods_Name[i],typedArray.getResourceId(i,0)));
             }
         }
+        mDatas=new ArrayList<>();
+        for (int i = 0; i <12 ; i++) {
+            mDatas.add("商家"+i);
+
+        }
 
     }
 
     private void initView() {
-        vpHomeCategroy = (ViewPager) mView.findViewById(R.id.vpHomeCategroy);
-        IndicatorHome= (Indicator) mView.findViewById(R.id.IndicatorHome);
+        lvHomeGoods= (ListView) mView.findViewById(R.id.lvHomeGoods);
+        View Layout_View=mInflater.inflate(R.layout.home_goods_categroy,null);
+
+        vpHomeCategroy = (ViewPager) Layout_View.findViewById(R.id.vpHomeCategroy);
+        IndicatorHome= (Indicator) Layout_View.findViewById(R.id.IndicatorHome);
 
         View mGrid1 = mInflater.inflate(R.layout.home_goods_gridview, null);
         GridView grigView_one = (GridView) mGrid1.findViewById(R.id.gvHomeCategroy);
@@ -78,6 +89,9 @@ public class HomeFragment extends Fragment {
         views.add(mGrid2);
 
         vpHomeCategroy.setAdapter(new MyPagerAdapter(views));
+        lvHomeGoods.addHeaderView(Layout_View);
+
+        lvHomeGoods.setAdapter(new HomeGoodsBaseAdapter(mDatas,getActivity()));
 
     }
 
