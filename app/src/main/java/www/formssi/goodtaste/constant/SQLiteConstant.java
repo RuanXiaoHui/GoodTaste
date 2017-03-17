@@ -27,7 +27,7 @@ public class SQLiteConstant {
             "shopId integer"}; // 食品表的列名数组
     public static final String[] TABLE_ORDER_COLUMNS = new String[]{"orderId", "shopName varchar(20),",
             "shopPicture varchar(10),", "status char(1),", "price varchar(10),","orderNumber varchar(50),",
-            "orderTime datetime"}; // 订单表的列名数组
+            "orderContent varchar(50),", "orderTime datetime"}; // 订单表的列名数组
     public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{"orderDetailId", "shopName varchar(20),",
             "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),","orderNumber varchar(50),",
             "image_path varchar(100)"}; // 订单详情表的列名数组
