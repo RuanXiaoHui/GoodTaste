@@ -77,4 +77,12 @@ public class FoodBean  implements Serializable {
     public void setGoodsMoney(String goodsMoney) {
         this.goodsMoney = goodsMoney;
     }
+
+    public int getGoodsNumber() {
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(int goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
 }

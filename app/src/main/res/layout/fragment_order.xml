@@ -5,7 +5,7 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#1295DA"
+        android:background="@color/appColor"
         android:layout_height="50dp">
         <TextView
             android:layout_width="wrap_content"
@@ -151,7 +151,8 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <ImageView
+        style="@style/thin_dividing_line"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvOrderList"
         android:layout_width="match_parent"

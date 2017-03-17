@@ -13,13 +13,16 @@
         android:background="@color/fragment_mine_bg_color">
 
         <TextView
-            android:textSize="18sp"
             android:id="@+id/tv_mine"
-            style="@style/text_small_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin"
-            android:text="@string/fragment_mine_me" />
+            android:layout_alignBottom="@+id/iv_setting"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_marginRight="@dimen/large_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:text="@string/fragment_mine_me"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
 
         <ImageView
             android:id="@+id/iv_setting"
@@ -50,44 +53,47 @@
                 android:padding="@dimen/medium_padding">
 
                 <ImageView
-                    android:id="@+id/iv_mine_head"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginLeft="35dp"
+                    android:id="@+id/iv_mine_headprotrait"
+                    android:layout_width="@dimen/fragment_mine_iv_headprotrait_width"
+                    android:layout_height="@dimen/fragment_mine_iv_headprotrait_height"
+                    android:layout_marginLeft="@dimen/common_margin_super"
                     android:src="@mipmap/icon_mine_headprotrait" />
 
                 <RelativeLayout
                     android:id="@+id/rl_mine_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/iv_mine_head">
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_toRightOf="@+id/iv_mine_headprotrait"
+                    android:padding="@dimen/common_padding_small">
 
                     <TextView
-                        android:id="@+id/tv_mine_name"
+                        android:id="@+id/tv_mine_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="4894" />
+                        android:layout_marginTop="@dimen/common_margin_normal"
+                        android:text="4894"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/tv_mine_telephone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_mine_name"
-                        android:layout_marginTop="12dp"
-                        android:text="13078888888" />
+                        android:layout_below="@+id/tv_mine_username"
+                        android:layout_marginTop="@dimen/common_margin_normal"
+                        android:text="13078888888"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/fragment_mine_iv_width"
+                    android:layout_height="@dimen/fragment_mine_iv_height"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="21dp"
-                    android:layout_marginRight="21dp"
+                    android:layout_marginEnd="@dimen/common_margin_large"
+                    android:layout_marginRight="@dimen/common_margin_large"
                     android:src="@mipmap/icon_mine_enter" />
 
             </RelativeLayout>
@@ -97,76 +103,60 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="@dimen/medium_padding">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/style_mine_vertical_linearlayout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00元"
-                        android:textColor="#f60" />
+                        android:textColor="@color/fragment_mine_wallet" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/fragment_mine_wallet" />
                 </LinearLayout>
 
                 <View
-                    android:layout_width="0.7dp"
+                    android:layout_width="@dimen/line_vertical_small_width"
                     android:layout_height="match_parent"
                     android:background="@color/black" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/style_mine_vertical_linearlayout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00个"
-                        android:textColor="#f00" />
+                        android:textColor="@color/fragment_mine_preferential" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/fragment_mine_preferential" />
                 </LinearLayout>
 
                 <View
-                    android:layout_width="0.7dp"
+                    android:layout_width="@dimen/line_vertical_small_width"
                     android:layout_height="match_parent"
                     android:background="@color/black" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/style_mine_vertical_linearlayout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00分"
-                        android:textColor="#194d19" />
+                        android:textColor="@color/fragment_mine_integral" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/fragment_mine_integral" />
                 </LinearLayout>
 
@@ -176,16 +166,16 @@
                 android:id="@+id/tv_mine_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:background="@color/white"
                 android:drawableLeft="@mipmap/icon_mine_address"
-                android:drawablePadding="10dp"
-                android:padding="14dp"
+                android:drawablePadding="@dimen/common_padding_normal"
+                android:padding="@dimen/common_padding_medium"
                 android:text="@string/fragment_mine_address" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.7dp"
+                android:layout_height="@dimen/line_horizontal_small_height"
                 android:background="@color/black" />
 
             <TextView
@@ -194,13 +184,13 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:drawableLeft="@mipmap/icon_mine_collection"
-                android:drawablePadding="10dp"
-                android:padding="14dp"
+                android:drawablePadding="@dimen/common_padding_normal"
+                android:padding="@dimen/common_padding_medium"
                 android:text="@string/fragment_mine_collection" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.7dp"
+                android:layout_height="@dimen/line_horizontal_small_height"
                 android:background="@color/black" />
 
             <TextView
@@ -209,8 +199,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:drawableLeft="@mipmap/icon_mine_evaluation"
-                android:drawablePadding="10dp"
-                android:padding="14dp"
+                android:drawablePadding="@dimen/common_padding_normal"
+                android:padding="@dimen/common_padding_medium"
                 android:text="@string/fragment_mine_evaluation" />
 
         </LinearLayout>

@@ -18,7 +18,6 @@ import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.GoodsDetailActivity;
-import www.formssi.goodtaste.activity.MainActivity;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
 import www.formssi.goodtaste.adapter.HomeGoodsBaseAdapter;
 import www.formssi.goodtaste.adapter.MyPagerAdapter;
@@ -116,6 +115,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent=new Intent(getActivity(), GoodsDetailActivity.class);
+                intent.putExtra("ShopBean",mDatas.get(position-1));
                 startActivity(intent);
             }
         });

@@ -22,9 +22,11 @@ public class ShopBean  implements Serializable{
     private String shopPhone;     //商店电话
     private List<GoodsMenu> shopMenu;  //商店菜单
     private int shopCount;     //商店总销量
+    private String  distributionTime;   //平均配送时间
+    private String shopBusinessHours;    //商店营业时间
 
 
-    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone,List<GoodsMenu> shopMenu,int shopCount) {
+    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone,List<GoodsMenu> shopMenu,int shopCount,String  distributionTime,String shopBusinessHours) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.foods = foods;
@@ -36,6 +38,8 @@ public class ShopBean  implements Serializable{
         this.shopPhone = shopPhone;
         this.shopMenu=shopMenu;
         this.shopCount=shopCount;
+        this.distributionTime=distributionTime;
+        this.shopBusinessHours=shopBusinessHours;
     }
 
     public String getShopId() {
@@ -124,5 +128,21 @@ public class ShopBean  implements Serializable{
 
     public void setShopCount(int shopCount) {
         this.shopCount = shopCount;
+    }
+
+    public String getDistributionTime() {
+        return distributionTime;
+    }
+
+    public void setDistributionTime(String distributionTime) {
+        this.distributionTime = distributionTime;
+    }
+
+    public String getShopBusinessHours() {
+        return shopBusinessHours;
+    }
+
+    public void setShopBusinessHours(String shopBusinessHours) {
+        this.shopBusinessHours = shopBusinessHours;
     }
 }
