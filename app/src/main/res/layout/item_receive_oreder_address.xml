@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_margin_medium">
+
+        <CheckBox
+            android:id="@+id/cb_ReceiveAddressActivity_selected"
+            style="@style/checkbox_circle"
+            android:focusable="false"
+            android:src="@mipmap/ic_checkbox_selected" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_ReceiveAddressActivity_name"
+                    style="@style/text_normal_black"
+                    android:text="苏妮"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_ReceiveAddressActivity_gender"
+                    style="@style/text_normal_black"
+                    android:layout_marginLeft="@dimen/common_margin_small"
+                    android:text="女士" />
+
+                <TextView
+                    android:id="@+id/tv_ReceiveAddressActivity_phone"
+                    style="@style/text_normal_black"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:text="18376611446" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_ReceiveAddressActivity_address"
+                style="@style/text_small_gray"
+                android:layout_marginTop="@dimen/common_margin_normal"
+                android:text="海外联谊大厦迎春路122210" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_ReceiveAddressActivity_edit"
+            style="@style/icon_normal"
+            android:src="@mipmap/ic_edit" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

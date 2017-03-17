@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_payfor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="www.formssi.goodtaste.activity.ConfirmOrderActivity">
+
+    <!--确认订单-->
+
+    <include layout="@layout/layout_back_titlebar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_ConfirmOrederActtivity_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/line_horizontal"
+            android:dividerHeight="@dimen/listView_dividerHeight_null"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_bottom_hight"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_width_null"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:background="@color/negative_black"
+            android:gravity="center_vertical|left"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_padding_medium">
+
+            <TextView
+                style="@style/text_normal_white"
+                android:text="@string/activity_confirmOrder_toBePay" />
+
+            <TextView
+                android:id="@+id/tv_ConfirmOrederActtivity_toBePay"
+                style="@style/text_normal_white"
+                android:text="Y48.3"
+                android:layout_marginLeft="@dimen/common_margin_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_width_null"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/positive_green"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_ConfirmOrederActtivity_commitOrder"
+                style="@style/button_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/activity_confirmOrder_commit" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,9 +3,28 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="commom_ok">确定</string>
+    <string name="commom_cancle">取消</string>
+
     <string name="activity_main_tabhome">主页</string>
     <string name="activity_main_taborder">订单</string>
     <string name="activity_main_tabmine">我的</string>
+
+    <string name="activity_confirmOrder_title">确认订单</string>
+    <string name="activity_confirmOrder_distributionCost">配送费</string>
+    <string name="activity_confirmOrder_orderNote">口味、偏好</string>
+    <string name="activity_confirmOrder_orderRemarks">订单备注</string>
+    <string name="activity_confirmOrder_toBePay">待支付</string>
+    <string name="activity_confirmOrder_commit">提交订单</string>
+
+    <string name="activity_receiveAddress_title">收货地址</string>
+    <string name="activity_receiveAddress_addAddress">新增地址</string>
+
+    <string name="activity_remarkOrder_title">订单备注</string>
+    <string name="activity_remarkOrder_remark">备注信息</string>
+    <string name="activity_remarkOrder_editHint">请输入备注内容（可不填）</string>
+
+
 
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>
