@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray2"
+    android:orientation="vertical">
+
+    <!-- 订单备注-->
+    <include
+        layout="@layout/layout_back_titlebar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/activity_common_background_white"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/common_margin_normal"
+        android:padding="@dimen/common_padding_medium">
+
+        <TextView
+            style="@style/text_normal_black"
+            android:text="@string/activity_remarkOrder_remark" />
+
+        <EditText
+            android:id="@+id/et_RemarkOrderActivity_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_normal"
+            android:background="@color/activity_common_background_gray1"
+            android:gravity="top"
+            android:textSize="@dimen/text_size_normal"
+            android:hint="@string/activity_remarkOrder_editHint"
+            android:lines="5"
+            android:padding="@dimen/common_padding_normal" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/common_padding_medium"
+        android:paddingRight="@dimen/common_padding_medium">
+
+        <Button
+            android:id="@+id/btn_RemarkOrderActivity_ok"
+            style="@style/button_positive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:text="@string/commom_ok"
+            android:textSize="@dimen/text_size_medium"/>
+    </LinearLayout>
+
+</LinearLayout>

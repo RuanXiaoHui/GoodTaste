@@ -17,6 +17,9 @@
         <activity android:name=".activity.PayforActivity" />
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.UserCenterActivity"></activity>
+        <activity android:name=".activity.ConfirmOrderActivity"></activity>
+        <activity android:name=".activity.ReceiveAddressActivity"></activity>
+        <activity android:name=".activity.RemarkOrderActivity"></activity>
     </application>
 
 </manifest>

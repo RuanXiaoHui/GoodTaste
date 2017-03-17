@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llt_foodList_headView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llt_ConfirmOrederActtivity_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_margin_medium">
+
+        <ImageView
+            style="@style/icon_normal"
+            android:src="@mipmap/ic_location" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_ConfirmOrederActtivity_name"
+                    style="@style/text_normal_black"
+                    android:text="苏妮"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_ConfirmOrederActtivity_gender"
+                    style="@style/text_normal_black"
+                    android:layout_marginLeft="@dimen/common_margin_small"
+                    android:text="女士" />
+
+                <TextView
+                    android:id="@+id/tv_ConfirmOrederActtivity_phone"
+                    style="@style/text_normal_black"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:text="18376611446" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_ConfirmOrederActtivity_address"
+                style="@style/text_small_gray"
+                android:layout_marginTop="@dimen/common_margin_normal"
+                android:text="海外联谊大厦迎春路122210" />
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/icon_micro"
+            android:src="@mipmap/ic_spread" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_high"
+        android:background="@color/line_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_padding_normal"
+        android:paddingLeft="@dimen/common_padding_medium"
+        android:paddingRight="@dimen/common_padding_medium"
+        android:paddingTop="@dimen/common_padding_normal">
+
+        <ImageView
+            android:id="@+id/iv_ConfirmOrederActtivity_store"
+            style="@style/icon_normal"
+            android:src="@mipmap/ic_location" />
+
+        <TextView
+            android:id="@+id/tv_ConfirmOrederActtivity_stroeName"
+            style="@style/text_normal_gray"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:text="湘江小厨" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_low"
+        android:background="@color/line_horizontal" />
+
+</LinearLayout>
