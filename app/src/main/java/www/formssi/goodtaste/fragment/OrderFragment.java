@@ -38,8 +38,8 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
 
         orders = new ArrayList<>();
 
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
+        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
+        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
 //        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
 //        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
 //        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));

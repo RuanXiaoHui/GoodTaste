@@ -5,6 +5,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.List;
+
+import www.formssi.goodtaste.bean.OrderBean;
+
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -32,6 +36,23 @@ public class DataBaseSQLiteUtil {
     private static SQLiteDatabase mDatabase;
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
+
+
+    public static void insertOrder(){
+        openDataBase();
+
+
+    }
+
+
+//    public static List<OrderBean>
+
+
+
+
+
+
+
 
     /**
      * 打开数据库
