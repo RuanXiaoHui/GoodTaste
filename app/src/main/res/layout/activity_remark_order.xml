@@ -18,7 +18,7 @@
         android:padding="@dimen/common_padding_medium">
 
         <TextView
-            style="@style/text_normal_black"
+            style="@style/activity_text_normal_black"
             android:text="@string/activity_remarkOrder_remark" />
 
         <EditText

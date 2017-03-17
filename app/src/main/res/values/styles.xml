@@ -10,7 +10,7 @@
     </style>
 
     <!-- activity大字体 白色 -->
-    <style name="text_normal_white" >
+    <style name="activity_text_normal_white" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
@@ -19,7 +19,7 @@
     </style>
 
     <!-- activity正常字体 黑色 -->
-    <style name="text_normal_black" >
+    <style name="activity_text_normal_black" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -28,7 +28,7 @@
     </style>
 
     <!-- activity正常字体 灰色 -->
-    <style name="text_normal_gray" >
+    <style name="activity_text_normal_gray" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -37,7 +37,7 @@
     </style>
 
     <!-- activity正常字体 蓝色 -->
-    <style name="text_normal_blue" >
+    <style name="activity_text_normal_blue" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -46,7 +46,7 @@
     </style>
 
     <!-- activity小字体 黑色 -->
-    <style name="text_small_black" >
+    <style name="activity_text_small_black" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
@@ -54,9 +54,8 @@
         <item name="android:textColor">@color/activity_text_black</item>
     </style>
 
-
     <!-- activity小字体 灰色 -->
-    <style name="text_small_gray" >
+    <style name="activity_text_small_gray" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
@@ -65,7 +64,7 @@
     </style>
 
     <!-- activity超小字体 灰色 -->
-    <style name="text_micro_gray" >
+    <style name="activity_text_micro_gray" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
