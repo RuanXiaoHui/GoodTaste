@@ -3,6 +3,7 @@ package www.formssi.goodtaste.bean;
 import java.util.List;
 
 /**
+<<<<<<< Updated upstream
  * 订单实体类
  *
  * @author qq724418408
@@ -108,4 +109,5 @@ public class OrderBean {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }
