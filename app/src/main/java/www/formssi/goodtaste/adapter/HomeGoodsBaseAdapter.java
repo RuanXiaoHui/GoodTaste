@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.ShopBean;
 
 /**
  * Created by Administrator on 2017/3/16.
@@ -17,11 +19,11 @@ import www.formssi.goodtaste.R;
  * project: GoodTaste
  */
 public class HomeGoodsBaseAdapter extends BaseAdapter{
-    private List<String> mDatas;
+    private List<ShopBean> mDatas;
     private LayoutInflater mInflater;
 
 
-    public HomeGoodsBaseAdapter(List<String> datas, Context mContext) {
+    public HomeGoodsBaseAdapter(List<ShopBean> datas , Context mContext) {
         mDatas = datas;
         mInflater = LayoutInflater.from(mContext);
     }
@@ -49,17 +51,28 @@ public class HomeGoodsBaseAdapter extends BaseAdapter{
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.item_home_listview_goods,null);
 
-            holder.tv= (TextView) convertView.findViewById(R.id.tv);
+            holder.ivGoodsIcon= (ImageView) convertView.findViewById(R.id.ivGoodsIcon);
+            holder.tvShopName= (TextView) convertView.findViewById(R.id.tvShopName);
+            holder.tvShopDesc= (TextView) convertView.findViewById(R.id.tvShopDesc);
+            holder.tvShopCount= (TextView) convertView.findViewById(R.id.tvShopCount);
             convertView.setTag(holder);
         }else{
 
             holder= (ViewHolder) convertView.getTag();
         }
-        holder.tv.setText(mDatas.get(position).toString());
+        ShopBean bean=mDatas.get(position);
+        holder.ivGoodsIcon.setImageResource(bean.getShopPic());
+        holder.tvShopName.setText(bean.getShopName());
+        holder.tvShopDesc.setText(bean.getShopDesc());
+        holder.tvShopCount.setText("月销量："+bean.getShopCount()+"份");
 
         return convertView;
     }
     static class ViewHolder{
-        TextView tv;
+        ImageView ivGoodsIcon;
+        TextView  tvShopName;
+        TextView  tvShopDesc;
+        TextView  tvShopCount;
+
     }
 }

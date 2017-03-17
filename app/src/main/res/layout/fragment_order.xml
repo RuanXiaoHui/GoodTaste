@@ -158,4 +158,28 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/lltNoOrder"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有订单"
+            />
+
+        <Button
+            android:id="@+id/btnGoSingle"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="去下单"
+            android:background="@drawable/shape_button_order_item"
+            android:layout_below="@+id/tv"
+            android:layout_centerInParent="true"
+            />
+    </LinearLayout>
 </LinearLayout>
