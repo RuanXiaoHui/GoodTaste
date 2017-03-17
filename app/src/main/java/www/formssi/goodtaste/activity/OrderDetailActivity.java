@@ -14,6 +14,7 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
 
 /**
@@ -41,7 +42,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initEvents() {
-
+        DataBaseSQLiteUtil.openDataBase();
     }
 
     /**
@@ -49,10 +50,10 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     public void initViews() {
         listFoodBean = new ArrayList<>();
-        listFoodBean.add(new FoodBean("", "鱼香肉丝", 0, 0));
-        listFoodBean.add(new FoodBean("", "香菜牛肉", 0, 0));
-        listFoodBean.add(new FoodBean("", "芹菜炒鸡蛋", 0, 0));
-        listFoodBean.add(new FoodBean("", "餐盒", 0, 0));
+        listFoodBean.add(new FoodBean("", "鱼香肉丝", 0, 0, 0, ""));
+        listFoodBean.add(new FoodBean("", "香菜牛肉", 0, 0, 0, ""));
+        listFoodBean.add(new FoodBean("", "芹菜炒鸡蛋", 0, 0, 0, ""));
+        listFoodBean.add(new FoodBean("", "餐盒", 0, 0, 0, ""));
         adapter = new FoodListAdapter();
         lvFoodList = (NoScrollListView) findViewById(R.id.lv_order_food_list);
         lvFoodList.setAdapter(adapter);

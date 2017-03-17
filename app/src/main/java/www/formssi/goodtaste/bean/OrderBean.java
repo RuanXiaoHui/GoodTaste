@@ -1,88 +1,62 @@
 package www.formssi.goodtaste.bean;
 
-import java.util.List;
-
 /**
- * 订单实体类
- *
- * @author qq724418408
+ * Created by GTs on 2017-03-17.
  */
+
 public class OrderBean {
+    String id;
+    String shopName;
+    String orderTime;
+    String orderContent;
+    String price;
+    String status;
+    String orderNumber;
 
-    private String orderId; // 订单id
-    private String userId; // 用户id
-    private String storeId; // 店铺id
-    private String orderNum; // 订单号（参考）：店铺id（后三位） + 用户id（后三位） + 用户手机号（后四位） + 流水号（0000-9999）
-    private String status; // 订单状态：未支付、未配送、送餐中、已完成、已评价
-    private List<FoodBean> foodBeanList; // 食品列表
-    private String distributingFee; // 配送费
-    private String actualPayment; // 实付金额
-    private String orderTime; // 下单时间
-    private String payTime; // 支付时间
-    private String address; // 送餐地址
-
-    public String getOrderId() {
-        return orderId;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
-    public String getUserId() {
-        return userId;
+    public OrderBean() {
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
+    public OrderBean(String shopName, String orderTime, String orderContent, String price, String status) {
+        this.shopName = shopName;
+        this.orderTime = orderTime;
+        this.orderContent = orderContent;
+        this.price = price;
         this.status = status;
     }
 
-    public List<FoodBean> getFoodBeanList() {
-        return foodBeanList;
+
+    public String getId() {
+        return id;
     }
 
-    public void setFoodBeanList(List<FoodBean> foodBeanList) {
-        this.foodBeanList = foodBeanList;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getDistributingFee() {
-        return distributingFee;
+    public String getTransactionStatus() {
+        return status;
     }
 
-    public void setDistributingFee(String distributingFee) {
-        this.distributingFee = distributingFee;
+    public void setTransactionStatus(String transactionStatus) {
+        this.status = transactionStatus;
     }
 
-    public String getActualPayment() {
-        return actualPayment;
+
+
+    public String getShopName() {
+        return shopName;
     }
 
-    public void setActualPayment(String actualPayment) {
-        this.actualPayment = actualPayment;
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
     public String getOrderTime() {
@@ -93,19 +67,27 @@ public class OrderBean {
         this.orderTime = orderTime;
     }
 
-    public String getPayTime() {
-        return payTime;
+    public String getOrderContent() {
+        return orderContent;
     }
 
-    public void setPayTime(String payTime) {
-        this.payTime = payTime;
+    public void setOrderContent(String commodityName) {
+        this.orderContent = commodityName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPrice() {
+        return price;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

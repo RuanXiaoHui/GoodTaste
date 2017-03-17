@@ -15,6 +15,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
+
         <item name="android:textColor">@color/activity_text_white</item>
     </style>
 
@@ -24,6 +26,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_black</item>
     </style>
 
@@ -33,6 +36,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_gray</item>
     </style>
 
@@ -42,6 +46,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_blue</item>
     </style>
 
@@ -51,6 +56,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_black</item>
     </style>
 
@@ -60,6 +66,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_gray</item>
     </style>
 
@@ -69,6 +76,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/activity_text_gray</item>
     </style>
 
@@ -210,6 +218,45 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/activity_main_tab_bg</item>
     </style>
+
+    <!--收货地址性别RadioButton单选按钮-->
+    <style name="radioButton_circle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:button">@drawable/selector_radiobutton_gender</item>
+        <item name="android:textColor">@color/activity_text_black</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:paddingLeft">@dimen/common_padding_normal</item>
+    </style>
+
+
+    <!--收货地址EditText-->
+    <style name="activity_address_editText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:lines">1</item>
+        <item name="android:gravity">left|top</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/activity_text_black</item>
+    </style>
+
+
+    <!--orderFragment的粗分割线-->
+    <style name="crude_dividing_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/line_horizontal</item>
+    </style>
+    <!--orderFragment的细分割线-->
+    <style name="thin_dividing_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line_horizontal</item>
+    </style>
+
+
 
     <!--MineFragment -->
     <style name="style_mine_vertical_linearlayout">

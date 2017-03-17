@@ -19,8 +19,12 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.XAdapter;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
+
 /**
  * 确认订单页面
+ * 说明：包含送餐地址、食品列表、配送费、订单备注、待支付费用
  */
 public class ConfirmOrderActivity extends BaseActivity implements View.OnClickListener{
 
@@ -47,8 +51,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private View headView;
     private View footView;
 
-    private  int ORDER_REMARK = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +68,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private void bindViews() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivStore = (ImageView) findViewById(R.id.iv_ConfirmOrederActtivity_store);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         tvName = (TextView) findViewById(R.id.tv_ConfirmOrederActtivity_name);
         tvGender = (TextView) findViewById(R.id.tv_ConfirmOrederActtivity_gender);
         tvPhone = (TextView) findViewById(R.id.tv_ConfirmOrederActtivity_phone);
@@ -86,6 +88,39 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lltAddress.setOnClickListener(this);
         lltOrderRemarks.setOnClickListener(this);
         btnCommitOrder.setOnClickListener(this);
+    }
+
+    /**
+     * 监听事件
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.llt_ConfirmOrederActtivity_address: //点击地址栏
+                intent = new Intent(ConfirmOrderActivity.this,ReceiveAddressActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.llt_ConfirmOrederActtivity_orderRemarks: //点击订单备注栏
+                intent =  new Intent(ConfirmOrderActivity.this,RemarkOrderActivity.class);
+                startActivityForResult(intent,ORDER_REMARK_REQUEST);
+                break;
+
+            case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT){
+            tvRemarks.setText(data.getStringExtra("remarks"));
+        }
     }
 
     /**
@@ -129,39 +164,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 return convertView;
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ORDER_REMARK && resultCode == RESULT_OK){
-            tvRemarks.setText(data.getStringExtra("remarks"));
-        }
-    }
-
-    /**
-     * 监听事件
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()){
-            case R.id.llt_ConfirmOrederActtivity_address: //点击地址栏
-                intent = new Intent(ConfirmOrderActivity.this,ReceiveAddressActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.llt_ConfirmOrederActtivity_orderRemarks: //点击订单备注栏
-                intent =  new Intent(ConfirmOrderActivity.this,RemarkOrderActivity.class);
-                startActivityForResult(intent,ORDER_REMARK);
-                break;
-
-            case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
-                break;
-            default:
-                break;
-        }
     }
 
     public class FoodViewHolder {

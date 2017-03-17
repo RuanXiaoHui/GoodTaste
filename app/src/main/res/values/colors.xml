@@ -3,7 +3,7 @@
     <color name="colorPrimary">#0095fe</color>
     <color name="colorPrimaryDark">#0095fe</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="appcolor">#0095fe</color>
+    <color name="appColor">#0095fe</color>
 
     <color name="activity_common_background_gray1">#f7f7f7</color>
     <color name="activity_common_background_gray2">#efefef</color>
