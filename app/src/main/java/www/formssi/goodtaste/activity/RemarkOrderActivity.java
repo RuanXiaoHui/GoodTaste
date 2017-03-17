@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.constant.ConstantConfig;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
 
 /**
  * 订单备注页面
@@ -61,7 +64,7 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent();
                 String remarks = etRemarkOrder.getText().toString();
                 intent.putExtra("remarks",remarks);
-                setResult(RESULT_OK,intent);
+                setResult(ORDER_REMARK_RESULT,intent);
                 finish();
                 break;
 

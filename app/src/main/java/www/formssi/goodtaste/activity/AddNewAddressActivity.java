@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
+
 /**
  * 新增收货地址页面
  * 说明：直接输入姓名、性别、电话、地址
@@ -32,8 +34,6 @@ public class AddNewAddressActivity extends Activity implements View.OnClickListe
     private RadioButton rbGentleman; //男士
     private RadioButton rbLady; //女士
     private Button btnOk;//确定
-
-    private  int ORDER_REMARK = 1001;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,12 +72,10 @@ public class AddNewAddressActivity extends Activity implements View.OnClickListe
             case R.id.btn_AddNewAddressActivity_ok: // 确定
                 Intent intent =  new Intent();
                 intent.putExtra("name",etName.getText().toString());
-//                intent.putExtra("gender",.getText().toString());
+                intent.putExtra("gender","女士");
                 intent.putExtra("phone",etPhone.getText().toString());
                 intent.putExtra("address",etAddress.getText().toString());
-                setResult(RESULT_OK,intent);
-
-
+                setResult(ADD_NEW_ADREES_RESULT,intent);
                 break;
 
             default:

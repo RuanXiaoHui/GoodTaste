@@ -19,6 +19,9 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.XAdapter;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
+
 /**
  * 确认订单页面
  * 说明：包含送餐地址、食品列表、配送费、订单备注、待支付费用
@@ -47,8 +50,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private List<Object> list;
     private View headView;
     private View footView;
-
-    private  int ORDER_REMARK = 1002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
             case R.id.llt_ConfirmOrederActtivity_orderRemarks: //点击订单备注栏
                 intent =  new Intent(ConfirmOrderActivity.this,RemarkOrderActivity.class);
-                startActivityForResult(intent,ORDER_REMARK);
+                startActivityForResult(intent,ORDER_REMARK_REQUEST);
                 break;
 
             case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
@@ -117,7 +118,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ORDER_REMARK && resultCode == RESULT_OK){
+        if(requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT){
             tvRemarks.setText(data.getStringExtra("remarks"));
         }
     }

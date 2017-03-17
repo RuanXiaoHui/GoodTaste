@@ -17,6 +17,10 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.XAdapter;
+import www.formssi.goodtaste.bean.AddressBean;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUEST;
+import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 
 /**
  * 收货地址列表页面
@@ -32,7 +36,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     private ListView lvAddress; //地址列表
     private LinearLayout llt_ReceiveAddressActivity_addAddress; //新增地址栏
 
-    private List<Object> list;
+    private List<Object> list;  //对象列表
+    private AddressBean addressBean; // 地址实体类
+    private  int addressId; //当前选中得item项位置
     private  int ORDER_REMARK = 1002; //请求码
 
     @Override
@@ -70,11 +76,31 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.llt_ReceiveAddressActivity_addAddress: //新增地址
                 Intent intent = new Intent(ReceiveAddressActivity.this,AddressViewHolder.class);
-//                startActivityForResult(intent,);
-
+                startActivityForResult(intent,ADD_NEW_ADREES_REQUEST);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADD_NEW_ADREES_REQUEST && requestCode == ADD_NEW_ADREES_RESULT){
+            String name = data.getStringExtra("name");
+            String gender = data.getStringExtra("gender");
+            String phone = data.getStringExtra("phone");
+            String address = data.getStringExtra("address");
+
+            list.add(new AddressBean("",(list.size() - 1)+"",name,gender,phone,address,false));
+
+
+//
+//            addressBean = new AddressBean();
+//            addressBean.setName(name);
+//            addressBean.setGender(gender);
+//            addressBean.setPhone(phone);
+//            addressBean.setAddress(address);
         }
     }
 
@@ -85,19 +111,18 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         list = new ArrayList<Object>();
         //添加数据
         list = new ArrayList<Object>();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
+        list.add(new AddressBean("",addressId + "","微微","女士","18376614562","深圳市罗湖XXXXX",false));
+        list.add(new AddressBean("",addressId + "","哈哈","女士","18376614562","深圳市罗湖XXXXX",false));
+        list.add(new AddressBean("",addressId + "","呵呵","女士","18376614562","深圳市罗湖XXXXX",false));
+        list.add(new AddressBean("",addressId + "","微微","女士","18376614562","深圳市罗湖XXXXX",false));
+        list.add(new AddressBean("",addressId + "","哈哈","女士","18376614562","深圳市罗湖XXXXX",false));
+        list.add(new AddressBean("",addressId + "","呵呵","女士","18376614562","深圳市罗湖XXXXX",false));
 
         //添加适配器
         lvAddress.setAdapter(new XAdapter(list,ReceiveAddressActivity.this) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
+                addressId = position + 1;
 
                 AddressViewHolder holder = null;
                 if (convertView == null){
@@ -113,7 +138,14 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
                 }else {
                     holder = (AddressViewHolder) convertView.getTag();
                 }
+
                 //赋值
+                Object object = list.get(position);
+                AddressBean addressBean = (AddressBean) object;
+                holder.tvReceiverName.setText(addressBean.getName());
+                holder.tvReceiverGender.setText(addressBean.getGender());
+                holder.tvReceiverPhone.setText(addressBean.getPhone());
+                holder.tvReceiverAddress.setText(addressBean.getAddress());
 
                 return convertView;
             }
