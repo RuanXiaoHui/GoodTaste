@@ -45,6 +45,10 @@
     <dimen name="activity_mian_fl_hight">0dp</dimen>
     <dimen name="activity_mian_fl_width">0dp</dimen>
 
+    <!-- MineFragment-->
+    <dimen name="fragment_mine_iv_width">25dp</dimen>
+    <dimen name="fragment_mine_iv_height">25dp</dimen>
+
     <!--activity的返回标题栏-->
     <dimen name="activity_back_titlebar_hight">50dp</dimen>
     <dimen name="activity_back_titlebar_paddingLeft">15dp</dimen>
