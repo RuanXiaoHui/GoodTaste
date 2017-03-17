@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.fragment;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,16 +9,23 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.GoodsDetailActivity;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
 import www.formssi.goodtaste.adapter.HomeGoodsBaseAdapter;
 import www.formssi.goodtaste.adapter.MyPagerAdapter;
 import www.formssi.goodtaste.bean.HomeGoodsCategroyBean;
+import www.formssi.goodtaste.bean.ShopBean;
+import www.formssi.goodtaste.utils.GoodsDataUtils;
 import www.formssi.goodtaste.widget.Indicator;
+import www.formssi.goodtaste.widget.MyOnPageChangeListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +41,7 @@ public class HomeFragment extends Fragment {
     private ViewPager vpHomeCategroy;
     private List<View> views;
     private ListView lvHomeGoods;
-    private List<String> mDatas;
+    private List<ShopBean> mDatas;
 
 
 
@@ -61,11 +69,8 @@ public class HomeFragment extends Fragment {
                 good_Data2.add(new HomeGoodsCategroyBean(goods_Name[i],typedArray.getResourceId(i,0)));
             }
         }
-        mDatas=new ArrayList<>();
-        for (int i = 0; i <12 ; i++) {
-            mDatas.add("商家"+i);
+        mDatas= GoodsDataUtils.GetShop();
 
-        }
 
     }
 
@@ -93,24 +98,24 @@ public class HomeFragment extends Fragment {
 
         lvHomeGoods.setAdapter(new HomeGoodsBaseAdapter(mDatas,getActivity()));
 
+
     }
 
 
     private void initListener() {
-        vpHomeCategroy.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpHomeCategroy.setOnPageChangeListener(new MyOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 IndicatorHome.setIndicator(position,positionOffset);
             }
+        });
 
+        lvHomeGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onPageSelected(int position) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+//                Intent intent=new Intent(getActivity(), GoodsDetailActivity.class);
+//                startActivity(intent);
             }
         });
     }
