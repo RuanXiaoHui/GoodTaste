@@ -19,97 +19,94 @@
         android:paddingTop="@dimen/common_padding_large">
 
         <TextView
-            android:id="@+id/tv_AddNewAddressActivity_contacts"
+            android:id="@+id/tv_EditAddressActivity_contacts"
             style="@style/activity_text_normal_black"
             android:text="@string/activity_address_contacts" />
 
         <EditText
-            android:id="@+id/et_AddNewAddressActivity_name"
+            android:id="@+id/et_EditAddressActivity_name"
             style="@style/activity_address_editText"
             android:layout_marginLeft="@dimen/common_margin_large"
-            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_contacts"
-            android:hint="@string/activity_address_name" />
+            android:layout_toRightOf="@+id/tv_EditAddressActivity_contacts" />
 
         <View
-            android:id="@+id/view_AddNewAddressActivity_line1"
+            android:id="@+id/view_EditAddressActivity_line1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/line_height_low"
-            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
-            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
-            android:layout_below="@+id/et_AddNewAddressActivity_name"
+            android:layout_alignLeft="@+id/et_EditAddressActivity_name"
+            android:layout_alignRight="@+id/et_EditAddressActivity_name"
+            android:layout_below="@+id/et_EditAddressActivity_name"
             android:layout_marginTop="@dimen/common_margin_large"
             android:background="@color/line_horizontal" />
 
         <RadioGroup
-            android:id="@+id/rg_AddNewAddressActivity_gender"
+            android:id="@+id/rg_EditAddressActivity_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/view_AddNewAddressActivity_line1"
-            android:layout_alignRight="@+id/view_AddNewAddressActivity_line1"
-            android:layout_below="@+id/view_AddNewAddressActivity_line1"
+            android:layout_alignLeft="@+id/view_EditAddressActivity_line1"
+            android:layout_alignRight="@+id/view_EditAddressActivity_line1"
+            android:layout_below="@+id/view_EditAddressActivity_line1"
             android:layout_marginTop="@dimen/common_margin_large"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rb_AddNewAddressActivity_gentleman"
+                android:id="@+id/rb_EditAddressActivity_gentleman"
                 style="@style/radioButton_circle"
                 android:text="@string/activity_address_gentleman" />
 
             <RadioButton
-                android:id="@+id/rb_AddNewAddressActivity_lady"
+                android:id="@+id/rb_EditAddressActivity_lady"
                 style="@style/radioButton_circle"
                 android:layout_marginLeft="@dimen/common_margin_medium"
                 android:text="@string/activity_address_lady" />
         </RadioGroup>
 
         <View
-            android:id="@+id/view_AddNewAddressActivity_line2"
+            android:id="@+id/view_EditAddressActivity_line2"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/line_height_low"
-            android:layout_below="@+id/rg_AddNewAddressActivity_gender"
+            android:layout_below="@+id/rg_EditAddressActivity_gender"
             android:layout_marginTop="@dimen/common_margin_large"
             android:background="@color/line_horizontal" />
 
         <TextView
-            android:id="@+id/tv_AddNewAddressActivity_phone"
+            android:id="@+id/tv_EditAddressActivity_phone"
             style="@style/activity_text_normal_black"
-            android:layout_below="@+id/view_AddNewAddressActivity_line2"
+            android:layout_below="@+id/view_EditAddressActivity_line2"
             android:layout_marginTop="@dimen/common_margin_large"
             android:text="@string/activity_address_phone" />
 
         <EditText
-            android:id="@+id/et_AddNewAddressActivity_phone"
+            android:id="@+id/et_EditAddressActivity_phone"
             style="@style/activity_address_editText"
-            android:layout_alignBottom="@+id/tv_AddNewAddressActivity_phone"
-            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
-            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
-            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_phone"
-            android:hint="@string/activity_address_phoneNumber"
+            android:layout_alignBottom="@+id/tv_EditAddressActivity_phone"
+            android:layout_alignLeft="@+id/et_EditAddressActivity_name"
+            android:layout_alignRight="@+id/et_EditAddressActivity_name"
+            android:layout_toRightOf="@+id/tv_EditAddressActivity_phone"
             android:inputType="phone" />
 
         <View
-            android:id="@+id/view_AddNewAddressActivity_line3"
+            android:id="@+id/view_EditAddressActivity_line3"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/line_height_low"
-            android:layout_below="@+id/tv_AddNewAddressActivity_phone"
+            android:layout_below="@+id/tv_EditAddressActivity_phone"
             android:layout_marginTop="@dimen/common_margin_large"
             android:background="@color/line_horizontal" />
 
         <TextView
-            android:id="@+id/tv_AddNewAddressActivity_address"
+            android:id="@+id/tv_EditAddressActivity_address"
             style="@style/activity_text_normal_black"
-            android:layout_below="@+id/view_AddNewAddressActivity_line3"
+            android:layout_below="@+id/view_EditAddressActivity_line3"
             android:layout_marginTop="@dimen/common_margin_large"
             android:text="@string/activity_address_address" />
 
         <EditText
-            android:id="@+id/et_AddNewAddressActivity_address"
+            android:id="@+id/et_EditAddressActivity_address"
             style="@style/activity_address_editText"
-            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
-            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
-            android:layout_alignTop="@+id/tv_AddNewAddressActivity_address"
-            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_address"
-            android:hint="@string/activity_address_addressDetail"
+            android:layout_alignLeft="@+id/et_EditAddressActivity_name"
+            android:layout_alignRight="@+id/et_EditAddressActivity_name"
+            android:layout_alignTop="@+id/tv_EditAddressActivity_address"
+            android:layout_toRightOf="@+id/tv_EditAddressActivity_address"
             android:lines="2" />
 
     </RelativeLayout>
@@ -123,7 +120,7 @@
         android:paddingRight="@dimen/common_padding_medium">
 
         <Button
-            android:id="@+id/btn_AddNewAddressActivity_ok"
+            android:id="@+id/btn_EditAddressActivity_ok"
             style="@style/button_positive"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

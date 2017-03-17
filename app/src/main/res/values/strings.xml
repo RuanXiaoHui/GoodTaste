@@ -24,16 +24,17 @@
     <string name="activity_remarkOrder_title">订单备注</string>
     <string name="activity_remarkOrder_remark">备注信息</string>
     <string name="activity_remarkOrder_editHint">请输入备注内容（可不填）</string>
-    <!--新增（收货）地址页面-->
+    <!--新增（收货）地址页面、修改地址页面-->
     <string name="activity_addNewAddress_title">新增地址</string>
-    <string name="activity_addNewAddress_contacts">联系人</string>
-    <string name="activity_addNewAddress_name">姓名</string>
-    <string name="activity_addNewAddress_gentleman">先生</string>
-    <string name="activity_addNewAddress_lady">女士</string>
-    <string name="activity_addNewAddress_phone">电话</string>
-    <string name="activity_addNewAddress_phoneNumber">收货人电话</string>
-    <string name="activity_addNewAddress_address">地址</string>
-    <string name="activity_addNewAddress_addressDetail">详细地址</string>
+    <string name="activity_editAddress_title">修改地址</string>
+    <string name="activity_address_contacts">联系人</string>
+    <string name="activity_address_name">姓名</string>
+    <string name="activity_address_gentleman">先生</string>
+    <string name="activity_address_lady">女士</string>
+    <string name="activity_address_phone">电话</string>
+    <string name="activity_address_phoneNumber">收货人电话</string>
+    <string name="activity_address_address">地址</string>
+    <string name="activity_address_addressDetail">详细地址</string>
 
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>
@@ -81,8 +82,6 @@
     <string name="fragment_personal_security">账户与安全</string>
     <string name="fragment_personal_portrait">头像</string>
     <string name="fragment_personal_username">用户名</string>
-
-
 
     <!--homeFragment-->
     <string name="home_favourable_one_title">天天特价</string>

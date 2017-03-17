@@ -12,8 +12,8 @@ import java.util.List;
 
 public abstract class XAdapter extends BaseAdapter {
 
-    private List<Object> list;
-    private Context context;
+    protected List<Object> list;
+    protected Context context;
 
     public XAdapter(List<Object> list, Context context) {
         this.list = list;

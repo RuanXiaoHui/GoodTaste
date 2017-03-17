@@ -22,6 +22,8 @@
         <activity android:name=".activity.ReceiveAddressActivity"></activity>
         <activity android:name=".activity.RemarkOrderActivity"></activity>
         <activity android:name=".activity.GoodsDetailActivity"></activity>
+        <activity android:name=".activity.AddNewAddressActivity"></activity>
+        <activity android:name=".activity.EditAddressActivity"></activity>
     </application>
 
 </manifest>
