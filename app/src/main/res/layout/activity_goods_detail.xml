@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,93 +7,106 @@
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.activity.GoodsDetailActivity">
 
-    <RelativeLayout
-        android:id="@+id/rltGoodsDetailBar"
+   <include layout="@layout/layout_back_titlebar" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="商家详情"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:layout_centerInParent="true"/>
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:text="返回"
-            android:background="#fff"/>
-    </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="160dp"
+           android:background="@mipmap/icon_shop">
 
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@+id/rltGoodsDetailBar">
-      <ScrollView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
+           <ImageView
+               android:id="@+id/ivShopimg"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+               android:background="@mipmap/ic_launcher"/>
+       </RelativeLayout>
 
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#bebebe"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-              <ImageView
-                  android:layout_width="match_parent"
-                  android:layout_height="160dp"
-                  android:background="@mipmap/ic_launcher"/>
+            <ListView
+                android:id="@+id/lvLeftMenu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                android:layout_height="match_parent"/>
+            <ListView
+                android:id="@+id/lvRightFoods"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent">
+            </ListView>
 
-              <View
-                  android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:background="#bebebe"/>
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal">
+        </LinearLayout>
 
-                  <ListView
-                      android:id="@+id/lvLeftMenu"
-                      android:layout_width="0dp"
-                      android:layout_weight="1"
-                      android:scrollbars="none"
-                      android:layout_height="match_parent"/>
-                  <ListView
-                      android:id="@+id/lvRightFoods"
-                      android:layout_width="0dp"
-                      android:layout_weight="4"
-                      android:layout_height="match_parent">
+    </LinearLayout>
 
-                  </ListView>
-
-
-              </LinearLayout>
-
-
-          </LinearLayout>
-
-
-      </ScrollView>
-
-  </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#66414548">
+        android:background="#99414548">
 
         <ImageView
+            android:id="@+id/ivCar"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@mipmap/icon_car_pressed"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivCar"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvGoodsMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="￥24"/>
+            <TextView
+                android:id="@+id/tvShopMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:text="另需配送费4元"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmintOrder"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/selector_button_normal"
+            android:text="去结算"/>
+
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
