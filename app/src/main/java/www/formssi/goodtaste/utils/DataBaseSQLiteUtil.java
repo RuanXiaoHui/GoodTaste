@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.OrderBean;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
@@ -42,15 +44,23 @@ public class DataBaseSQLiteUtil {
 
     public static void insertOrder(){
         openDataBase();
-
-
+        ContentValues values = new ContentValues();
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.food+"");
+        values.put("status", 0+"");
+        values.put("price", "23");
+        values.put("orderNumber","1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        closeDataBase();
     }
 
 
     public static List<OrderBean> queryOrder() {
         List<OrderBean> orderBeanList = null;
-        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from person", null);
+        openDataBase();
+        Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
         while (cursor.moveToNext()) {
             orderBeanList = new ArrayList<>();
             OrderBean orderBean = new OrderBean();
@@ -74,7 +84,7 @@ public class DataBaseSQLiteUtil {
             orderBeanList.add(orderBean);
         }
         cursor.close();
-        db.close();
+        closeDataBase();
         return orderBeanList;
 
     }
