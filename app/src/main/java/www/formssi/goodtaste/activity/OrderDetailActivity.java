@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,15 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
 
 /**
  * 订单详情Activity类
- * 说明：订单详情页面信息显示
+ * 说明：
+ * 1.根据订单号查询订单详情显示
+ * 2.根据订单号查询食品列表
  *
  * @author qq724418408
  */
@@ -31,12 +35,15 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private Button btnCancel; // 取消按钮：取消订单
     private Button btnContactBusiness; // 联系商家按钮：拨打商家电话
     private List<FoodBean> listFoodBean; // 食品列表
+    private OrderBean orderdBean; // 订单实体
     private FoodListAdapter adapter; // 适配器
+    private Intent intent; // 获取上一个intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
+        intent = getIntent(); // 通过intent获取订单id
         initViews(); // 初始化控件
         initEvents(); // 注册事件
     }
@@ -49,7 +56,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      * 初始化控件
      */
     public void initViews() {
-        listFoodBean = new ArrayList<>();
+        listFoodBean = new ArrayList<>(); // 食品列表根据订单详情里面的订单号查询出来
         listFoodBean.add(new FoodBean("", "鱼香肉丝", 0, 0, 0, ""));
         listFoodBean.add(new FoodBean("", "香菜牛肉", 0, 0, 0, ""));
         listFoodBean.add(new FoodBean("", "芹菜炒鸡蛋", 0, 0, 0, ""));

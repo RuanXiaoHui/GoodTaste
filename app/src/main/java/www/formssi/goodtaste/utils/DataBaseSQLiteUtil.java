@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.bean.OrderDetailsBean;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
@@ -61,6 +63,7 @@ public class DataBaseSQLiteUtil {
         List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
         Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
+        orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
             String id = String.valueOf(cursor.getInt(0));
@@ -92,7 +95,57 @@ public class DataBaseSQLiteUtil {
 
 
 
+    /**
+     * 通过id查询订单表
+     *
+     * @return
+     */
+    public static List<OrderDetailsBean> getOrderBeansById(String orderId) {
+        String[] projection = {"", "", ""};
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, "orderId" + "= ?",
+                new String[]{orderId}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        OrderDetailsBean o = new OrderDetailsBean();
+        List<OrderDetailsBean> list = new ArrayList<>();
+        for (int i = 0; i < resultCounts; i++) {
+            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex("shopId"))));
+            list.add(o);
+            cursor.moveToNext();
+        }
+        o.setFoodBeanList(getOrderDetailsBeansById(orderId));
+        list.add(o);
+        return list;
+    }
 
+    /**
+     * 通过id查询订单详情表
+     * 获得食品列表
+     * @param orderId
+     * @return
+     */
+    public static List<FoodBean> getOrderDetailsBeansById(String orderId) {
+        String[] projection = {"foodId", "foodName", "price", "amount"}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, "orderId" + "= ?",
+                new String[]{orderId}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        List<FoodBean> list = new ArrayList<>();
+        for (int i = 0; i < resultCounts; i++) {
+            FoodBean food = new FoodBean();
+            food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex("foodId"))));
+            food.setGoodsName(cursor.getString(cursor.getColumnIndex("foodName")));
+            food.setGoodsMoney(cursor.getString(cursor.getColumnIndex("price")));
+            food.setGoodsNumber(cursor.getColumnIndex("amount"));
+            list.add(food);
+            cursor.moveToNext();
+        }
+        return list;
+    }
 
 
     /**
