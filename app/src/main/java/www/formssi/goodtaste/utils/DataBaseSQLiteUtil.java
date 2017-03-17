@@ -54,7 +54,6 @@ public class DataBaseSQLiteUtil {
         }
     }
 
-
     /**
      * 数据表打开帮助类
      */
@@ -66,20 +65,18 @@ public class DataBaseSQLiteUtil {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            StringBuffer sb = new StringBuffer();
             String sql1 = createTable(TABLE_NAME_USER, TABLE_USER_COLUMNS);
+            db.execSQL(sql1);
             String sql2 = createTable(TABLE_NAME_SHOP, TABLE_SHOP_COLUMNS);
+            db.execSQL(sql2);
             String sql3 = createTable(TABLE_NAME_FOOD, TABLE_FOOD_COLUMNS);
+            db.execSQL(sql3);
             String sql4 = createTable(TABLE_NAME_ORDER, TABLE_ORDER_COLUMNS);
+            db.execSQL(sql4);
             String sql5 = createTable(TABLE_NAME_ORDER_DETAIL, TABLE_ORDER_DETAIL_COLUMNS);
+            db.execSQL(sql5);
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
-            sb.append(sql1);
-            sb.append(sql2);
-            sb.append(sql3);
-            sb.append(sql4);
-            sb.append(sql5);
-            sb.append(sql6);
-            db.execSQL(sb.toString());
+            db.execSQL(sql6);
         }
 
         @Override
@@ -89,7 +86,6 @@ public class DataBaseSQLiteUtil {
 
     /**
      * 创建表的方法
-     *
      *
      * @param tableName 表名
      * @param columns   列名数组：new String[]{"id", "name varchar(20),", "phone varchar(15)"}
