@@ -5,30 +5,51 @@ package www.formssi.goodtaste.bean;
  */
 
 public class OrderBean {
+    String id;
     String shopName;
     String orderTime;
-    String commodityName;
+    String orderContent;
     String price;
-    String transactionStatus;
+    String status;
+    String orderNumber;
 
+    public String getOrderNumber() {
+        return orderNumber;
+    }
 
-    public OrderBean(String shopName, String orderTime, String commodityName, String price, String transactionStatus) {
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public OrderBean() {
+    }
+
+    public OrderBean(String shopName, String orderTime, String orderContent, String price, String status) {
         this.shopName = shopName;
         this.orderTime = orderTime;
-        this.commodityName = commodityName;
+        this.orderContent = orderContent;
         this.price = price;
-        this.transactionStatus = transactionStatus;
+        this.status = status;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTransactionStatus() {
-        return transactionStatus;
+        return status;
     }
 
     public void setTransactionStatus(String transactionStatus) {
-        this.transactionStatus = transactionStatus;
+        this.status = transactionStatus;
     }
 
-    int type;
+
 
     public String getShopName() {
         return shopName;
@@ -46,12 +67,12 @@ public class OrderBean {
         this.orderTime = orderTime;
     }
 
-    public String getCommodityName() {
-        return commodityName;
+    public String getOrderContent() {
+        return orderContent;
     }
 
-    public void setCommodityName(String commodityName) {
-        this.commodityName = commodityName;
+    public void setOrderContent(String commodityName) {
+        this.orderContent = commodityName;
     }
 
     public String getPrice() {
@@ -62,14 +83,11 @@ public class OrderBean {
         this.price = price;
     }
 
-    public int getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-
-
 }

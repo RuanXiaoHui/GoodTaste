@@ -1,10 +1,12 @@
 package www.formssi.goodtaste.utils;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.bean.OrderBean;
@@ -45,7 +47,37 @@ public class DataBaseSQLiteUtil {
     }
 
 
-//    public static List<OrderBean>
+    public static List<OrderBean> queryOrder() {
+        List<OrderBean> orderBeanList = null;
+        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from person", null);
+        while (cursor.moveToNext()) {
+            orderBeanList = new ArrayList<>();
+            OrderBean orderBean = new OrderBean();
+            String id = String.valueOf(cursor.getInt(0));
+            String shopName = cursor.getString(1);
+            String shopPicture = cursor.getString(2);
+            String status = cursor.getString(3);
+            String price = cursor.getString(4);
+            String orderNumber = cursor.getString(5);
+            String orderContent = cursor.getString(6);
+            String orderTime = cursor.getString(7);
+            orderBean.setId(id);
+            orderBean.setShopName(shopName);
+            orderBean.setPrice(shopPicture);
+            orderBean.setStatus(status);
+            orderBean.setPrice(price);
+            orderBean.setOrderTime(orderTime);
+            orderBean.setOrderContent(orderContent);
+            orderBean.setOrderNumber(orderNumber);
+
+            orderBeanList.add(orderBean);
+        }
+        cursor.close();
+        db.close();
+        return orderBeanList;
+
+    }
 
 
 
