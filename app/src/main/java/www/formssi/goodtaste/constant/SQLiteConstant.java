@@ -16,6 +16,23 @@ public class SQLiteConstant {
     public static final String TABLE_NAME_ORDER = "tb_order"; // 订单表
     public static final String TABLE_NAME_ORDER_DETAIL = "tb_order_detail"; // 订单明细表
     public static final String TABLE_NAME_ADDRESS = "tb_address"; // 地址表
-    public static final String CRATE_TABLE_ADDRESS_SQL = "tb_address"; // 创建地址表
+    public static final String[] TABLE_USER_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 用户表的列名数组
+    public static final String[] TABLE_SHOP_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 商店表的列名数组
+    public static final String[] TABLE_FOOD_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 食品表的列名数组
+    public static final String[] TABLE_ORDER_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 订单表的列名数组
+    public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 订单详情表的列名数组
+    public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{"userId", "userName varchar(20),",
+            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
+            "image_path varchar(100)"}; // 地址表的列名数组
 
 }

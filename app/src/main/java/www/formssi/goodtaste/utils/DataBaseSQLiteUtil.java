@@ -5,10 +5,20 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import www.formssi.goodtaste.constant.SQLiteConstant;
-
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_FOOD_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ADDRESS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_FOOD;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ORDER;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ORDER_DETAIL;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_SHOP;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_USER;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ORDER_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ORDER_DETAIL_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_SHOP_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_USER_COLUMNS;
 
 /**
  * 数据库操作工具类
@@ -57,8 +67,18 @@ public class DataBaseSQLiteUtil {
         @Override
         public void onCreate(SQLiteDatabase db) {
             StringBuffer sb = new StringBuffer();
-            String sql = createTable(SQLiteConstant.TABLE_NAME_USER, new String[]{"userId", "userName varchar(20),", "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),", "image_path varchar(100)"});
-            sb.append(sql);
+            String sql1 = createTable(TABLE_NAME_USER, TABLE_USER_COLUMNS);
+            String sql2 = createTable(TABLE_NAME_SHOP, TABLE_SHOP_COLUMNS);
+            String sql3 = createTable(TABLE_NAME_FOOD, TABLE_FOOD_COLUMNS);
+            String sql4 = createTable(TABLE_NAME_ORDER, TABLE_ORDER_COLUMNS);
+            String sql5 = createTable(TABLE_NAME_ORDER_DETAIL, TABLE_ORDER_DETAIL_COLUMNS);
+            String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
+            sb.append(sql1);
+            sb.append(sql2);
+            sb.append(sql3);
+            sb.append(sql4);
+            sb.append(sql5);
+            sb.append(sql6);
             db.execSQL(sb.toString());
         }
 
