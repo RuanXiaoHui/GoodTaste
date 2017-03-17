@@ -124,7 +124,6 @@
 
             </LinearLayout>
 
-
             <ImageView
                 android:layout_width="@dimen/fragment_home_favourable_img_width"
                 android:layout_height="@dimen/fragment_home_favourable_img_width"
