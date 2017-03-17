@@ -40,25 +40,10 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         btnGoSingle = (Button) v.findViewById(R.id.btnGoSingle);
         btnGoSingle.setOnClickListener(this);
         DataBaseSQLiteUtil.insertOrder();
-        DataBaseSQLiteUtil.insertOrder();
-        DataBaseSQLiteUtil.insertOrder();
-        DataBaseSQLiteUtil.insertOrder();
         orders = DataBaseSQLiteUtil.queryOrder();
         Log.e(TAG, "onCreateView: "+orders.size() );
-//                new ArrayList<>();
-//
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
 
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-//        orders.add(new OrderBean("好味道","2017-03-11 22:30","宫保鸡丁","23","交易完成"));
-
-        if (orders==null) {
+        if (orders.size() == 0) {
             rvOrderList.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
 

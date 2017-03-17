@@ -58,11 +58,10 @@ public class DataBaseSQLiteUtil {
 
 
     public static List<OrderBean> queryOrder() {
-        List<OrderBean> orderBeanList = null;
+        List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
         Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
         while (cursor.moveToNext()) {
-            orderBeanList = new ArrayList<>();
             OrderBean orderBean = new OrderBean();
             String id = String.valueOf(cursor.getInt(0));
             String shopName = cursor.getString(1);
