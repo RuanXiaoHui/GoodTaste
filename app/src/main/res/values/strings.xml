@@ -36,4 +36,17 @@
     <string name="activity_order_distribute_address_text">海外联谊大厦2210室</string>
     <string name="activity_order_distributor">送餐员：</string>
     <string name="activity_order_distributor_text">陈芝泽，15899861849</string>
+
+    <!-- Mine-->
+    <string name="fragment_mine_me">我的</string>
+    <string name="fragment_mine_wallet">钱包</string>
+    <string name="fragment_mine_preferential">优惠</string>
+    <string name="fragment_mine_integral">积分</string>
+    <string name="fragment_mine_address">收货地址</string>
+    <string name="fragment_mine_collection">我的收藏</string>
+    <string name="fragment_mine_evaluation">历史评价</string>
+    <string name="fragment_personal_security">账户与安全</string>
+    <string name="fragment_personal_portrait">头像</string>
+    <string name="fragment_personal_username">用户名</string>
+
 </resources>

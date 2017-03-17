@@ -23,7 +23,7 @@
     <color name="activity_main_indicator_fore">#427fb4</color>
 
     <!-- MineFragment-->
-    <color name="fragment_mine_ll">#bab6b6</color>
-    <color name="fragment_mine_text_color">#fff</color>
+    <color name="fragment_mine_ll">#d1cece</color>
+    <color name="fragment_mine_bg_color">#0095fe</color>
 
 </resources>
