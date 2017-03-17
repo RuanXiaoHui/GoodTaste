@@ -1,13 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="www.formssi.goodtaste.fragment.MineFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_mine_ll"
+    android:orientation="vertical"
+    tools:context="www.formssi.goodtaste.fragment.MineFragment">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:text="我的"/>
+        android:layout_height="@dimen/fragment_mine_rl_height"
+        android:background="#1296db">
 
-</RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/icon_mine_setting" />
+
+        <ImageView
+            android:id="@+id/iv_mine_head"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="35dp"
+            android:src="@mipmap/icon_mine_headprotrait"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

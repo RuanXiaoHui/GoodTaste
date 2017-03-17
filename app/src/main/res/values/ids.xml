@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="llt_">false</item>
+    <item type="id" name="rlt_">false</item>
+    <item type="id" name="btn_order_cancel">false</item>
+    <item type="id" name="btn_order_ok">false</item>
+    <item type="id" name="btn_order_contact_business">false</item>
+    <item type="id" name="rb_">false</item>
+    <item type="id" name="ib_">false</item>
+    <item type="id" name="lv_order_food_list">false</item>
+    <item type="id" name="iv_order_shop_image">false</item>
+    <item type="id" name="tv_order_status">false</item>
+    <item type="id" name="iv_order_shop_small_icon">false</item>
+    <item type="id" name="iv_order_item_food_name">false</item>
+    <item type="id" name="iv_order_item_food_count">false</item>
+    <item type="id" name="iv_order_item_food_price">false</item>
+</resources>

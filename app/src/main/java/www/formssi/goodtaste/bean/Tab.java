@@ -1,9 +1,8 @@
 package www.formssi.goodtaste.bean;
 
 /**
- * Created by john on 2017/3/16.
+ * Created by qkldev003 on 2017/3/16.
  */
-
 public class Tab {
 
     private int TabIcon;
