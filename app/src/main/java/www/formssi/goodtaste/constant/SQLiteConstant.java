@@ -19,20 +19,19 @@ public class SQLiteConstant {
     public static final String[] TABLE_USER_COLUMNS = new String[]{"userId", "userName varchar(20),",
             "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
             "image_path varchar(100)"}; // 用户表的列名数组
-    public static final String[] TABLE_SHOP_COLUMNS = new String[]{"userId", "userName varchar(20),",
-            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
-            "image_path varchar(100)"}; // 商店表的列名数组
-    public static final String[] TABLE_FOOD_COLUMNS = new String[]{"userId", "userName varchar(20),",
-            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
-            "image_path varchar(100)"}; // 食品表的列名数组
-    public static final String[] TABLE_ORDER_COLUMNS = new String[]{"userId", "userName varchar(20),",
-            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
-            "image_path varchar(100)"}; // 订单表的列名数组
-    public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{"userId", "userName varchar(20),",
+    public static final String[] TABLE_SHOP_COLUMNS = new String[]{"shopId", "name varchar(20),",
+            "phone varchar(15),", "picture varchar(10),", "giveCosts varchar(10),", "address varchar(30),",
+            "score varchar(10)"}; // 商店表的列名数组
+    public static final String[] TABLE_FOOD_COLUMNS = new String[]{"foodId", "name varchar(20),",
+            "picture varchar(10),", "price varchar(10),", "score varchar(10),", "number varchar(10),",
+            "shopId interger"}; // 食品表的列名数组
+    public static final String[] TABLE_ORDER_COLUMNS = new String[]{"orderId", "shopName varchar(20),",
+            "shopPicture varchar(10),", "status char(1),", "foodName varchar(20),", "price varchar(10),",
+            "orderTime time"}; // 订单表的列名数组
+    public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{"orderDetailId", "userName varchar(20),",
             "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
             "image_path varchar(100)"}; // 订单详情表的列名数组
-    public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{"userId", "userName varchar(20),",
-            "phone varchar(15),", "sex char(1),", "login_pwd varchar(20),", "pay_pwd varchar(6),",
-            "image_path varchar(100)"}; // 地址表的列名数组
+    public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{"addressId", "userId interger,",
+            "address varchar(50)"}; // 地址表的列名数组
 
 }
