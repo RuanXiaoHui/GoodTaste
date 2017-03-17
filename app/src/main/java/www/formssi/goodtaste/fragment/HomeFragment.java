@@ -18,6 +18,7 @@ import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.GoodsDetailActivity;
+import www.formssi.goodtaste.activity.MainActivity;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
 import www.formssi.goodtaste.adapter.HomeGoodsBaseAdapter;
 import www.formssi.goodtaste.adapter.MyPagerAdapter;
