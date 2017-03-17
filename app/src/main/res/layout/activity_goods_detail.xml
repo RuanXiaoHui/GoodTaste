@@ -28,6 +28,7 @@
                android:layout_marginLeft="15dp"
                android:background="@mipmap/icon_categroy_6"/>
            <LinearLayout
+               android:id="@+id/llShop"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:orientation="vertical"
@@ -48,8 +49,16 @@
                    android:text="店家描述：小滨外卖，吃了爽到你骨子里"/>
 
            </LinearLayout>
-
-
+           <TextView
+               android:id="@+id/ivShopBusinessHours"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="#3e581b"
+               android:layout_below="@+id/llShop"
+               android:layout_toRightOf="@+id/ivShopimg"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="20dp"
+               android:text="营业时间：早上12:00-晚上22:00"/>
        </RelativeLayout>
 
         <View

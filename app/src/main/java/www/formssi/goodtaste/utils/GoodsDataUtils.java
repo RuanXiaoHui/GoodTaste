@@ -42,7 +42,6 @@ public class GoodsDataUtils {
 
             mData.add(new ShopBean("110",shopName[i],foods, shopIcon[i],"4","深圳联谊大厦121","味道很不错，你值得拥有","4","18376611549",shopMenu,100+i,"35分钟","早10:00-晚21:00"));
 
-            System.out.println(mData.get(i).getShopName()+mData.get(i).getShopDesc());
 
         }
 
