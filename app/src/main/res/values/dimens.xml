@@ -24,6 +24,9 @@
     <dimen name="line_horizontal_bold_height">1dp</dimen>
     <dimen name="line_horizontal_small_height">0.5dp</dimen>
 
+    <dimen name="line_vertical_bold_width">1dp</dimen>
+    <dimen name="line_vertical_small_width">0.5dp</dimen>
+
     <!-- 字体大小 -->
     <dimen name="text_size_micro">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
@@ -45,9 +48,14 @@
     <dimen name="activity_mian_fl_hight">0dp</dimen>
     <dimen name="activity_mian_fl_width">0dp</dimen>
 
-    <!-- MineFragment-->
+    <!-- MineFragment 图标-->
     <dimen name="fragment_mine_iv_width">25dp</dimen>
     <dimen name="fragment_mine_iv_height">25dp</dimen>
+    <!-- MineFragment 头像-->
+    <dimen name="fragment_mine_iv_headprotrait_width">70dp</dimen>
+    <dimen name="fragment_mine_iv_headprotrait_height">70dp</dimen>
+    <!-- MineFragment 竖直方框-->
+    <dimen name="fragment_mine_ll_vertical_width">0dp</dimen>
 
     <!--activity的返回标题栏-->
     <dimen name="activity_back_titlebar_hight">50dp</dimen>
@@ -81,13 +89,6 @@
     <!--列表分割线-->
     <dimen name="listView_dividerHeight_null">0dp</dimen>
     <dimen name="listView_dividerHeight">1dp</dimen>
-
-
-    <!--MineFragment -->
-    <dimen name="fragment_mine_rl_height">100dp</dimen>
-    <dimen name="fragment_mine_tv_width">50dp</dimen>
-    <dimen name="fragment_mine_tv_height">30dp</dimen>
-
 
     <!--HomeFragment-->
     <dimen name="fragment_home_favourable_layout_paddingTop">3dp</dimen>

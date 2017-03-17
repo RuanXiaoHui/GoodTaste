@@ -72,8 +72,11 @@
     <string name="fragment_personal_security">账户与安全</string>
     <string name="fragment_personal_portrait">头像</string>
     <string name="fragment_personal_username">用户名</string>
-
-
+    <string name="fragment_personal_setting">设置</string>
+    <string name="fragment_personal_securitysetting">安全设置</string>
+    <string name="fragment_personal_phone">手机</string>
+    <string name="fragment_personal_login_password">登录密码</string>
+    <string name="fragment_personal_pay_password">支付密码</string>
 
     <!--homeFragment-->
     <string name="home_favourable_one_title">天天特价</string>

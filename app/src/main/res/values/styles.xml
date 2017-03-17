@@ -10,7 +10,7 @@
     </style>
 
     <!-- activity大字体 白色 -->
-    <style name="activity_text_normal_white" >
+    <style name="activity_text_normal_white">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
@@ -19,7 +19,7 @@
     </style>
 
     <!-- activity正常字体 黑色 -->
-    <style name="activity_text_normal_black" >
+    <style name="activity_text_normal_black">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -28,7 +28,7 @@
     </style>
 
     <!-- activity正常字体 灰色 -->
-    <style name="activity_text_normal_gray" >
+    <style name="activity_text_normal_gray">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -37,7 +37,7 @@
     </style>
 
     <!-- activity正常字体 蓝色 -->
-    <style name="activity_text_normal_blue" >
+    <style name="activity_text_normal_blue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
@@ -46,7 +46,7 @@
     </style>
 
     <!-- activity小字体 黑色 -->
-    <style name="activity_text_small_black" >
+    <style name="activity_text_small_black">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
@@ -55,7 +55,7 @@
     </style>
 
     <!-- activity小字体 灰色 -->
-    <style name="activity_text_small_gray" >
+    <style name="activity_text_small_gray">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_small</item>
@@ -64,7 +64,7 @@
     </style>
 
     <!-- activity超小字体 灰色 -->
-    <style name="activity_text_micro_gray" >
+    <style name="activity_text_micro_gray">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
@@ -73,7 +73,7 @@
     </style>
 
     <!-- 确定类Button按钮 -->
-    <style name="button_bottom" >
+    <style name="button_bottom">
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
@@ -82,7 +82,7 @@
     </style>
 
     <!-- 确定类Button按钮 -->
-    <style name="button_positive" >
+    <style name="button_positive">
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@color/positive_green</item>
@@ -90,14 +90,14 @@
     </style>
 
     <!-- activity超小图标 -->
-    <style name="icon_micro" >
+    <style name="icon_micro">
         <item name="android:layout_width">@dimen/icon_micro_width</item>
         <item name="android:layout_height">@dimen/icon_micro_hight</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 
     <!-- activity小图标 -->
-    <style name="icon_small" >
+    <style name="icon_small">
         <item name="android:layout_width">@dimen/icon_small_width</item>
         <item name="android:layout_height">@dimen/icon_small_hight</item>
         <item name="android:gravity">center</item>
@@ -105,7 +105,7 @@
     </style>
 
     <!-- activity正常图标 -->
-    <style name="icon_normal" >
+    <style name="icon_normal">
         <item name="android:layout_width">@dimen/icon_normal_width</item>
         <item name="android:layout_height">@dimen/icon_normal_hight</item>
         <item name="android:gravity">center</item>
@@ -113,7 +113,7 @@
     </style>
 
     <!-- 圆形Checkbox 收货地址 -->
-    <style name="checkbox_circle" >
+    <style name="checkbox_circle">
         <item name="android:layout_width">@dimen/icon_normal_width</item>
         <item name="android:layout_height">@dimen/icon_normal_hight</item>
         <item name="android:gravity">center</item>
@@ -210,5 +210,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/activity_main_tab_bg</item>
     </style>
+
+    <!--MineFragment -->
+    <style name="style_mine_vertical_linearlayout">
+        <item name="android:layout_width">@dimen/fragment_mine_ll_vertical_width</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 
 </resources>

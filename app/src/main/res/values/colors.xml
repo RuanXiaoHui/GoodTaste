@@ -33,8 +33,11 @@
 
 
     <!-- MineFragment-->
-    <color name="fragment_mine_ll">#d1cece</color>
+    <color name="fragment_mine_ll">#efefef</color>
     <color name="fragment_mine_bg_color">#0095fe</color>
+    <color name="fragment_mine_wallet">#f60</color>
+    <color name="fragment_mine_preferential">#f00</color>
+    <color name="fragment_mine_integral">#194d19</color>
 
     <!-- Back_titlebar -->
     <color name="back_titlebar_background">#1296db</color>
