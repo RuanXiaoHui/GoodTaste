@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray1"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_back_titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_small"
+        android:background="@color/activity_common_background_white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_padding_large"
+        android:paddingLeft="@dimen/common_padding_medium"
+        android:paddingRight="@dimen/common_padding_medium"
+        android:paddingTop="@dimen/common_padding_large">
+
+        <TextView
+            android:id="@+id/tv_AddNewAddressActivity_contacts"
+            style="@style/activity_text_normal_black"
+            android:text="@string/activity_addNewAddress_contacts" />
+
+        <EditText
+            android:id="@+id/et_AddNewAddressActivity_name"
+            style="@style/activity_address_editText"
+            android:layout_marginLeft="@dimen/common_margin_large"
+            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_contacts"
+            android:hint="@string/activity_addNewAddress_name" />
+
+        <View
+            android:id="@+id/view_AddNewAddressActivity_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/line_height_low"
+            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
+            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
+            android:layout_below="@+id/et_AddNewAddressActivity_name"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:background="@color/line_horizontal" />
+
+        <RadioGroup
+            android:id="@+id/rg_AddNewAddressActivity_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_AddNewAddressActivity_line1"
+            android:layout_alignRight="@+id/view_AddNewAddressActivity_line1"
+            android:layout_below="@+id/view_AddNewAddressActivity_line1"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_AddNewAddressActivity_gentleman"
+                style="@style/radioButton_circle"
+                android:text="@string/activity_addNewAddress_gentleman" />
+
+            <RadioButton
+                android:id="@+id/rb_AddNewAddressActivity_lady"
+                style="@style/radioButton_circle"
+                android:layout_marginLeft="@dimen/common_margin_medium"
+                android:text="@string/activity_addNewAddress_lady" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view_AddNewAddressActivity_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/line_height_low"
+            android:layout_below="@+id/rg_AddNewAddressActivity_gender"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:background="@color/line_horizontal" />
+
+        <TextView
+            android:id="@+id/tv_AddNewAddressActivity_phone"
+            style="@style/activity_text_normal_black"
+            android:layout_below="@+id/view_AddNewAddressActivity_line2"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:text="@string/activity_addNewAddress_phone" />
+
+        <EditText
+            android:id="@+id/et_AddNewAddressActivity_phone"
+            style="@style/activity_address_editText"
+            android:layout_alignBottom="@+id/tv_AddNewAddressActivity_phone"
+            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
+            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
+            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_phone"
+            android:hint="@string/activity_addNewAddress_phoneNumber" />
+
+        <View
+            android:id="@+id/view_AddNewAddressActivity_line3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/line_height_low"
+            android:layout_below="@+id/tv_AddNewAddressActivity_phone"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:background="@color/line_horizontal" />
+
+        <TextView
+            android:id="@+id/tv_AddNewAddressActivity_address"
+            style="@style/activity_text_normal_black"
+            android:layout_below="@+id/view_AddNewAddressActivity_line3"
+            android:layout_marginTop="@dimen/common_margin_large"
+            android:text="@string/activity_addNewAddress_address" />
+
+        <EditText
+            android:id="@+id/et_AddNewAddressActivity_address"
+            style="@style/activity_address_editText"
+            android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
+            android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
+            android:layout_alignTop="@+id/tv_AddNewAddressActivity_address"
+            android:layout_toRightOf="@+id/tv_AddNewAddressActivity_address"
+            android:hint="@string/activity_addNewAddress_addressDetail"
+            android:lines="2" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_large"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/common_padding_medium"
+        android:paddingRight="@dimen/common_padding_medium">
+
+        <Button
+            android:id="@+id/btn_AddNewAddressActivity_ok"
+            style="@style/button_positive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:text="@string/commom_ok"
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+
+</LinearLayout>
