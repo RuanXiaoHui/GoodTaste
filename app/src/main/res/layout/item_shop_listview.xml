@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/ivGoodsIcon"
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@mipmap/food"/>
+
+        <LinearLayout
+            android:id="@+id/llShopItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ivGoodsIcon"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="必胜客宅急送"
+                android:textAllCaps="true"
+                android:textColor="#2e2e2e"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvShopDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="月售21份"
+                android:textColor="#b3b3b3"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivGoodsIcon"
+            android:layout_below="@+id/llShopItem"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/tvShopDesc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="¥18元"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#ff1010"
+                android:textSize="18sp"/>
+
+            <www.formssi.goodtaste.widget.NumberSubAdd
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                app:maxVue="10"
+                app:minVue="0"
+                app:vue="0"
+                app:SubBackground="@drawable/shape_btn_sub_number"
+                app:AddBackground="@drawable/shape_btn_add_number">
+            </www.formssi.goodtaste.widget.NumberSubAdd>
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
