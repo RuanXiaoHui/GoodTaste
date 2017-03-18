@@ -13,8 +13,14 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
-import www.formssi.goodtaste.bean.OrderDetailsBean;
+import www.formssi.goodtaste.constant.OrderState;
 
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -114,15 +120,14 @@ public class DataBaseSQLiteUtil {
             orderBean.setOrderId(id);
             orderBean.setShopName(shopName);
             orderBean.setShopImgPath(shopPicture);
-            orderBean.setStatus(status);
-            orderBean.setActualPayment(price);
-            orderBean.setShopPicture(Integer.valueOf(shopPicture));
             orderBean.setStatus(strStatus);
-            orderBean.setPrice(price);
+            orderBean.setActualPayment(price);
+            //orderBean.setShopPicture(Integer.valueOf(shopPicture));
+            orderBean.setStatus(strStatus);
+            //orderBean.setPrice(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
             orderBean.setOrderNum(orderNumber);
-            orderBean.setOrderNumber(orderNumber);
             orderBeanList.add(orderBean);
         }
         cursor.close();
