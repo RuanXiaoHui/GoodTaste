@@ -61,8 +61,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     private void initStatusBtn(OrderHolder holder, int status) {
         switch (status) {
             case OrderState.NOT_PAY://未支付
-                holder.tvTransactionStatus.setText("未支付");
-                holder.btnStatusLogic.setText("去支付");
+                holder.tvTransactionStatus.setText(R.string.order_state_notpay);
+                holder.btnStatusLogic.setText(R.string.order_state_btn_notpay);
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -70,8 +70,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 });
                 break;
             case OrderState.NOT_COMMENT://未评论
-                holder.tvTransactionStatus.setText("未评论");
-                holder.btnStatusLogic.setText("去评论");
+                holder.tvTransactionStatus.setText(R.string.order_state_notcomment);
+                holder.btnStatusLogic.setText(R.string.order_state_btn_notcomment);
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,8 +79,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 });
                 break;
             case OrderState.NOT_DELIVERY://未发货
-                holder.tvTransactionStatus.setText("未发货");
-                holder.btnStatusLogic.setText("去催单");
+                holder.tvTransactionStatus.setText(R.string.order_state_notdelivery);
+                holder.btnStatusLogic.setText(R.string.order_state_btn_notdelivery);
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -89,8 +89,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 });
                 break;
             case OrderState.FINISH://订单完成
-                holder.btnStatusLogic.setText("再来一单");
-                holder.tvTransactionStatus.setText("交易完成");
+                holder.btnStatusLogic.setText(R.string.order_state_finish);
+                holder.tvTransactionStatus.setText(R.string.order_state_btn_finish);
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -98,8 +98,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 });
                 break;
             case OrderState.DELIVERY_ING://送餐中
-                holder.tvTransactionStatus.setText("送餐中");
-                holder.btnStatusLogic.setText("查看进度");
+                holder.tvTransactionStatus.setText(R.string.order_state_deliverying);
+                holder.btnStatusLogic.setText(R.string.order_state_btn_deliverying);
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

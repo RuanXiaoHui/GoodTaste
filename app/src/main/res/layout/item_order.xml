@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
     android:id="@+id/lltOrderItem"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_order_item_click"
+    android:orientation="vertical">
 
-    <ImageView
-        style="@style/crude_dividing_line"
-        />
+    <ImageView style="@style/crude_dividing_line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
         <ImageView
             android:id="@+id/imgShop"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/food"
-            />
+            android:src="@mipmap/food" />
 
         <LinearLayout
             android:id="@+id/llt"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/imgShop"
             android:orientation="vertical">
 
@@ -37,16 +36,14 @@
                 android:layout_height="wrap_content"
                 android:maxLength="12"
                 android:text="店铺名称"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tvOrderTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017-03-12 11:30"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <ImageView
@@ -54,8 +51,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/llt"
-            android:src="@mipmap/ic_right_arrow"
-            />
+            android:src="@mipmap/ic_right_arrow" />
 
         <TextView
             android:id="@+id/tvTransactionStatus"
@@ -65,15 +61,12 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:text="交易成功"
-            android:textColor="#e2300d"
-            />
+            android:textColor="#e2300d" />
 
 
     </RelativeLayout>
 
-    <ImageView
-        style="@style/thin_dividing_line"
-        />
+    <ImageView style="@style/thin_dividing_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -89,8 +82,7 @@
             android:maxLength="25"
             android:maxLines="2"
             android:text="商品名称"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvPrice"
@@ -104,14 +96,12 @@
 
     </RelativeLayout>
 
-    <ImageView
-        style="@style/thin_dividing_line"
-        />
+    <ImageView style="@style/thin_dividing_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:padding="8dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/btnStatusLogic"
@@ -120,11 +110,9 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_button_order_item"
             android:text="再来一单"
-            android:textColor="@color/appColor"
-            />
+            android:textColor="@color/appColor" />
 
     </RelativeLayout>
-    <ImageView
-        style="@style/thin_dividing_line"
-        />
+
+    <ImageView style="@style/thin_dividing_line" />
 </LinearLayout>

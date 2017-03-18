@@ -19,6 +19,9 @@ import www.formssi.goodtaste.adapter.OrderPagerAdapter;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.fragment.OrderStateFragment;
 
+/**
+ * 订单分类的activity
+ */
 public class OrderStateActivity extends BaseActivity {
 
     private TabLayout tabLayout;

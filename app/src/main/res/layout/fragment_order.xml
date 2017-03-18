@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="未支付"
+                android:text="@string/order_state_notpay"
                 android:textSize="12sp"
                 />
 
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="未配送"
+                android:text="@string/order_state_notdelivery"
                 android:textSize="12sp"
                 />
 
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="送餐中"
+                android:text="@string/order_state_deliverying"
                 android:textSize="12sp"
                 />
 
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="未评论"
+                android:text="@string/order_state_notcomment"
                 android:textSize="12sp"
                 />
 
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="已完成"
+                android:text="@string/order_state_finish"
                 android:textSize="12sp"
                 />
 

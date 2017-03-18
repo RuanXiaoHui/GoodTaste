@@ -22,12 +22,16 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 public class OrderStateFragment extends Fragment {
 
 
-    RecyclerView rlvOrderState;
-    OrderAdapter orderAdapter;
-    LinearLayout lltNoOrder;
-    List<OrderBean> orders;
-    int state = 0;
+    RecyclerView rlvOrderState;//分类订单显示的列表
+    OrderAdapter orderAdapter;//分类订单的adapter
+    LinearLayout lltNoOrder;//没有订单时的父布局
+    List<OrderBean> orders;//数据源
+    int state = 0;//进入视图时显示的fragment
 
+    /**
+     *
+     * @param state 进入视图时显示的fragment
+     */
     public OrderStateFragment(int state) {
         super();
         this.state = state;

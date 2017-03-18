@@ -28,18 +28,21 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * 订单页面
+ */
 public class OrderFragment extends Fragment implements View.OnClickListener {
 
-    RecyclerView rvOrderList;
-    List<OrderBean> orders;
-    OrderAdapter orderAdapter;
-    LinearLayout lltNoOrder;
-    Button btnGoSingle;
-    LinearLayout lltNotPay;
-    LinearLayout lltNotDelivery;
-    LinearLayout lltDeliveryIng;
-    LinearLayout lltNotComment;
-    LinearLayout lltFinish;
+    RecyclerView rvOrderList;//显示所有订单的recycle人view
+    List<OrderBean> orders;//数据源
+    OrderAdapter orderAdapter;//适配器
+    LinearLayout lltNoOrder;//没有订单时显示的布局
+    Button btnGoSingle;//没有订单时显示的按钮
+    LinearLayout lltNotPay;//未支付的父布局
+    LinearLayout lltNotDelivery;//未配送的父布局
+    LinearLayout lltDeliveryIng;//送餐中的父布局
+    LinearLayout lltNotComment;//未评论的父布局
+    LinearLayout lltFinish;//已完成的父布局
 
     @Nullable
     @Override
@@ -49,11 +52,11 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         setOnClick();
 //        DataBaseSQLiteUtil.insertOrder();//测试
         orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
-        if (orders.size() == 0) {
+        if (orders.size() == 0) {//没有订单,则显示的布局
             rvOrderList.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
 
-        } else {
+        } else {//有订单时显示的布局
             orderAdapter = new OrderAdapter(orders, getContext());
             rvOrderList.setLayoutManager(new LinearLayoutManager(getContext()));
             rvOrderList.setAdapter(orderAdapter);
@@ -62,6 +65,9 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+    /**
+     * 为控件添加监听事件
+     */
     private void setOnClick() {
         lltNotPay.setOnClickListener(this);
         lltNotDelivery.setOnClickListener(this);
@@ -71,6 +77,10 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         btnGoSingle.setOnClickListener(this);
     }
 
+    /**
+     * 初始化控件
+     * @param v
+     */
     private void initView(View v) {
         rvOrderList = (RecyclerView) v.findViewById(R.id.rvOrderList);
         lltNoOrder = (LinearLayout) v.findViewById(R.id.lltNoOrder);
@@ -92,23 +102,23 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                     ((MeOnClickListener) getActivity()).onBtnGoSingleClick();
                 }
                 break;
-            case R.id.lltNotPay://未支付
+            case R.id.lltNotPay://未支付,点击是进入OrderStateActivity,并且传入相应的参数,使进入界面为相应的界面
                 intent.putExtra("stateNum", OrderState.NOT_PAY);
                 startActivity(intent);
                 break;
-            case R.id.lltNotDelivery://未发货
+            case R.id.lltNotDelivery://未发货,同上
                 intent.putExtra("stateNum", OrderState.NOT_DELIVERY);
                 startActivity(intent);
                 break;
-            case R.id.lltDeliveryIng://送餐中
+            case R.id.lltDeliveryIng://送餐中,同上
                 intent.putExtra("stateNum", OrderState.DELIVERY_ING);
                 startActivity(intent);
                 break;
-            case R.id.lltNotComment://未评论
+            case R.id.lltNotComment://未评论,同上
                 intent.putExtra("stateNum", OrderState.NOT_COMMENT);
                 startActivity(intent);
                 break;
-            case R.id.lltFinish://已完成
+            case R.id.lltFinish://已完成,同上
                 intent.putExtra("stateNum", OrderState.FINISH);
                 startActivity(intent);
                 break;
@@ -117,6 +127,9 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    /**
+     * 去下单按钮回调接口
+     */
     public interface MeOnClickListener {
         void onBtnGoSingleClick();
     }
