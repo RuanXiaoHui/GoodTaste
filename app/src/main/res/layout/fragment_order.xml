@@ -1,19 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/appColor"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@color/appColor">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单"
-            android:textSize="22sp"
             android:layout_centerInParent="true"
-            />
+            android:text="订单"
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -22,170 +22,101 @@
 
         <LinearLayout
             android:id="@+id/lltNotPay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            style="@style/order_fragment_state_llt">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_unpaid"/>
+                style="@style/order_fragment_state_img"
+                android:src="@mipmap/ic_unpaid" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/order_fragment_state_tv"
                 android:text="@string/order_state_notpay"
-                android:textSize="12sp"
+
                 />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lltNotDelivery"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            style="@style/order_fragment_state_llt">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_notdelivery"/>
+                style="@style/order_fragment_state_img"
+                android:src="@mipmap/ic_notdelivery" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/order_state_notdelivery"
-                android:textSize="12sp"
-                />
+                style="@style/order_fragment_state_tv"
+                android:text="@string/order_state_notdelivery" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lltDeliveryIng"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            style="@style/order_fragment_state_llt">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_notreceive"/>
+                style="@style/order_fragment_state_img"
+
+                android:src="@mipmap/ic_notreceive" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/order_state_deliverying"
-                android:textSize="12sp"
-                />
+                style="@style/order_fragment_state_tv"
+                android:text="@string/order_state_deliverying" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lltNotComment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            style="@style/order_fragment_state_llt">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_notcomment"/>
+                style="@style/order_fragment_state_img"
+
+                android:src="@mipmap/ic_notcomment" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/order_state_notcomment"
-                android:textSize="12sp"
-                />
+                style="@style/order_fragment_state_tv"
+                android:text="@string/order_state_notcomment" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lltFinish"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            style="@style/order_fragment_state_llt">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_finish"/>
+                style="@style/order_fragment_state_img"
+                android:src="@mipmap/ic_finish" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/order_state_finish"
-                android:textSize="12sp"
-                />
+                style="@style/order_fragment_state_tv"
+                android:text="@string/order_state_finish" />
 
         </LinearLayout>
 
     </LinearLayout>
-    <ImageView
-        style="@style/thin_dividing_line"/>
+
+    <ImageView style="@style/thin_dividing_line" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvOrderList"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
     <LinearLayout
         android:id="@+id/lltNoOrder"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
+        style="@style/order_fragment_no_order_llt">
+
         <TextView
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="还没有订单"
-            />
+            android:text="@string/no_order_tv_content" />
 
         <Button
             android:id="@+id/btnGoSingle"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:text="去下单"
-            android:background="@drawable/shape_button_order_item"
-            android:layout_below="@+id/tv"
-            android:layout_centerInParent="true"
-            />
+            style="@style/order_fragment_no_order_btn"
+             />
     </LinearLayout>
 </LinearLayout>

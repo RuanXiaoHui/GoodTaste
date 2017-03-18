@@ -268,5 +268,46 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <!--order state 的 LinearLayout-->
+    <style name="order_fragment_state_llt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+    <!--order state 的 LinearLayout下的img-->
+    <style name="order_fragment_state_img">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <!--order state 的 LinearLayout下的textview -->
+    <style name="order_fragment_state_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">12sp</item>
+
+    </style>
+
+    <!--orderfragemnt 没有订单时内容的LinearLayout -->
+    <style name="order_fragment_no_order_llt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    <!--orderfragemnt 没有订单时内容的LinearLayout下的 -->
+    <style name="order_fragment_no_order_btn">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/shape_button_order_item</item>
+        <item name="android:text">@string/order_btn_go_single</item>
+    </style>
 
 </resources>

@@ -15,10 +15,7 @@
 
     <LinearLayout
         android:id="@+id/lltNoOrder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone">
+        style="@style/order_fragment_no_order_llt">
 
         <TextView
             style="@style/text_large_black"
