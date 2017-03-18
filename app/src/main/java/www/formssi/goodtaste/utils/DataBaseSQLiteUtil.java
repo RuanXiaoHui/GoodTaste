@@ -38,8 +38,10 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_USER_COLUMNS;
 
 /**
  * 数据库操作工具类
- * 使用之前先openDataBase
- * 说明：定义有关数据库操作的增、删、改、查
+ *
+ * 说明：
+ * 1.定义有关数据库操作的增、删、改、查
+ * 2.使用之前先openDataBase
  *
  * @author qq724418408
  */
@@ -122,9 +124,9 @@ public class DataBaseSQLiteUtil {
             orderBean.setShopImgPath(shopPicture);
             orderBean.setStatus(strStatus);
             orderBean.setActualPayment(price);
-            //orderBean.setShopPicture(Integer.valueOf(shopPicture));
+            orderBean.setShopPicture(Integer.valueOf(shopPicture));
             orderBean.setStatus(strStatus);
-            //orderBean.setPrice(price);
+            orderBean.setActualPayment(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
             orderBean.setOrderNum(orderNumber);

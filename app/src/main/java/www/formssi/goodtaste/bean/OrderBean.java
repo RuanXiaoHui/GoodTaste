@@ -14,6 +14,7 @@ public class OrderBean {
     private String storeId; // 店铺id
     private String shopName; // 商店名称
     private String shopImgPath; // 商店图像
+    private int shopPicture; // 商店图像
     private String orderNum; // 订单号（参考）：店铺id（后三位） + 用户id（后三位） + 用户手机号（后四位） + 流水号（0000-9999）
     private String status; // 订单状态：未支付、未配送、送餐中、已完成、已评价
     private String orderContent; // 订单内容
@@ -34,6 +35,14 @@ public class OrderBean {
         this.orderTime = orderTime;
         this.orderContent = orderContent;
         this.status = status;
+    }
+
+    public int getShopPicture() {
+        return shopPicture;
+    }
+
+    public void setShopPicture(int shopPicture) {
+        this.shopPicture = shopPicture;
     }
 
     public String getOrderId() {
