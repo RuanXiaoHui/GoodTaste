@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="订单"
-            android:textSize="22sp" />
+            style="@style/text_large_white" />
     </RelativeLayout>
 
     <LinearLayout
