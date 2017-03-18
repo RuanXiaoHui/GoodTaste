@@ -13,8 +13,13 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
-import www.formssi.goodtaste.bean.OrderDetailsBean;
 
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -74,15 +79,14 @@ public class DataBaseSQLiteUtil {
             String orderNumber = cursor.getString(5);
             String orderContent = cursor.getString(6);
             String orderTime = cursor.getString(7);
-            orderBean.setId(id);
+            orderBean.setOrderId(id);
             orderBean.setShopName(shopName);
-            orderBean.setPrice(shopPicture);
+            orderBean.setShopImgPath(shopPicture);
             orderBean.setStatus(status);
-            orderBean.setPrice(price);
+            orderBean.setActualPayment(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
-            orderBean.setOrderNumber(orderNumber);
-
+            orderBean.setOrderNum(orderNumber);
             orderBeanList.add(orderBean);
         }
         cursor.close();
@@ -100,21 +104,22 @@ public class DataBaseSQLiteUtil {
      *
      * @return
      */
-    public static List<OrderDetailsBean> getOrderBeansById(String orderId) {
+    public static List<OrderBean> getOrderBeansById(String orderId) {
         String[] projection = {"", "", ""};
-        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, "orderId" + "= ?",
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) {
             return null;
         }
-        OrderDetailsBean o = new OrderDetailsBean();
-        List<OrderDetailsBean> list = new ArrayList<>();
+        OrderBean o = new OrderBean();
+        List<OrderBean> list = new ArrayList<>();
         for (int i = 0; i < resultCounts; i++) {
-            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex("shopId"))));
+            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID))));
             list.add(o);
             cursor.moveToNext();
         }
+        cursor.close();
         o.setFoodBeanList(getOrderDetailsBeansById(orderId));
         list.add(o);
         return list;
@@ -127,8 +132,8 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static List<FoodBean> getOrderDetailsBeansById(String orderId) {
-        String[] projection = {"foodId", "foodName", "price", "amount"}; //
-        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, "orderId" + "= ?",
+        String[] projection = {COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_PRICE, COLUMN_FOOD_BUY_COUNT}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) {
@@ -137,10 +142,10 @@ public class DataBaseSQLiteUtil {
         List<FoodBean> list = new ArrayList<>();
         for (int i = 0; i < resultCounts; i++) {
             FoodBean food = new FoodBean();
-            food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex("foodId"))));
-            food.setGoodsName(cursor.getString(cursor.getColumnIndex("foodName")));
-            food.setGoodsMoney(cursor.getString(cursor.getColumnIndex("price")));
-            food.setGoodsNumber(cursor.getColumnIndex("amount"));
+            food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_FOOD_ID))));
+            food.setGoodsName(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_NAME)));
+            food.setGoodsMoney(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_PRICE)));
+            food.setGoodsNumber(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT));
             list.add(food);
             cursor.moveToNext();
         }
