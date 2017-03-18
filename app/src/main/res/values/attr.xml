@@ -6,4 +6,27 @@
         <attr name="Indicator_forecolor" format="reference"/>
         <attr name="Indicator_bgcolor" format="reference"/>
     </declare-styleable>
+
+
+
+
+
+
+    <!--自定义加减控件-->
+    <attr name="minVue" format="integer|reference"/>
+    <attr name="maxVue" format="integer|reference"/>
+    <attr name="vue" format="integer|reference"/>
+    <attr name="AddBackground" format="reference"/>
+    <attr name="SubBackground" format="reference"/>
+    <attr name="textViewBackground" format="reference"/>
+
+
+    <declare-styleable name="NumberSubAdd">
+        <attr name="minVue"/>
+        <attr name="maxVue" />
+        <attr name="vue" />
+        <attr name="AddBackground"/>
+        <attr name="SubBackground"/>
+        <attr name="textViewBackground"/>
+    </declare-styleable>
 </resources>
