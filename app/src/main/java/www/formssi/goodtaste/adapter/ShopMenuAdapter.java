@@ -28,7 +28,7 @@ public class ShopMenuAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mdatas.size();
     }
 
     @Override
