@@ -26,7 +26,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView() {
 
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+//        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivReturn.setOnClickListener(this);
 
