@@ -7,6 +7,10 @@ package www.formssi.goodtaste.constant;
 
 public class OrderState {
     /**
+     * 全部
+     */
+    public static final int ALL = 0;
+    /**
      * 未付款
      */
     public static final int NOT_PAY = 1;
