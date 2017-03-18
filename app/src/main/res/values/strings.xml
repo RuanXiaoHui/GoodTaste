@@ -104,4 +104,7 @@
     <string name="home_topbar_text_three">鸭血粉丝</string>
     <string name="home_topbar_text_four">澳门皇茶</string>
 
+    <!--Toast-->
+    <string name="toast_order_remind">已提醒商家</string>
+
 </resources>

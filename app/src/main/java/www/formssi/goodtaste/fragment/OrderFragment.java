@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.OrderDetailActivity;
 import www.formssi.goodtaste.activity.OrderStateActivity;
 import www.formssi.goodtaste.adapter.OrderAdapter;
 import www.formssi.goodtaste.bean.OrderBean;
@@ -45,7 +47,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_order, null);
         initView(v);
         setOnClick();
-        DataBaseSQLiteUtil.insertOrder();//测试
+//        DataBaseSQLiteUtil.insertOrder();//测试
         orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
         if (orders.size() == 0) {
             rvOrderList.setVisibility(View.GONE);
@@ -56,6 +58,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
             rvOrderList.setLayoutManager(new LinearLayoutManager(getContext()));
             rvOrderList.setAdapter(orderAdapter);
         }
+
         return v;
     }
 
@@ -113,8 +116,8 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
     public interface MeOnClickListener {
         void onBtnGoSingleClick();
-
     }
 }

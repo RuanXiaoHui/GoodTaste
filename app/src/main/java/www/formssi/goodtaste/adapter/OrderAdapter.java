@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.OrderDetailActivity;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.utils.ContextUtil;
 
 import static android.content.ContentValues.TAG;
 
@@ -23,11 +27,10 @@ import static android.content.ContentValues.TAG;
  * Created by GTs on 2017-03-16.
  */
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> implements View.OnClickListener{
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> implements View.OnClickListener {
 
     List<OrderBean> list;
     Context context;
-    int status;
 
     public OrderAdapter(List list, Context context) {
         this.list = list;
@@ -37,7 +40,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     @Override
     public OrderHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        OrderHolder holder = new OrderHolder(LayoutInflater.from(context).inflate(R.layout.item_order, parent, false));
+        View v = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
+        OrderHolder holder = new OrderHolder(v);
+
         return holder;
     }
 
@@ -48,29 +53,58 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.imgShop.setImageResource(list.get(position).getShopPicture());
         holder.tvOrderTime.setText(list.get(position).getOrderTime());
         holder.tvOrderContent.setText(list.get(position).getOrderContent());
-        holder.lltOrderIten.setOnClickListener(this);
-        holder.btnStatusLogic.setOnClickListener(this);
-        status = Integer.valueOf(list.get(position).getStatus());
+        holder.lltOrderItem.setOnClickListener(this);
+        int status = Integer.valueOf(list.get(position).getStatus());
+        initStatusBtn(holder, status);
+    }
+
+    private void initStatusBtn(OrderHolder holder, int status) {
         switch (status) {
             case OrderState.NOT_PAY://未支付
                 holder.tvTransactionStatus.setText("未支付");
                 holder.btnStatusLogic.setText("去支付");
+                holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 break;
             case OrderState.NOT_COMMENT://未评论
                 holder.tvTransactionStatus.setText("未评论");
                 holder.btnStatusLogic.setText("去评论");
+                holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 break;
             case OrderState.NOT_DELIVERY://未发货
                 holder.tvTransactionStatus.setText("未发货");
                 holder.btnStatusLogic.setText("去催单");
-                break;
-            case OrderState.DELIVERY_ING://送餐中
-                holder.tvTransactionStatus.setText("送餐中");
-                holder.btnStatusLogic.setText("查看进度");
+                holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ContextUtil.getInstance(), R.string.toast_order_remind, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case OrderState.FINISH://订单完成
                 holder.btnStatusLogic.setText("再来一单");
                 holder.tvTransactionStatus.setText("交易完成");
+                holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+                break;
+            case OrderState.DELIVERY_ING://送餐中
+                holder.tvTransactionStatus.setText("送餐中");
+                holder.btnStatusLogic.setText("查看进度");
+                holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 break;
         }
     }
@@ -89,26 +123,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.lltOrderItem:
-                break;
-            case R.id.btnStatusLogic:
-
-                switch (status){
-                    case OrderState.NOT_PAY://未支付
-
-                        break;
-                    case OrderState.NOT_COMMENT://未评论
-
-                        break;
-                    case OrderState.NOT_DELIVERY://未发货
-
-                        break;
-                    case OrderState.DELIVERY_ING://送餐中
-
-                        break;
-                    case OrderState.FINISH://订单完成
-
-                        break;
-                }
+                context.startActivity(new Intent(context,OrderDetailActivity.class));
                 break;
 
         }
@@ -117,8 +132,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     class OrderHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout lltOrderIten;
-
+        LinearLayout lltOrderItem;
         TextView tvShopName;//商店名字
         TextView tvOrderTime;//交易时间
         TextView tvTransactionStatus;//交易状态
@@ -136,7 +150,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         }
 
         private void initView(View itemView) {
-            lltOrderIten = (LinearLayout) itemView.findViewById(R.id.lltOrderItem);
+            lltOrderItem = (LinearLayout) itemView.findViewById(R.id.lltOrderItem);
             tvShopName = (TextView) itemView.findViewById(R.id.tvShopName);
             tvOrderTime = (TextView) itemView.findViewById(R.id.tvOrderTime);
             tvTransactionStatus = (TextView) itemView.findViewById(R.id.tvTransactionStatus);
@@ -146,8 +160,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             btnStatusLogic = (Button) itemView.findViewById(R.id.btnStatusLogic);
         }
 
-
     }
+
 
 
 }

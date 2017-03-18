@@ -13,4 +13,19 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <LinearLayout
+        android:id="@+id/lltNoOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/text_large_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您还没有相关的订单" />
+
+    </LinearLayout>
+
 </FrameLayout>
