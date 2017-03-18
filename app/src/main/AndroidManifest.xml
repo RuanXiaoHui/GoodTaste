@@ -25,13 +25,14 @@
         </activity>
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.PersonalActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
-        <activity android:name=".activity.ConfirmOrderActivity"></activity>
-        <activity android:name=".activity.ReceiveAddressActivity"></activity>
-        <activity android:name=".activity.RemarkOrderActivity"></activity>
-        <activity android:name=".activity.GoodsDetailActivity"></activity>
-        <activity android:name=".activity.AddNewAddressActivity"></activity>
-        <activity android:name=".activity.EditAddressActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ConfirmOrderActivity" />
+        <activity android:name=".activity.ReceiveAddressActivity" />
+        <activity android:name=".activity.RemarkOrderActivity" />
+        <activity android:name=".activity.GoodsDetailActivity" />
+        <activity android:name=".activity.AddNewAddressActivity" />
+        <activity android:name=".activity.EditAddressActivity" />
+        <activity android:name=".activity.OrderStateActivity"></activity>
     </application>
 
 </manifest>

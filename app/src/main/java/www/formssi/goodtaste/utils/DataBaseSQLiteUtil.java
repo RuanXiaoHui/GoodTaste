@@ -45,14 +45,46 @@ public class DataBaseSQLiteUtil {
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
 
-    public static void insertOrder(){
+    public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish+"");
-        values.put("status", 1+"");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 1 + "");
         values.put("price", "23");
-        values.put("orderNumber","1234");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 2 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 3 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 4 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 5 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
         values.put("orderContent", "宫保鸡丁");
         values.put("orderTime", "2017-03-17 12:33");
         mDatabase.insert("tb_order", null, values);
@@ -66,8 +98,8 @@ public class DataBaseSQLiteUtil {
         Cursor cursor;
         if (status == OrderState.ALL) {
             cursor = mDatabase.rawQuery("select * from tb_order", null);
-        }else {
-            cursor = mDatabase.rawQuery("select * from tb_order where status = "+status, null);
+        } else {
+            cursor = mDatabase.rawQuery("select * from tb_order where status = " + status, null);
         }
         orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -95,9 +127,6 @@ public class DataBaseSQLiteUtil {
         return orderBeanList;
 
     }
-
-
-
 
 
     /**
@@ -128,6 +157,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 通过id查询订单详情表
      * 获得食品列表
+     *
      * @param orderId
      * @return
      */
