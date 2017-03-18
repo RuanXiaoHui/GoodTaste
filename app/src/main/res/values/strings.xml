@@ -104,4 +104,26 @@
     <string name="home_topbar_text_three">鸭血粉丝</string>
     <string name="home_topbar_text_four">澳门皇茶</string>
 
+    <!--Toast-->
+    <string name="toast_order_remind">已提醒商家</string>
+
+    <!--订单状态-->
+    <string name="order_state_notpay">未支付</string>
+    <string name="order_state_notdelivery">未配送</string>
+    <string name="order_state_deliverying">送餐中</string>
+    <string name="order_state_notcomment">未评论</string>
+    <string name="order_state_finish">已完成</string>
+
+    <!--订单列表中按钮状态-->
+    <string name="order_state_btn_notpay">去支付</string>
+    <string name="order_state_btn_notdelivery">去催单</string>
+    <string name="order_state_btn_deliverying">查看进度</string>
+    <string name="order_state_btn_notcomment">去评论</string>
+    <string name="order_state_btn_finish">再来一单</string>
+    <string name="order_btn_go_single">去下单</string>
+    <string name="no_order_tv_content">还没有订单</string>
+
+
+
+
 </resources>

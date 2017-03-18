@@ -42,7 +42,7 @@ public class GoodsDetailActivity extends BaseActivity {
         }
     }
     private void initListener() {
-        SimpleAdapter sim=new SimpleAdapter(this,mLeftData,R.layout.item_goods_leftmenu,new String[]{"menu"},new int[]{R.id.tv});
-        lvLeftMenu.setAdapter(sim);
+//        SimpleAdapter sim=new SimpleAdapter(this,mLeftData,R.layout.item_goods_leftmenu,new String[]{"menu"},new int[]{R.id.tv});
+//        lvLeftMenu.setAdapter(sim);
     }
 }

@@ -13,13 +13,8 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.bean.OrderDetailsBean;
 
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
-import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -49,14 +44,46 @@ public class DataBaseSQLiteUtil {
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
 
-    public static void insertOrder(){
+    public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.food+"");
-        values.put("status", 0+"");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 1 + "");
         values.put("price", "23");
-        values.put("orderNumber","1234");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 2 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 3 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 4 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
+        values.put("orderContent", "宫保鸡丁");
+        values.put("orderTime", "2017-03-17 12:33");
+        mDatabase.insert("tb_order", null, values);
+        values.put("shopName", "好味道");
+        values.put("shopPicture", R.mipmap.ic_finish + "");
+        values.put("status", 5 + "");
+        values.put("price", "23");
+        values.put("orderNumber", "1234");
         values.put("orderContent", "宫保鸡丁");
         values.put("orderTime", "2017-03-17 12:33");
         mDatabase.insert("tb_order", null, values);
@@ -64,17 +91,22 @@ public class DataBaseSQLiteUtil {
     }
 
 
-    public static List<OrderBean> queryOrder() {
+    public static List<OrderBean> queryOrder(int status) {
         List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
-        Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
+        Cursor cursor;
+        if (status == OrderState.ALL) {
+            cursor = mDatabase.rawQuery("select * from tb_order", null);
+        } else {
+            cursor = mDatabase.rawQuery("select * from tb_order where status = " + status, null);
+        }
         orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
             String id = String.valueOf(cursor.getInt(0));
             String shopName = cursor.getString(1);
             String shopPicture = cursor.getString(2);
-            String status = cursor.getString(3);
+            String strStatus = cursor.getString(3);
             String price = cursor.getString(4);
             String orderNumber = cursor.getString(5);
             String orderContent = cursor.getString(6);
@@ -84,9 +116,13 @@ public class DataBaseSQLiteUtil {
             orderBean.setShopImgPath(shopPicture);
             orderBean.setStatus(status);
             orderBean.setActualPayment(price);
+            orderBean.setShopPicture(Integer.valueOf(shopPicture));
+            orderBean.setStatus(strStatus);
+            orderBean.setPrice(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
             orderBean.setOrderNum(orderNumber);
+            orderBean.setOrderNumber(orderNumber);
             orderBeanList.add(orderBean);
         }
         cursor.close();
@@ -94,9 +130,6 @@ public class DataBaseSQLiteUtil {
         return orderBeanList;
 
     }
-
-
-
 
 
     /**
