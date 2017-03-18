@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class FoodBean  implements Serializable {
 
     private String goodsId;        //商品id
+    private String goodsType;      //商品的类型 一般店铺进行分类的时候进行使用按照类型进行分类
     private String goodsName;      //商品名字
     private int goodsIcon;         //商品图片
     private int goodsCount;        //商品销量
@@ -19,6 +20,16 @@ public class FoodBean  implements Serializable {
 
     public FoodBean() {
 
+    }
+
+    public FoodBean(String goodsId,String goodsType, String goodsName, int goodsIcon,int goodsCount, float goodsSrart, String  goodsMoney) {
+        this.goodsId = goodsId;
+        this.goodsType=goodsType;
+        this.goodsName = goodsName;
+        this.goodsIcon=goodsIcon;
+        this.goodsCount = goodsCount;
+        this.goodsSrart = goodsSrart;
+        this.goodsMoney=goodsMoney;
     }
 
     public FoodBean(String goodsId, String goodsName, int goodsIcon,int goodsCount, float goodsSrart, String  goodsMoney) {
@@ -36,6 +47,14 @@ public class FoodBean  implements Serializable {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 
     public String getGoodsName() {
