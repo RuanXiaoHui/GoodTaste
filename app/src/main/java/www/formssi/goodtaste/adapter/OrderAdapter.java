@@ -45,6 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     public void onBindViewHolder(final OrderHolder holder, int position) {
         holder.tvShopName.setText(list.get(position).getShopName());
         holder.tvPrice.setText(list.get(position).getPrice());
+        holder.imgShop.setImageResource(list.get(position).getShopPicture());
         holder.tvOrderTime.setText(list.get(position).getOrderTime());
         holder.tvOrderContent.setText(list.get(position).getOrderContent());
         holder.lltOrderIten.setOnClickListener(this);

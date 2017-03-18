@@ -19,6 +19,7 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.adapter.OrderAdapter;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static android.content.ContentValues.TAG;
@@ -40,7 +41,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         btnGoSingle = (Button) v.findViewById(R.id.btnGoSingle);
         btnGoSingle.setOnClickListener(this);
         DataBaseSQLiteUtil.insertOrder();
-        orders = DataBaseSQLiteUtil.queryOrder();
+        orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
         Log.e(TAG, "onCreateView: "+orders.size() );
 
         if (orders.size() == 0) {

@@ -14,6 +14,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.OrderDetailsBean;
+import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
@@ -48,8 +49,8 @@ public class DataBaseSQLiteUtil {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.food+"");
-        values.put("status", 0+"");
+        values.put("shopPicture", R.mipmap.ic_finish+"");
+        values.put("status", 1+"");
         values.put("price", "23");
         values.put("orderNumber","1234");
         values.put("orderContent", "宫保鸡丁");
@@ -59,30 +60,34 @@ public class DataBaseSQLiteUtil {
     }
 
 
-    public static List<OrderBean> queryOrder() {
+    public static List<OrderBean> queryOrder(int status) {
         List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
-        Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
+        Cursor cursor;
+        if (status == OrderState.ALL) {
+            cursor = mDatabase.rawQuery("select * from tb_order", null);
+        }else {
+            cursor = mDatabase.rawQuery("select * from tb_order where status = "+status, null);
+        }
         orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
             String id = String.valueOf(cursor.getInt(0));
             String shopName = cursor.getString(1);
             String shopPicture = cursor.getString(2);
-            String status = cursor.getString(3);
+            String strStatus = cursor.getString(3);
             String price = cursor.getString(4);
             String orderNumber = cursor.getString(5);
             String orderContent = cursor.getString(6);
             String orderTime = cursor.getString(7);
             orderBean.setId(id);
             orderBean.setShopName(shopName);
-            orderBean.setPrice(shopPicture);
-            orderBean.setStatus(status);
+            orderBean.setShopPicture(Integer.valueOf(shopPicture));
+            orderBean.setStatus(strStatus);
             orderBean.setPrice(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
             orderBean.setOrderNumber(orderNumber);
-
             orderBeanList.add(orderBean);
         }
         cursor.close();

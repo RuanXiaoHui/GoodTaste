@@ -5,13 +5,22 @@ package www.formssi.goodtaste.bean;
  */
 
 public class OrderBean {
-    String id;
-    String shopName;
-    String orderTime;
-    String orderContent;
-    String price;
-    String status;
-    String orderNumber;
+    String id;//订单id
+    String shopName;//商店名字
+    String orderTime;//下单时间
+    String orderContent;//订单内容
+    String price;//价格
+    String status;//状态
+    String orderNumber;//订单号
+    int shopPicture ;//商店图片的资源文件
+
+    public int getShopPicture() {
+        return shopPicture;
+    }
+
+    public void setShopPicture(int shopPicture) {
+        this.shopPicture = shopPicture;
+    }
 
     public String getOrderNumber() {
         return orderNumber;
