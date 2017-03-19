@@ -14,6 +14,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.constant.SQLiteConstant;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
@@ -38,7 +39,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_USER_COLUMNS;
 
 /**
  * 数据库操作工具类
- *
+ * <p>
  * 说明：
  * 1.定义有关数据库操作的增、删、改、查
  * 2.使用之前先openDataBase
@@ -51,62 +52,70 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-
+//测试    插入方法
     public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish + "");
-        values.put("status", 1 + "");
-        values.put("price", "23");
-        values.put("orderNumber", "1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish + "");
-        values.put("status", 2 + "");
-        values.put("price", "23");
-        values.put("orderNumber", "1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 2 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish + "");
-        values.put("status", 3 + "");
-        values.put("price", "23");
-        values.put("orderNumber", "1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 3 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish + "");
-        values.put("status", 4 + "");
-        values.put("price", "23");
-        values.put("orderNumber", "1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
-        mDatabase.insert("tb_order", null, values);
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.ic_finish + "");
-        values.put("status", 5 + "");
-        values.put("price", "23");
-        values.put("orderNumber", "1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 4 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
         closeDataBase();
     }
 
-
+    /**
+     * 查找订单的方法
+     * @param status 订单的状态 (状态在orderState类中)
+     * @return
+     */
     public static List<OrderBean> queryOrder(int status) {
         List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
         Cursor cursor;
         if (status == OrderState.ALL) {
-            cursor = mDatabase.rawQuery("select * from tb_order", null);
+            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER, null);
         } else {
-            cursor = mDatabase.rawQuery("select * from tb_order where status = " + status, null);
+            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER + " where " + SQLiteConstant.COLUMN_ORDER_STATUS + " = " + status, null);
         }
         orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -115,10 +124,10 @@ public class DataBaseSQLiteUtil {
             String shopName = cursor.getString(1);
             String shopPicture = cursor.getString(2);
             String strStatus = cursor.getString(3);
-            String price = cursor.getString(4);
-            String orderNumber = cursor.getString(5);
-            String orderContent = cursor.getString(6);
-            String orderTime = cursor.getString(7);
+            String price = cursor.getString(6);
+            String orderNumber = cursor.getString(7);
+            String orderContent = cursor.getString(8);
+            String orderTime = cursor.getString(10);
             orderBean.setOrderId(id);
             orderBean.setShopName(shopName);
             orderBean.setShopImgPath(shopPicture);
@@ -168,6 +177,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 通过id查询订单详情表
      * 获得食品列表
+     *
      * @param orderId
      * @return
      */
