@@ -27,7 +27,7 @@ import static android.content.ContentValues.TAG;
  * Created by GTs on 2017-03-16.
  */
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> implements View.OnClickListener {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>{
 
     List<OrderBean> list;
     Context context;
@@ -47,13 +47,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     }
 
     @Override
-    public void onBindViewHolder(final OrderHolder holder, int position) {
+    public void onBindViewHolder(final OrderHolder holder, final int position) {
         holder.tvShopName.setText(list.get(position).getShopName());
         holder.tvPrice.setText(list.get(position).getActualPayment());
         holder.imgShop.setImageResource(list.get(position).getShopPicture());
         holder.tvOrderTime.setText(list.get(position).getOrderTime());
         holder.tvOrderContent.setText(list.get(position).getOrderContent());
-        holder.lltOrderItem.setOnClickListener(this);
+        //跳转到订单详情,并传递订单id过去
+        holder.lltOrderItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,OrderDetailActivity.class);
+                intent.putExtra("orderId",list.get(position).getOrderId());
+                context.startActivity(intent);
+            }
+        });
         int status = Integer.valueOf(list.get(position).getStatus());
         initStatusBtn(holder, status);
     }
@@ -119,15 +127,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         return list.size();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.lltOrderItem:
-                context.startActivity(new Intent(context,OrderDetailActivity.class));
-                break;
-
-        }
-    }
 
 
     class OrderHolder extends RecyclerView.ViewHolder {
