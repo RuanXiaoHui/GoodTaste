@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,14 +86,14 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         adapter = new FoodListAdapter();
         ivOrderShopImg = (ImageView) findViewById(R.id.iv_order_shop_image);
         tvOrderStatus = (TextView) findViewById(R.id.tv_order_status);
-//        tvOrderShopName = (TextView) findViewById(R.id.tv_order_shop_name);
-//        tvOrderPackFee = (TextView) findViewById(R.id.tv_order_pack_fee);
-//        tvOrderDiscount = (TextView) findViewById(R.id.tv_order_discount_fee);
-//        tvOrderActualPay = (TextView) findViewById(R.id.tv_order_actual_pay);
-//        tvOrderNumber = (TextView) findViewById(R.id.tv_order_number);
-//        tvOrderTime = (TextView) findViewById(R.id.tv_order_time);
-//        tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
-//        tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
+        tvOrderShopName = (TextView) findViewById(R.id.tv_order_shop_name);
+        tvOrderPackFee = (TextView) findViewById(R.id.tv_order_pack_fee);
+        tvOrderDiscount = (TextView) findViewById(R.id.tv_order_discount_fee);
+        tvOrderActualPay = (TextView) findViewById(R.id.tv_order_actual_pay);
+        tvOrderNumber = (TextView) findViewById(R.id.tv_order_number);
+        tvOrderTime = (TextView) findViewById(R.id.tv_order_time);
+        tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
+        tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
         btnOK = (Button) findViewById(R.id.btn_order_ok);
         btnCancel = (Button) findViewById(R.id.btn_order_cancel);
         btnContactBusiness = (Button) findViewById(R.id.btn_order_contact_business);
@@ -127,7 +128,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     public void setOrderDetail(OrderBean orderdBean) {
         if (null != orderdBean) {
-            ivOrderShopImg.setImageURI(Uri.fromFile(new File(orderdBean.getShopImgPath())));
+//            ivOrderShopImg.setImageURI(Uri.fromFile(new File(orderdBean.getShopImgPath())));
             tvOrderShopName.setText(orderdBean.getShopName());
             tvOrderNumber.setText(orderdBean.getOrderNum());
             tvOrderDiscount.setText(orderdBean.getDiscountMoney());

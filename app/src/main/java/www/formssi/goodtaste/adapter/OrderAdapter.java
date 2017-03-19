@@ -18,6 +18,7 @@ import java.util.List;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.OrderDetailActivity;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ContextUtil;
 
@@ -58,7 +59,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,OrderDetailActivity.class);
-                intent.putExtra("orderId",list.get(position).getOrderId());
+                intent.putExtra(ConstantConfig.INTENT_ORDER_ID,list.get(position).getOrderId());
                 context.startActivity(intent);
             }
         });

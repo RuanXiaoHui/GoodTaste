@@ -15,4 +15,6 @@ public final class ConstantConfig {
     public static final int EDIT_ADREES_REQUEST = 0x0005; // 修改地址请求码
     public static final int EDIT_ADREES_RESULT = 0x0006; // 修改地址结果码
 
+    public static final String INTENT_ORDER_ID = "OrderId";//orderFragment跳转到orderDetailActivity携带订单id的key
+
 }
