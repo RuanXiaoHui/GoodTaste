@@ -98,6 +98,7 @@ public class DataBaseSQLiteUtil {
         closeDataBase();
     }
 
+
     /**
      * 查找订单的方法
      *
@@ -396,7 +397,7 @@ public class DataBaseSQLiteUtil {
      * @param id
      * @return
      */
-    public static String getAddressById(String id) {
+    public static AddressBean getAddressById(String id) {
         String[] projection = {COLUMN_ADDRESS_ID, COLUMN_TO_NAME, COLUMN_TO_PHONE, COLUMN_TO_SEX, COLUMN_TO_ADDRESS}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_ADDRESS_ID + "= ?",
                 new String[]{id}, null, null, null);
@@ -413,7 +414,7 @@ public class DataBaseSQLiteUtil {
             addressBean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS))); // 收货地址
             cursor.moveToNext();
         }
-        return addressBean.toAddressString();
+        return addressBean;
     }
 
 
