@@ -15,6 +15,7 @@ import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
+import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.constant.SQLiteConstant;
 
@@ -25,12 +26,14 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUN
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_LOGIN_PWD;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_NUMBER;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_STATUS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TIME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_PACK_FEE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_PAY_PWD;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_PAY_TIME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ADDRESS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
@@ -43,6 +46,10 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_ADDRESS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_PHONE;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_SEX;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_IMG_PATH;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_PHONE;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -295,6 +302,95 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
+     * 用户注册
+     *
+     * @param bean
+     * @return
+     */
+    public static long userRegister(UserBean bean) {
+        ContentValues values = new ContentValues(); //
+        values.put(COLUMN_USER_NAME, bean.getUserName()); // 姓名
+        values.put(COLUMN_LOGIN_PWD, bean.getLoginPassword()); // 登录密码
+        values.put(COLUMN_PAY_PWD, bean.getPayPassword()); // 支付密码
+        values.put(COLUMN_USER_PHONE, bean.getPhoneNimeber()); // 电话
+        values.put(COLUMN_USER_IMG_PATH, bean.getHeadProtrait()); // 头像
+        return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); //
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param userName
+     * @param pwd
+     * @return
+     */
+    public static UserBean userLogin(String userName, String pwd) {
+        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH,
+                COLUMN_TO_ADDRESS}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_USER_NAME + "= ? and "
+                + COLUMN_LOGIN_PWD + " = ?", new String[]{userName, pwd}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        UserBean bean = new UserBean();
+        for (int i = 0; i < resultCounts; i++) {
+            bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
+            bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
+            bean.setPhoneNimeber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
+            bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
+            cursor.moveToNext();
+        }
+        return bean;
+    }
+
+    /**
+     * 用户添加地址
+     *
+     * @param bean
+     * @return
+     */
+    public static long userInsertAddress(AddressBean bean) {
+        ContentValues values = new ContentValues(); // 订单ContentValues
+        values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
+        values.put(COLUMN_TO_NAME, bean.getAddress()); // 姓名
+        values.put(COLUMN_TO_SEX, bean.getAddress()); // 性别
+        values.put(COLUMN_TO_PHONE, bean.getAddress()); // 电话
+        values.put(COLUMN_TO_ADDRESS, bean.getAddress()); // 地址
+        return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); // 插入地址表
+    }
+
+    /**
+     * 通过用户id获取送餐地址列表
+     *
+     * @param userId
+     * @return
+     */
+    public static List<AddressBean> queryAddressByUserId(int userId) {
+        String[] projection = {COLUMN_ADDRESS_ID, COLUMN_USER_ID, COLUMN_TO_NAME, COLUMN_TO_SEX
+                , COLUMN_TO_PHONE, COLUMN_TO_ADDRESS}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_USER_ID + "= ?",
+                new String[]{"" + userId}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        List<AddressBean> list = new ArrayList<>();
+        for (int i = 0; i < resultCounts; i++) {
+            AddressBean bean = new AddressBean();
+            bean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))));
+            bean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
+            bean.setName(cursor.getString(cursor.getColumnIndex(COLUMN_TO_NAME)));
+            bean.setGender(cursor.getString(cursor.getColumnIndex(COLUMN_TO_SEX)));
+            bean.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_TO_PHONE)));
+            bean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS)));
+            list.add(bean);
+            cursor.moveToNext();
+        }
+        return list;
+    }
+
+    /**
      * 通过地址id查询地址信息
      *
      * @param id
@@ -325,17 +421,20 @@ public class DataBaseSQLiteUtil {
      * 实例化数据库对象
      */
     public static void openDataBase() {
-        if (null == mDbOpenHelper) {
+        /*if (null == mDbOpenHelper) {
             mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
-        }
+        }*/
+        mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
         try {
-            if(null == mDatabase){
+            /*if (null == mDatabase) {
                 mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
-            }
+            }*/
+            mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
         } catch (SQLException e) {
-            if(null == mDatabase){
+            /*if (null == mDatabase) {
                 mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
-            }
+            }*/
+            mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
         }
     }
 
