@@ -74,4 +74,11 @@ public class UserBean implements Serializable{
         this.payPassword = payPassword;
     }
 
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
 }
