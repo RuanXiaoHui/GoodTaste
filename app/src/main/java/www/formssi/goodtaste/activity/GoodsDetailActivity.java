@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
@@ -36,6 +38,7 @@ public class GoodsDetailActivity extends BaseActivity {
     private TextView tvShopMoney;            //配送费
     private TextView tv_backTitlebar_center_title;   //商店标题
     private ShopDataAdapter Adapter;
+    private List<FoodBean> mFoodbConfirm;
 
 
     @Override
@@ -59,7 +62,8 @@ public class GoodsDetailActivity extends BaseActivity {
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
         btnSubmintOrder= (Button) findViewById(R.id.btnSubmintOrder);
         tv_backTitlebar_center_title= (TextView) findViewById(R.id.tv_backTitlebar_center_title);
-       // btnSubmintOrder.setEnabled(false);
+        mFoodbConfirm=new ArrayList<>();
+        btnSubmintOrder.setEnabled(false);
     }
 
     private void initData() {
@@ -92,31 +96,38 @@ public class GoodsDetailActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GoodsMenu menu= mLeftMenu.get(position);
                 int  menuId=menu.getId();
-                mRefreshBean.clear();
+                List<FoodBean> data=new ArrayList<FoodBean>();
                 for (int i = 0; i <mFoodBean.size() ; i++) {
                     if (mFoodBean.get(i).getGoodsType().equals(String.valueOf(menuId))){
-                        mRefreshBean.add(mFoodBean.get(i));
+                        data.add(mFoodBean.get(i));
                     }
-
                 }
-                lvRightFoods.setAdapter(new ShopDataAdapter(mRefreshBean,GoodsDetailActivity.this));
-
-
+                Adapter.addData(data);
             }
         });
 
         Adapter.setOnExtralClickListener(new ShopDataAdapter.OnExtralClickListener() {
             @Override
-            public void onClickMoney(int vue) {
+            public void onClickMoney(int vue, Map<String, FoodBean> beans) {
                 tvGoodsMoney.setText("￥"+vue+"元");
+                if (vue==0){
+                    btnSubmintOrder.setEnabled(false);
+                }else{
+                    btnSubmintOrder.setEnabled(true);
+                }
+
+                for (Map.Entry<String ,FoodBean> bean:beans.entrySet()) {
+                    mFoodbConfirm.add(bean.getValue());
+                }
             }
         });
         btnSubmintOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
+                intent.putExtra("ShopBeans",mShopBean);
+                intent.putExtra("foodBeans",(Serializable) mFoodbConfirm);
                 startActivity(intent);
-
             }
         });
 

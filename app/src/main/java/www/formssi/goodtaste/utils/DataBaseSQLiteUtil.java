@@ -63,7 +63,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_USER_COLUMNS;
  * <p>
  * 说明：
  * 1.定义有关数据库操作的增、删、改、查
- * 2.使用之前先openDataBase
+ * 2.使用之前先openDataBase实例化必要的对象
  *
  * @author qq724418408
  */
@@ -78,7 +78,7 @@ public class DataBaseSQLiteUtil {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.food1+ "");//图片
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.food1 + "");//图片
         values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
         values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
         values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
@@ -160,6 +160,7 @@ public class DataBaseSQLiteUtil {
     public static long addOrder(OrderBean orderBean, List<FoodBean> foodBeanList) {
         ContentValues orderValues = new ContentValues(); // 订单ContentValues
         ShopBean shopBean = orderBean.getShopBean();
+        orderValues.put(COLUMN_ORDER_NUMBER, orderBean.getOrderNum()); // 订单号
         orderValues.put(COLUMN_SHOP_ID, shopBean.getShopId()); // 商店id
         orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
@@ -168,8 +169,8 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
         orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费
         orderValues.put(COLUMN_ACTUAL_PAY, orderBean.getActualPayment()); // 实付金额
-        orderValues.put(COLUMN_ORDER_TIME, orderBean.getActualPayment()); // 下单时间
-        orderValues.put(COLUMN_ADDRESS_ID, orderBean.getActualPayment()); // 地址id
+        orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
+        orderValues.put(COLUMN_ADDRESS_ID, orderBean.getAddressId()); // 地址id
         for (FoodBean fb : foodBeanList) {
             ContentValues orderDetailValues = new ContentValues(); // 订单详情ContentValues
             orderDetailValues.put(COLUMN_ORDER_NUMBER, orderBean.getOrderNum()); // 订单号
@@ -183,7 +184,7 @@ public class DataBaseSQLiteUtil {
 
     /**
      * 支付订单
-     * 修改支付状态、生成下单时间
+     * 修改支付状态、生成支付时间
      *
      * @param orderId
      * @return
@@ -202,7 +203,7 @@ public class DataBaseSQLiteUtil {
      */
     public static List<OrderBean> getOrderBeansById(String orderId) {
         String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
-                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_PACK_FEE, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
+                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
                 COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
@@ -221,7 +222,6 @@ public class DataBaseSQLiteUtil {
             o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
             o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
             o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
-            o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
             o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
             o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
             String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
@@ -322,14 +322,20 @@ public class DataBaseSQLiteUtil {
 
 
     /**
-     * 打开数据库
+     * 实例化数据库对象
      */
     public static void openDataBase() {
-        mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
+        if (null == mDbOpenHelper) {
+            mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
+        }
         try {
-            mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
+            if(null == mDatabase){
+                mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
+            }
         } catch (SQLException e) {
-            mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
+            if(null == mDatabase){
+                mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
+            }
         }
     }
 
