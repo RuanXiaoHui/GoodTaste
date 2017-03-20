@@ -46,7 +46,6 @@ public class SQLiteConstant {
     public static final String COLUMN_FOOD_SELL_COUNT = "foodSellCount"; // 食品销量
     public static final String COLUMN_FOOD_SCORE = "foodScore"; // 食品评分
 
-
     //订单表字段
     public static final String COLUMN_ORDER_ID = "orderId"; // 订单id
     public static final String COLUMN_ORDER_NUMBER = "orderNumber"; // 订单号
@@ -57,7 +56,6 @@ public class SQLiteConstant {
     public static final String COLUMN_ACTUAL_PAY = "actualPay"; // 实付金额
     public static final String COLUMN_ORDER_TIME = "orderTime"; // 下单时间
     public static final String COLUMN_PAY_TIME = "payTime"; // 支付时间
-
 
     //订单详情表字段
     public static final String COLUMN_ORDER_DETAIL_ID = "oderDetailId"; // 订单详情id
