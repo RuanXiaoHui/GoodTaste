@@ -207,7 +207,7 @@ public class DataBaseSQLiteUtil {
      * @param orderBean
      * @return
      */
-    public long addOrder(ShopBean shopBean, OrderBean orderBean) {
+    public static long addOrder(ShopBean shopBean, OrderBean orderBean) {
         ContentValues values = new ContentValues();
         return mDatabase.insert(TABLE_NAME_ORDER, null, values);
     }
