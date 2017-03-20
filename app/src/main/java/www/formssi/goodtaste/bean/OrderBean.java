@@ -25,6 +25,7 @@ public class OrderBean {
     private String actualPayment; // 实付金额
     private String orderTime; // 下单时间
     private String payTime; // 支付时间
+    private int addressId; // 送餐地址id
     private String address; // 送餐地址
 
     public OrderBean() {
@@ -179,5 +180,13 @@ public class OrderBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 }

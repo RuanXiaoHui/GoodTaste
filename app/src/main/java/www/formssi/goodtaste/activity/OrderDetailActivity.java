@@ -56,7 +56,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private OrderBean orderdBean; // 订单实体
     private FoodListAdapter adapter; // 适配器
     private Intent intent; // 获取上一个intent
-    private Toast toast;
+    private Toast toast; // 吐司
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         intent = getIntent(); // 通过intent获取订单id
         initViews(); // 初始化控件
         initEvents(); // 注册事件
-        orderdBean = new OrderBean();
-        setOrderDetail(orderdBean);
+        orderdBean = new OrderBean(); // 根据id查询订单详情数据
+        setOrderDetail(orderdBean); // 展示订单详情信息
     }
 
     private void initEvents() {

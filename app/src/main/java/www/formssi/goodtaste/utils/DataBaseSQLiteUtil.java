@@ -11,17 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.constant.SQLiteConstant;
 
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ACTUAL_PAY;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ADDRESS_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_DISC_MONEY;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_NUMBER;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_STATUS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TIME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_PACK_FEE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_PAY_TIME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_IMG_PATH;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_ADDRESS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_PHONE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_TO_SEX;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -173,12 +190,26 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
-     * 通过id查询订单表
+     * 确认订单
      *
+     * @param shopBean
+     * @param orderBean
      * @return
      */
+    public long addOrder(ShopBean shopBean, OrderBean orderBean) {
+        ContentValues values = new ContentValues();
+        return mDatabase.insert(TABLE_NAME_ORDER, null, values);
+    }
+
+    /**
+     * 通过id查询订单表
+     *
+     * @return 订单列表
+     */
     public static List<OrderBean> getOrderBeansById(String orderId) {
-        String[] projection = {"", "", ""};
+        String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
+                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_PACK_FEE, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
+                COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         int resultCounts = cursor.getCount();
@@ -187,8 +218,19 @@ public class DataBaseSQLiteUtil {
         }
         OrderBean o = new OrderBean();
         List<OrderBean> list = new ArrayList<>();
-        for (int i = 0; i < resultCounts; i++) {
-            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID))));
+        for (int i = 0; i < resultCounts; i++) { //
+            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID)))); // 商店id
+            o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
+            o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
+            o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
+            o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
+            o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
+            o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
+            o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
+            o.setOrderNum(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER))); // 订单号
+            o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
+            o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
+            o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
             o.setFoodBeanList(getOrderDetailsBeansById(orderId));
             list.add(o);
             cursor.moveToNext();
@@ -225,6 +267,32 @@ public class DataBaseSQLiteUtil {
         return list;
     }
 
+    /**
+     * 通过地址id查询地址信息
+     *
+     * @param id
+     * @return
+     */
+    public static String getAddressById(String id) {
+        String[] projection = {COLUMN_ADDRESS_ID, COLUMN_TO_NAME, COLUMN_TO_PHONE, COLUMN_TO_SEX, COLUMN_TO_ADDRESS}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_ADDRESS_ID + "= ?",
+                new String[]{id}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        AddressBean addressBean = new AddressBean();
+        for (int i = 0; i < resultCounts; i++) {
+            addressBean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))));
+            addressBean.setName(cursor.getString(cursor.getColumnIndex(COLUMN_TO_NAME))); // 收货人姓名
+            addressBean.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_TO_PHONE))); // 收货人电话
+            addressBean.setGender(cursor.getString(cursor.getColumnIndex(COLUMN_TO_SEX))); // 收货人性别
+            addressBean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS))); // 收货地址
+            cursor.moveToNext();
+        }
+        return addressBean.toAddressString();
+    }
+
 
     /**
      * 打开数据库
@@ -259,17 +327,17 @@ public class DataBaseSQLiteUtil {
         @Override
         public void onCreate(SQLiteDatabase db) {
             String sql1 = createTable(TABLE_NAME_USER, TABLE_USER_COLUMNS);
-            db.execSQL(sql1);
+            db.execSQL(sql1); // 创建用户表
             String sql2 = createTable(TABLE_NAME_SHOP, TABLE_SHOP_COLUMNS);
-            db.execSQL(sql2);
+            db.execSQL(sql2); // 创建商店表
             String sql3 = createTable(TABLE_NAME_FOOD, TABLE_FOOD_COLUMNS);
-            db.execSQL(sql3);
+            db.execSQL(sql3); // 创建食品表
             String sql4 = createTable(TABLE_NAME_ORDER, TABLE_ORDER_COLUMNS);
-            db.execSQL(sql4);
+            db.execSQL(sql4); // 创建订单表
             String sql5 = createTable(TABLE_NAME_ORDER_DETAIL, TABLE_ORDER_DETAIL_COLUMNS);
-            db.execSQL(sql5);
+            db.execSQL(sql5); // 创建订单详情表
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
-            db.execSQL(sql6);
+            db.execSQL(sql6); // 创建地址表
         }
 
         @Override
