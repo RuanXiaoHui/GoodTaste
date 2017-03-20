@@ -312,7 +312,7 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_USER_NAME, bean.getUserName()); // 姓名
         values.put(COLUMN_LOGIN_PWD, bean.getLoginPassword()); // 登录密码
         values.put(COLUMN_PAY_PWD, bean.getPayPassword()); // 支付密码
-        values.put(COLUMN_USER_PHONE, bean.getPhoneNimeber()); // 电话
+        values.put(COLUMN_USER_PHONE, bean.getPhoneNumber()); // 电话
         values.put(COLUMN_USER_IMG_PATH, bean.getHeadProtrait()); // 头像
         return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); //
     }
@@ -337,7 +337,7 @@ public class DataBaseSQLiteUtil {
         for (int i = 0; i < resultCounts; i++) {
             bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
             bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
-            bean.setPhoneNimeber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
+            bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
             bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
             cursor.moveToNext();
         }

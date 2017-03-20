@@ -2,6 +2,8 @@ package www.formssi.goodtaste.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,8 @@ public class UpdateTelephoneActivity extends AppCompatActivity implements View.O
 
         ivReturn.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
+
+
     }
 
     @Override
