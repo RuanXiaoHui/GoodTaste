@@ -8,6 +8,8 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 
+import static www.formssi.goodtaste.R.mipmap.food;
+
 /**
  * Created by Administrator on 2017/3/16.
  * 邮箱：769006026@qq.com
@@ -16,19 +18,35 @@ import www.formssi.goodtaste.bean.ShopBean;
 public class GoodsDataUtils {
 
     public static List<ShopBean> GetShop(){
-         int shopIcon[]={R.mipmap.food,R.mipmap.food2,R.mipmap.food3,R.mipmap.food2,
-                 R.mipmap.food3,R.mipmap.food,R.mipmap.food1,R.mipmap.food,
+         int shopIcon[]={food,R.mipmap.food2,R.mipmap.food3,R.mipmap.food2,
+                 R.mipmap.food3, food,R.mipmap.food1, food,
                  R.mipmap.food2,R.mipmap.food1,R.mipmap.food3,R.mipmap.food2,};
          String shopName[]={"小龙虾","老和火锅","高天回锅肉","俊流早餐",
                  "苏妮小菜","王永珠自助餐","小林子咖啡","老王餐馆",
                  "星巴克","肯德基","麦当劳","沙县小吃",};
 
         List<ShopBean> mData=new ArrayList<>();
-        for (int i = 0; i <12 ; i++) {
+        for (int i = 1; i <12 ; i++) {
 
             List<FoodBean> foods=new ArrayList<>();
-            for (int j = 0; j <7 ; j++) {
-                foods.add(new FoodBean("1","老母鸡煲汤",R.mipmap.ic_launcher,33,4,"18"));
+            for (int j = 1; j <7 ; j++) {
+
+                //生成食品ID   这里面进行拼接数，防止商品的Id数进行重复
+                foods.add(new FoodBean(j+"00"+i,""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+1),""+j,"好味道姜汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+2),""+j,"小鸡炖蘑菇"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+3),""+j,"芥末小鸡"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+4),""+j,"鲫鱼炖汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+5),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+6),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+7),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+8),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+9),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+10),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+11),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+12),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+(i+13),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+
             }
 
             List<GoodsMenu> shopMenu=new ArrayList<>();

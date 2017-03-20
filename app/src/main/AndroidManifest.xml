@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="www.formssi.goodtaste">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -13,7 +14,7 @@
     <application
         android:name=".utils.ContextUtil"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
@@ -35,6 +36,14 @@
         <activity android:name=".activity.SettingSuggestionActivity" />
         <activity android:name=".activity.UpdateLoginPasswordActivity" />
         <activity android:name=".activity.UpdatePayPasswordActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ConfirmOrderActivity" />
+        <activity android:name=".activity.ReceiveAddressActivity" />
+        <activity android:name=".activity.RemarkOrderActivity" />
+        <activity android:name=".activity.GoodsDetailActivity" />
+        <activity android:name=".activity.AddNewAddressActivity" />
+        <activity android:name=".activity.EditAddressActivity" />
+        <activity android:name=".activity.OrderStateActivity"></activity>
     </application>
 
 </manifest>

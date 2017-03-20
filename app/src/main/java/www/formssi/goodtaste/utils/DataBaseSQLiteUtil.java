@@ -11,8 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.constant.SQLiteConstant;
 
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_SHOP_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -30,8 +39,10 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_USER_COLUMNS;
 
 /**
  * 数据库操作工具类
- * 使用之前先openDataBase
- * 说明：定义有关数据库操作的增、删、改、查
+ * <p>
+ * 说明：
+ * 1.定义有关数据库操作的增、删、改、查
+ * 2.使用之前先openDataBase
  *
  * @author qq724418408
  */
@@ -41,46 +52,94 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-
-    public static void insertOrder(){
+    //测试    插入方法
+    public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put("shopName", "好味道");
-        values.put("shopPicture", R.mipmap.food+"");
-        values.put("status", 0+"");
-        values.put("price", "23");
-        values.put("orderNumber","1234");
-        values.put("orderContent", "宫保鸡丁");
-        values.put("orderTime", "2017-03-17 12:33");
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
+        mDatabase.insert("tb_order", null, values);
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 2 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
+        mDatabase.insert("tb_order", null, values);
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 3 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
+        mDatabase.insert("tb_order", null, values);
+        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 4 + "");//状态
+        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
+        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
+        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
+        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
+        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
+        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
+        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
         closeDataBase();
     }
 
-
-    public static List<OrderBean> queryOrder() {
-        List<OrderBean> orderBeanList = null;
+    /**
+     * 查找订单的方法
+     *
+     * @param status 订单的状态 (状态在orderState类中)
+     * @return
+     */
+    public static List<OrderBean> queryOrder(int status) {
+        List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
-        Cursor cursor = mDatabase.rawQuery("select * from tb_order", null);
+        Cursor cursor;
+        if (status == OrderState.ALL) {
+            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER, null);
+        } else {
+            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER + " where " + SQLiteConstant.COLUMN_ORDER_STATUS + " = " + status, null);
+        }
+        orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            orderBeanList = new ArrayList<>();
             OrderBean orderBean = new OrderBean();
             String id = String.valueOf(cursor.getInt(0));
             String shopName = cursor.getString(1);
             String shopPicture = cursor.getString(2);
-            String status = cursor.getString(3);
-            String price = cursor.getString(4);
-            String orderNumber = cursor.getString(5);
-            String orderContent = cursor.getString(6);
-            String orderTime = cursor.getString(7);
-            orderBean.setId(id);
+            String strStatus = cursor.getString(3);
+            String price = cursor.getString(6);
+            String orderNumber = cursor.getString(7);
+            String orderContent = cursor.getString(8);
+            String orderTime = cursor.getString(10);
+            orderBean.setOrderId(id);
             orderBean.setShopName(shopName);
-            orderBean.setPrice(shopPicture);
-            orderBean.setStatus(status);
-            orderBean.setPrice(price);
+            orderBean.setShopImgPath(shopPicture);
+            orderBean.setStatus(strStatus);
+            orderBean.setActualPayment(price);
+            orderBean.setShopPicture(Integer.valueOf(shopPicture));
+            orderBean.setStatus(strStatus);
+            orderBean.setActualPayment(price);
             orderBean.setOrderTime(orderTime);
             orderBean.setOrderContent(orderContent);
-            orderBean.setOrderNumber(orderNumber);
-
+            orderBean.setOrderNum(orderNumber);
             orderBeanList.add(orderBean);
         }
         cursor.close();
@@ -89,11 +148,82 @@ public class DataBaseSQLiteUtil {
 
     }
 
+    /**
+     * 第page行开始,返回count行数据
+     *
+     * @param page
+     * @param count
+     * @return
+     */
+    public List<Object> testQueryAll(int page, int count) {
+        /**
+         * 分页查询参数
+         *
+         * @param table:表名
+         * @param columns:要查询的列名
+         * @param selection:查询条件
+         * @param selectionArgs:条件中用了占位符的参数
+         * @param groupBy:数据分组
+         * @param having:分组后的条件
+         * @param orderBy:排序方式
+         * @param limit:分页查询
+         **/
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, null, null, null, null, null, null, page + "," + count); // 第page行开始,返回count行数据
+        return new ArrayList<>();
+    }
 
+    /**
+     * 通过id查询订单表
+     *
+     * @return
+     */
+    public static List<OrderBean> getOrderBeansById(String orderId) {
+        String[] projection = {"", "", ""};
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
+                new String[]{orderId}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        OrderBean o = new OrderBean();
+        List<OrderBean> list = new ArrayList<>();
+        for (int i = 0; i < resultCounts; i++) {
+            o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID))));
+            o.setFoodBeanList(getOrderDetailsBeansById(orderId));
+            list.add(o);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
 
-
-
-
+    /**
+     * 通过id查询订单详情表
+     * 获得食品列表
+     *
+     * @param orderId
+     * @return
+     */
+    public static List<FoodBean> getOrderDetailsBeansById(String orderId) {
+        String[] projection = {COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_PRICE, COLUMN_FOOD_BUY_COUNT}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, COLUMN_ORDER_ID + "= ?",
+                new String[]{orderId}, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        List<FoodBean> list = new ArrayList<>();
+        for (int i = 0; i < resultCounts; i++) {
+            FoodBean food = new FoodBean();
+            food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_FOOD_ID))));
+            food.setGoodsName(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_NAME)));
+            food.setGoodsMoney(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_PRICE)));
+            food.setGoodsNumber(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT));
+            list.add(food);
+            cursor.moveToNext();
+        }
+        return list;
+    }
 
 
     /**
