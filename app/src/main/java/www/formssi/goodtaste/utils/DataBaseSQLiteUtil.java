@@ -52,7 +52,7 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-//测试    插入方法
+    //测试    插入方法
     public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
@@ -105,6 +105,7 @@ public class DataBaseSQLiteUtil {
 
     /**
      * 查找订单的方法
+     *
      * @param status 订单的状态 (状态在orderState类中)
      * @return
      */
@@ -147,6 +148,29 @@ public class DataBaseSQLiteUtil {
 
     }
 
+    /**
+     * 第page行开始,返回count行数据
+     *
+     * @param page
+     * @param count
+     * @return
+     */
+    public List<Object> testQueryAll(int page, int count) {
+        /**
+         * 分页查询参数
+         *
+         * @param table:表名
+         * @param columns:要查询的列名
+         * @param selection:查询条件
+         * @param selectionArgs:条件中用了占位符的参数
+         * @param groupBy:数据分组
+         * @param having:分组后的条件
+         * @param orderBy:排序方式
+         * @param limit:分页查询
+         **/
+        Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, null, null, null, null, null, null, page + "," + count); // 第page行开始,返回count行数据
+        return new ArrayList<>();
+    }
 
     /**
      * 通过id查询订单表
@@ -165,12 +189,11 @@ public class DataBaseSQLiteUtil {
         List<OrderBean> list = new ArrayList<>();
         for (int i = 0; i < resultCounts; i++) {
             o.setStoreId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID))));
+            o.setFoodBeanList(getOrderDetailsBeansById(orderId));
             list.add(o);
             cursor.moveToNext();
         }
         cursor.close();
-        o.setFoodBeanList(getOrderDetailsBeansById(orderId));
-        list.add(o);
         return list;
     }
 

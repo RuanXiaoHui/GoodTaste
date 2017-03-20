@@ -82,8 +82,8 @@ public class SQLiteConstant {
             COLUMN_PAY_TIME + " varchar(50),", COLUMN_ORDER_TIME + " varchar(50)"};
     // 订单详情表的列名数组
     public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{COLUMN_ORDER_DETAIL_ID,
-            COLUMN_ORDER_NUMBER + " varchar(50),", COLUMN_FOOD_ID + " integer,","foodName varchar(20),",
-            "price varchar(10),", "amount varchar(10)"};
+            COLUMN_ORDER_ID + " integer,", COLUMN_FOOD_ID + " integer,",COLUMN_FOOD_NAME + " varchar(20),",
+            COLUMN_FOOD_PRICE + " varchar(10),", COLUMN_FOOD_BUY_COUNT + " varchar(10)"};
     // 地址表的列名数组
     public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{COLUMN_ADDRESS_ID, COLUMN_USER_ID
             + " integer,", COLUMN_TO_ADDRESS + " varchar(50),", COLUMN_TO_NAME + " varchar(20),",
