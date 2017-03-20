@@ -25,8 +25,10 @@ public class ShopBean  implements Serializable{
     private String  distributionTime;   //平均配送时间
     private String shopBusinessHours;    //商店营业时间
 
+    public ShopBean() {
+    }
 
-    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone,List<GoodsMenu> shopMenu,int shopCount,String  distributionTime,String shopBusinessHours) {
+    public ShopBean(String shopId, String shopName, List<FoodBean> foods, int shopPic, String shopMoney, String shopAddress, String shopDesc, String shopStart, String shopPhone, List<GoodsMenu> shopMenu, int shopCount, String  distributionTime, String shopBusinessHours) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.foods = foods;

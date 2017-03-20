@@ -17,11 +17,22 @@ public class FoodBean  implements Serializable {
     private float goodsSrart;      //商品评分
     private String goodsMoney;     //商品单价
     private int goodsNumber;       //商品单次购买数
+    private int goodsBuynumber;    //你所要购买的数量
 
     public FoodBean() {
 
     }
-
+    public FoodBean(String goodsId, String goodsType, String goodsName, int goodsIcon, int goodsCount, float goodsSrart, String goodsMoney, int goodsNumber, int goodsBuynumber) {
+        this.goodsId = goodsId;
+        this.goodsType = goodsType;
+        this.goodsName = goodsName;
+        this.goodsIcon = goodsIcon;
+        this.goodsCount = goodsCount;
+        this.goodsSrart = goodsSrart;
+        this.goodsMoney = goodsMoney;
+        this.goodsNumber = goodsNumber;
+        this.goodsBuynumber = goodsBuynumber;
+    }
     public FoodBean(String goodsId,String goodsType, String goodsName, int goodsIcon,int goodsCount, float goodsSrart, String  goodsMoney) {
         this.goodsId = goodsId;
         this.goodsType=goodsType;
@@ -40,6 +51,7 @@ public class FoodBean  implements Serializable {
         this.goodsSrart = goodsSrart;
         this.goodsMoney=goodsMoney;
     }
+
 
     public String getGoodsId() {
         return goodsId;
@@ -104,4 +116,13 @@ public class FoodBean  implements Serializable {
     public void setGoodsNumber(int goodsNumber) {
         this.goodsNumber = goodsNumber;
     }
+
+    public int getGoodsBuynumber() {
+        return goodsBuynumber;
+    }
+
+    public void setGoodsBuynumber(int goodsBuynumber) {
+        this.goodsBuynumber = goodsBuynumber;
+    }
 }
+

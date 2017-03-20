@@ -32,20 +32,20 @@ public class GoodsDataUtils {
             for (int j = 1; j <7 ; j++) {
 
                 //生成食品ID   这里面进行拼接数，防止商品的Id数进行重复
-                foods.add(new FoodBean(j+"00"+i,""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+1),""+j,"好味道姜汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+2),""+j,"小鸡炖蘑菇"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+3),""+j,"芥末小鸡"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+4),""+j,"鲫鱼炖汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+5),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+6),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+7),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+8),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+9),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+10),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+11),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+12),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
-                foods.add(new FoodBean(j+"00"+(i+13),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18"));
+                foods.add(new FoodBean(j+"00"+i,""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18",13,0));
+                foods.add(new FoodBean(j+"00"+(i+1),""+j,"好味道姜汤"+j,R.mipmap.ic_launcher,33,4,"11",432,0));
+                foods.add(new FoodBean(j+"00"+(i+2),""+j,"小鸡炖蘑菇"+j,R.mipmap.ic_launcher,33,4,"22",43,0));
+                foods.add(new FoodBean(j+"00"+(i+3),""+j,"芥末小鸡"+j,R.mipmap.ic_launcher,33,4,"45",32,0));
+                foods.add(new FoodBean(j+"00"+(i+4),""+j,"鲫鱼炖汤"+j,R.mipmap.ic_launcher,33,4,"65",22,0));
+                foods.add(new FoodBean(j+"00"+(i+5),""+j,"宫保鸡丁"+j,R.mipmap.ic_launcher,33,4,"11",12,0));
+                foods.add(new FoodBean(j+"00"+(i+6),""+j,"萝卜牛腩"+j,R.mipmap.ic_launcher,33,4,"8",212,0));
+                foods.add(new FoodBean(j+"00"+(i+7),""+j,"小黄人鸡汤"+j,R.mipmap.ic_launcher,33,4,"28",412,0));
+                foods.add(new FoodBean(j+"00"+(i+8),""+j,"火腿炒青椒"+j,R.mipmap.ic_launcher,33,4,"18",43,0));
+                foods.add(new FoodBean(j+"00"+(i+9),""+j,"老母鸡煲汤"+j,R.mipmap.ic_launcher,33,4,"18",6,0));
+                foods.add(new FoodBean(j+"00"+(i+10),""+j,"小鸡炖蘑菇"+j,R.mipmap.ic_launcher,33,4,"38",98,0));
+                foods.add(new FoodBean(j+"00"+(i+11),""+j,"番茄炒蛋"+j,R.mipmap.ic_launcher,33,4,"78",48,0));
+                foods.add(new FoodBean(j+"00"+(i+12),""+j,"猪扒"+j,R.mipmap.ic_launcher,33,4,"18",40,0));
+                foods.add(new FoodBean(j+"00"+(i+13),""+j,"金针菇炒米饭"+j,R.mipmap.ic_launcher,33,4,"28",41,0));
 
             }
 

@@ -18,6 +18,7 @@ public class OrderBean {
     private String orderNum; // 订单号（参考）：店铺id（后三位） + 用户id（后三位） + 用户手机号（后四位） + 流水号（0000-9999）
     private String status; // 订单状态：未支付、未配送、送餐中、已完成、已评价
     private String orderContent; // 订单内容
+    private ShopBean shopBean; // 商店
     private List<FoodBean> foodBeanList; // 食品列表
     private String distributingFee; // 配送费
     private String orderTotalMoney; // 总金额
@@ -25,6 +26,7 @@ public class OrderBean {
     private String actualPayment; // 实付金额
     private String orderTime; // 下单时间
     private String payTime; // 支付时间
+    private int addressId; // 送餐地址id
     private String address; // 送餐地址
 
     public OrderBean() {
@@ -35,6 +37,14 @@ public class OrderBean {
         this.orderTime = orderTime;
         this.orderContent = orderContent;
         this.status = status;
+    }
+
+    public ShopBean getShopBean() {
+        return shopBean;
+    }
+
+    public void setShopBean(ShopBean shopBean) {
+        this.shopBean = shopBean;
     }
 
     public int getShopPicture() {
@@ -179,5 +189,13 @@ public class OrderBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 }

@@ -7,17 +7,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:descendantFocusability="blocksDescendants"
         android:layout_height="100dp">
 
         <ImageView
-            android:id="@+id/ivGoodsIcon"
+            android:id="@+id/ivFoodIcon"
             android:layout_width="90dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:background="@mipmap/food"/>
+            android:layout_marginBottom="3dp"/>
 
         <LinearLayout
             android:id="@+id/llShopItem"
@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ivGoodsIcon"
+            android:layout_toRightOf="@+id/ivFoodIcon"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tvRight"
+                android:id="@+id/tvFoodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="必胜客宅急送"
@@ -36,7 +36,7 @@
                 android:textColor="#2e2e2e"
                 android:textSize="16sp"/>
             <TextView
-                android:id="@+id/tvShopDesc"
+                android:id="@+id/tvFoodBuyNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -48,13 +48,13 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivGoodsIcon"
+            android:layout_toRightOf="@+id/ivFoodIcon"
             android:layout_below="@+id/llShopItem"
             android:gravity="center"
             android:layout_alignParentBottom="true">
 
             <TextView
-                android:id="@+id/tvShopDesc1"
+                android:id="@+id/tvFoodMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -65,7 +65,7 @@
                 android:textSize="18sp"/>
 
             <www.formssi.goodtaste.widget.NumberSubAdd
-                android:id="@+id/number"
+                android:id="@+id/numberSubAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

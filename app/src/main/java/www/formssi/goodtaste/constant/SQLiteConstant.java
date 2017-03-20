@@ -68,7 +68,7 @@ public class SQLiteConstant {
     public static final String COLUMN_TO_ADDRESS = "toAddress"; // 收货人地址
     // 用户表的列名数组
     public static final String[] TABLE_USER_COLUMNS = new String[]{COLUMN_USER_ID, COLUMN_USER_NAME
-            + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " char(1),",
+            + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " varchar(5),",
             COLUMN_LOGIN_PWD + " varchar(20),", COLUMN_PAY_PWD + " varchar(6),", COLUMN_USER_IMG_PATH
             + " varchar(100)"};
     // 商店表的列名数组
@@ -86,14 +86,15 @@ public class SQLiteConstant {
             + " varchar(20),", COLUMN_SHOP_IMG_PATH + " varchar(100),", COLUMN_ORDER_STATUS + " char(1),",
             COLUMN_ORDER_TOTAL_MONEY + " varchar(10),", COLUMN_DISC_MONEY + " varchar(10),", COLUMN_ACTUAL_PAY
             + " varchar(10),", COLUMN_ORDER_NUMBER + " varchar(50),", COLUMN_ORDER_CONTENT + " varchar(50),",
-            COLUMN_PAY_TIME + " varchar(50),", COLUMN_ORDER_TIME + " varchar(50)"};
+            COLUMN_PAY_TIME + " varchar(50),", COLUMN_ORDER_TIME + " varchar(50),", COLUMN_ADDRESS_ID
+            + " integer,", COLUMN_SHOP_ID + " integer"};
     // 订单详情表的列名数组
     public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{COLUMN_ORDER_DETAIL_ID,
-            COLUMN_ORDER_ID + " integer,", COLUMN_FOOD_ID + " integer,",COLUMN_FOOD_NAME + " varchar(20),",
-            COLUMN_FOOD_PRICE + " varchar(10),", COLUMN_FOOD_BUY_COUNT + " varchar(10)"};
+            COLUMN_ORDER_NUMBER + " varchar(50),", COLUMN_FOOD_ID + " integer,", COLUMN_FOOD_NAME +
+            " varchar(20),", COLUMN_FOOD_PRICE + " varchar(10),", COLUMN_FOOD_BUY_COUNT + " varchar(10)"};
     // 地址表的列名数组
     public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{COLUMN_ADDRESS_ID, COLUMN_USER_ID
             + " integer,", COLUMN_TO_ADDRESS + " varchar(50),", COLUMN_TO_NAME + " varchar(20),",
-            COLUMN_TO_SEX + " char(1),", COLUMN_TO_PHONE + " varchar(15)"};
+            COLUMN_TO_SEX + " varchar(5),", COLUMN_TO_PHONE + " varchar(15)"};
 
 }

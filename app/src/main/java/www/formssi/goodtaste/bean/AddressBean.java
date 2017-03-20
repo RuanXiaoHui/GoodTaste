@@ -6,17 +6,21 @@ import java.io.Serializable;
  * 收货地址实体类
  * Created by sn on 2017/3/17.
  */
-public class AddressBean implements Serializable{
+public class AddressBean implements Serializable {
 
     private String userId; //用户id
     private String addressId; //地址id
     private String name; //姓名
-    private String gender ="先生"; //性别
+    private String gender = "先生"; //性别
     private String phone; //电话
     private String address; //地址
     private boolean isCheckboxFlag; //复选框是否选中状态
 
     public AddressBean() {
+    }
+
+    public String toAddressString() {
+        return name + ' ' + gender + '\n' + phone + '\n' + address;
     }
 
     public AddressBean(String userId, String addressId, String name, String gender, String phone, String address, boolean isCheckboxFlag) {
