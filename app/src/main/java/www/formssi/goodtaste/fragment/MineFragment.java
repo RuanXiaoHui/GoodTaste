@@ -80,7 +80,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
         hasLogin = sharedPreferences.getBoolean("login", false);
         String telephone = sharedPreferences.getString("telephone", "");
-        String userName = "_" + telephone.substring(telephone.length() - 4);
+        String userName = "";
+        if (!TextUtils.isEmpty(telephone)) {
+            userName = "_" + telephone.substring(telephone.length() - 4);
+        }
         userBean.setUserName(userName);
         userBean.setPhoneNumber(telephone);
         validateView();
