@@ -32,6 +32,8 @@
         android:background="@drawable/shape_home_toolbar"
         android:gravity="center"
         android:enabled="false"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_marginLeft="@dimen/fragment_home_topbar_magin10"
         android:layout_marginRight="@dimen/fragment_home_topbar_magin10"
         android:layout_marginTop="@dimen/fragment_home_topbar_magin5"
