@@ -19,7 +19,7 @@ import www.formssi.goodtaste.fragment.HomeFragment;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.fragment.OrderFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OrderFragment.MeOnClickListener{
 
     private FragmentTabHost mTabhost;
     private int TabIcon[]={R.drawable.selector_tab_home,R.drawable.selector_tab_order,
@@ -75,5 +75,13 @@ public class MainActivity extends BaseActivity {
         ivIconTab.setImageResource(tab.getTabIcon());
         tvIconName.setText(tab.getTabName());
         return  mView;
+    }
+
+    /**
+     * 回调orderFragment里面的监听事件
+     */
+    @Override
+    public void onBtnGoSingleClick() {
+        mTabhost.setCurrentTab(0);
     }
 }

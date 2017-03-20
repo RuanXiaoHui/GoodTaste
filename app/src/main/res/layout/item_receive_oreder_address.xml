@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -57,9 +58,11 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_ReceiveAddressActivity_edit"
+        <ImageButton
+            android:id="@+id/ib_ReceiveAddressActivity_edit"
             style="@style/icon_normal"
+            android:background="@null"
+            android:focusable="false"
             android:src="@mipmap/ic_edit" />
 
     </LinearLayout>
