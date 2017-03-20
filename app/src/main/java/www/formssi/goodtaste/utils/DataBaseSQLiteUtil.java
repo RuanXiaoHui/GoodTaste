@@ -120,6 +120,27 @@ public class DataBaseSQLiteUtil {
         closeDataBase();
     }
 
+
+    /**
+     * 操作数据库添加用户信息
+     * @param name 名字
+     * @param phone 电话
+     * @param loginPwd 登录密码
+     * @param payPwd 支付密码
+     * @param img 头像
+     */
+    public static void insertUser(String name ,String phone,String loginPwd,String payPwd,String img){
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteConstant.COLUMN_USER_NAME, name);//名字
+        values.put(SQLiteConstant.COLUMN_USER_PHONE,phone);//电话
+        values.put(SQLiteConstant.COLUMN_LOGIN_PWD, loginPwd);//登录密码
+        values.put(SQLiteConstant.COLUMN_PAY_PWD, payPwd);//支付密码
+        values.put(SQLiteConstant.COLUMN_USER_IMG_PATH, img);//头像路径
+        mDatabase.insert(TABLE_NAME_USER, null, values);
+        closeDataBase();
+    }
+
     /**
      * 查找订单的方法
      *
@@ -138,25 +159,15 @@ public class DataBaseSQLiteUtil {
         orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
-            String id = String.valueOf(cursor.getInt(0));
-            String shopName = cursor.getString(1);
-            String shopPicture = cursor.getString(2);
-            String strStatus = cursor.getString(3);
-            String price = cursor.getString(6);
-            String orderNumber = cursor.getString(7);
-            String orderContent = cursor.getString(8);
-            String orderTime = cursor.getString(10);
-            orderBean.setOrderId(id);
-            orderBean.setShopName(shopName);
-            orderBean.setShopImgPath(shopPicture);
-            orderBean.setStatus(strStatus);
-            orderBean.setActualPayment(price);
-            orderBean.setShopPicture(Integer.valueOf(shopPicture));
-            orderBean.setStatus(strStatus);
-            orderBean.setActualPayment(price);
-            orderBean.setOrderTime(orderTime);
-            orderBean.setOrderContent(orderContent);
-            orderBean.setOrderNum(orderNumber);
+            orderBean.setOrderId(String.valueOf(cursor.getInt(0)));//id
+            orderBean.setShopName(cursor.getString(1));//商店名称
+            orderBean.setShopImgPath(cursor.getString(2));//商店图片
+            orderBean.setShopPicture(Integer.valueOf(cursor.getString(2)));//商店图片的资源id
+            orderBean.setStatus(cursor.getString(3));//订单状态
+            orderBean.setActualPayment(cursor.getString(6));//实付价格
+            orderBean.setOrderNum(cursor.getString(7));//订单号
+            orderBean.setOrderContent(cursor.getString(8));//订单内容
+            orderBean.setOrderTime(cursor.getString(10));//下单时间
             orderBeanList.add(orderBean);
         }
         cursor.close();

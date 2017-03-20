@@ -35,6 +35,7 @@ public class GoodsDetailActivity extends BaseActivity {
     private TextView tvGoodsMoney;           //商品钱数
     private TextView tvShopMoney;            //配送费
     private TextView tv_backTitlebar_center_title;   //商店标题
+    private ShopDataAdapter Adapter;
 
 
     @Override
@@ -58,6 +59,7 @@ public class GoodsDetailActivity extends BaseActivity {
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
         btnSubmintOrder= (Button) findViewById(R.id.btnSubmintOrder);
         tv_backTitlebar_center_title= (TextView) findViewById(R.id.tv_backTitlebar_center_title);
+       // btnSubmintOrder.setEnabled(false);
     }
 
     private void initData() {
@@ -74,6 +76,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
         }
 
+
     }
     private void initListener() {
         tv_backTitlebar_center_title.setText(mShopBean.getShopName());
@@ -81,7 +84,8 @@ public class GoodsDetailActivity extends BaseActivity {
         ivShopDesc.setText("店家描述："+mShopBean.getShopDesc());
         ivShopBusinessHours.setText("营业时间："+mShopBean.getShopBusinessHours());
         lvLeftMenu.setAdapter(new ShopMenuAdapter(mLeftMenu,this));
-        lvRightFoods.setAdapter(new ShopDataAdapter(mRefreshBean,this));
+        Adapter= new ShopDataAdapter(mRefreshBean,this);
+        lvRightFoods.setAdapter(Adapter);
 
         lvLeftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,6 +101,21 @@ public class GoodsDetailActivity extends BaseActivity {
                 }
                 lvRightFoods.setAdapter(new ShopDataAdapter(mRefreshBean,GoodsDetailActivity.this));
 
+
+            }
+        });
+
+        Adapter.setOnExtralClickListener(new ShopDataAdapter.OnExtralClickListener() {
+            @Override
+            public void onClickMoney(int vue) {
+                tvGoodsMoney.setText("￥"+vue+"元");
+            }
+        });
+        btnSubmintOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
+                startActivity(intent);
 
             }
         });

@@ -5,10 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.widget.NumberSubAdd;
 
 /**
  * Created by zhuchenxu on 2017/3/17.
@@ -18,10 +22,21 @@ public class ShopDataAdapter extends BaseAdapter {
 
     private List<FoodBean> mdatas;
     private LayoutInflater mInflater;
+    private int CountNumber=0;
 
     public ShopDataAdapter(List<FoodBean> mdatas, Context context) {
         this.mdatas = mdatas;
         this.mInflater=LayoutInflater.from(context);
+    }
+
+    //////////////*对外提供接口//////////////
+    public interface  OnExtralClickListener{
+        void onClickMoney(int vue);
+    }
+    public OnExtralClickListener onExtralClickListener;
+
+    public void setOnExtralClickListener(OnExtralClickListener onExtralClickListener) {
+        this.onExtralClickListener = onExtralClickListener;
     }
 
     @Override
@@ -40,21 +55,60 @@ public class ShopDataAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder=null;
         if (view==null){
             holder=new ViewHolder();
             view=mInflater.inflate(R.layout.item_shop_listview,null);
-            holder.tv= (TextView) view.findViewById(R.id.tvRight);
+            holder.ivFoodIcon= (ImageView) view.findViewById(R.id.ivFoodIcon);
+            holder.tvFoodName= (TextView) view.findViewById(R.id.tvFoodName);
+            holder.tvFoodBuyNumber= (TextView) view.findViewById(R.id.tvFoodBuyNumber);
+            holder.tvFoodMoney= (TextView) view.findViewById(R.id.tvFoodMoney);
+            holder.numberSubAdd= (NumberSubAdd) view.findViewById(R.id.numberSubAdd);
             view.setTag(holder);
         }else{
             holder= (ViewHolder) view.getTag();
         }
-        holder.tv.setText(mdatas.get(i).getGoodsName());
+        FoodBean bean=mdatas.get(i);
+        holder.ivFoodIcon.setImageResource(bean.getGoodsIcon());
+        holder.tvFoodName.setText(bean.getGoodsName());
+        holder.tvFoodBuyNumber.setText("月销量："+bean.getGoodsNumber()+"份");
+       holder.numberSubAdd.setNubNumBerSubAddClick(new NumberSubAdd.NumBerSubAddClick() {
+           @Override
+           public void AddBtnOnClick(View v, int vue) {
+              mdatas.get(i).setGoodsBuynumber(vue);
+               if (onExtralClickListener!=null){
+                   mdatas.get(i).setGoodsBuynumber(vue);
+                   int price= mdatas.get(i).getGoodsBuynumber();//获得当前的选项的单价
+                   CountNumber=CountNumber+price;
+                   onExtralClickListener.onClickMoney(CountNumber);
+               }
+
+           }
+
+           @Override
+           public void SubBtnOnclick(View v, int vue) {
+              // mdatas.get(i).setGoodsBuynumber(vue);
+               if (onExtralClickListener!=null&&vue>=1&&mdatas.get(i).getGoodsBuynumber()>1){
+                   int price= Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
+                   mdatas.get(i).setGoodsBuynumber(vue);
+                   CountNumber=CountNumber-price;
+                   onExtralClickListener.onClickMoney(CountNumber);
+               }else if(onExtralClickListener!=null&&vue>=1&&mdatas.get(i).getGoodsBuynumber()>1){
+                   mdatas.get(i).setGoodsBuynumber(vue);
+               }
+
+           }
+       });
+        holder.numberSubAdd.setVue(bean.getGoodsBuynumber());
         return view;
     }
 
     static class ViewHolder{
-        TextView tv;
+        ImageView ivFoodIcon;
+        TextView tvFoodName;
+        TextView tvFoodBuyNumber;
+        TextView tvFoodMoney;
+        NumberSubAdd numberSubAdd;
     }
 }
