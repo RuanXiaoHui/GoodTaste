@@ -35,6 +35,17 @@
     <string name="activity_address_phoneNumber">收货人电话</string>
     <string name="activity_address_address">地址</string>
     <string name="activity_address_addressDetail">详细地址</string>
+    <!--在线支付页面-->
+    <string name="activity_onlinePayment_title">在线支付</string>
+    <string name="activity_onlinePayment_outTakeOrder">外卖订单</string>
+    <string name="activity_onlinePayment_comfirmPayment">确认支付</string>
+    <string name="activity_onlinePayment_canclePayment">取消支付</string>
+    <!--支付成功页面-->
+    <string name="activity_paySuccess_title">支付成功</string>
+    <string name="activity_paySuccess_success">支付成功！</string>
+    <!--支付成功页面-->
+    <string name="activity_payFailure_title">支付失败</string>
+    <string name="activity_payFailure_failure">支付失败！</string>
 
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>

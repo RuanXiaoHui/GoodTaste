@@ -58,7 +58,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+//        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivHeadPicture = (ImageView) findViewById(R.id.iv_personal_headprotrait);
         rlPortrait = (RelativeLayout) findViewById(R.id.rl_personal_portrait);

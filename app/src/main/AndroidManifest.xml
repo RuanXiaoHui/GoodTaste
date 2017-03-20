@@ -32,6 +32,9 @@
         <activity android:name=".activity.GoodsDetailActivity"></activity>
         <activity android:name=".activity.AddNewAddressActivity"></activity>
         <activity android:name=".activity.EditAddressActivity"></activity>
+            <activity android:name=".activity.OnlinePaymentActivity"></activity>
+            <activity android:name=".activity.PaySuccessActivity"></activity>
+        <activity android:name=".activity.PayFailureActivity"></activity>
     </application>
 
 </manifest>

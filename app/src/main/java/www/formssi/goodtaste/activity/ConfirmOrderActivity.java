@@ -96,6 +96,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
      */
     @Override
     public void onClick(View v) {
+        Log.i(TAG, "onClick: ");
         Intent intent;
         switch (v.getId()){
             case R.id.llt_ConfirmOrederActtivity_address: //点击地址栏
@@ -109,6 +110,9 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
+                Log.i(TAG, "onClick: 点击了确认订单按钮");
+                intent = new Intent(ConfirmOrderActivity.this,OnlinePaymentActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
