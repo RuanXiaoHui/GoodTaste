@@ -68,7 +68,7 @@ public class SQLiteConstant {
     public static final String COLUMN_TO_ADDRESS = "toAddress"; // 收货人地址
     // 用户表的列名数组
     public static final String[] TABLE_USER_COLUMNS = new String[]{COLUMN_USER_ID, COLUMN_USER_NAME
-            + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " char(1),",
+            + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " varchar(5),",
             COLUMN_LOGIN_PWD + " varchar(20),", COLUMN_PAY_PWD + " varchar(6),", COLUMN_USER_IMG_PATH
             + " varchar(100)"};
     // 商店表的列名数组
@@ -95,6 +95,6 @@ public class SQLiteConstant {
     // 地址表的列名数组
     public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{COLUMN_ADDRESS_ID, COLUMN_USER_ID
             + " integer,", COLUMN_TO_ADDRESS + " varchar(50),", COLUMN_TO_NAME + " varchar(20),",
-            COLUMN_TO_SEX + " char(1),", COLUMN_TO_PHONE + " varchar(15)"};
+            COLUMN_TO_SEX + " varchar(5),", COLUMN_TO_PHONE + " varchar(15)"};
 
 }
