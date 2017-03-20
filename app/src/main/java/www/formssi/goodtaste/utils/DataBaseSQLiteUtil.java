@@ -153,6 +153,7 @@ public class DataBaseSQLiteUtil {
          * @param having:分组后的条件
          * @param orderBy:排序方式
          * @param limit:分页查询
+         *
          **/
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, null, null, null, null, null, null, page + "," + count); // 第page行开始,返回count行数据
         return new ArrayList<>();
@@ -175,7 +176,6 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
         orderValues.put(COLUMN_ORDER_TOTAL_MONEY, orderBean.getOrderTotalMoney()); // 总金额
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
-        orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费
         orderValues.put(COLUMN_ACTUAL_PAY, orderBean.getActualPayment()); // 实付金额
         orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
         orderValues.put(COLUMN_ADDRESS_ID, orderBean.getAddressId()); // 地址id
