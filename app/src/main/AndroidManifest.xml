@@ -44,6 +44,7 @@
         <activity android:name=".activity.PaySuccessActivity" />
         <activity android:name=".activity.PayFailureActivity" />
         <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
     </application>
 
 </manifest>

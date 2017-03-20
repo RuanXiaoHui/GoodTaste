@@ -48,10 +48,14 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
-        user = (UserBean) getIntent().getSerializableExtra("user");
         initView();
+        initData();
         fillData();
         tvTitle.setText(R.string.fragment_personal_security);
+    }
+
+    private void initData() {
+        user = (UserBean) getIntent().getSerializableExtra("user");
     }
 
     private void fillData() {
@@ -143,6 +147,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.rl_personal_phone: //更改电话号码
                 Intent intent2 = new Intent(this, UpdateTelephoneActivity.class);
+                intent2.putExtra("tel",user.getPhoneNumber());
                 startActivityForResult(intent2, REQ_USERNAME);
                 break;
             case R.id.rl_personal_login_password: //更在登录密码
