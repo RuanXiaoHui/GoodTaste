@@ -5,11 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +25,12 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.LoginActivity;
 import www.formssi.goodtaste.activity.PersonalActivity;
 import www.formssi.goodtaste.activity.ReceiveAddressActivity;
 import www.formssi.goodtaste.activity.SettingActivity;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 
 import static android.R.attr.action;
 
@@ -49,6 +53,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private UserBean userBean;
 
     private static final String TAG = "MineFragment";
+    private boolean hasLogin;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,22 +70,20 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
         mView = inflater.inflate(R.layout.fragment_mine, container, false);
+
         initView();
         fillData();
         return mView;
     }
 
     private void fillData() {
-        String headProtrait = userBean.getHeadProtrait();
-        if (headProtrait != null) {
-            Picasso.with(getContext())
-                    .load(Uri.parse(headProtrait))
-                    .into(ivHeadPicture);
-        }
-        String userName = userBean.getUserName();
-        if (userName != null) {
-            tvUserName.setText(userName);
-        }
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
+        hasLogin = sharedPreferences.getBoolean("login", false);
+        String telephone = sharedPreferences.getString("telephone", "");
+        String userName = "_" + telephone.substring(telephone.length() - 4);
+        userBean.setUserName(userName);
+        userBean.setPhoneNumber(telephone);
+        validateView();
     }
 
     private void initView() {
@@ -99,6 +102,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent intent;
+        if (!hasLogin) {
+            intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+
         switch (v.getId()) {
             case R.id.iv_setting:
                 intent = new Intent(getActivity(), SettingActivity.class);
@@ -113,7 +122,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), ReceiveAddressActivity.class);
                 startActivity(intent);
                 break;
-
         }
     }
 
@@ -122,14 +130,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         public static final String CODE = "code";// code 的 key
         public static final String RESULT = "result"; // 结果的key
 
-        public static final int TYPE_CAMERA = 1;//xianji
-        public static final int TYPE_ALBUM = 2;//xiangce
-        public static final int TYPE_USERNAME = 3;//xiangce
+        public static final int TYPE_CAMERA = 1;//相机
+        public static final int TYPE_ALBUM = 2;//相册
+        public static final int TYPE_USERNAME = 3;//用户名
+        public static final int TYPE_TELEPHONE = 4;//电话号码
+        public static final int TYPE_LOGIN_STATE = 5;// 登录状态改变
 
         @Override
         public void onReceive(Context context, Intent intent) {
             int codeType = intent.getIntExtra(CODE, -1);
-            if (codeType == TYPE_ALBUM) {
+            if (codeType == TYPE_ALBUM) { //相册
                 Uri uri = intent.getParcelableExtra(RESULT);
                 userBean.setHeadProtrait(uri.toString());
                 Picasso.with(getContext())
@@ -148,7 +158,42 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 String userName = intent.getStringExtra(RESULT);
                 userBean.setUserName(userName);
                 tvUserName.setText(userName);
+            } else if (codeType == TYPE_TELEPHONE) {
+                hasLogin = intent.getBooleanExtra("login", false);
+                String userTelephone = intent.getStringExtra(RESULT);
+                userTelephone = userTelephone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+                userBean.setPhoneNumber(userTelephone);
+                tvPhoneNum.setText(userTelephone);
+                String userName = "_" + userTelephone.substring(userTelephone.length() - 4);
+                userBean.setUserName(userName);
+                tvUserName.setText(userName);
+            } else if (codeType == TYPE_LOGIN_STATE) {
+                hasLogin = intent.getBooleanExtra("login", false);
+                validateView();
             }
+        }
+    }
+
+    private void validateView() {
+        if (hasLogin) {
+            String headProtrait = userBean.getHeadProtrait();
+            if (!TextUtils.isEmpty(headProtrait)) {
+                Picasso.with(getContext())
+                        .load(Uri.parse(headProtrait))
+                        .into(ivHeadPicture);
+            }
+            String userName = userBean.getUserName();
+            if (!TextUtils.isEmpty(userName)) {
+                tvUserName.setText(userName);
+            }
+            String phoneNumber = userBean.getPhoneNumber();
+            if (!TextUtils.isEmpty(phoneNumber)) {
+                tvPhoneNum.setText(phoneNumber);
+            }
+        } else {
+            ivHeadPicture.setImageResource(R.mipmap.icon_mine_headprotrait);
+            tvUserName.setText("");
+            tvPhoneNum.setText("");
         }
     }
 

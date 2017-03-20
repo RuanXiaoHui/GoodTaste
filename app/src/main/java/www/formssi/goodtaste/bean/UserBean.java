@@ -10,18 +10,18 @@ public class UserBean implements Serializable{
     private String userId; //用户ID
     private String userName; //用户名
     private String headProtrait; //头像
-    private String phoneNimeber; //电话号码
+    private String phoneNumber; //电话号码
     private String loginPassword; //登录密码
     private String payPassword; //支付密码
     private String addressId; //地址id
     public UserBean() {
     }
 
-    public UserBean(String userId, String userName, String headProtrait, String phoneNimeber, String loginPassword, String payPassword) {
+    public UserBean(String userId, String userName, String headProtrait, String phoneNumber, String loginPassword, String payPassword) {
         this.userId = userId;
         this.userName = userName;
         this.headProtrait = headProtrait;
-        this.phoneNimeber = phoneNimeber;
+        this.phoneNumber = phoneNumber;
         this.loginPassword = loginPassword;
         this.payPassword = payPassword;
     }
@@ -50,12 +50,12 @@ public class UserBean implements Serializable{
         this.headProtrait = headProtrait;
     }
 
-    public String getPhoneNimeber() {
-        return phoneNimeber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNimeber(String phoneNimeber) {
-        this.phoneNimeber = phoneNimeber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLoginPassword() {
