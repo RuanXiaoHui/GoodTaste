@@ -69,12 +69,12 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-    //测试    插入方法
+    //测试    订单插入方法
     public static void insertOrder() {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
+        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.food1+ "");//图片
         values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
         values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
         values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
@@ -84,62 +84,10 @@ public class DataBaseSQLiteUtil {
         values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
         values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
         mDatabase.insert("tb_order", null, values);
-        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
-        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 2 + "");//状态
-        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
-        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
-        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
-        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
-        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
-        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
-        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
-        mDatabase.insert("tb_order", null, values);
-        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
-        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 3 + "");//状态
-        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
-        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
-        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
-        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
-        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
-        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
-        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
-        mDatabase.insert("tb_order", null, values);
-        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.ic_finish + "");//图片
-        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 4 + "");//状态
-        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
-        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
-        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
-        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
-        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
-        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
-        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
-        mDatabase.insert("tb_order", null, values);
         closeDataBase();
     }
 
 
-    /**
-     * 操作数据库添加用户信息
-     * @param name 名字
-     * @param phone 电话
-     * @param loginPwd 登录密码
-     * @param payPwd 支付密码
-     * @param img 头像
-     */
-    public static void insertUser(String name ,String phone,String loginPwd,String payPwd,String img){
-        openDataBase();
-        ContentValues values = new ContentValues();
-        values.put(SQLiteConstant.COLUMN_USER_NAME, name);//名字
-        values.put(SQLiteConstant.COLUMN_USER_PHONE,phone);//电话
-        values.put(SQLiteConstant.COLUMN_LOGIN_PWD, loginPwd);//登录密码
-        values.put(SQLiteConstant.COLUMN_PAY_PWD, payPwd);//支付密码
-        values.put(SQLiteConstant.COLUMN_USER_IMG_PATH, img);//头像路径
-        mDatabase.insert(TABLE_NAME_USER, null, values);
-        closeDataBase();
-    }
 
     /**
      * 查找订单的方法
