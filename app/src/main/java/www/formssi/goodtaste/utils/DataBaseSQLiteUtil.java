@@ -83,7 +83,6 @@ public class DataBaseSQLiteUtil {
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
 
-
     /**
      * 查找订单的方法
      *
@@ -166,6 +165,7 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
         orderValues.put(COLUMN_ORDER_TOTAL_MONEY, orderBean.getOrderTotalMoney()); // 总金额
+        orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
         orderValues.put(COLUMN_ACTUAL_PAY, orderBean.getActualPayment()); // 实付金额
         orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
@@ -203,7 +203,7 @@ public class DataBaseSQLiteUtil {
      */
     public static List<OrderBean> getOrderBeansById(String orderId) {
         String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
-                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
+                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY, COLUMN_PACK_FEE,
                 COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
@@ -222,6 +222,7 @@ public class DataBaseSQLiteUtil {
             o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
             o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
             o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
+            o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
             o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
             o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
             String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
@@ -257,7 +258,7 @@ public class DataBaseSQLiteUtil {
             food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_FOOD_ID))));
             food.setGoodsName(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_NAME)));
             food.setGoodsMoney(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_PRICE)));
-            food.setGoodsNumber(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT));
+            food.setGoodsBuynumber(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT))));
             list.add(food);
             cursor.moveToNext();
         }

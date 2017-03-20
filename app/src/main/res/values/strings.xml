@@ -48,6 +48,7 @@
     <string name="activity_payFailure_title">支付失败</string>
     <string name="activity_payFailure_failure">支付失败！</string>
 
+    <string name="activity_order_my">我的订单</string>
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>
     <string name="activity_order_complete">订单已完成</string>
