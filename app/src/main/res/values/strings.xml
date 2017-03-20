@@ -86,6 +86,12 @@
     <string name="fragment_personal_phone">手机</string>
     <string name="fragment_personal_login_password">登录密码</string>
     <string name="fragment_personal_pay_password">支付密码</string>
+    <string name="activity_update_telephone">原手机号</string>
+    <string name="activity_update_telephone_new">旧手机号</string>
+    <string name="activity_setting_service">客服电话</string>
+    <string name="activity_setting_suggestion">意见反馈</string>
+    <string name="activity_setting_check">检查更新</string>
+    <string name="activity_setting_exit">退出登录</string>
 
     <!--homeFragment-->
     <string name="home_favourable_one_title">天天特价</string>

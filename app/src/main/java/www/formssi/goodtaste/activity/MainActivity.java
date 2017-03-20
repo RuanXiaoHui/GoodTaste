@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity implements OrderFragment.MeOnClic
     }
 
     private void initView() {
-
         mTabhost= (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabhost.setup(this,getSupportFragmentManager(),R.id.realcontent);
         mInflate=getLayoutInflater();

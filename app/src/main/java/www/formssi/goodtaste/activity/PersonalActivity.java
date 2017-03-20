@@ -29,12 +29,18 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
 
     private static final int REQ_ALBUM = 200; //相册请求码
     private static final int REQ_CARME = 100; //相机请求码
+    private static final int REQ_USERNAME = 400; //修改用户名
     private TextView tvTitle; //标题
+    private TextView tvUserName; //用户名
+    private TextView tvTelephone; //手机
     private ImageView ivReturn; //返回
     private ImageView ivHeadPicture; //头像
     private RelativeLayout rlPortrait; //点击选择头像
     private RelativeLayout rlUsername; //点击修改用户名
-    private File mPhotoFile; //
+    private RelativeLayout rlTelephone; //点击修改手机
+    private RelativeLayout rlPayPassword; //点击修改支付密码
+    private RelativeLayout rlLoginPassword; //点击登录密码
+    private File mPhotoFile; //拍照保存文件
     private String saveDir = Environment.getExternalStorageDirectory().getPath() + "/goodtaste/";
     private UserBean user;
 
@@ -55,17 +61,30 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                     .load(Uri.parse(headProtrait))
                     .into(ivHeadPicture);
         }
+        String userName = user.getUserName();
+        if (userName != null) {
+            tvUserName.setText(userName);
+        }
     }
 
     private void initView() {
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_Title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvUserName = (TextView) findViewById(R.id.tv_personal_username);
+        tvTelephone = (TextView) findViewById(R.id.tv_personal_phone);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivHeadPicture = (ImageView) findViewById(R.id.iv_personal_headprotrait);
         rlPortrait = (RelativeLayout) findViewById(R.id.rl_personal_portrait);
         rlUsername = (RelativeLayout) findViewById(R.id.rl_personal_username);
+        rlTelephone = (RelativeLayout) findViewById(R.id.rl_personal_phone);
+        rlPayPassword = (RelativeLayout) findViewById(R.id.rl_personal_pay_password);
+        rlLoginPassword = (RelativeLayout) findViewById(R.id.rl_personal_login_password);
+
         ivReturn.setOnClickListener(this);
         rlPortrait.setOnClickListener(this);
         rlUsername.setOnClickListener(this);
+        rlTelephone.setOnClickListener(this);
+        rlPayPassword.setOnClickListener(this);
+        rlLoginPassword.setOnClickListener(this);
     }
 
     @Override
@@ -115,8 +134,23 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                         });
                 builder.show();
                 break;
+
             case R.id.rl_personal_username:
-//                Intent intent = new Intent(PersonalActivity.this, )
+                Intent intent = new Intent(this, UpdateUserNameActivity.class);
+                startActivityForResult(intent, REQ_USERNAME);
+                break;
+
+            case R.id.rl_personal_phone:
+                Intent intent2 = new Intent(this, UpdateTelephoneActivity.class);
+                startActivityForResult(intent2, REQ_USERNAME);
+                break;
+            case R.id.rl_personal_login_password:
+                Intent intent3 = new Intent(this, UpdateLoginPasswordActivity.class);
+                startActivityForResult(intent3, REQ_USERNAME);
+                break;
+            case R.id.rl_personal_pay_password:
+                Intent intent4 = new Intent(this, UpdatePayPasswordActivity.class);
+                startActivityForResult(intent4, REQ_USERNAME);
                 break;
         }
     }
@@ -139,6 +173,9 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_CAMERA);
                 intent.putExtra(MineFragment.MyReceiver.RESULT, mPhotoFile);
                 sendBroadcast(intent);
+            }
+            if (requestCode == REQ_USERNAME) {
+                tvUserName.setText(data.getStringExtra("result"));
             }
         }
     }
