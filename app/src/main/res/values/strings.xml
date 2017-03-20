@@ -98,6 +98,12 @@
     <string name="fragment_personal_phone">手机</string>
     <string name="fragment_personal_login_password">登录密码</string>
     <string name="fragment_personal_pay_password">支付密码</string>
+    <string name="activity_update_telephone">原手机号</string>
+    <string name="activity_update_telephone_new">旧手机号</string>
+    <string name="activity_setting_service">客服电话</string>
+    <string name="activity_setting_suggestion">意见反馈</string>
+    <string name="activity_setting_check">检查更新</string>
+    <string name="activity_setting_exit">退出登录</string>
 
     <!--homeFragment-->
     <string name="home_favourable_one_title">天天特价</string>
@@ -114,5 +120,27 @@
     <string name="home_topbar_text_two">必胜客</string>
     <string name="home_topbar_text_three">鸭血粉丝</string>
     <string name="home_topbar_text_four">澳门皇茶</string>
+
+    <!--Toast-->
+    <string name="toast_order_remind">已提醒商家</string>
+
+    <!--订单状态-->
+    <string name="order_state_notpay">未支付</string>
+    <string name="order_state_notdelivery">未配送</string>
+    <string name="order_state_deliverying">送餐中</string>
+    <string name="order_state_notcomment">未评论</string>
+    <string name="order_state_finish">已完成</string>
+
+    <!--订单列表中按钮状态-->
+    <string name="order_state_btn_notpay">去支付</string>
+    <string name="order_state_btn_notdelivery">去催单</string>
+    <string name="order_state_btn_deliverying">查看进度</string>
+    <string name="order_state_btn_notcomment">去评论</string>
+    <string name="order_state_btn_finish">再来一单</string>
+    <string name="order_btn_go_single">去下单</string>
+    <string name="no_order_tv_content">还没有订单</string>
+
+
+
 
 </resources>

@@ -6,24 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.List;
-
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.bean.GoodsMenu;
+import www.formssi.goodtaste.bean.FoodBean;
 
 /**
  * Created by zhuchenxu on 2017/3/17.
  */
 
-public class ShopMenuAdapter extends BaseAdapter {
+public class ShopDataAdapter extends BaseAdapter {
 
-    private List<GoodsMenu> mdatas;
+    private List<FoodBean> mdatas;
     private LayoutInflater mInflater;
 
-    public ShopMenuAdapter(List<GoodsMenu> mdatas, Context context) {
+    public ShopDataAdapter(List<FoodBean> mdatas, Context context) {
         this.mdatas = mdatas;
-        mInflater=LayoutInflater.from(context);
+        this.mInflater=LayoutInflater.from(context);
     }
 
     @Override
@@ -46,13 +44,13 @@ public class ShopMenuAdapter extends BaseAdapter {
         ViewHolder holder=null;
         if (view==null){
             holder=new ViewHolder();
-            view=mInflater.inflate(R.layout.item_goods_leftmenu,null);
-            holder.tv= (TextView) view.findViewById(R.id.tvMenu);
+            view=mInflater.inflate(R.layout.item_shop_listview,null);
+            holder.tv= (TextView) view.findViewById(R.id.tvRight);
             view.setTag(holder);
         }else{
             holder= (ViewHolder) view.getTag();
         }
-        holder.tv.setText(mdatas.get(i).getName());
+        holder.tv.setText(mdatas.get(i).getGoodsName());
         return view;
     }
 

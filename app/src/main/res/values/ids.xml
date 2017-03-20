@@ -2,14 +2,22 @@
 <resources>
     <item type="id" name="llt_">false</item>
     <item type="id" name="rlt_">false</item>
-    <item type="id" name="btn_order_cancel">false</item>
     <item type="id" name="btn_order_ok">false</item>
+    <item type="id" name="btn_order_cancel">false</item>
     <item type="id" name="btn_order_contact_business">false</item>
     <item type="id" name="rb_">false</item>
     <item type="id" name="ib_">false</item>
     <item type="id" name="lv_order_food_list">false</item>
     <item type="id" name="iv_order_shop_image">false</item>
+    <item type="id" name="tv_order_shop_name">false</item>
     <item type="id" name="tv_order_status">false</item>
+    <item type="id" name="tv_order_number">false</item>
+    <item type="id" name="tv_order_pack_fee">false</item>
+    <item type="id" name="tv_order_discount_fee">false</item>
+    <item type="id" name="tv_order_actual_pay">false</item>
+    <item type="id" name="tv_order_time">false</item>
+    <item type="id" name="tv_order_address">false</item>
+    <item type="id" name="tv_order_pay_time">false</item>
     <item type="id" name="iv_order_shop_small_icon">false</item>
     <item type="id" name="iv_order_item_food_name">false</item>
     <item type="id" name="iv_order_item_food_count">false</item>

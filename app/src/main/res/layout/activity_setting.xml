@@ -5,8 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/fragment_mine_ll"
     tools:context="www.formssi.goodtaste.activity.SettingActivity">
 
     <include layout="@layout/layout_back_titlebar" />
+
+    <LinearLayout
+        android:id="@+id/ll_setting_servicetel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <TextView
+            android:id="@+id/tv_setting_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:drawableLeft="@mipmap/icon_setting_call"
+            android:drawablePadding="@dimen/medium_padding"
+            android:padding="@dimen/small_padding"
+            android:text="@string/activity_setting_service" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <TextView
+            android:id="@+id/tv_setting_suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:drawableLeft="@mipmap/icon_setting_opinion"
+            android:drawablePadding="@dimen/medium_padding"
+            android:padding="@dimen/small_padding"
+            android:text="@string/activity_setting_suggestion" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <TextView
+            android:id="@+id/tv_setting_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:drawableLeft="@mipmap/icon_setting_check"
+            android:drawablePadding="@dimen/medium_padding"
+            android:padding="@dimen/small_padding"
+            android:text="@string/activity_setting_check" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/medium_padding"
+        android:text="@string/activity_setting_exit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_medium" />
 
 </LinearLayout>
