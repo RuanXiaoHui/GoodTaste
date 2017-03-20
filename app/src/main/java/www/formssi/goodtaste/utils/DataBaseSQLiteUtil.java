@@ -421,17 +421,20 @@ public class DataBaseSQLiteUtil {
      * 实例化数据库对象
      */
     public static void openDataBase() {
-        if (null == mDbOpenHelper) {
+        /*if (null == mDbOpenHelper) {
             mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
-        }
+        }*/
+        mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
         try {
-            if (null == mDatabase) {
+            /*if (null == mDatabase) {
                 mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
-            }
+            }*/
+            mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
         } catch (SQLException e) {
-            if (null == mDatabase) {
+            /*if (null == mDatabase) {
                 mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
-            }
+            }*/
+            mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
         }
     }
 
