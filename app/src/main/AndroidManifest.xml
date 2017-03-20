@@ -17,7 +17,7 @@
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.ConfirmOrderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.PersonalActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.ConfirmOrderActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.ReceiveAddressActivity" />
         <activity android:name=".activity.RemarkOrderActivity" />
         <activity android:name=".activity.GoodsDetailActivity" />

@@ -26,6 +26,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUE
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
+import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
 
 /**
  * 收货地址列表页面
@@ -33,7 +34,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
  * Created by john on 2017/3/16.
  */
 
-public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemLongClickListener{
+public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemLongClickListener,AdapterView.OnItemClickListener{
 
     private static final String TAG = "ReceiveAddressActivity";
     private ImageView ivBack; //返回
@@ -51,11 +52,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_address);
-
         bindViews();
         tvTitle.setText(R.string.activity_receiveAddress_title);
         operateListView();
-
     }
 
     /**
@@ -70,6 +69,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         ivBack.setOnClickListener(this);
         llt_ReceiveAddressActivity_addAddress.setOnClickListener(this);
         lvAddress.setOnItemLongClickListener(this);
+        lvAddress.setOnItemClickListener(this);
     }
 
     /**
@@ -129,6 +129,25 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         createDialog(position);
         return true;
+    }
+
+    /**
+     * 点击列表项，选择收货地址
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        intent = new Intent();
+        AddressBean addressBean = (AddressBean) list.get(position);
+        intent.putExtra("name",addressBean.getName());
+        intent.putExtra("gender",addressBean.getGender());
+        intent.putExtra("phone",addressBean.getPhone());
+        intent.putExtra("address",addressBean.getAddress());
+        setResult(OREDER_REDDRESS_RESULT,intent);
+        this.finish();
     }
 
     private void createDialog(final int position) {

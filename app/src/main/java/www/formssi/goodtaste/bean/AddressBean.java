@@ -11,7 +11,7 @@ public class AddressBean implements Serializable {
     private String userId; //用户id
     private String addressId; //地址id
     private String name; //姓名
-    private String gender = "先生"; //性别
+    private String gender; //性别
     private String phone; //电话
     private String address; //地址
     private boolean isCheckboxFlag; //复选框是否选中状态
