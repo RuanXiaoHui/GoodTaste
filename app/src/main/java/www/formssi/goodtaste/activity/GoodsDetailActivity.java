@@ -122,6 +122,7 @@ public class GoodsDetailActivity extends BaseActivity {
                     btnSubmintOrder.setEnabled(true);
                     btnSubmintOrder.setTextColor(getResources().getColor(R.color.white));
                 }
+                mFoodbConfirm.clear();
                 for (Map.Entry<String ,FoodBean> bean:beans.entrySet()) {
                     mFoodbConfirm.add(bean.getValue());
                 }
