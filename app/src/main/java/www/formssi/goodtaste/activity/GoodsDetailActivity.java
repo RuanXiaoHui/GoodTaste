@@ -29,6 +29,7 @@ public class GoodsDetailActivity extends BaseActivity {
     private List<GoodsMenu> mLeftMenu;
     private List<FoodBean> mFoodBean;
     private List<FoodBean> mRefreshBean;
+    private ImageView iv_backTitlebar_back;
     private ImageView ivShopimg;               //商店图片
     private TextView ivShopTime;              //配送时间
     private TextView ivShopDesc;              //店铺描述
@@ -39,6 +40,7 @@ public class GoodsDetailActivity extends BaseActivity {
     private TextView tv_backTitlebar_center_title;   //商店标题
     private ShopDataAdapter Adapter;
     private List<FoodBean> mFoodbConfirm;
+    private int Money=0;
 
 
     @Override
@@ -55,6 +57,7 @@ public class GoodsDetailActivity extends BaseActivity {
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
         ivShopimg= (ImageView) findViewById(R.id.ivShopimg);
+        iv_backTitlebar_back= (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivShopTime= (TextView) findViewById(R.id.ivShopTime);
         ivShopDesc= (TextView) findViewById(R.id.ivShopDesc);
         ivShopBusinessHours= (TextView) findViewById(R.id.ivShopBusinessHours);
@@ -87,6 +90,7 @@ public class GoodsDetailActivity extends BaseActivity {
         ivShopTime.setText("平均配送时间:"+mShopBean.getShopBusinessHours());
         ivShopDesc.setText("店家描述："+mShopBean.getShopDesc());
         ivShopBusinessHours.setText("营业时间："+mShopBean.getShopBusinessHours());
+        tvShopMoney.setText("另需配送费"+mShopBean.getShopMoney()+"元");
         lvLeftMenu.setAdapter(new ShopMenuAdapter(mLeftMenu,this));
         Adapter= new ShopDataAdapter(mRefreshBean,this);
         lvRightFoods.setAdapter(Adapter);
@@ -110,24 +114,37 @@ public class GoodsDetailActivity extends BaseActivity {
             @Override
             public void onClickMoney(int vue, Map<String, FoodBean> beans) {
                 tvGoodsMoney.setText("￥"+vue+"元");
+                Money=vue;
                 if (vue==0){
                     btnSubmintOrder.setEnabled(false);
+                    btnSubmintOrder.setTextColor(getResources().getColor(R.color.gray));
                 }else{
                     btnSubmintOrder.setEnabled(true);
+                    btnSubmintOrder.setTextColor(getResources().getColor(R.color.white));
                 }
-
                 for (Map.Entry<String ,FoodBean> bean:beans.entrySet()) {
                     mFoodbConfirm.add(bean.getValue());
                 }
             }
         });
+
+        //提交订单
         btnSubmintOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
                 intent.putExtra("ShopBeans",mShopBean);
                 intent.putExtra("foodBeans",(Serializable) mFoodbConfirm);
+                intent.putExtra("CountMoney",Money);
                 startActivity(intent);
+            }
+        });
+
+        //返回
+        iv_backTitlebar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
