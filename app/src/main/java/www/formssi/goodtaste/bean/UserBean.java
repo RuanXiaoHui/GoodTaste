@@ -13,6 +13,7 @@ public class UserBean implements Serializable{
     private String phoneNimeber; //电话号码
     private String loginPassword; //登录密码
     private String payPassword; //支付密码
+    private String addressId; //地址id
     public UserBean() {
     }
 
