@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_mine_ll"
+    android:orientation="vertical"
+    tools:context="www.formssi.goodtaste.activity.LoginActivity">
+
+    <include layout="@layout/layout_back_titlebar" />
+
+        <EditText
+            android:layout_marginTop="@dimen/medium_margin"
+            android:id="@+id/et_login_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:hint="手机号码"
+            android:digits="0123456789"
+            android:maxLength="11"
+            android:inputType="phone"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/line_height_low"
+            android:padding="@dimen/medium_padding"
+            android:hint="密码"
+            android:background="@color/white"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/button_blue_text_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_login" />
+
+</LinearLayout>

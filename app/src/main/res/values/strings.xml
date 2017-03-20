@@ -104,6 +104,7 @@
     <string name="activity_setting_suggestion">意见反馈</string>
     <string name="activity_setting_check">检查更新</string>
     <string name="activity_setting_exit">退出登录</string>
+    <string name="activity_login">登录</string>
 
     <!--homeFragment-->
     <string name="home_favourable_one_title">天天特价</string>
@@ -139,8 +140,6 @@
     <string name="order_state_btn_finish">再来一单</string>
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
-
-
 
 
 </resources>
