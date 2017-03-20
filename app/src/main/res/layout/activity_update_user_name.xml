@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_mine_ll"
+    android:orientation="vertical"
+    tools:context="www.formssi.goodtaste.activity.UpdateUserNameActivity">
+
+    <include layout="@layout/layout_back_titlebar" />
+
+    <EditText
+        android:id="@+id/et_update_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:hint="用户名"
+        android:background="@null"/>
+
+    <Button
+        android:id="@+id/btn_update"
+        style="@style/button_text_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认修改" />
+
+</LinearLayout>

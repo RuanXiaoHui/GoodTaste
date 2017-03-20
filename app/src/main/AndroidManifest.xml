@@ -31,9 +31,17 @@
         <activity android:name=".activity.ReceiveAddressActivity" />
         <activity android:name=".activity.RemarkOrderActivity" />
         <activity android:name=".activity.GoodsDetailActivity" />
+        <activity android:name=".activity.UpdateUserNameActivity" />
+        <activity android:name=".activity.UpdateTelephoneActivity" />
+        <activity android:name=".activity.SettingSuggestionActivity" />
+        <activity android:name=".activity.UpdateLoginPasswordActivity" />
+        <activity android:name=".activity.UpdatePayPasswordActivity"></activity>
         <activity android:name=".activity.AddNewAddressActivity" />
         <activity android:name=".activity.EditAddressActivity" />
         <activity android:name=".activity.OrderStateActivity"></activity>
+        <activity android:name=".activity.OnlinePaymentActivity"></activity>
+        <activity android:name=".activity.PaySuccessActivity"></activity>
+        <activity android:name=".activity.PayFailureActivity"></activity>
     </application>
 
 </manifest>

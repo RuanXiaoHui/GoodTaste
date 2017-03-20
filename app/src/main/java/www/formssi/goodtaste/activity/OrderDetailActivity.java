@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,8 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.CALL_PHONE_REQUEST_CODE;
 
 /**
  * 订单详情Activity类
@@ -55,6 +56,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private OrderBean orderdBean; // 订单实体
     private FoodListAdapter adapter; // 适配器
     private Intent intent; // 获取上一个intent
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,14 +113,30 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_order_contact_business: // 联系商家按钮：拨打商家电话
                 // 调用系统拨号Action
                 String phone = "110";
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-
+                    showToast("拨号权限未曾授权！");
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, CALL_PHONE_REQUEST_CODE);
                     return;
                 }
                 startActivity(intent);
                 break;
         }
+    }
+
+    /**
+     * 吐司
+     *
+     * @param tip
+     */
+    public void showToast(String tip) {
+        if (toast == null) {
+            toast = Toast.makeText(this, tip, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(tip);
+        }
+        toast.show();
     }
 
     /**
@@ -128,7 +146,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     public void setOrderDetail(OrderBean orderdBean) {
         if (null != orderdBean) {
-//            ivOrderShopImg.setImageURI(Uri.fromFile(new File(orderdBean.getShopImgPath())));
+            ivOrderShopImg.setImageResource(orderdBean.getShopPicture());
             tvOrderShopName.setText(orderdBean.getShopName());
             tvOrderNumber.setText(orderdBean.getOrderNum());
             tvOrderDiscount.setText(orderdBean.getDiscountMoney());
@@ -143,6 +161,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // 根据用户授权情况判断哪些权限已经获得
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) { // 用户授予了该权限
+            showToast("用户授权了");
+        } else { // 用户拒绝授予该权限
+            showToast("用户拒绝了");
+        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 

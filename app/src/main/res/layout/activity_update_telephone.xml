@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fragment_mine_ll"
+    tools:context="www.formssi.goodtaste.activity.UpdateTelephoneActivity">
+
+    <include layout="@layout/layout_back_titlebar" />
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="旧手机号码"/>
+
+        <EditText
+            android:id="@+id/et_telephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:hint="请输入旧手机号码"
+            android:maxLength="11"
+            android:digits="0123456789"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新手机号码"
+            />
+        <EditText
+            android:id="@+id/et_update_telephone"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入新手机号码"
+            android:maxLength="11"
+            android:digits="0123456789"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_update_telephone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="绑定新手机"
+        android:textColor="#fff"
+        android:textSize="18sp"/>
+
+</LinearLayout>
