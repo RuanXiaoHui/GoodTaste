@@ -153,17 +153,17 @@ public class DataBaseSQLiteUtil {
     /**
      * 确认订单
      *
-     * @param shopBean
      * @param orderBean
      * @param foodBeanList
      * @return
      */
     public static long addOrder(OrderBean orderBean, List<FoodBean> foodBeanList) {
         ContentValues orderValues = new ContentValues(); // 订单ContentValues
-        orderValues.put(COLUMN_SHOP_ID, orderBean.getStoreId()); // 商店id
-        orderValues.put(COLUMN_SHOP_NAME, orderBean.getShopName()); // 商店名称
-        orderValues.put(COLUMN_SHOP_IMG_PATH, orderBean.getShopPicture()); // 商店图像
-        orderValues.put(COLUMN_ORDER_STATUS, orderBean.getShopPicture()); // 订单状态
+        ShopBean shopBean = orderBean.getShopBean();
+        orderValues.put(COLUMN_SHOP_ID, shopBean.getShopId()); // 商店id
+        orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
+        orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
+        orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
         orderValues.put(COLUMN_ORDER_TOTAL_MONEY, orderBean.getOrderTotalMoney()); // 总金额
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
         orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费

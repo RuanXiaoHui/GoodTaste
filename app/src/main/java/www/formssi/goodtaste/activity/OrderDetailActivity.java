@@ -23,6 +23,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
 
@@ -53,7 +54,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private Button btnCancel; // 取消按钮：取消订单
     private Button btnContactBusiness; // 联系商家按钮：拨打商家电话
     private List<FoodBean> listFoodBean; // 食品列表
-    private OrderBean orderdBean; // 订单实体
+    private OrderBean orderBean; // 订单实体
     private FoodListAdapter adapter; // 适配器
     private Intent intent; // 获取上一个intent
     private Toast toast; // 吐司
@@ -62,11 +63,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
+        DataBaseSQLiteUtil.openDataBase();
         intent = getIntent(); // 通过intent获取订单id
+        String orderId = intent.getStringExtra(ConstantConfig.INTENT_ORDER_ID);
         initViews(); // 初始化控件
         initEvents(); // 注册事件
-        orderdBean = new OrderBean(); // 根据id查询订单详情数据
-        setOrderDetail(orderdBean); // 展示订单详情信息
+        orderBean = DataBaseSQLiteUtil.getOrderBeansById(orderId).get(0); // 根据id查询订单详情数据
+        setOrderDetail(orderBean); // 展示订单详情信息
     }
 
     private void initEvents() {
@@ -81,10 +84,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     public void initViews() {
         listFoodBean = new ArrayList<>(); // 食品列表根据订单详情里面的订单号查询出来
-        listFoodBean.add(new FoodBean("", "鱼香肉丝", 0, 0, 0, ""));
-        listFoodBean.add(new FoodBean("", "香菜牛肉", 0, 0, 0, ""));
-        listFoodBean.add(new FoodBean("", "芹菜炒鸡蛋", 0, 0, 0, ""));
-        listFoodBean.add(new FoodBean("", "餐盒", 0, 0, 0, ""));
+        listFoodBean.addAll(orderBean.getFoodBeanList());
         adapter = new FoodListAdapter();
         ivOrderShopImg = (ImageView) findViewById(R.id.iv_order_shop_image);
         tvOrderStatus = (TextView) findViewById(R.id.tv_order_status);
@@ -112,7 +112,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_order_contact_business: // 联系商家按钮：拨打商家电话
                 // 调用系统拨号Action
-                String phone = "110";
+                String phone = orderBean.getShopBean().getShopPhone();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -142,19 +142,19 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     /**
      * 展示订单详情信息
      *
-     * @param orderdBean
+     * @param orderBean
      */
-    public void setOrderDetail(OrderBean orderdBean) {
-        if (null != orderdBean) {
-            ivOrderShopImg.setImageResource(orderdBean.getShopPicture());
-            tvOrderShopName.setText(orderdBean.getShopName());
-            tvOrderNumber.setText(orderdBean.getOrderNum());
-            tvOrderDiscount.setText(orderdBean.getDiscountMoney());
-            tvOrderActualPay.setText(orderdBean.getActualPayment());
-            tvOrderPackFee.setText(orderdBean.getDistributingFee());
-            tvOrderTime.setText(orderdBean.getOrderTime());
-            tvOrderPayTime.setText(orderdBean.getPayTime());
-            tvOrderAddress.setText(orderdBean.getAddress());
+    public void setOrderDetail(OrderBean orderBean) {
+        if (null != orderBean) {
+            ivOrderShopImg.setImageResource(orderBean.getShopPicture());
+            tvOrderShopName.setText(orderBean.getShopName());
+            tvOrderNumber.setText(orderBean.getOrderNum());
+            tvOrderDiscount.setText(orderBean.getDiscountMoney());
+            tvOrderActualPay.setText(orderBean.getActualPayment());
+            tvOrderPackFee.setText(orderBean.getDistributingFee());
+            tvOrderTime.setText(orderBean.getOrderTime());
+            tvOrderPayTime.setText(orderBean.getPayTime());
+            tvOrderAddress.setText(orderBean.getAddress());
         }
 
     }
@@ -202,8 +202,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             }
             FoodBean bean = getItem(position);
             holder.tvFoodName.setText(bean.getGoodsName());
-            //holder.tvFoodCount.setText(bean.getGoodsName());
-            //holder.tvFoodPrice.setText(bean.getGoodsName());
+            holder.tvFoodCount.setText(bean.getGoodsName());
+            holder.tvFoodPrice.setText(bean.getGoodsName());
             return convertView;
         }
     }
@@ -212,5 +212,11 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         TextView tvFoodName; // 食品名称
         TextView tvFoodCount; // 食品数量
         TextView tvFoodPrice; // 食品单价
+    }
+
+    @Override
+    protected void onDestroy() {
+        DataBaseSQLiteUtil.closeDataBase();
+        super.onDestroy();
     }
 }
