@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,19 +9,30 @@
 
     <include layout="@layout/layout_back_titlebar" />
 
-    <EditText
-        android:id="@+id/et_update_username"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_margin"
-        android:hint="用户名"
-        android:background="@null"/>
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_update_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@null"
+            android:hint="用户名" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_update"
-        style="@style/button_text_white"
+        style="@style/button_blue_text_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
         android:text="确认修改" />
+
 
 </LinearLayout>

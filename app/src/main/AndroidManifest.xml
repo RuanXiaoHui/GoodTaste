@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".utils.ContextUtil"
@@ -35,13 +36,14 @@
         <activity android:name=".activity.UpdateTelephoneActivity" />
         <activity android:name=".activity.SettingSuggestionActivity" />
         <activity android:name=".activity.UpdateLoginPasswordActivity" />
-        <activity android:name=".activity.UpdatePayPasswordActivity"></activity>
+        <activity android:name=".activity.UpdatePayPasswordActivity" />
         <activity android:name=".activity.AddNewAddressActivity" />
         <activity android:name=".activity.EditAddressActivity" />
-        <activity android:name=".activity.OrderStateActivity"></activity>
-        <activity android:name=".activity.OnlinePaymentActivity"></activity>
-        <activity android:name=".activity.PaySuccessActivity"></activity>
-        <activity android:name=".activity.PayFailureActivity"></activity>
+        <activity android:name=".activity.OrderStateActivity" />
+        <activity android:name=".activity.OnlinePaymentActivity" />
+        <activity android:name=".activity.PaySuccessActivity" />
+        <activity android:name=".activity.PayFailureActivity" />
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>

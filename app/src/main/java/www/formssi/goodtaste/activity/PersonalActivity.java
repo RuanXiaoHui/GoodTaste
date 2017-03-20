@@ -55,6 +55,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void fillData() {
+
         String headProtrait = user.getHeadProtrait();
         if (headProtrait != null) {
             Picasso.with(this)
@@ -90,10 +91,10 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_backTitlebar_back:
+            case R.id.iv_backTitlebar_back: //返回按钮
                 finish();
                 break;
-            case R.id.rl_personal_portrait:
+            case R.id.rl_personal_portrait:  //头像设置
                 AlertDialog.Builder builder = new AlertDialog.Builder(PersonalActivity.this);
                 builder.setTitle("上传头像");
                 builder.setItems(new String[]{"拍照", "从手机相册选择"},
@@ -103,7 +104,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
-                                    case 0:
+                                    case 0: //拍照
                                         String state = Environment.getExternalStorageState();
                                         if (state.equals(Environment.MEDIA_MOUNTED)) {
                                             mPhotoFile = new File(saveDir, "temp.jpg");
@@ -124,7 +125,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                                         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
                                         startActivityForResult(intent, REQ_CARME);
                                         break;
-                                    case 1:
+                                    case 1: //从相册选择
                                         intent = new Intent(Intent.ACTION_PICK,
                                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                         startActivityForResult(intent, REQ_ALBUM);
@@ -135,20 +136,20 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 builder.show();
                 break;
 
-            case R.id.rl_personal_username:
+            case R.id.rl_personal_username: //更新用户名
                 Intent intent = new Intent(this, UpdateUserNameActivity.class);
                 startActivityForResult(intent, REQ_USERNAME);
                 break;
 
-            case R.id.rl_personal_phone:
+            case R.id.rl_personal_phone: //更改电话号码
                 Intent intent2 = new Intent(this, UpdateTelephoneActivity.class);
                 startActivityForResult(intent2, REQ_USERNAME);
                 break;
-            case R.id.rl_personal_login_password:
+            case R.id.rl_personal_login_password: //更在登录密码
                 Intent intent3 = new Intent(this, UpdateLoginPasswordActivity.class);
                 startActivityForResult(intent3, REQ_USERNAME);
                 break;
-            case R.id.rl_personal_pay_password:
+            case R.id.rl_personal_pay_password: //更改支付密码
                 Intent intent4 = new Intent(this, UpdatePayPasswordActivity.class);
                 startActivityForResult(intent4, REQ_USERNAME);
                 break;
@@ -159,7 +160,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQ_ALBUM) {
+            if (requestCode == REQ_ALBUM) { //相册
                 Uri uri = data.getData();
                 ivHeadPicture.setImageURI(uri);
                 Intent intent = new Intent(MineFragment.MY_ACTION);
@@ -167,16 +168,17 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra(MineFragment.MyReceiver.RESULT, uri);
                 sendBroadcast(intent);
             }
-            if (requestCode == REQ_CARME) {
+            if (requestCode == REQ_CARME) { //相机
                 ivHeadPicture.setImageBitmap(BitmapFactory.decodeFile(mPhotoFile.getAbsolutePath()));
                 Intent intent = new Intent(MineFragment.MY_ACTION);
                 intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_CAMERA);
                 intent.putExtra(MineFragment.MyReceiver.RESULT, mPhotoFile);
                 sendBroadcast(intent);
             }
-            if (requestCode == REQ_USERNAME) {
+            if (requestCode == REQ_USERNAME) { //用户名
                 tvUserName.setText(data.getStringExtra("result"));
             }
+
         }
     }
 }

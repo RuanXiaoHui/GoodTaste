@@ -70,7 +70,7 @@ public class SQLiteConstant {
     public static final String[] TABLE_USER_COLUMNS = new String[]{COLUMN_USER_ID, COLUMN_USER_NAME
             + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " varchar(5),",
             COLUMN_LOGIN_PWD + " varchar(20),", COLUMN_PAY_PWD + " varchar(6),", COLUMN_USER_IMG_PATH
-            + " varchar(100)"};
+            + " varchar(100),", COLUMN_ADDRESS_ID + "integer"};
     // 商店表的列名数组
     public static final String[] TABLE_SHOP_COLUMNS = new String[]{COLUMN_SHOP_ID, COLUMN_SHOP_NAME
             + " varchar(20),", COLUMN_SHOP_PHONE + " varchar(15),", COLUMN_SHOP_IMG_PATH +
