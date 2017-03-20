@@ -82,23 +82,6 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-    //测试    订单插入方法
-    public static void insertOrder() {
-        openDataBase();
-        ContentValues values = new ContentValues();
-        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.food1 + "");//图片
-        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
-        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
-        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
-        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
-        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
-        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
-        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
-        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
-        mDatabase.insert("tb_order", null, values);
-        closeDataBase();
-    }
 
 
     /**
@@ -108,27 +91,33 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static List<OrderBean> queryOrder(int status) {
-        List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
+        String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_ORDER_NUMBER, COLUMN_ORDER_STATUS,
+                SQLiteConstant.COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
         Cursor cursor;
+        List<OrderBean> orderBeanList = new ArrayList<>();
         if (status == OrderState.ALL) {
-            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER, null);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, null);
         } else {
-            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER + " where " + SQLiteConstant.COLUMN_ORDER_STATUS + " = " + status, null);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, null);
         }
-        orderBeanList = new ArrayList<>();
-        while (cursor.moveToNext()) {
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return orderBeanList;
+        }
+        for (int i = 0; i < resultCounts; i++) {
             OrderBean orderBean = new OrderBean();
-            orderBean.setOrderId(String.valueOf(cursor.getInt(0)));//id
-            orderBean.setShopName(cursor.getString(1));//商店名称
-            orderBean.setShopImgPath(cursor.getString(2));//商店图片
-            orderBean.setShopPicture(Integer.valueOf(cursor.getString(2)));//商店图片的资源id
-            orderBean.setStatus(cursor.getString(3));//订单状态
-            orderBean.setActualPayment(cursor.getString(6));//实付价格
-            orderBean.setOrderNum(cursor.getString(7));//订单号
-            orderBean.setOrderContent(cursor.getString(8));//订单内容
-            orderBean.setOrderTime(cursor.getString(10));//下单时间
+            orderBean.setOrderId(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_ID)));//id
+            orderBean.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME)));//商店名称
+            orderBean.setShopImgPath(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH)));//商店图片
+            orderBean.setShopPicture(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))));//商店图片的资源id
+            orderBean.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS)));//订单状态
+            orderBean.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY)));//实付价格
+            orderBean.setOrderNum(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)));//订单号
+            orderBean.setOrderContent(cursor.getString(cursor.getColumnIndex(SQLiteConstant.COLUMN_ORDER_CONTENT)));//订单内容
+            orderBean.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME)));//下单时间
             orderBeanList.add(orderBean);
+            cursor.moveToNext();
         }
         cursor.close();
         closeDataBase();
