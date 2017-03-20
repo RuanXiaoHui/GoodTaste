@@ -48,7 +48,6 @@
             <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_toBePay"
                 style="@style/activity_text_normal_white"
-                android:text="Y48.3"
                 android:layout_marginLeft="@dimen/common_margin_small"/>
 
         </LinearLayout>

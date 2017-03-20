@@ -24,7 +24,7 @@ public class SQLiteConstant {
     public static final String COLUMN_USER_PHONE = "phone"; // 手机号
     public static final String COLUMN_USER_SEX = "sex"; // 性别
     public static final String COLUMN_LOGIN_PWD = "loginPwd"; // 登录密码
-    public static final String COLUMN_PAY_PWD = "pay_pwd"; // 支付密码
+    public static final String COLUMN_PAY_PWD = "payPwd"; // 支付密码
     public static final String COLUMN_USER_IMG_PATH = "userImgPath"; // 头像路径
 
     //商店表字段

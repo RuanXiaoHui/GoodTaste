@@ -36,7 +36,6 @@
             android:id="@+id/tv_OnlinePayment_price"
             style="@style/activity_text_normal_black"
             android:layout_marginTop="@dimen/common_margin_medium"
-            android:text="¥16.00"
             android:textColor="@color/red" />
 
     </LinearLayout>

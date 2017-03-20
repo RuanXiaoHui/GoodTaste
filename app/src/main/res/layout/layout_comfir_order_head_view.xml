@@ -17,12 +17,19 @@
             style="@style/icon_normal"
             android:src="@mipmap/ic_location" />
 
+        <TextView
+            android:id="@+id/tv_ConfirmOrederActtivity_addressNull"
+            style="@style/activity_text_normal_blue"
+            android:text="@string/activity_addNewAddress_title"
+            android:visibility="gone" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_margin_normal"
             android:layout_weight="1"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -32,28 +39,24 @@
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_name"
                     style="@style/activity_text_normal_black"
-                    android:text="苏妮"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_gender"
                     style="@style/activity_text_normal_black"
-                    android:layout_marginLeft="@dimen/common_margin_small"
-                    android:text="女士" />
+                    android:layout_marginLeft="@dimen/common_margin_small" />
 
                 <TextView
                     android:id="@+id/tv_ConfirmOrederActtivity_phone"
                     style="@style/activity_text_normal_black"
-                    android:layout_marginLeft="@dimen/common_margin_normal"
-                    android:text="18376611446" />
+                    android:layout_marginLeft="@dimen/common_margin_normal" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_ConfirmOrederActtivity_address"
                 style="@style/activity_text_small_gray"
-                android:layout_marginTop="@dimen/common_margin_normal"
-                android:text="海外联谊大厦迎春路122210" />
+                android:layout_marginTop="@dimen/common_margin_normal" />
 
         </LinearLayout>
 
@@ -86,8 +89,7 @@
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_stroeName"
             style="@style/activity_text_normal_gray"
-            android:layout_marginLeft="@dimen/common_margin_normal"
-            android:text="湘江小厨" />
+            android:layout_marginLeft="@dimen/common_margin_normal" />
 
     </LinearLayout>
 
