@@ -25,7 +25,7 @@
 
         <EditText
             android:id="@+id/et_telephone"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding"
             android:layout_marginLeft="@dimen/small_margin"
@@ -53,7 +53,7 @@
             android:id="@+id/et_update_telephone"
             android:padding="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入新手机号码"
             android:maxLength="11"

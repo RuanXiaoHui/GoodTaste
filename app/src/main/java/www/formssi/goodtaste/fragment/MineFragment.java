@@ -85,7 +85,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             userName = "_" + telephone.substring(telephone.length() - 4);
         }
         userBean.setUserName(userName);
-        userBean.setPhoneNumber(telephone);
+        userBean.setPhoneNumber(telephone.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
         validateView();
     }
 

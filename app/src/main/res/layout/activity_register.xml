@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/fragment_mine_ll"
     android:orientation="vertical"
-    tools:context="www.formssi.goodtaste.activity.LoginActivity">
+    tools:context="www.formssi.goodtaste.activity.RegisterActivity">
 
     <include layout="@layout/layout_back_titlebar" />
 
@@ -22,7 +22,6 @@
             android:background="@color/white"/>
 
         <EditText
-            android:inputType="numberPassword"
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,18 +30,18 @@
             android:hint="密码"
             android:background="@color/white"/>
 
+    <EditText
+        android:id="@+id/et_login_pay_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/line_height_low"
+        android:background="@color/white"
+        android:hint="支付密码"
+        android:padding="@dimen/medium_padding" />
+
     <Button
         android:id="@+id/btn_login"
         style="@style/button_blue_text_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_login" />
-
-    <TextView
-        android:padding="8dp"
-        android:textColor="#f00"
-        android:id="@+id/tv_regist"
-        android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/activity_register" />

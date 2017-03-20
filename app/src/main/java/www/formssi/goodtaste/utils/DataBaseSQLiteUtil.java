@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_IMG_PATH;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_PHONE;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_SEX;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
@@ -316,21 +318,23 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_PAY_PWD, bean.getPayPassword()); // 支付密码
         values.put(COLUMN_USER_PHONE, bean.getPhoneNumber()); // 电话
         values.put(COLUMN_USER_IMG_PATH, bean.getHeadProtrait()); // 头像
-        return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); //
+        values.put(COLUMN_USER_SEX, ""); //
+        return mDatabase.insert(TABLE_NAME_USER, null, values); //
     }
 
     /**
      * 用户登录
      *
-     * @param userName
+     * @param tel
      * @param pwd
      * @return
      */
-    public static UserBean userLogin(String userName, String pwd) {
-        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH,
-                COLUMN_TO_ADDRESS}; //
-        Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_USER_NAME + "= ? and "
-                + COLUMN_LOGIN_PWD + " = ?", new String[]{userName, pwd}, null, null, null);
+    public static UserBean userLogin(String tel, String pwd) {
+        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ? and "
+                + COLUMN_LOGIN_PWD + " = ? ", new String[]{tel, pwd}, null, null, null);
+
+//        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, null, null, null, null, null);
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) {
             return null;
@@ -498,6 +502,19 @@ public class DataBaseSQLiteUtil {
             db.execSQL(sql5); // 创建订单详情表
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
             db.execSQL(sql6); // 创建地址表
+//            ContentValues values = new ContentValues();
+//            /**
+//             * COLUMN_USER_ID, COLUMN_USER_NAME
+//             + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " varchar(5),",
+//             COLUMN_LOGIN_PWD + " varchar(20),", COLUMN_PAY_PWD + " varchar(6),", COLUMN_USER_IMG_PATH
+//             + " varchar(100),", COLUMN_ADDRESS_ID + " integer"
+//             */
+//            values.put(COLUMN_USER_NAME,"184");
+//            values.put(COLUMN_USER_PHONE,"184");
+//            values.put(COLUMN_USER_SEX,"184");
+//            values.put(COLUMN_USER_NAME,"184");
+//            db.insert(TABLE_NAME_USER,null,values);
+//            db.query(TABLE_NAME_USER,null,null,null,null,null,null,null);
         }
 
         @Override
