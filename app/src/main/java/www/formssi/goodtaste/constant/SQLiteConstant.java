@@ -8,6 +8,7 @@ package www.formssi.goodtaste.constant;
  */
 public class SQLiteConstant {
 
+    //数据库建库建表
     public static final String DB_NAME = "good_taste.db"; // 数据库名称
     public static final int DB_VERSION = 1; // 数据库版本
     public static final String TABLE_NAME_USER = "tb_user"; // 用户表
@@ -17,6 +18,7 @@ public class SQLiteConstant {
     public static final String TABLE_NAME_ORDER_DETAIL = "tb_order_detail"; // 订单明细表
     public static final String TABLE_NAME_ADDRESS = "tb_address"; // 地址表
 
+    //用户表字段
     public static final String COLUMN_USER_ID = "userId"; // 用户id
     public static final String COLUMN_USER_NAME = "userName"; // 用户名
     public static final String COLUMN_USER_PHONE = "phone"; // 手机号
@@ -25,6 +27,7 @@ public class SQLiteConstant {
     public static final String COLUMN_PAY_PWD = "pay_pwd"; // 支付密码
     public static final String COLUMN_USER_IMG_PATH = "userImgPath"; // 头像路径
 
+    //商店表字段
     public static final String COLUMN_SHOP_ID = "shopId"; // 商店id
     public static final String COLUMN_SHOP_NAME = "shopName"; // 商店名称
     public static final String COLUMN_SHOP_PHONE = "shopPhone"; // 商家电话
@@ -34,6 +37,7 @@ public class SQLiteConstant {
     public static final String COLUMN_SHOP_SCORE = "shopScore"; // 商店评分
     public static final String COLUMN_SHOP_TOTAL_SELL = "shopTotalSell"; // 商店总销量
 
+    //食品标字段
     public static final String COLUMN_FOOD_ID = "foodId"; // 食品id
     public static final String COLUMN_FOOD_NAME = "foodName"; // 食品名称
     public static final String COLUMN_FOOD_IMG_PATH = "foodImgPath"; // 食品图像
@@ -42,6 +46,8 @@ public class SQLiteConstant {
     public static final String COLUMN_FOOD_SELL_COUNT = "foodSellCount"; // 食品销量
     public static final String COLUMN_FOOD_SCORE = "foodScore"; // 食品评分
 
+
+    //订单表字段
     public static final String COLUMN_ORDER_ID = "orderId"; // 订单id
     public static final String COLUMN_ORDER_NUMBER = "orderNumber"; // 订单号
     public static final String COLUMN_ORDER_STATUS = "orderStatus"; // 订单状态
@@ -52,8 +58,11 @@ public class SQLiteConstant {
     public static final String COLUMN_ORDER_TIME = "orderTime"; // 下单时间
     public static final String COLUMN_PAY_TIME = "payTime"; // 支付时间
 
+
+    //订单详情表字段
     public static final String COLUMN_ORDER_DETAIL_ID = "oderDetailId"; // 订单详情id
 
+    //地址表字段
     public static final String COLUMN_ADDRESS_ID = "addressId"; // 送餐地址id
     public static final String COLUMN_TO_NAME = "toName"; // 收货人姓名
     public static final String COLUMN_TO_SEX = "toSex"; // 收货人性别
