@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +16,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -26,7 +29,9 @@ import www.formssi.goodtaste.adapter.ShopMenuAdapter;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.widget.CustomScrollView;
+
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
 import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
 import static www.formssi.goodtaste.R.id.tv_backTitlebar_center_title;
@@ -58,6 +63,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private int Money=0;                     //购买的总钱数
     private int mHeight=0;                   //顶部背景图片的高度
     private Animation mCarAnimation=null;    //购物车的添加购物动画
+    private SharedPreferences mContextSharedPreferences;
 
 
     @Override
@@ -95,6 +101,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     @Override
     protected  void initData() {
+        mContextSharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
         mRefreshBean=new ArrayList<>();
         Intent intent=getIntent();
         mShopBean= (ShopBean) intent.getSerializableExtra("ShopBean");
@@ -164,11 +171,19 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         btnSubmitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
-                intent.putExtra("ShopBeans",mShopBean);
-                intent.putExtra("foodBeans",(Serializable) mFoodConfirm);
-                intent.putExtra("CountMoney",Money);
-                startActivity(intent);
+              boolean isLogin=  mContextSharedPreferences.getBoolean("login",false);
+                if (isLogin){
+                    Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
+                    intent.putExtra("ShopBeans",mShopBean);
+                    intent.putExtra("foodBeans",(Serializable) mFoodConfirm);
+                    intent.putExtra("CountMoney",Money);
+                    startActivity(intent);
+                }else{
+                    Intent intent=new Intent(GoodsDetailActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
+
+
             }
         });
 
