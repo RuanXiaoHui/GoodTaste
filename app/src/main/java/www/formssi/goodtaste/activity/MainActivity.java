@@ -28,7 +28,6 @@ public class MainActivity extends BaseActivity implements OrderFragment.MeOnClic
     private List<Tab> mTabs=new ArrayList<>();
     private LayoutInflater mInflate;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,6 +29,21 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
         tvTitle.setText(R.string.activity_paySuccess_title);
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化、绑定控件
      */

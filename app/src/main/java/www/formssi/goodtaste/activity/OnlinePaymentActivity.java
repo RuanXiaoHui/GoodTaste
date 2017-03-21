@@ -45,6 +45,21 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvPrice.setText("¥" + totalPay);
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化、绑定控件
      */

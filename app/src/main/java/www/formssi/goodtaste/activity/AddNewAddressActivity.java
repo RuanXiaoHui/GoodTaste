@@ -44,6 +44,21 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(R.string.activity_addNewAddress_title);
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化，绑定控件
      */

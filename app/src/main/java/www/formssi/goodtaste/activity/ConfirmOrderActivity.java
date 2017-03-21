@@ -89,6 +89,21 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
     protected void onDestroy() {
         DataBaseSQLiteUtil.closeDataBase();
         super.onDestroy();

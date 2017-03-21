@@ -35,6 +35,21 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
         tvTitle.setText(R.string.activity_remarkOrder_title);
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化，绑定控件
      */

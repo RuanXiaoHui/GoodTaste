@@ -53,6 +53,21 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         showOldData();
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化、绑定控件
      */

@@ -58,6 +58,21 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         operateListView();
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
     /**
      * 初始化，绑定控件
      */
@@ -159,7 +174,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AddressBean addressBean = addressBeanList.remove(position);
-                DataBaseSQLiteUtil.userDeleteAddressById(addressBean.getAddressId());
+//                DataBaseSQLiteUtil.userDeleteAddressById(addressBean.getAddressId());
                 addressAdapter.notifyDataSetChanged();
             }
         });
@@ -202,7 +217,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
             } else if ((requestCode == EDIT_ADREES_REQUEST && resultCode == EDIT_ADREES_RESULT)) {  //编辑地址
                 Bundle bundle = data.getBundleExtra("returnEditAddressBeanBunlde");
                 AddressBean addressBean = (AddressBean) bundle.getSerializable("returnEditAddressBean");
-                DataBaseSQLiteUtil.userEditAddress(addressBean);
+//                DataBaseSQLiteUtil.userEditAddress(addressBean);
                 addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(addressBean.getUserId()));
                 addressAdapter.notifyDataSetChanged();
             }
