@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.SPUtils;
 import www.formssi.goodtaste.utils.ToastUtil;
 
 public class UpdateTelephoneActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +29,7 @@ public class UpdateTelephoneActivity extends AppCompatActivity implements View.O
     private EditText etUpdateTelelphone; //新手机号码
     private Button btnUpdate; //确认绑定手机
     private String tel;
+    private UserBean userBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +60,17 @@ public class UpdateTelephoneActivity extends AppCompatActivity implements View.O
                 String oldTelephone = etTelelphone.getText().toString();
                 String newTelephone = etUpdateTelelphone.getText().toString();
                 if (TextUtils.equals(tel, oldTelephone)) {
+                    DataBaseSQLiteUtil.openDataBase();
+                    boolean b = DataBaseSQLiteUtil.updateUserPhone(tel, newTelephone);
+                    if (b) {
+                        SPUtils.updateTel(this,newTelephone);
+                    }
+                    DataBaseSQLiteUtil.closeDataBase();
                     Intent intent = new Intent(MineFragment.MY_ACTION);
                     intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_TELEPHONE);
                     intent.putExtra(MineFragment.MyReceiver.RESULT, newTelephone);
+                    sendBroadcast(intent);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     ToastUtil.showToast("旧手机不匹配");
