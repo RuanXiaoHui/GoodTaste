@@ -232,6 +232,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         orderBean.setOrderNum(OrderUtil.getOrderNumber(userBean.getPhoneNumber()));//订单号
         orderBean.setStatus(OrderState.NOT_PAY + "");//订单状态
         orderBean.setOrderTotalMoney(money + "");//订单总金额
+        orderBean.setOrderContent(OrderUtil.createOrderContent(foodBeanList));//订单内容
         orderBean.setDiscountMoney("0"); //优惠金额
         orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
         orderBean.setActualPayment((money + Integer.parseInt(shopBean.getShopMoney())) + "");//实付金额
