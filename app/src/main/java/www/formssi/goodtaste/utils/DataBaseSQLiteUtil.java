@@ -207,32 +207,29 @@ public class DataBaseSQLiteUtil {
                 COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         OrderBean o = new OrderBean();
         List<OrderBean> list = new ArrayList<>();
-        for (int i = 0; i < resultCounts; i++) { //
-            int shopId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID));
-            String storeId = String.valueOf(shopId);
-            o.setStoreId(storeId); // 商店id
-            o.setShopBean(getShopById(storeId));
-            o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
-            o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
-            o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
-            o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
-            o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
-            o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
-            o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
-            String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
-            o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
-            o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
-            o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
-            o.setOrderNum(orderNumber);
-            o.setFoodBeanList(getOrderDetailsBeansById(orderNumber));
-            list.add(o);
-            cursor.moveToNext();
+        if (null != cursor) {
+            while (cursor.moveToNext()) { //
+                int shopId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID));
+                String storeId = String.valueOf(shopId);
+                o.setStoreId(storeId); // 商店id
+                o.setShopBean(getShopById(storeId));
+                o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
+                o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
+                o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
+                o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
+                o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
+                o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
+                o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
+                String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
+                o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
+                o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
+                o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
+                o.setOrderNum(orderNumber);
+                o.setFoodBeanList(getOrderDetailsBeansById(orderNumber));
+                list.add(o);
+            }
         }
         cursor.close();
         return list;

@@ -1,5 +1,9 @@
 package www.formssi.goodtaste.utils;
 
+import java.util.List;
+
+import www.formssi.goodtaste.bean.FoodBean;
+
 import static www.formssi.goodtaste.utils.DateUtil.YYYYMMDDHHMMSS;
 import static www.formssi.goodtaste.utils.DateUtil.getCurrentDate;
 
@@ -17,12 +21,34 @@ public final class OrderUtil {
     /**
      * 订单号：当前时间+用户手机号后四位
      *
+     * @param phone
      * @return orderNumber
      */
     public static String getOrderNumber(String phone) {
         StringBuffer sb = new StringBuffer();
         sb.append(getCurrentDate(YYYYMMDDHHMMSS));
         sb.append(getPhoneAfter4(phone, 4));
+        return sb.toString();
+    }
+
+    /**
+     * 生成订单的内容：获取食品名称
+     *
+     * @param list 食品列表
+     * @return 订单内容
+     */
+    public static String createOrderContent(List<FoodBean> list) {
+        int totalCount = 0;
+        StringBuffer sb = new StringBuffer();
+        if (list.size() > 0) {
+            for (FoodBean f : list) {
+                totalCount += f.getGoodsBuynumber(); // 计算所有商品数量
+            }
+            sb.append(list.get(0).getGoodsName());
+            if (totalCount > 1) { // 当商品数量大于1的时候显示等多少件
+                sb.append("等" + totalCount + "件食品");
+            }
+        }
         return sb.toString();
     }
 
