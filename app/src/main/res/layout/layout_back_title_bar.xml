@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_back_titlebar_hight"
         android:id="@+id/rltToolbar"
-        android:background="@color/back_titlebar_background"
+        android:background="@color/back_title_bar_background"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_back_titlebar_paddingLeft"
         android:paddingRight="@dimen/activity_back_titlebar_paddingRight">
@@ -17,24 +17,24 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_titlebar_back" />
+            android:src="@mipmap/ic_title_bar_back" />
 
         <TextView
-            android:id="@+id/tv_backTitlebar_title"
+            android:id="@+id/tv_backTitleBar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/iv_backTitlebar_back"
             android:layout_marginLeft="@dimen/activity_back_titlebar_marginLeft"
             android:layout_centerVertical="true"
-            android:textColor="@color/back_titlebar_titleColor"
+            android:textColor="@color/back_title_bar_titleColor"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_backTitlebar_center_title"
+            android:id="@+id/tv_backTitleBar_center_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/back_titlebar_titleColor"
+            android:textColor="@color/back_title_bar_titleColor"
             android:textSize="@dimen/text_size_medium" />
 
     </RelativeLayout>

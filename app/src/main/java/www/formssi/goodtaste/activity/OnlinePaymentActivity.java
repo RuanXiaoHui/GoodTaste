@@ -44,7 +44,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tvStoreName = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_storeName);
         tvPrice = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_price);
         btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePaymentActivity_confirmPayment);
@@ -56,7 +56,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(R.string.activity_onlinePayment_title);
         intent = getIntent();
         //订单id
-        orderId = intent.getStringExtra("orderId");
+        orderId = intent.getStringExtra(INTENT_ORDER_ID);
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);

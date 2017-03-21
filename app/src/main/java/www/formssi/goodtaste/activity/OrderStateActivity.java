@@ -45,7 +45,7 @@ public class OrderStateActivity extends BaseActivity implements View.OnClickList
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.vpOrderState);
         ivBackTitleBarBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvBackTitleBarTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvBackTitleBarTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
     }
 
     @Override

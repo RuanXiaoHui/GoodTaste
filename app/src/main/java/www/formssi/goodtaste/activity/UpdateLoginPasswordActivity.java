@@ -33,7 +33,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
 
     @Override
     protected void initView() {
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etUpdateLoginPassword = (EditText) findViewById(R.id.et_update_login_password);

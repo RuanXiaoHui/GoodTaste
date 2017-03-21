@@ -39,7 +39,7 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etRemarkOrder = (EditText) findViewById(R.id.et_RemarkOrderActivity_remark);
         btnOk = (Button) findViewById(R.id.btn_RemarkOrderActivity_ok);
     }

@@ -37,7 +37,7 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         btnPaySuccess = (Button) findViewById(R.id.btn_paySuccess);
     }
 

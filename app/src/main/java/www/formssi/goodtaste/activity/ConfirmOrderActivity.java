@@ -31,6 +31,8 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_REQUEST;
@@ -82,7 +84,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tvToBePay = (TextView) findViewById(R.id.tv_ConfirmOrderActivity_toBePay);
         btnCommitOrder = (Button) findViewById(R.id.btn_ConfirmOrderActivity_commitOrder);
         lvFood = (ListView) findViewById(R.id.lv_ConfirmOrderActivity_food);
@@ -111,7 +113,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         if (!loginStatus) { //用户未登录
             Toast.makeText(this, "请先登录账号！", Toast.LENGTH_SHORT).show();
         } else {//用户已登录
-            String userId = sharedPreferences.getString("userId", "-1");
+            String userId = sharedPreferences.getString(INTENT_USER_ID, "-1");
             String telephone = sharedPreferences.getString("telephone", "");
             userBean.setUserId(userId);
             userBean.setPhoneNumber(telephone);
@@ -207,7 +209,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
                             DataBaseSQLiteUtil.closeDataBase();
                             intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
-                            intent.putExtra("orderId", orderId + "");
+                            intent.putExtra(INTENT_ORDER_ID, orderId + "");
                             intent.putExtra("storeName", shopBean.getShopName());
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
                             finish();

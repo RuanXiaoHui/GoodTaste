@@ -30,6 +30,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUE
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
 
 /**
@@ -63,7 +64,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         lvAddress = (ListView) findViewById(R.id.lv_ReceiveAddressActivity_address);
         llt_ReceiveAddressActivity_addAddress = (LinearLayout) findViewById(R.id.llt_ReceiveAddressActivity_addAddress);
     }
@@ -72,7 +73,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void initData() {
         //获取当前登录的用户id
         sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-        userId = sharedPreferences.getString("userId", "");
+        userId = sharedPreferences.getString(INTENT_USER_ID, "");
         //设置标题
         tvTitle.setText(R.string.activity_receiveAddress_title);
         //ListView操作

@@ -45,7 +45,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initView() {
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etTelephone = (EditText) findViewById(R.id.et_login_telephone);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etPayLoginPassword = (EditText) findViewById(R.id.et_login_pay_password);

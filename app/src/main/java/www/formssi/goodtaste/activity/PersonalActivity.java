@@ -60,7 +60,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initView() {
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tvUserName = (TextView) findViewById(R.id.tv_personal_username);
         tvTelephone = (TextView) findViewById(R.id.tv_personal_phone);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);

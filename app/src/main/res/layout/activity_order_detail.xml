@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_horizontal_bold_height"
-        android:background="@color/gray" />
+        android:background="@color/line_horizontal" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_large_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <TextView
                 android:id="@id/tv_order_shop_name"
@@ -84,7 +84,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_bold_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <www.formssi.goodtaste.widget.NoScrollListView
                 android:id="@id/lv_order_food_list"
@@ -95,7 +95,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_bold_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_bold_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -145,7 +145,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_bold_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,14 +186,14 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_large_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <include layout="@layout/layout_order_info" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_horizontal_large_height"
-                android:background="@color/gray" />
+                android:background="@color/line_horizontal" />
 
             <include layout="@layout/layout_distribution_info" />
 

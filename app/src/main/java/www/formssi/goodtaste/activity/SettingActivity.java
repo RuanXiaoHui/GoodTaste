@@ -36,7 +36,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initView() {
 
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         llService = (LinearLayout) findViewById(R.id.ll_setting_servicetel);
         llSuggestion = (LinearLayout) findViewById(R.id.ll_setting_suggestion);

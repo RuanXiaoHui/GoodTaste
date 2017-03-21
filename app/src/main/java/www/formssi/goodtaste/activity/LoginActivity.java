@@ -21,6 +21,8 @@ import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
+
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     Context mContext;
@@ -44,7 +46,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etTelephone = (EditText) findViewById(R.id.et_login_telephone);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
@@ -103,7 +105,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (userBean != null) {
             //登录设置
             SharedPreferences.Editor editor = mContextSharedPreferences.edit();
-            editor.putString("userId", userBean.getUserId());
+            editor.putString(INTENT_USER_ID, userBean.getUserId());
             editor.putString("telephone", telephone1);
             editor.putString("password", pass);
             editor.putBoolean("login", true);
