@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,12 +15,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -41,7 +41,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private ImageView iv_backTitlebar_back;
     private RelativeLayout rlToobar;
     private TextView tv_backTitlebar_title;
-
+    private ImageView ivCar;                   //购物车的img
     private ImageView ivShopimg;               //商店图片
     private TextView ivShopTime;              //配送时间
     private TextView ivShopDesc;              //店铺描述
@@ -54,6 +54,8 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private List<FoodBean> mFoodbConfirm;
     private int Money=0;
     private int mHeight=0;
+
+    private Animation mCarAnimaton;
 
 
     @Override
@@ -82,11 +84,12 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         ivShopBusinessHours= (TextView) findViewById(R.id.ivShopBusinessHours);
         tvGoodsMoney= (TextView) findViewById(R.id.tvGoodsMoney);
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
+        ivCar= (ImageView) findViewById(R.id.ivCar);
         btnSubmintOrder= (Button) findViewById(R.id.btnSubmintOrder);
         mFoodbConfirm=new ArrayList<>();
-        // lvRightFoods.setFocusable(false);
         scLayoutView.smoothScrollTo(0, 0);
         btnSubmintOrder.setEnabled(false);
+        ivCar.setEnabled(false);
     }
 
     private void initData() {
@@ -100,11 +103,10 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
                 mRefreshBean.add(mFoodBean.get(i));
                 System.out.println(mFoodBean.get(i).getGoodsName());
             }
-
         }
-
-
+        mCarAnimaton= AnimationUtils.loadAnimation(this,R.anim.scale_goodsdetail_car);
     }
+
     private void initListener() {
         ivShopTime.setText("平均配送时间:"+mShopBean.getShopBusinessHours());
         ivShopDesc.setText("店家描述："+mShopBean.getShopDesc());
@@ -134,12 +136,20 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             @Override
             public void onClickMoney(int vue, Map<String, FoodBean> beans) {
                 tvGoodsMoney.setText("￥"+vue+"元");
+
+                //判断一下，如果金额比之前的大，也就是点击了添加按钮，那么就会启动动画
+                if (vue>Money){
+                    ivCar.startAnimation(mCarAnimaton);
+                }
+
                 Money=vue;
                 if (vue==0){
                     btnSubmintOrder.setEnabled(false);
+                    ivCar.setEnabled(false);
                     btnSubmintOrder.setTextColor(getResources().getColor(R.color.gray));
                 }else{
                     btnSubmintOrder.setEnabled(true);
+                    ivCar.setEnabled(true);
                     btnSubmintOrder.setTextColor(getResources().getColor(R.color.white));
                 }
                 mFoodbConfirm.clear();
