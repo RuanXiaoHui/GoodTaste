@@ -55,6 +55,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_FOOD_COLUMNS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ADDRESS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_FEEDBACK;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_FOOD;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ORDER;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ORDER_DETAIL;
@@ -438,6 +439,18 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
+     * 反馈
+     *
+     */
+    public static void feedback(String uid, String contents) {
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put("contents", contents);
+        mDatabase.insert(TABLE_NAME_FEEDBACK, null, values);
+        closeDataBase();
+    }
+
+    /**
      * 用户添加地址
      *
      * @param bean
@@ -631,6 +644,8 @@ public class DataBaseSQLiteUtil {
             db.execSQL(sql5); // 创建订单详情表
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
             db.execSQL(sql6); // 创建地址表
+            String sql7 = createTable(TABLE_NAME_FEEDBACK, TABLE_ADDRESS_COLUMNS);
+            db.execSQL("create table if not exits " + TABLE_NAME_FEEDBACK + "(_id integer primary key autoincrement,contents varchar(50),uid integer)"); // 创建地址表
         }
 
         @Override

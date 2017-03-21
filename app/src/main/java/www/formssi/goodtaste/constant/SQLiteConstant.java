@@ -17,6 +17,7 @@ public class SQLiteConstant {
     public static final String TABLE_NAME_ORDER = "tb_order"; // 订单表
     public static final String TABLE_NAME_ORDER_DETAIL = "tb_order_detail"; // 订单明细表
     public static final String TABLE_NAME_ADDRESS = "tb_address"; // 地址表
+    public static final String TABLE_NAME_FEEDBACK = "tb_feedback"; // 反馈表
 
     //用户表字段
     public static final String COLUMN_USER_ID = "userId"; // 用户id
