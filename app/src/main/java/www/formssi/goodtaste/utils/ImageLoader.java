@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -11,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 public class ImageLoader {
     public static void display(Context context, String url, ImageView imageView) {
-        Picasso.with(context).load(url).into(imageView);
+        if (!TextUtils.isEmpty(url)) {
+            Picasso.with(context).load(url).into(imageView);
+        }
     }
 }
