@@ -30,7 +30,7 @@
 
             <TextView
                 style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_notpay"
+                android:text="@string/order_state_not_pay"
 
                 />
 
@@ -46,7 +46,7 @@
 
             <TextView
                 style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_notdelivery" />
+                android:text="@string/order_state_not_delivery" />
 
         </LinearLayout>
 
@@ -61,7 +61,7 @@
 
             <TextView
                 style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_deliverying" />
+                android:text="@string/order_state_delivery_ing" />
 
         </LinearLayout>
 
@@ -76,7 +76,7 @@
 
             <TextView
                 style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_notcomment" />
+                android:text="@string/order_state_not_comment" />
 
         </LinearLayout>
 

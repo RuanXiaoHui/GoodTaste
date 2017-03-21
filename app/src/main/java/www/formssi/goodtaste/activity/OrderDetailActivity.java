@@ -204,13 +204,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             tvOrderAddress.setText(bean.toAddressString());
             switch (Integer.parseInt(orderBean.getStatus())) {
                 case OrderState.NOT_PAY: // 未支付
-                    tvOrderStatus.setText(getString(R.string.order_state_notpay));
+                    tvOrderStatus.setText(getString(R.string.order_state_not_pay));
                     btnOK.setText(getString(R.string.activity_order_goto_pay));
-                    tvOrderPayTime.setText(getString(R.string.order_state_notpay));
+                    tvOrderPayTime.setText(getString(R.string.order_state_not_pay));
                     break;
                 case OrderState.NOT_DELIVERY: // 未配送
-                    tvOrderStatus.setText(getString(R.string.order_state_btn_notdelivery));
-                    btnOK.setText(getString(R.string.order_state_btn_notdelivery));
+                    tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery));
+                    btnOK.setText(getString(R.string.order_state_btn_not_delivery));
                     break;
             }
         }

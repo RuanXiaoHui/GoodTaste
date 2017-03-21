@@ -21,10 +21,10 @@ public class OrderPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
     private Context context = ContextUtil.getInstance();
     //tablayout控件显示的文字
-    private String[] mTitles = new String[]{context.getString(R.string.order_state_notpay),
-            context.getString(R.string.order_state_notdelivery),
-            context.getString(R.string.order_state_deliverying),
-            context.getString(R.string.order_state_notcomment),
+    private String[] mTitles = new String[]{context.getString(R.string.order_state_not_pay),
+            context.getString(R.string.order_state_not_delivery),
+            context.getString(R.string.order_state_delivery_ing),
+            context.getString(R.string.order_state_not_comment),
             context.getString(R.string.order_state_finish)};
 
     public OrderPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
