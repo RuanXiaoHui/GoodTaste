@@ -16,12 +16,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -31,11 +29,6 @@ import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.widget.CustomScrollView;
-
-import static www.formssi.goodtaste.R.id.btnSubmintOrder;
-import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
-import static www.formssi.goodtaste.R.id.tv_backTitlebar_center_title;
-import static www.formssi.goodtaste.R.id.tv_backTitlebar_title;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
@@ -91,7 +84,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         tvGoodsMoney= (TextView) findViewById(R.id.tvGoodsMoney);
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
         ivCar= (ImageView) findViewById(R.id.ivCar);
-        btnSubmitOrder= (Button) findViewById(btnSubmintOrder);
+        btnSubmitOrder= (Button) findViewById(R.id.btnSubmintOrder);
         mFoodConfirm=new ArrayList<>();
         scLayoutView.smoothScrollTo(0, 0);
         btnSubmitOrder.setEnabled(false);
