@@ -18,7 +18,7 @@ public class SettingSuggestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_suggestion);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tvTitle.setText("意见反馈");
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivReturn.setOnClickListener(new View.OnClickListener() {

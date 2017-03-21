@@ -120,6 +120,14 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
+    <!-- activity大图标 -->
+    <style name="icon_large">
+        <item name="android:layout_width">@dimen/icon_large_width</item>
+        <item name="android:layout_height">@dimen/icon_large_high</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
     <!-- 圆形Checkbox 收货地址 -->
     <style name="checkbox_circle">
         <item name="android:layout_width">@dimen/icon_normal_width</item>

@@ -39,9 +39,9 @@
     <color name="fragment_mine_preferential">#f00</color>
     <color name="fragment_mine_integral">#194d19</color>
 
-    <!-- Back_titlebar -->
-    <color name="back_titlebar_background">#0095fe</color>
-    <color name="back_titlebar_titleColor">#ffffff</color>
+    <!-- Back_title_bar -->
+    <color name="back_title_bar_background">#0095fe</color>
+    <color name="back_title_bar_titleColor">#ffffff</color>
 
     <!-- 分割线 -->
     <color name="line_horizontal">#efefef</color>

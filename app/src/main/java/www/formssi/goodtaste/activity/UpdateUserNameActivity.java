@@ -35,7 +35,7 @@ public class UpdateUserNameActivity extends BaseActivity implements View.OnClick
     @Override
     protected void initView() {
         etUpdateUsername = (EditText) findViewById(R.id.et_update_username);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         btnUpdate = (Button) findViewById(R.id.btn_update);
         tvTitle.setText("修改用户名");

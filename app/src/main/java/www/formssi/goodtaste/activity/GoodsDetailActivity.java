@@ -80,8 +80,8 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         scLayoutView= (CustomScrollView) findViewById(R.id.scLayoutView);
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
-        tv_backTitleBar_title= (TextView) findViewById(tv_backTitlebar_title);
-        tv_backTitleBar_center_title= (TextView) findViewById(tv_backTitlebar_center_title);
+        tv_backTitleBar_title= (TextView) findViewById(R.id.tv_backTitleBar_title);
+        tv_backTitleBar_center_title= (TextView) findViewById(R.id.tv_backTitleBar_center_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
         iv_backTitleBar_back= (ImageView) findViewById(iv_backTitlebar_back);

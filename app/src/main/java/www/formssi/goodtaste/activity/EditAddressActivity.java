@@ -52,7 +52,7 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etName = (EditText) findViewById(R.id.et_EditAddressActivity_name);
         etPhone = (EditText) findViewById(R.id.et_EditAddressActivity_phone);
         etAddress = (EditText) findViewById(R.id.et_EditAddressActivity_address);
@@ -120,10 +120,10 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
      */
     private void showOldData(String gender) {
         etName.setText(addressBean.getName());
-        if (gender.equals(R.string.activity_address_gentleman)) {
+        if (gender.equals(getString(R.string.activity_address_gentleman))) {
             rbGentleman.setChecked(true);
             rbLady.setChecked(false);
-        } else if (gender.equals(R.string.activity_address_lady)) {
+        } else if (gender.equals(getString(R.string.activity_address_lady))) {
             rbGentleman.setChecked(false);
             rbLady.setChecked(true);
         }

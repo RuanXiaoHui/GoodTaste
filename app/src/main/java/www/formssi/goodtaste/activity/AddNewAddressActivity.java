@@ -23,6 +23,7 @@ import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 
 /**
  * 新增收货地址页面
@@ -52,7 +53,7 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etName = (EditText) findViewById(R.id.et_AddNewAddressActivity_name);
         etPhone = (EditText) findViewById(R.id.et_AddNewAddressActivity_phone);
         etAddress = (EditText) findViewById(R.id.et_AddNewAddressActivity_address);
@@ -92,9 +93,16 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 String address = etAddress.getText().toString();
                 //获取当前登录用户id
                 SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-                String userId = sharedPreferences.getString("userId", "");
+                String userId = sharedPreferences.getString(INTENT_USER_ID, "");
                 AddressBean addressBean = new AddressBean(userId, name, gender, phone, address);
-                DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                long addressId = DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                //用户对象
+                UserBean userBean = new UserBean();
+                userBean.setUserId(userId);
+                userBean.setAddressId(addressId + "");
+                //设置默认地址
+                DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
+
                 setResult(ADD_NEW_ADREES_RESULT, intent);
                 finish();
                 break;
