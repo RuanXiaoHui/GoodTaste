@@ -53,6 +53,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView tvOrderPayTime; // 支付时间
     private TextView tvOrderAddress; // 送餐地址
     private NoScrollListView lvFoodList; // 食品listView
+    private Button btnBack; // 返回按钮
     private Button btnOK; // 确认按钮：根据状态显示不同文字：去支付、评价、再来一单
     private Button btnCancel; // 取消按钮：取消订单
     private Button btnContactBusiness; // 联系商家按钮：拨打商家电话
@@ -87,7 +88,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initEvents() {
-        DataBaseSQLiteUtil.openDataBase();
+        btnBack.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnContactBusiness.setOnClickListener(this);
@@ -107,6 +108,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         tvOrderTime = (TextView) findViewById(R.id.tv_order_time);
         tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
         tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
+        btnBack = (Button) findViewById(R.id.btn_back);
         btnOK = (Button) findViewById(R.id.btn_order_ok);
         btnCancel = (Button) findViewById(R.id.btn_order_cancel);
         btnContactBusiness = (Button) findViewById(R.id.btn_order_contact_business);
@@ -116,6 +118,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_back: // 返回按钮
+                finish();
+                break;
             case R.id.btn_order_ok: // 根据状态改变按钮处理的业务
                 break;
             case R.id.btn_order_cancel: // 根据状态改变按钮处理的业务
