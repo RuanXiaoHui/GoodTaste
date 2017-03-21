@@ -35,6 +35,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     private LinearLayout lltNotComment;//未评论的父布局
     private LinearLayout lltFinish;//已完成的父布局
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +60,12 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         lltDeliveryIng = (LinearLayout) v.findViewById(R.id.lltDeliveryIng);
         lltNotComment = (LinearLayout) v.findViewById(R.id.lltNotComment);
         lltFinish = (LinearLayout) v.findViewById(R.id.lltFinish);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     /**
