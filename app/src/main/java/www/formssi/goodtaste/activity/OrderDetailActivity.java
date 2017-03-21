@@ -104,9 +104,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         if (null != intent) {
             String orderId = intent.getStringExtra(ConstantConfig.INTENT_ORDER_ID);
             if (null != orderId && !"".equals(orderId)) {
-                DataBaseSQLiteUtil.openDataBase();
                 orderBean = DataBaseSQLiteUtil.getOrderBeansById(orderId).get(0); // 根据id查询订单详情数据
-                DataBaseSQLiteUtil.closeDataBase();
                 setOrderDetail(orderBean); // 展示订单详情信息
             }
             if (null != orderBean) {
@@ -176,7 +174,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      * @param tip
      */
     public void showToast(String tip) {
-        if (toast == null) {
+        if (toast == null) { // 如果为空
             toast = Toast.makeText(this, tip, Toast.LENGTH_SHORT);
         } else {
             toast.setText(tip);
@@ -200,9 +198,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             tvOrderTime.setText(orderBean.getOrderTime());
             tvOrderPayTime.setText(orderBean.getPayTime());
             int addressId = orderBean.getAddressId();
-            DataBaseSQLiteUtil.openDataBase();
             AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId));
-            DataBaseSQLiteUtil.closeDataBase();
             tvOrderAddress.setText(bean.toAddressString());
             switch (Integer.parseInt(orderBean.getStatus())) {
                 case OrderState.NOT_PAY: // 未支付
