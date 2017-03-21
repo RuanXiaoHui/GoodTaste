@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
@@ -34,7 +32,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     @Override
     protected void initView() {
         setContentView(R.layout.activity_update_pay_password);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etPayPwd = (EditText) findViewById(R.id.et_pay_password);
         etUpdatePwd = (EditText) findViewById(R.id.et_update_pay_password);
         tvTitle.setText("修改支付密码");

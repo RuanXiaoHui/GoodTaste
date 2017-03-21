@@ -33,9 +33,6 @@ import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
-import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
-import static www.formssi.goodtaste.R.id.tv_backTitlebar_center_title;
-import static www.formssi.goodtaste.R.id.tv_backTitlebar_title;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
@@ -81,10 +78,10 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitleBar_title= (TextView) findViewById(R.id.tv_backTitleBar_title);
-        tv_backTitleBar_center_title= (TextView) findViewById(R.id.tv_backTitleBar_center_title);
+        tv_backTitleBar_center_title= (TextView) findViewById(R.id.tv_backTitlebar_center_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
-        iv_backTitleBar_back= (ImageView) findViewById(iv_backTitlebar_back);
+        iv_backTitleBar_back= (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivShopTime= (TextView) findViewById(R.id.ivShopTime);
         ivShopDesc= (TextView) findViewById(R.id.ivShopDesc);
         ivShopBusinessHours= (TextView) findViewById(R.id.ivShopBusinessHours);
