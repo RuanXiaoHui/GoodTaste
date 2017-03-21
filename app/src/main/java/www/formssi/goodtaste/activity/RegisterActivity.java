@@ -16,12 +16,13 @@ import android.widget.Toast;
 import java.util.UUID;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     Context mContext;
     private ImageView ivReturn; //返回
@@ -36,68 +37,73 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mContext = this;
+        initView();
+        initData();
+        initListener();
+    }
+
+    @Override
+    protected void initView() {
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvTitle.setText("登录");
         etTelephone = (EditText) findViewById(R.id.et_login_telephone);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etPayLoginPassword = (EditText) findViewById(R.id.et_login_pay_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        tvTitle.setText("登录");
+    }
+
+    @Override
+    protected void initData() {
+        mContext = this;
         mContextSharedPreferences = mContext.getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
         String telephone = mContextSharedPreferences.getString("telephone", "");
         final String password = mContextSharedPreferences.getString("password", "");
         etTelephone.setText(telephone);
         etLoginPassword.setText(password);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String telephone1 = etTelephone.getText().toString();
-                String pass = etLoginPassword.getText().toString();
-                String pPwd = etPayLoginPassword.getText().toString();
-                if (telephone1.length() != 11) {
-                    Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(pass)) {
-                    Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
-                    return;
-                }
+    }
 
-                String id = Integer.toHexString(UUID.randomUUID().hashCode());
-                String name = "_" + telephone1.substring(telephone1.length() - 4);
-                String headUrl = "";
-                UserBean user = new UserBean(id, name, headUrl, telephone1, pass, pPwd);
-                DataBaseSQLiteUtil.openDataBase();
-                DataBaseSQLiteUtil.userRegister(user);
-                DataBaseSQLiteUtil.closeDataBase();
-
-                //登录设置
-//                SharedPreferences.Editor editor = mContextSharedPreferences.edit();
-//                editor.putString("telephone", telephone1);
-//                editor.putString("password", pass);
-//                editor.putBoolean("login", true);
-//                editor.commit();
-//                //将登录的手机号码显示在MineFragment
-//                Intent intent = new Intent(MineFragment.MY_ACTION);
-//                intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_TELEPHONE);
-//                intent.putExtra(MineFragment.MyReceiver.RESULT, telephone1);
-//                intent.putExtra("login", true);
-//                sendBroadcast(intent);
-//                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
-        ivReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+    @Override
+    protected void initListener() {
+        ivReturn.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
     public static void start(Context context) {
         Intent starter = new Intent(context, RegisterActivity.class);
         context.startActivity(starter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_backTitlebar_back:
+                finish();
+                break;
+            case R.id.btn_login:
+                register();
+                break;
+        }
+    }
+
+    private void register() {
+        String telephone1 = etTelephone.getText().toString();
+        String pass = etLoginPassword.getText().toString();
+        String pPwd = etPayLoginPassword.getText().toString();
+        if (telephone1.length() != 11) {
+            Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String id = Integer.toHexString(UUID.randomUUID().hashCode());
+        String name = "_" + telephone1.substring(telephone1.length() - 4);
+        String headUrl = "";
+        UserBean user = new UserBean(id, name, headUrl, telephone1, pass, pPwd);
+        DataBaseSQLiteUtil.userRegister(user);
+        finish();
     }
 }

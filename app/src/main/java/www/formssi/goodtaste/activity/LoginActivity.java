@@ -14,13 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     Context mContext;
     private ImageView ivReturn; //返回
@@ -29,74 +30,94 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etTelephone; //
     private EditText etLoginPassword; //登录密码
     private SharedPreferences mContextSharedPreferences;
-    private TextView tvRegist;
+    private TextView mTvRegister;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mContext = this;
+        initView();
+        initData();
+        initListener();
+    }
+
+    @Override
+    protected void initView() {
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvTitle.setText("登录");
         etTelephone = (EditText) findViewById(R.id.et_login_telephone);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        tvRegist = (TextView) findViewById(R.id.tv_regist);
-        tvRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RegisterActivity.start(mContext);
-            }
-        });
+        mTvRegister = (TextView) findViewById(R.id.tv_regist);
+        tvTitle.setText("登录");
+    }
+
+    @Override
+    protected void initData() {
+        mContext = this;
         mContextSharedPreferences = mContext.getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
         final String telephone = mContextSharedPreferences.getString("telephone", "");
         final String password = mContextSharedPreferences.getString("password", "");
         etTelephone.setText(telephone);
         etLoginPassword.setText(password);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String telephone1 = etTelephone.getText().toString();
-                String pass = etLoginPassword.getText().toString();
-                if (telephone1.length() != 11) {
-                    Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(pass)) {
-                    Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
-                    return;
-                }
+    }
 
-                DataBaseSQLiteUtil.openDataBase();
-                UserBean userBean = DataBaseSQLiteUtil.userLogin(telephone1, pass);
-                DataBaseSQLiteUtil.closeDataBase();
-                if (userBean != null) {
-                    //登录设置
-                    SharedPreferences.Editor editor = mContextSharedPreferences.edit();
-                    editor.putString("userId", userBean.getUserId());
-                    editor.putString("telephone", telephone1);
-                    editor.putString("password", pass);
-                    editor.putBoolean("login", true);
-                    editor.commit();
-                    //将登录的手机号码显示在MineFragment
-                    Intent intent = new Intent(MineFragment.MY_ACTION);
-                    intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_TELEPHONE);
-                    intent.putExtra(MineFragment.MyReceiver.RESULT, telephone1);
-                    intent.putExtra("login", true);
-                    sendBroadcast(intent);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                } else {
-                    ToastUtil.showToast("用户名或密码错误");
-                }
-            }
-        });
-        ivReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    protected void initListener() {
+        mTvRegister.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        ivReturn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_regist:
+                RegisterActivity.start(mContext);
+                break;
+            case R.id.iv_backTitlebar_back:
                 finish();
-            }
-        });
+                break;
+            case R.id.btn_login:
+                login();
+                break;
+        }
+    }
+
+    /**
+     * 登录
+     */
+    private void login() {
+        String telephone1 = etTelephone.getText().toString();
+        String pass = etLoginPassword.getText().toString();
+        if (telephone1.length() != 11) {
+            Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        UserBean userBean = DataBaseSQLiteUtil.userLogin(telephone1, pass);
+        if (userBean != null) {
+            //登录设置
+            SharedPreferences.Editor editor = mContextSharedPreferences.edit();
+            editor.putString("userId", userBean.getUserId());
+            editor.putString("telephone", telephone1);
+            editor.putString("password", pass);
+            editor.putBoolean("login", true);
+            editor.commit();
+            //将登录的手机号码显示在MineFragment
+            Intent intent = new Intent(MineFragment.MY_ACTION);
+            intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_LOGIN);
+            intent.putExtra(MineFragment.MyReceiver.RESULT, telephone1);
+            intent.putExtra("login", true);
+            sendBroadcast(intent);
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            ToastUtil.showToast("用户名或密码错误");
+        }
     }
 }

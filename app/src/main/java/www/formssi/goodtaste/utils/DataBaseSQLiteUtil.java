@@ -288,6 +288,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static long userRegister(UserBean bean) {
+        openDataBase();
         ContentValues values = new ContentValues(); //
         values.put(COLUMN_USER_NAME, bean.getUserName()); // 姓名
         values.put(COLUMN_LOGIN_PWD, bean.getLoginPassword()); // 登录密码
@@ -295,7 +296,9 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_USER_PHONE, bean.getPhoneNumber()); // 电话
         values.put(COLUMN_USER_IMG_PATH, bean.getHeadProtrait()); // 头像
         values.put(COLUMN_USER_SEX, ""); //
-        return mDatabase.insert(TABLE_NAME_USER, null, values); //
+        long id = mDatabase.insert(TABLE_NAME_USER, null, values);
+        closeDataBase();
+        return id;
     }
 
     /**
@@ -306,6 +309,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static UserBean userLogin(String tel, String pwd) {
+        openDataBase();
         String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ? and "
                 + COLUMN_LOGIN_PWD + " = ? ", new String[]{tel, pwd}, null, null, null);
@@ -318,6 +322,7 @@ public class DataBaseSQLiteUtil {
             cursor.moveToNext();
         }
         cursor.close();
+        closeDataBase();
         return bean;
     }
 
@@ -328,10 +333,9 @@ public class DataBaseSQLiteUtil {
      * @return null or user
      */
     public static UserBean queryUserByTel(String tel) {
+        openDataBase();
         String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
-
-//        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, null, null, null, null, null);
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) {
             return null;
@@ -344,6 +348,8 @@ public class DataBaseSQLiteUtil {
             bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
             cursor.moveToNext();
         }
+        cursor.close();
+        closeDataBase();
         return bean;
     }
 
@@ -355,10 +361,11 @@ public class DataBaseSQLiteUtil {
      * @return true if success
      */
     public static boolean updateUserName(String tel, String name) {
-//        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
+        openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, name);
         int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        closeDataBase();
         return update > 0 ? true : false;
     }
 
@@ -370,9 +377,27 @@ public class DataBaseSQLiteUtil {
      * @return true if success
      */
     public static boolean updateUserPhone(String tel, String newtel) {
+        openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_PHONE, newtel);
         int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        closeDataBase();
+        return update > 0 ? true : false;
+    }
+
+    /**
+     * 根据手机号修改头像
+     *
+     * @param tel
+     * @param newUrl
+     * @return true if success
+     */
+    public static boolean updateHeadPicUrl(String tel, String newUrl) {
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_IMG_PATH, newUrl);
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        closeDataBase();
         return update > 0 ? true : false;
     }
 

@@ -7,8 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.base.BaseActivity;
 
-public class UpdateLoginPasswordActivity extends AppCompatActivity {
+public class UpdateLoginPasswordActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tvTitle; //标题
     private ImageView ivReturn; //返回
@@ -17,14 +18,34 @@ public class UpdateLoginPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_login_password);
+        initView();
+        initData();
+        initListener();
+    }
+
+    @Override
+    protected void initView() {
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvTitle.setText("修改登录密码");
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        ivReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        tvTitle.setText("修改登录密码");
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+        ivReturn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_backTitlebar_back:
                 finish();
-            }
-        });
+                break;
+        }
     }
 }

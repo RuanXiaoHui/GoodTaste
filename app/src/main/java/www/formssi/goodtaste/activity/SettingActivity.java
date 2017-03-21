@@ -12,10 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tvTitle; //标题
     private ImageView ivReturn; //返回
@@ -29,11 +30,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initView();
-        tvTitle.setText(R.string.fragment_personal_setting);
-
+        initListener();
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
 
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
@@ -41,13 +42,21 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         llSuggestion = (LinearLayout) findViewById(R.id.ll_setting_suggestion);
         llCheck = (LinearLayout) findViewById(R.id.ll_setting_check);
         btnExit = (Button) findViewById(R.id.btn_exit);
+        tvTitle.setText(R.string.fragment_personal_setting);
+    }
 
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
         ivReturn.setOnClickListener(this);
         llService.setOnClickListener(this);
         llSuggestion.setOnClickListener(this);
         llCheck.setOnClickListener(this);
         btnExit.setOnClickListener(this);
-
     }
 
     @Override
@@ -71,7 +80,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_exit:
                 SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("login",false);
+                editor.putBoolean("login", false);
                 editor.commit();
                 Intent intent = new Intent(MineFragment.MY_ACTION)
                         .putExtra("login", false)

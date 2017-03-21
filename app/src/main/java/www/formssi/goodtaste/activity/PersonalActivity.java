@@ -21,6 +21,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.fragment.MineFragment;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DialogUtils;
 import www.formssi.goodtaste.utils.ImageLoader;
 import www.formssi.goodtaste.utils.StringUtils;
@@ -132,9 +133,12 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_ALBUM);
                 intent.putExtra(MineFragment.MyReceiver.RESULT, uri);
                 sendBroadcast(intent);
+                DataBaseSQLiteUtil.updateHeadPicUrl(user.getPhoneNumber(), uri.toString());
             }
             if (requestCode == REQ_CAMERA) { //相机
                 ivHeadPicture.setImageBitmap(BitmapFactory.decodeFile(mPhotoFile.getAbsolutePath()));
+                Uri uri = Uri.fromFile(mPhotoFile);
+                DataBaseSQLiteUtil.updateHeadPicUrl(user.getPhoneNumber(), uri.toString());
                 Intent intent = new Intent(MineFragment.MY_ACTION);
                 intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_CAMERA);
                 intent.putExtra(MineFragment.MyReceiver.RESULT, mPhotoFile);

@@ -131,9 +131,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
      */
     private void getUser() {
         telephone = SPUtils.getTel(getContext());
-        DataBaseSQLiteUtil.openDataBase();
         userBean = DataBaseSQLiteUtil.queryUserByTel(telephone);
-        DataBaseSQLiteUtil.closeDataBase();
     }
 
     @Override
