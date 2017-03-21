@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
@@ -81,7 +82,6 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-
     /**
      * 查找订单的方法
      *
@@ -91,19 +91,16 @@ public class DataBaseSQLiteUtil {
     public static List<OrderBean> queryOrder(int status) {
         openDataBase();
         String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_ORDER_NUMBER, COLUMN_ORDER_STATUS,
-                SQLiteConstant.COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
+                COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
+        String desc =  COLUMN_ORDER_ID+" desc";//根据id降序
         Cursor cursor;
         List<OrderBean> orderBeanList = new ArrayList<>();
         if (status == OrderState.ALL) {
-            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, null);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, desc);
         } else {
-            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, null);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, desc);
         }
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return orderBeanList;
-        }
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()){
             OrderBean orderBean = new OrderBean();
             orderBean.setOrderId(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_ID)));//id
             orderBean.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME)));//商店名称
@@ -112,10 +109,9 @@ public class DataBaseSQLiteUtil {
             orderBean.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS)));//订单状态
             orderBean.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY)));//实付价格
             orderBean.setOrderNum(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)));//订单号
-            orderBean.setOrderContent(cursor.getString(cursor.getColumnIndex(SQLiteConstant.COLUMN_ORDER_CONTENT)));//订单内容
+            orderBean.setOrderContent(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_CONTENT)));//订单内容
             orderBean.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME)));//下单时间
             orderBeanList.add(orderBean);
-            cursor.moveToNext();
         }
         cursor.close();
         closeDataBase();

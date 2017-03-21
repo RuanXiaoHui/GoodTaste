@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.OnlinePaymentActivity;
 import www.formssi.goodtaste.activity.OrderDetailActivity;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
@@ -25,6 +26,8 @@ import www.formssi.goodtaste.utils.ContextUtil;
 import static android.content.ContentValues.TAG;
 
 /**
+ *
+ *  订单列表的adapter
  * Created by GTs on 2017-03-16.
  */
 
@@ -75,6 +78,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        context.startActivity(new Intent(context, OnlinePaymentActivity.class));//点击去支付去往支付页面
                     }
                 });
                 break;
