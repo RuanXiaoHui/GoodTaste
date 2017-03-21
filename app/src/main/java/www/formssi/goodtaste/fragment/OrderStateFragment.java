@@ -20,12 +20,8 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
  * 订单分类的fragment
  */
 public class OrderStateFragment extends Fragment {
-
-
     private RecyclerView rlvOrderState;//分类订单显示的列表
-    private OrderAdapter orderAdapter;//分类订单的adapter
     private LinearLayout lltNoOrder;//没有订单时的父布局
-    private List<OrderBean> orders;//数据源
     private int state = 0;//进入视图时显示的fragment
 
     /**
@@ -50,19 +46,13 @@ public class OrderStateFragment extends Fragment {
         lltNoOrder = (LinearLayout) v.findViewById(R.id.lltNoOrder);
     }
 
-
-//    private void initView(){
-//
-//    }
-
     private void initData(){
-        orders = DataBaseSQLiteUtil.queryOrder(state);
+        List<OrderBean> orders = DataBaseSQLiteUtil.queryOrder(state);
         if (orders.size() == 0) {
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
-
         } else {
-            orderAdapter = new OrderAdapter(orders, getContext());
+            OrderAdapter orderAdapter = new OrderAdapter(orders, getContext());
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
