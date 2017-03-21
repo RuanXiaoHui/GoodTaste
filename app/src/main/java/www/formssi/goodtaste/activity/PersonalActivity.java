@@ -32,6 +32,8 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     private static final int REQ_ALBUM = 200; //相册请求码
     private static final int REQ_USERNAME = 300; //修改用户名
     private static final int REQ_TEL = 400; //修改手机号
+    private static final int REQ_PWD = 500; //修改登录密码
+    private static final int REQ_PAY_PWD = 600; //修改支付密码
 
     private TextView tvTitle; //标题
     private TextView tvUserName; //用户名
@@ -113,11 +115,13 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.rl_personal_login_password: //更改登录密码
                 Intent intent3 = new Intent(this, UpdateLoginPasswordActivity.class);
-                startActivity(intent3);
+                intent3.putExtra("user", user);
+                startActivityForResult(intent3, REQ_PWD);
                 break;
             case R.id.rl_personal_pay_password: //更改支付密码
                 Intent intent4 = new Intent(this, UpdatePayPasswordActivity.class);
-                startActivity(intent4);
+                intent4.putExtra("user", user);
+                startActivityForResult(intent4, REQ_PAY_PWD);
                 break;
         }
     }
@@ -145,10 +149,20 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 sendBroadcast(intent);
             }
             if (requestCode == REQ_USERNAME) { //用户名
-                tvUserName.setText(data.getStringExtra("result"));
+                String result = data.getStringExtra("result");
+                tvUserName.setText(result);
+                user.setUserName(result);
             }
             if (requestCode == REQ_TEL) { //手机号
-                tvTelephone.setText(StringUtils.hideTelephone(data.getStringExtra("result")));
+                String result = data.getStringExtra("result");
+                tvTelephone.setText(StringUtils.hideTelephone(result));
+                user.setPhoneNumber(result);
+            }
+            if (requestCode == REQ_PWD) { //手机号
+                user.setLoginPassword(data.getStringExtra("result"));
+            }
+            if (requestCode == REQ_PAY_PWD) { //手机号
+                user.setPayPassword(data.getStringExtra("result"));
             }
         }
     }

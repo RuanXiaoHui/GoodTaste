@@ -44,6 +44,7 @@ public class UpdateUserNameActivity extends BaseActivity implements View.OnClick
     @Override
     protected void initData() {
         userBean = (UserBean) getIntent().getSerializableExtra("user");
+        etUpdateUsername.setText(userBean.getUserName());
     }
 
     @Override

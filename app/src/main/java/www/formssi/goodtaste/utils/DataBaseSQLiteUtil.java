@@ -341,8 +341,7 @@ public class DataBaseSQLiteUtil {
      */
     public static UserBean queryUserByTel(String tel) {
         openDataBase();
-        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
-        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
+        Cursor cursor = mDatabase.query(TABLE_NAME_USER, null, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
         UserBean bean = null;
         if (cursor.moveToFirst()) {
             bean = new UserBean();
@@ -350,6 +349,8 @@ public class DataBaseSQLiteUtil {
             bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
             bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
             bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
+            bean.setLoginPassword(cursor.getString(cursor.getColumnIndex(COLUMN_LOGIN_PWD))); // 登录密码
+            bean.setPayPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_PWD))); // 支付密码
         }
         cursor.close();
         closeDataBase();

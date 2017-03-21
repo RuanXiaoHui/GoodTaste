@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.ToastUtil;
 
 public class UpdateLoginPasswordActivity extends BaseActivity implements View.OnClickListener {
 
@@ -20,7 +24,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
     private Button btnUpdateLoginPassword; //修改登录密码
     private EditText etLoginPassword; //旧密码
     private EditText etUpdateLoginPassword; //新密码
-    private String tel;
+    private UserBean user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
 
     @Override
     protected void initData() {
-        tel = getIntent().getStringExtra("tel");
+        user = (UserBean) getIntent().getSerializableExtra("user");
     }
 
     @Override
@@ -67,8 +71,19 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
     private void updateLoginPwd() {
         String oldPwd = etLoginPassword.getText().toString();
         String newPwd = etUpdateLoginPassword.getText().toString();
-//        if (TextUtils.isEmpty(tel, oldPwd)) {
-//            DataBaseSQLiteUtil.updateLoginPassword(tel, newPwd);
-//        }
+        if (TextUtils.equals(oldPwd, user.getLoginPassword())) {
+            if (TextUtils.isEmpty(newPwd)) {
+                ToastUtil.showToast("请输入新密码！");
+                return;
+            }
+            boolean updateResult = DataBaseSQLiteUtil.updateLoginPassword(user.getPhoneNumber(), newPwd);
+            if (updateResult) {
+                sendBroadcast(new Intent(MineFragment.MY_ACTION));
+                setResult(RESULT_OK, new Intent().putExtra("result", newPwd));
+                finish();
+            }
+        } else {
+            ToastUtil.showToast("旧密码不正确");
+        }
     }
 }
