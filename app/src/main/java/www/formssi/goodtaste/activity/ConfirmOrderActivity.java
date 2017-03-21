@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
@@ -64,6 +66,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private ShopBean shopBean; //商店对象
     private int money; //食品总金额
     private AddressBean addressBean; //地址对象
+    private boolean loginStatus;  //登录状态
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,17 +152,21 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
-                if (addressBean != null) {
-                    long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
-                    intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
-                    intent.putExtra("orderId", orderId + "");
-                    intent.putExtra("storeName", shopBean.getShopName());
-                    intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
-                    startActivity(intent);
-                } else {
-                    // 提示用户输入地址
-                    Toast.makeText(this, "请输入地址", Toast.LENGTH_SHORT).show();
+                if (!loginStatus) { //用户未登录
+                    intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
+                } else {//用户已登录
+                    if (addressBean != null) {//地址不为控
+                        long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
+                        intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
+                        intent.putExtra("orderId", orderId + "");
+                        intent.putExtra("storeName", shopBean.getShopName());
+                        intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
+                    } else {//地址为空
+                        // 提示用户输入地址
+                        Toast.makeText(this, "请输入地址", Toast.LENGTH_SHORT).show();
+                    }
                 }
+                startActivity(intent);
                 break;
 
             default:
@@ -223,8 +230,13 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private void createOrder() {
         //用户对象
         UserBean userBean = new UserBean();
-        userBean.setUserId("1");
-        userBean.setPhoneNumber("18376611446");
+        //获取当前登录用户的登录状态、id和电话
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+        loginStatus = sharedPreferences.getBoolean("login", true);
+        String userId = sharedPreferences.getString("userId", "1");
+        String telephone = sharedPreferences.getString("telephone", "18376611446");
+        userBean.setUserId(userId);
+        userBean.setPhoneNumber(telephone);
 
         //创建一个订单对象
         orderBean = new OrderBean();
