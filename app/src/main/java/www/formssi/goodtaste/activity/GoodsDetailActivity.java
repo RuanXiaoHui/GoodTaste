@@ -104,7 +104,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         for (int i = 0; i <mFoodBean.size() ; i++) {
             if (mFoodBean.get(i).getGoodsType().equals("1")){
                 mRefreshBean.add(mFoodBean.get(i));
-                System.out.println(mFoodBean.get(i).getGoodsName());
             }
         }
         mCarAnimation= AnimationUtils.loadAnimation(this,R.anim.scale_goodsdetail_car);
