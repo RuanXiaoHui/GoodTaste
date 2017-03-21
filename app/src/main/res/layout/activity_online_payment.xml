@@ -17,26 +17,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/common_margin_super"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_OnlinePayment_storeName"
+                android:id="@+id/tv_OnlinePaymentActivity_storeName"
                 style="@style/activity_text_normal_black"
-                android:layout_marginTop="@dimen/common_margin_super" />
+                android:layout_marginLeft="@dimen/common_margin_normal"
+                android:text="高天回国肉" />
 
             <TextView
-                style="@style/activity_text_normal_black"
-                android:layout_marginTop="@dimen/common_margin_large"
+                style="@style/activity_text_normal_gray"
+                android:layout_marginLeft="@dimen/common_margin_large"
                 android:text="@string/activity_onlinePayment_outTakeOrder" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_OnlinePayment_price"
-            style="@style/activity_text_normal_black"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_medium"
-            android:textColor="@color/red" />
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/activity_text_normal_black"
+                android:text="订单总额：" />
+
+            <TextView
+                android:id="@+id/tv_OnlinePaymentActivity_price"
+                style="@style/activity_text_normal_black"
+                android:text="¥16"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -54,7 +69,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_OnlinePayment_cancelPayment"
+                android:id="@+id/btn_OnlinePaymentActivity_cancelPayment"
                 style="@style/button_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -70,7 +85,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_OnlinePayment_confirmPayment"
+                android:id="@+id/btn_OnlinePaymentActivity_confirmPayment"
                 style="@style/button_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

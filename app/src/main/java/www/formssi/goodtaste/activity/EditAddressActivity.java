@@ -120,10 +120,10 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
      */
     private void showOldData(String gender) {
         etName.setText(addressBean.getName());
-        if (gender.equals(R.string.activity_address_gentleman)) {
+        if (gender.equals(getString(R.string.activity_address_gentleman))) {
             rbGentleman.setChecked(true);
             rbLady.setChecked(false);
-        } else if (gender.equals(R.string.activity_address_lady)) {
+        } else if (gender.equals(getString(R.string.activity_address_lady))) {
             rbGentleman.setChecked(false);
             rbLady.setChecked(true);
         }

@@ -45,10 +45,10 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePayment_storeName);
-        tvPrice = (TextView) findViewById(R.id.tv_OnlinePayment_price);
-        btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePayment_confirmPayment);
-        btnCancelPayment = (Button) findViewById(R.id.btn_OnlinePayment_cancelPayment);
+        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_storeName);
+        tvPrice = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_price);
+        btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePaymentActivity_confirmPayment);
+        btnCancelPayment = (Button) findViewById(R.id.btn_OnlinePaymentActivity_cancelPayment);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_confirmPayment: //确认支付按钮
+            case R.id.btn_OnlinePaymentActivity_confirmPayment: //确认支付按钮
                 int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
                 if (payOrder > 0) {
                     intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
@@ -96,7 +96,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_cancelPayment: //取消支付按钮
+            case R.id.btn_OnlinePaymentActivity_cancelPayment: //取消支付按钮
                 this.finish();
                 break;
 

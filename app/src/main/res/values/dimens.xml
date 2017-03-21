@@ -70,7 +70,7 @@
     <dimen name="layout_width_null">0dp</dimen>
     <dimen name="layout_hight_null">0dp</dimen>
 
-    <!--小图标-->
+    <!--超小图标-->
     <dimen name="icon_micro_width">10dp</dimen>
     <dimen name="icon_micro_hight">10dp</dimen>
 
@@ -81,6 +81,10 @@
     <!--正常图标-->
     <dimen name="icon_normal_width">30dp</dimen>
     <dimen name="icon_normal_hight">30dp</dimen>
+
+    <!--大图标-->
+    <dimen name="icon_large_width">80dp</dimen>
+    <dimen name="icon_large_high">80dp</dimen>
 
     <!--分割线高度-->
     <dimen name="line_height_low">1dp</dimen>

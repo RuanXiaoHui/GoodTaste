@@ -94,7 +94,14 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
                 String userId = sharedPreferences.getString("userId", "");
                 AddressBean addressBean = new AddressBean(userId, name, gender, phone, address);
-                DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                long addressId = DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                //用户对象
+                UserBean userBean = new UserBean();
+                userBean.setUserId(userId);
+                userBean.setAddressId(addressId + "");
+                //设置默认地址
+                DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
+
                 setResult(ADD_NEW_ADREES_RESULT, intent);
                 finish();
                 break;

@@ -464,7 +464,6 @@ public class DataBaseSQLiteUtil {
     public static int userEditAddress(AddressBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
         values.put(COLUMN_TO_NAME, bean.getName()); // 姓名
         values.put(COLUMN_TO_SEX, bean.getGender()); // 性别
         values.put(COLUMN_TO_PHONE, bean.getPhone()); // 电话

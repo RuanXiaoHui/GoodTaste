@@ -47,7 +47,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     private LinearLayout llt_ReceiveAddressActivity_addAddress; //新增地址栏
     private List<AddressBean> addressBeanList = new ArrayList<>();  //对象列表
     private AddressAdapter addressAdapter; //适配器
+    private String userId; //用户id
     private Intent intent;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        //获取当前登录的用户id
+        sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", "");
         //设置标题
         tvTitle.setText(R.string.activity_receiveAddress_title);
         //ListView操作
@@ -108,10 +113,11 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
      * 对ListView的操作
      */
     private void operateListView() {
-        //添加数据
+        //创建用户对象
         UserBean userBean = new UserBean();
-        userBean.setUserId("1");
-        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId())); // 根据地址id获取用户保存的地址列表
+        userBean.setUserId(userId);
+        // 根据地址id获取用户保存的地址列表
+        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
         addressAdapter = new AddressAdapter(addressBeanList, this);
         lvAddress.setAdapter(addressAdapter);
     }
@@ -190,9 +196,6 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //获取当前登录用户id
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-        String userId = sharedPreferences.getString("userId", "");
         //清空地址列表
         addressBeanList.clear();
         //通过用户Id查询数据库,获得地址列表，并显示地址列表信息
