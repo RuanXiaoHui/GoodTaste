@@ -84,7 +84,6 @@ public class DataBaseSQLiteUtil {
 
     /**
      * 查找订单的方法
-     *
      * @param status 订单的状态 (状态在orderState类中)
      * @return
      */
@@ -92,15 +91,15 @@ public class DataBaseSQLiteUtil {
         openDataBase();
         String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_ORDER_NUMBER, COLUMN_ORDER_STATUS,
                 COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
-        String desc =  COLUMN_ORDER_ID+" desc";//根据id降序
+        String desc = COLUMN_ORDER_ID + " desc";//根据id降序
         Cursor cursor;
         List<OrderBean> orderBeanList = new ArrayList<>();
-        if (status == OrderState.ALL) {
+        if (status == OrderState.ALL) {//查询全部
             cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, desc);
-        } else {
+        } else {//根据状态查询
             cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, desc);
         }
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
             orderBean.setOrderId(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_ID)));//id
             orderBean.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME)));//商店名称
@@ -116,7 +115,6 @@ public class DataBaseSQLiteUtil {
         cursor.close();
         closeDataBase();
         return orderBeanList;
-
     }
 
     /**

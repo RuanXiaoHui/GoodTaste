@@ -28,45 +28,39 @@ public class OrderStateActivity extends BaseActivity {
     private ViewPager viewPager;
     private List<Fragment> fragments;
     private OrderPagerAdapter orderPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_state);
-        init();
-
-        Intent intent = getIntent();
-        int stateNum = intent.getIntExtra("stateNum",0) - 1;
-        viewPager.setCurrentItem(stateNum);
-
-
     }
 
-
-
-    private void init() {
-        initView();
-        initViewPager();
-        tabLayout.setupWithViewPager(viewPager);
-    }
-    public void initView(){
+    @Override
+    protected void initView() {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.vpOrderState);
     }
 
-    public void initViewPager(){
+    @Override
+    protected void initData() {
+        FragmentManager fm = getSupportFragmentManager();
+        int stateNum = getIntent().getIntExtra("stateNum", 0) - 1;//获取跳转的fragment
         fragments = new ArrayList<>();
         fragments.add(new OrderStateFragment(OrderState.NOT_PAY));
         fragments.add(new OrderStateFragment(OrderState.NOT_DELIVERY));
         fragments.add(new OrderStateFragment(OrderState.DELIVERY_ING));
         fragments.add(new OrderStateFragment(OrderState.NOT_COMMENT));
         fragments.add(new OrderStateFragment(OrderState.FINISH));
-        FragmentManager fm = getSupportFragmentManager();
         orderPagerAdapter = new OrderPagerAdapter(fm, fragments);
         viewPager.setAdapter(orderPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setCurrentItem(stateNum);
     }
 
-
-    public void onClick(View v){
+    @Override
+    protected void initListener() {
+    }
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
                 finish();

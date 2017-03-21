@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_back_titlebar_hight"
+            android:background="@color/back_titlebar_background"
             android:orientation="horizontal">
 
             <Button
@@ -26,7 +27,7 @@
                 android:onClick="onClick" />
 
             <TextView
-                style="@style/text_normal_black"
+                style="@style/text_normal_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
