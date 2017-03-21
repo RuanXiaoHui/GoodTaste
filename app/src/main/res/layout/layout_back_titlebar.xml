@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_back_titlebar_hight"
-        android:id="@+id/rlToolbar"
+        android:id="@+id/rltToolbar"
         android:background="@color/back_titlebar_background"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_back_titlebar_paddingLeft"
