@@ -1,5 +1,6 @@
 package www.formssi.goodtaste.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 
 /**
  * 支付失败页面
@@ -19,6 +22,8 @@ public class PayFailureActivity extends BaseActivity implements View.OnClickList
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
     private Button btnPayFailure; //确定
+    private String orederId;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class PayFailureActivity extends BaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_paySuccess:  //确定按钮
+                this.finish();
                 break;
 
             default:

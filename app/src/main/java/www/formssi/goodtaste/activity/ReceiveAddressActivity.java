@@ -84,10 +84,12 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
             case R.id.iv_backTitlebar_back: //返回
                 this.finish();
                 break;
+
             case R.id.llt_ReceiveAddressActivity_addAddress: //新增地址
                 intent = new Intent(ReceiveAddressActivity.this, AddNewAddressActivity.class);
                 startActivityForResult(intent, ADD_NEW_ADREES_REQUEST);
                 break;
+
             default:
                 break;
         }
@@ -198,12 +200,12 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
                 addressBeanList.add(addressBean);
                 addressAdapter.notifyDataSetChanged();
                 lvAddress.setSelection(addressBeanList.size() - 1);
-                DataBaseSQLiteUtil.userInsertAddress(addressBean);
             } else if ((requestCode == EDIT_ADREES_REQUEST && resultCode == EDIT_ADREES_RESULT)) {  //编辑地址
                 Bundle bundle = data.getBundleExtra("returnEditAddressBeanBunlde");
                 AddressBean addressBean = (AddressBean) bundle.getSerializable("returnEditAddressBean");
                 DataBaseSQLiteUtil.userEditAddress(addressBean);
-                addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(addressBean.getUserId()));
+                addressBeanList.clear();
+                addressBeanList.addAll(DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(addressBean.getUserId())));
                 addressAdapter.notifyDataSetChanged();
             }
         }

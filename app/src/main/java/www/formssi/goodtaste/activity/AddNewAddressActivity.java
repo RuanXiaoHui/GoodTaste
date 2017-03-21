@@ -2,10 +2,12 @@ package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 
@@ -22,7 +26,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESUL
  * 说明：直接输入姓名、性别、电话、地址
  * Created by john on 2017/3/17.
  */
-public class AddNewAddressActivity extends BaseActivity implements View.OnClickListener {
+public class AddNewAddressActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private ImageView ivBack;  //返回
     private TextView tvTitle; //标题
@@ -60,6 +64,7 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
 
         ivBack.setOnClickListener(this);
         btnOk.setOnClickListener(this);
+        rgGender.setOnCheckedChangeListener(this);
     }
 
     /**
@@ -76,16 +81,30 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
 
             case R.id.btn_AddNewAddressActivity_ok: // 确定
                 Intent intent = new Intent();
-                intent.putExtra("name", etName.getText().toString());
-                intent.putExtra("gender", "女士");
-                intent.putExtra("phone", etPhone.getText().toString());
-                intent.putExtra("address", etAddress.getText().toString());
+                String name = etName.getText().toString();
+                String phone = etPhone.getText().toString();
+                String address = etAddress.getText().toString();
+
+                intent.putExtra("name", name);
+                intent.putExtra("gender", gender == null ? "先生" : gender);
+                intent.putExtra("phone", phone);
+                intent.putExtra("address", address);
+
+                AddressBean addressBean = new AddressBean("1", "1", name, gender, phone, address);
                 setResult(ADD_NEW_ADREES_RESULT, intent);
+                DataBaseSQLiteUtil.userInsertAddress(addressBean);
                 finish();
                 break;
 
             default:
                 break;
         }
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        RadioButton rbGender = (RadioButton) findViewById(checkedId);
+        gender = rbGender.getText().toString();
     }
 }

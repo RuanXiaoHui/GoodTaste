@@ -7,9 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 
 /**
  * 在线支付页面
@@ -25,6 +30,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private Button btnComfirmPayment; //确认支付
     private Button btnCanclePayment; //取消支付
     private Intent intent;
+    private String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +41,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(R.string.activity_onlinePayment_title);
         intent = getIntent();
         //订单id
-        String orderId = intent.getStringExtra("orderId");
-        DataBaseSQLiteUtil.payOrder(orderId);
+        orderId = intent.getStringExtra("orderId");
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);
@@ -73,16 +78,19 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_comfirmPayment: //确认支付
-//                if(){
-                intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
-//                }else if(){
-//                    intent = new Intent(OnlinePaymentActivity.this,PayFailureActivity.class); //支付失败
-//                }
+            case R.id.btn_OnlinePayment_comfirmPayment: //确认支付按钮
+                int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
+                if(payOrder > 0){
+                    intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
+                    intent.putExtra(INTENT_ORDER_ID,orderId);
+                }else {
+                    intent = new Intent(OnlinePaymentActivity.this,PayFailureActivity.class); //支付失败
+                }
                 startActivity(intent);
+                this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_canclePayment: //取消支付
+            case R.id.btn_OnlinePayment_canclePayment: //取消支付按钮
                 this.finish();
                 break;
 

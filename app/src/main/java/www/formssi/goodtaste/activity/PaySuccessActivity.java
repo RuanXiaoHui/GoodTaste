@@ -10,6 +10,8 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+
 /**
  * 支付成功页面
  * Created by john on 2017/3/20.
@@ -20,6 +22,8 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
     private Button btnPaySuccess; //确定
+    private String orderId;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,8 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_pay_success);
         bindViews();
         tvTitle.setText(R.string.activity_paySuccess_title);
+        intent = getIntent();
+        orderId = intent.getStringExtra(INTENT_ORDER_ID);
     }
 
     /**
@@ -54,8 +60,10 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_paySuccess:  //确定按钮
+                Intent intent = new Intent(PaySuccessActivity.this,OrderDetailActivity.class);
+                intent.putExtra(INTENT_ORDER_ID,orderId);
+                startActivity(intent);
                 this.finish();
-//                Intent intent = new In
                 break;
 
             default:
