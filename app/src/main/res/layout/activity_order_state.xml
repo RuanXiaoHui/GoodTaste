@@ -15,7 +15,8 @@
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         app:tabIndicatorHeight="1dp"
-        app:tabSelectedTextColor="#FF0000"
+        app:tabSelectedTextColor="@color/appColor"
+        app:tabIndicatorColor="@color/appColor"
         >
 
     </android.support.design.widget.TabLayout>
