@@ -22,25 +22,28 @@ public class PayFailureActivity extends BaseActivity implements View.OnClickList
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
     private Button btnPayFailure; //确定
-    private String orederId;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_failure);
-        bindViews();
-        tvTitle.setText(R.string.activity_payFailure_title);
     }
 
-    /**
-     * 初始化、绑定控件
-     */
-    private void bindViews() {
+    @Override
+    protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         btnPayFailure = (Button) findViewById(R.id.btn_payFailure);
+    }
 
+    @Override
+    protected void initData() {
+        //设置标题
+        tvTitle.setText(R.string.activity_payFailure_title);
+    }
+
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
         btnPayFailure.setOnClickListener(this);
     }

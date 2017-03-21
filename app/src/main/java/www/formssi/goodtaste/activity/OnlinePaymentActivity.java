@@ -27,17 +27,30 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private TextView tvTitle; //标题
     private TextView tvStoreName;//店名
     private TextView tvPrice;//总金额
-    private Button btnComfirmPayment; //确认支付
-    private Button btnCanclePayment; //取消支付
+    private Button btnConfirmPayment; //确认支付
+    private Button btnCancelPayment; //取消支付
     private Intent intent;
-    private String orderId;
+    private String orderId; //订单id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
         DataBaseSQLiteUtil.openDataBase();
-        bindViews();
+    }
+
+    @Override
+    protected void initView() {
+        ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePayment_storeName);
+        tvPrice = (TextView) findViewById(R.id.tv_OnlinePayment_price);
+        btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePayment_confirmPayment);
+        btnCancelPayment = (Button) findViewById(R.id.btn_OnlinePayment_cancelPayment);
+    }
+
+    @Override
+    protected void initData() {
         tvTitle.setText(R.string.activity_onlinePayment_title);
         intent = getIntent();
         //订单id
@@ -50,20 +63,11 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvPrice.setText("¥" + totalPay);
     }
 
-    /**
-     * 初始化、绑定控件
-     */
-    private void bindViews() {
-        ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePayment_storeName);
-        tvPrice = (TextView) findViewById(R.id.tv_OnlinePayment_price);
-        btnComfirmPayment = (Button) findViewById(R.id.btn_OnlinePayment_comfirmPayment);
-        btnCanclePayment = (Button) findViewById(R.id.btn_OnlinePayment_canclePayment);
-
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
-        btnComfirmPayment.setOnClickListener(this);
-        btnCanclePayment.setOnClickListener(this);
+        btnConfirmPayment.setOnClickListener(this);
+        btnCancelPayment.setOnClickListener(this);
     }
 
     /**
@@ -80,11 +84,11 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
 
             case R.id.btn_OnlinePayment_comfirmPayment: //确认支付按钮
                 int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
-                if(payOrder > 0){
+                if (payOrder > 0) {
                     intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
-                    intent.putExtra(INTENT_ORDER_ID,orderId);
-                }else {
-                    intent = new Intent(OnlinePaymentActivity.this,PayFailureActivity.class); //支付失败
+                    intent.putExtra(INTENT_ORDER_ID, orderId);
+                } else {
+                    intent = new Intent(OnlinePaymentActivity.this, PayFailureActivity.class); //支付失败
                 }
                 startActivity(intent);
                 this.finish();
@@ -97,6 +101,5 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
             default:
                 break;
         }
-
     }
 }

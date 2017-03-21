@@ -34,7 +34,6 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     private RadioButton rbGentleman; //男士
     private RadioButton rbLady; //女士
     private Button btnOk;//确定
-
     private String mGender; //获取性别
     private int currentPosition;  //当前修改的地址在列表中的位置
     private AddressBean addressBean;  //当前修改的列表项所对应的AddressBean实体类
@@ -45,20 +44,10 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
-        bindViews();
-
-        intent = getIntent();
-        bundle = intent.getBundleExtra("editBundle");
-        currentPosition = bundle.getInt("sendEditPosition", 0);
-        addressBean = (AddressBean) bundle.getSerializable("editAddress");
-        String gender = addressBean.getGender();
-        showOldData(gender);
     }
 
-    /**
-     * 初始化、绑定控件
-     */
-    private void bindViews() {
+    @Override
+    protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         etName = (EditText) findViewById(R.id.et_EditAddressActivity_name);
@@ -68,7 +57,23 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         rbGentleman = (RadioButton) findViewById(R.id.rb_EditAddressActivity_gentleman);
         rbLady = (RadioButton) findViewById(R.id.rb_EditAddressActivity_lady);
         btnOk = (Button) findViewById(R.id.btn_EditAddressActivity_ok);
+    }
 
+    @Override
+    protected void initData() {
+        //编辑地址
+        tvTitle.setText(R.string.activity_editAddress_title);
+        //获取传递参数，并显示数据
+        intent = getIntent();
+        bundle = intent.getBundleExtra("editBundle");
+        currentPosition = bundle.getInt("sendEditPosition", 0);
+        addressBean = (AddressBean) bundle.getSerializable("editAddress");
+        String gender = addressBean.getGender();
+        showOldData(gender);
+    }
+
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
         btnOk.setOnClickListener(this);
         rgGender.setOnCheckedChangeListener(this);
@@ -96,7 +101,7 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                 bundle = new Bundle();
                 bundle.putSerializable("returnEditAddressBean", addressBean);
                 bundle.putInt("returnEditPosition", currentPosition);
-                intent.putExtra("returnEditAddressBeanBunlde", bundle);
+                intent.putExtra("returnEditAddressBeanBundle", bundle);
                 setResult(EDIT_ADREES_RESULT, intent);
                 this.finish();
                 break;
