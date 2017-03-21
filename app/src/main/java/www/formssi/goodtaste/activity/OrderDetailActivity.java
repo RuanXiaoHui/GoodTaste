@@ -176,7 +176,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      * @param tip
      */
     public void showToast(String tip) {
-        if (toast == null) {
+        if (toast == null) { // 如果为空
             toast = Toast.makeText(this, tip, Toast.LENGTH_SHORT);
         } else {
             toast.setText(tip);
