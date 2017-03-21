@@ -1,221 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    tools:context="www.formssi.goodtaste.activity.OrderDetailActivity">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/layout_back_title_bar"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_horizontal_bold_height"
+        android:background="@color/gray" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_back_titlebar_hight"
-            android:background="@color/back_titlebar_background"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="@dimen/icon_normal_width"
-                android:layout_height="@dimen/icon_normal_hight"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:background="@mipmap/ic_left_arrow"
-                android:onClick="onClick" />
-
-            <TextView
-                style="@style/text_normal_white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/activity_order_my" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_bold_height"
-            android:background="@color/gray" />
-
-        <ImageView
-            android:id="@id/iv_order_shop_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/small_margin"
-            android:src="@mipmap/ic_store_default_picture_normal" />
-
-        <TextView
-            android:id="@id/tv_order_status"
-            style="@style/text_normal_black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/small_margin"
-            android:drawableRight="@mipmap/ic_right_arrow_normal"
-            android:gravity="center"
-            android:text="@string/activity_order_complete" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@id/btn_order_cancel"
-                style="@style/button_blue_text_white"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/button_small_height"
-                android:background="@drawable/selector_button_normal"
-                android:text="@string/activity_order_cancel"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@id/btn_order_ok"
-                style="@style/button_blue_text_white"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/button_small_height"
-                android:background="@drawable/selector_button_normal"
-                android:text="@string/activity_order_again" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_large_height"
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@id/tv_order_shop_name"
-            style="@style/text_normal_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin"
-            android:drawableLeft="@mipmap/ic_store_default_picture_small"
-            android:drawablePadding="@dimen/small_padding"
-            android:drawableRight="@mipmap/ic_right_arrow_normal"
-            android:gravity="center|left"
-            android:text="@string/activity_order_store_name" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_bold_height"
-            android:background="@color/gray" />
-
-        <www.formssi.goodtaste.widget.NoScrollListView
-            android:id="@id/lv_order_food_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none" />
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_bold_height"
-            android:background="@color/gray" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin">
-
-            <TextView
-                style="@style/text_small_black"
+            <ImageView
+                android:id="@id/iv_order_shop_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_order_distribute_fee" />
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/small_margin"
+                android:src="@mipmap/ic_store_default_picture_normal" />
 
             <TextView
-                android:id="@id/tv_order_pack_fee"
-                style="@style/text_small_black"
+                android:id="@id/tv_order_status"
+                style="@style/text_normal_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/activity_order_distribute_fee_text" />
-        </FrameLayout>
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/small_margin"
+                android:drawableRight="@mipmap/ic_right_arrow_normal"
+                android:gravity="center"
+                android:text="@string/activity_order_complete" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_bold_height"
-            android:background="@color/gray" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin">
+                <Button
+                    android:id="@id/btn_order_cancel"
+                    style="@style/button_blue_text_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_small_height"
+                    android:background="@drawable/selector_button_normal"
+                    android:text="@string/activity_order_cancel"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@id/btn_order_ok"
+                    style="@style/button_blue_text_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/button_small_height"
+                    android:background="@drawable/selector_button_normal"
+                    android:text="@string/activity_order_again" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_large_height"
+                android:background="@color/gray" />
 
             <TextView
-                style="@style/text_small_black"
-                android:layout_width="wrap_content"
+                android:id="@id/tv_order_shop_name"
+                style="@style/text_normal_black"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_order_discount" />
+                android:layout_margin="@dimen/large_margin"
+                android:drawableLeft="@mipmap/ic_store_default_picture_small"
+                android:drawablePadding="@dimen/small_padding"
+                android:drawableRight="@mipmap/ic_right_arrow_normal"
+                android:gravity="center|left"
+                android:text="@string/activity_order_store_name" />
 
-            <TextView
-                android:id="@id/tv_order_discount_fee"
-                style="@style/text_small_red"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_bold_height"
+                android:background="@color/gray" />
+
+            <www.formssi.goodtaste.widget.NoScrollListView
+                android:id="@id/lv_order_food_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_bold_height"
+                android:background="@color/gray" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/activity_order_discount_text" />
-        </FrameLayout>
+                android:layout_margin="@dimen/large_margin">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_bold_height"
-            android:background="@color/gray" />
+                <TextView
+                    style="@style/text_small_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_order_distribute_fee" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin">
+                <TextView
+                    android:id="@id/tv_order_pack_fee"
+                    style="@style/text_small_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/activity_order_distribute_fee_text" />
+            </FrameLayout>
 
-            <TextView
-                style="@style/text_small_red"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_bold_height"
+                android:background="@color/gray" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="@string/activity_order_actual_payment" />
+                android:layout_margin="@dimen/large_margin">
 
-            <TextView
-                android:id="@id/tv_order_actual_pay"
-                style="@style/text_small_red"
-                android:layout_width="wrap_content"
+                <TextView
+                    style="@style/text_small_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_order_discount" />
+
+                <TextView
+                    android:id="@id/tv_order_discount_fee"
+                    style="@style/text_small_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/activity_order_discount_text" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_bold_height"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/activity_order_actual_payment_text" />
+                android:layout_margin="@dimen/large_margin">
+
+                <TextView
+                    style="@style/text_small_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/activity_order_actual_payment" />
+
+                <TextView
+                    android:id="@id/tv_order_actual_pay"
+                    style="@style/text_small_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/activity_order_actual_payment_text" />
+            </LinearLayout>
+
+            <Button
+                android:id="@id/btn_order_contact_business"
+                style="@style/button_text_white"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_small_height"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_button_normal"
+                android:drawableLeft="@mipmap/ic_telephone_normal"
+                android:drawablePadding="@dimen/small_padding"
+                android:padding="@dimen/small_padding"
+                android:text="@string/activity_order_contact_shop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_large_height"
+                android:background="@color/gray" />
+
+            <include layout="@layout/layout_order_info" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_horizontal_large_height"
+                android:background="@color/gray" />
+
+            <include layout="@layout/layout_distribution_info" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@id/btn_order_contact_business"
-            style="@style/button_text_white"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_small_height"
-            android:layout_gravity="center"
-            android:background="@drawable/selector_button_normal"
-            android:drawableLeft="@mipmap/ic_telephone_normal"
-            android:drawablePadding="@dimen/small_padding"
-            android:padding="@dimen/small_padding"
-            android:text="@string/activity_order_contact_shop" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_large_height"
-            android:background="@color/gray" />
-
-        <include layout="@layout/layout_order_info" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_horizontal_large_height"
-            android:background="@color/gray" />
-
-        <include layout="@layout/layout_distribution_info" />
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
