@@ -141,7 +141,7 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
-     * 确认订单
+     * 生成订单
      *
      * @param orderBean
      * @param foodBeanList

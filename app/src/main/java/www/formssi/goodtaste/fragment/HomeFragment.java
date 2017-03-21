@@ -12,10 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.GoodsDetailActivity;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
@@ -27,14 +25,12 @@ import www.formssi.goodtaste.utils.GoodsDataUtils;
 import www.formssi.goodtaste.widget.Indicator;
 import www.formssi.goodtaste.widget.MyOnPageChangeListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * 主页面
+/***
+ * HomeFragment
  */
 public class HomeFragment extends Fragment {
     private View mView;
     private Indicator IndicatorHome;
-
     private List<HomeGoodsCategroyBean> good_Data1;
     private List<HomeGoodsCategroyBean> good_Data2;
     private LayoutInflater mInflater;
@@ -42,8 +38,6 @@ public class HomeFragment extends Fragment {
     private List<View> views;
     private ListView lvHomeGoods;
     private List<ShopBean> mDatas;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +47,6 @@ public class HomeFragment extends Fragment {
         initData();
         initView();
         initListener();
-
         return mView;
     }
 
@@ -70,39 +63,29 @@ public class HomeFragment extends Fragment {
             }
         }
         mDatas= GoodsDataUtils.GetShop();
-
-
     }
 
     private void initView() {
         lvHomeGoods= (ListView) mView.findViewById(R.id.lvHomeGoods);
         View Layout_View=mInflater.inflate(R.layout.home_goods_categroy,null);
-
         vpHomeCategroy = (ViewPager) Layout_View.findViewById(R.id.vpHomeCategroy);
         IndicatorHome= (Indicator) Layout_View.findViewById(R.id.IndicatorHome);
-
         View mGrid1 = mInflater.inflate(R.layout.home_goods_gridview, null);
         GridView grigView_one = (GridView) mGrid1.findViewById(R.id.gvHomeCategroy);
         grigView_one.setAdapter(new HomeCategroyAdapter(good_Data1,getActivity()));
-
         View mGrid2 = mInflater.inflate(R.layout.home_goods_gridview, null);
         GridView grigView_two = (GridView) mGrid2.findViewById(R.id.gvHomeCategroy);
         grigView_two.setAdapter(new HomeCategroyAdapter(good_Data2,getActivity()));
-
         views = new ArrayList<View>();
         views.add(mGrid1);
         views.add(mGrid2);
-
         vpHomeCategroy.setAdapter(new MyPagerAdapter(views));
         lvHomeGoods.addHeaderView(Layout_View);
-
         lvHomeGoods.setAdapter(new HomeGoodsBaseAdapter(mDatas,getActivity()));
-
-
     }
 
-
     private void initListener() {
+        /**饰品分类的ViewPager滑动监听，这里面进行了抽取掉两个不常用的方法**/
         vpHomeCategroy.setOnPageChangeListener(new MyOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -110,6 +93,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        /**ListView Item的点击事件**/
         lvHomeGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
