@@ -82,7 +82,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_comfirmPayment: //确认支付按钮
+            case R.id.btn_OnlinePayment_confirmPayment: //确认支付按钮
                 int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
                 if (payOrder > 0) {
                     intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
@@ -94,7 +94,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_canclePayment: //取消支付按钮
+            case R.id.btn_OnlinePayment_cancelPayment: //取消支付按钮
                 this.finish();
                 break;
 
