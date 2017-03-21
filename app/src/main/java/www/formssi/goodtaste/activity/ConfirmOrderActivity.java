@@ -39,6 +39,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESU
 /**
  * 确认订单页面
  * 说明：包含送餐地址、食品列表、配送费、订单备注、待支付费用
+ * Created by sn on 2017/3/16.
  */
 public class ConfirmOrderActivity extends BaseActivity implements View.OnClickListener {
 
@@ -65,23 +66,26 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private Intent intent;
     private ShopBean shopBean; //商店对象
     private int money; //食品总金额
-    private AddressBean addressBean; //地址对象
+    private UserBean userBean; //用户对象
     private boolean loginStatus;  //登录状态
+    private AddressBean addressBean; //地址对象
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
-        DataBaseSQLiteUtil.openDataBase();
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvToBePay = (TextView) findViewById(R.id.tv_ConfirmOrederActtivity_toBePay);
-        btnCommitOrder = (Button) findViewById(R.id.btn_ConfirmOrederActtivity_commitOrder);
-        lvFood = (ListView) findViewById(R.id.lv_ConfirmOrederActtivity_food);
+        tvToBePay = (TextView) findViewById(R.id.tv_ConfirmOrderActivity_toBePay);
+        btnCommitOrder = (Button) findViewById(R.id.btn_ConfirmOrderActivity_commitOrder);
+        lvFood = (ListView) findViewById(R.id.lv_ConfirmOrderActivity_food);
         headView = getLayoutInflater().inflate(R.layout.layout_comfir_order_head_view, null);
         footView = getLayoutInflater().inflate(R.layout.layout_comfir_order_foot_view, null);
         ivStore = (ImageView) headView.findViewById(R.id.iv_ConfirmOrederActtivity_store);
@@ -99,8 +103,31 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        //用户对象
+        userBean = new UserBean();
+        //获取当前登录用户的登录状态、id和电话
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+        loginStatus = sharedPreferences.getBoolean("login", false);
+        if (!loginStatus) { //用户未登录
+            Toast.makeText(this,"请先登录账号！",Toast.LENGTH_SHORT).show();
+        } else {//用户已登录
+            String userId = sharedPreferences.getString("userId", "");
+            String telephone = sharedPreferences.getString("telephone", "");
+            userBean.setUserId(userId);
+            userBean.setPhoneNumber(telephone);
+        }
+        intent = getIntent();
+        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");
+        foodBeanList = new ArrayList<>();
+        foodBeanList.clear();
+        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans");
+        money = intent.getIntExtra("CountMoney", 0);
         //设置标题
         tvTitle.setText(R.string.activity_confirmOrder_title);
+        //创建订单
+        createOrder();
+        //获取食物列表数据并显示
+        operateListView();
         //商店图片
         ivStore.setImageResource(shopBean.getShopPic());
         //店名
@@ -109,10 +136,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         tvDistributionCost.setText(shopBean.getShopMoney());
         //待支付
         tvToBePay.setText("¥" + (money + Integer.parseInt(shopBean.getShopMoney())));
-        //获取食物列表数据并显示
-        operateListView();
-        //创建订单
-        createOrder();
     }
 
     @Override
@@ -121,12 +144,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lltAddress.setOnClickListener(this);
         lltOrderRemarks.setOnClickListener(this);
         btnCommitOrder.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        DataBaseSQLiteUtil.closeDataBase();
-        super.onDestroy();
     }
 
     /**
@@ -151,19 +168,22 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 startActivityForResult(intent, ORDER_REMARK_REQUEST);
                 break;
 
-            case R.id.btn_ConfirmOrederActtivity_commitOrder: //提交订单
+            case R.id.btn_ConfirmOrderActivity_commitOrder: //提交订单
                 if (!loginStatus) { //用户未登录
                     intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
                 } else {//用户已登录
-                    if (addressBean != null) {//地址不为控
+                    if (addressBean != null) {//地址不为空
                         long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
+                        // 同时设置用户的默认送餐地址为当前选中的地址
+                        DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
+                        DataBaseSQLiteUtil.closeDataBase();
                         intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
                         intent.putExtra("orderId", orderId + "");
                         intent.putExtra("storeName", shopBean.getShopName());
                         intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
                     } else {//地址为空
                         // 提示用户输入地址
-                        Toast.makeText(this, "请输入地址", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.activity_confirmOrder_toast, Toast.LENGTH_SHORT).show();
                     }
                 }
                 startActivity(intent);
@@ -179,7 +199,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         if (data != null) {
             if (requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT) { //订单备注返回数据
                 tvRemarks.setText(data.getStringExtra("remarks"));
-            } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址
+            } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址,返回选中的地址
                 tvAddressNull.setVisibility(View.GONE);
                 tvName.setText(data.getStringExtra("name"));
                 tvGender.setText(data.getStringExtra("gender"));
@@ -194,32 +214,24 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
      * 对ListView的操作
      */
     private void operateListView() {
-        intent = getIntent();
-        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");
-        foodBeanList = new ArrayList<>();
-        foodBeanList.clear();
-        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans");
-        money = intent.getIntExtra("CountMoney", 0);
-
         //添加头部和尾部
         lvFood.addHeaderView(headView);
         lvFood.addFooterView(footView);
 
-        //用户对象
-        UserBean userBean = new UserBean();
-        userBean.setAddressId("1");
-        // 根据地址id获取用户保存的地址列表
-        addressBean = DataBaseSQLiteUtil.getAddressById(userBean.getAddressId());
-        if (addressBean != null) {
-            tvAddressNull.setVisibility(View.GONE);
-            tvName.setText(addressBean.getName());
-            tvGender.setText(addressBean.getGender());
-            tvPhone.setText(addressBean.getPhone());
-            tvAddress.setText(addressBean.getAddress());
-        } else {
-            tvAddressNull.setVisibility(View.VISIBLE);
+        // 根据用户id显示默认收货地址
+        if(userBean != null ) {
+            addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));
+            if (addressBean != null) {
+                tvAddressNull.setVisibility(View.GONE);
+                userBean.setAddressId(addressBean.getAddressId());
+                tvName.setText(addressBean.getName());
+                tvGender.setText(addressBean.getGender());
+                tvPhone.setText(addressBean.getPhone());
+                tvAddress.setText(addressBean.getAddress());
+            } else {
+                tvAddressNull.setVisibility(View.VISIBLE);
+            }
         }
-
         //添加适配器
         lvFood.setAdapter(new FoodListAdapter(foodBeanList));
     }
@@ -228,16 +240,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
      * 创建订单
      */
     private void createOrder() {
-        //用户对象
-        UserBean userBean = new UserBean();
-        //获取当前登录用户的登录状态、id和电话
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-        loginStatus = sharedPreferences.getBoolean("login", true);
-        String userId = sharedPreferences.getString("userId", "1");
-        String telephone = sharedPreferences.getString("telephone", "18376611446");
-        userBean.setUserId(userId);
-        userBean.setPhoneNumber(telephone);
-
         //创建一个订单对象
         orderBean = new OrderBean();
         orderBean.setShopBean(shopBean); //商店实体类
@@ -245,6 +247,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         orderBean.setStatus(OrderState.NOT_PAY + "");//订单状态
         orderBean.setOrderTotalMoney(money + "");//订单总金额
         orderBean.setOrderContent(OrderUtil.createOrderContent(foodBeanList));//订单内容
+        orderBean.setShopPhone(shopBean.getShopPhone());
         orderBean.setDiscountMoney("0"); //优惠金额
         orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
         orderBean.setActualPayment((money + Integer.parseInt(shopBean.getShopMoney())) + "");//实付金额

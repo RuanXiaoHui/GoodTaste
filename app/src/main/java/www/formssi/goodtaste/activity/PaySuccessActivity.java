@@ -29,6 +29,9 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override

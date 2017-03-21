@@ -149,11 +149,13 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static long addOrder(OrderBean orderBean, List<FoodBean> foodBeanList) {
+        openDataBase();
         ContentValues orderValues = new ContentValues(); // 订单ContentValues
         ShopBean shopBean = orderBean.getShopBean();
         orderValues.put(COLUMN_ORDER_NUMBER, orderBean.getOrderNum()); // 订单号
         orderValues.put(COLUMN_SHOP_ID, shopBean.getShopId()); // 商店id
         orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
+        orderValues.put(COLUMN_SHOP_PHONE, shopBean.getShopPhone()); // 商店电话
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
         orderValues.put(COLUMN_ORDER_CONTENT, orderBean.getOrderContent()); // 订单内容
@@ -172,6 +174,7 @@ public class DataBaseSQLiteUtil {
             mDatabase.insert(TABLE_NAME_ORDER_DETAIL, null, orderDetailValues); // 插入订单详情表
         }
         long insert = mDatabase.insert(TABLE_NAME_ORDER, null, orderValues);
+        closeDataBase();
         return insert; // 插入订单表
     }
 
@@ -183,10 +186,13 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static int payOrder(String orderId) {
+        openDataBase();
         ContentValues values = new ContentValues(); // 订单ContentValues
         values.put(COLUMN_ORDER_STATUS, OrderState.NOT_DELIVERY); // 订单状态置为xx未配送（已支付）
         values.put(COLUMN_PAY_TIME, DateUtil.getCurrentTime()); // 支付时间
-        return mDatabase.update(TABLE_NAME_ORDER, values, COLUMN_ORDER_ID + "= ?", new String[]{orderId});
+        int update = mDatabase.update(TABLE_NAME_ORDER, values, COLUMN_ORDER_ID + "= ?", new String[]{orderId});
+        closeDataBase();
+        return update;
     }
 
     /**
@@ -383,13 +389,16 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static long userInsertAddress(AddressBean bean) {
+        openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
         values.put(COLUMN_TO_NAME, bean.getName()); // 姓名
         values.put(COLUMN_TO_SEX, bean.getGender()); // 性别
         values.put(COLUMN_TO_PHONE, bean.getPhone()); // 电话
         values.put(COLUMN_TO_ADDRESS, bean.getAddress()); // 地址
-        return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); // 插入地址表
+        long insert = mDatabase.insert(TABLE_NAME_ADDRESS, null, values);
+        closeDataBase();
+        return insert; // 插入地址表
     }
 
     /**
@@ -399,13 +408,16 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static int userEditAddress(AddressBean bean) {
+        openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
         values.put(COLUMN_TO_NAME, bean.getName()); // 姓名
         values.put(COLUMN_TO_SEX, bean.getGender()); // 性别
         values.put(COLUMN_TO_PHONE, bean.getPhone()); // 电话
         values.put(COLUMN_TO_ADDRESS, bean.getAddress()); // 地址
-        return mDatabase.update(TABLE_NAME_ADDRESS, values, COLUMN_ADDRESS_ID + "= ?", new String[]{bean.getAddressId()});
+        int update = mDatabase.update(TABLE_NAME_ADDRESS, values, COLUMN_ADDRESS_ID + "= ?", new String[]{bean.getAddressId()});
+        closeDataBase();
+        return update;
     }
 
     /**
@@ -415,7 +427,10 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static int userDeleteAddressById(String addressId) {
-        return mDatabase.delete(TABLE_NAME_ADDRESS, COLUMN_ADDRESS_ID + "= ?", new String[]{addressId});
+        openDataBase();
+        int delete = mDatabase.delete(TABLE_NAME_ADDRESS, COLUMN_ADDRESS_ID + "= ?", new String[]{addressId});
+        closeDataBase();
+        return delete;
     }
 
     /**
@@ -425,9 +440,12 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static int setUserDefaultAddress(UserBean bean) {
+        openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ADDRESS_ID, bean.getAddressId()); // 地址id
-        return mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_ID + "= ?", new String[]{bean.getUserId()});
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_ID + "= ?", new String[]{bean.getUserId()});
+        closeDataBase();
+        return update;
     }
 
     /**
@@ -437,15 +455,19 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static AddressBean getUserDefaultAddress(int userId) {
-        String[] projection = {COLUMN_ADDRESS_ID}; //
+        openDataBase();
+        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_ADDRESS_ID}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_ID + "= ?",
                 new String[]{"" + userId}, null, null, null);
         AddressBean bean = new AddressBean();
-        while (cursor.moveToNext()) {
-            String addressId = String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID)));
-            bean = getAddressById(addressId); // 查询地址
+        if (null != cursor) {
+            while (cursor.moveToNext()) {
+                String addressId = String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID)));
+                bean = getAddressById(addressId); // 查询地址
+            }
         }
         cursor.close();
+        closeDataBase();
         return bean;
     }
 
@@ -456,6 +478,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static List<AddressBean> queryAddressByUserId(int userId) {
+        openDataBase();
         String[] projection = {COLUMN_ADDRESS_ID, COLUMN_USER_ID, COLUMN_TO_NAME, COLUMN_TO_SEX
                 , COLUMN_TO_PHONE, COLUMN_TO_ADDRESS}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_USER_ID + "= ?",
@@ -472,6 +495,7 @@ public class DataBaseSQLiteUtil {
             list.add(bean);
         }
         cursor.close();
+        closeDataBase();
         return list;
     }
 
@@ -482,6 +506,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static AddressBean getAddressById(String id) {
+        openDataBase();
         String[] projection = {COLUMN_ADDRESS_ID, COLUMN_TO_NAME, COLUMN_TO_PHONE, COLUMN_TO_SEX, COLUMN_TO_ADDRESS}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_ADDRESS_ID + "= ?",
                 new String[]{id}, null, null, null);
@@ -494,6 +519,7 @@ public class DataBaseSQLiteUtil {
             addressBean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS))); // 收货地址
         }
         cursor.close();
+        closeDataBase();
         return addressBean;
     }
 

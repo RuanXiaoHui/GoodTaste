@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.AddressAdapter;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUEST;
@@ -33,7 +35,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESU
 /**
  * 收货地址列表页面
  * 说明：收货地址列表显示、新增、删除、修改地址
- * Created by john on 2017/3/16.
+ * Created by sn on 2017/3/16.
  */
 
 public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
@@ -51,7 +53,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_address);
-        DataBaseSQLiteUtil.openDataBase();
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -112,15 +116,6 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         lvAddress.setAdapter(addressAdapter);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        UserBean userBean = new UserBean();
-        userBean.setUserId("1");
-        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
-        addressAdapter.notifyDataSetChanged();
-    }
-
     /**
      * 长按列表项，删除地址
      *
@@ -157,17 +152,16 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * 创建对话框
+     * 创建删除地址的对话框
+     *
      * @param position
      */
     private void createDialog(final int position) {
-
         AlertDialog.Builder dialog = new AlertDialog.Builder(ReceiveAddressActivity.this);
-        dialog.setTitle("删除地址");
-        dialog.setMessage("你确定要删除该地址吗？");
-
+        dialog.setTitle(R.string.activity_receiveAddress_deleteAddress);
+        dialog.setMessage(R.string.activity_receiveAddress_are_you_sure_delete_the_address);
         //确定按钮
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton(R.string.common_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AddressBean addressBean = addressBeanList.remove(position);
@@ -175,9 +169,8 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
                 addressAdapter.notifyDataSetChanged();
             }
         });
-
         //取消按钮
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton(R.string.common_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -197,27 +190,15 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            if (requestCode == ADD_NEW_ADREES_REQUEST && resultCode == ADD_NEW_ADREES_RESULT) { //新增地址
-                String name = data.getStringExtra("name");
-                String gender = data.getStringExtra("gender");
-                String phone = data.getStringExtra("phone");
-                String address = data.getStringExtra("address");
-                Log.e(TAG, name + gender + phone + address);
-
-                //把填写的地址添加到列表中
-                AddressBean addressBean = new AddressBean("1", "1", name, gender, phone, address);
-                addressBeanList.add(addressBean);
-                addressAdapter.notifyDataSetChanged();
-                lvAddress.setSelection(addressBeanList.size() - 1);
-            } else if ((requestCode == EDIT_ADREES_REQUEST && resultCode == EDIT_ADREES_RESULT)) {  //编辑地址
-                Bundle bundle = data.getBundleExtra("returnEditAddressBeanBundle");
-                AddressBean addressBean = (AddressBean) bundle.getSerializable("returnEditAddressBean");
-                DataBaseSQLiteUtil.userEditAddress(addressBean);
-                addressBeanList.clear();
-                addressBeanList.addAll(DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(addressBean.getUserId())));
-                addressAdapter.notifyDataSetChanged();
-            }
-        }
+        //获取当前登录用户id
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+        String userId = sharedPreferences.getString("userId", "");
+        //清空地址列表
+        addressBeanList.clear();
+        //通过用户Id查询数据库,获得地址列表，并显示地址列表信息
+        List<AddressBean> list = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userId));
+        addressBeanList.addAll(list);
+        addressAdapter.notifyDataSetChanged();
+        lvAddress.setSelection(addressBeanList.size() - 1);
     }
 }

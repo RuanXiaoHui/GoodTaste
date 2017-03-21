@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 收货地址实体类
- * Created by sn on 2017/3/17.
+ * Created by sn on 2017/3/16.
  */
 public class AddressBean implements Serializable {
 
@@ -22,9 +22,8 @@ public class AddressBean implements Serializable {
         return name + ' ' + gender + '\n' + phone + '\n' + address;
     }
 
-    public AddressBean(String userId, String addressId, String name, String gender, String phone, String address) {
+    public AddressBean(String userId, String name, String gender, String phone, String address) {
         this.userId = userId;
-        this.addressId = addressId;
         this.name = name;
         this.gender = gender;
         this.phone = phone;

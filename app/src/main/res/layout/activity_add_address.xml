@@ -5,7 +5,8 @@
     android:background="@color/activity_common_background_gray1"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_back_titlebar" />
+    <!--新增地址-->
+    <include layout="@layout/layout_back_title_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -127,7 +128,7 @@
             style="@style/button_positive"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/commom_ok"
+            android:text="@string/common_ok"
             android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 

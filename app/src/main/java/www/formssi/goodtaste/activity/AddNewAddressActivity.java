@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
@@ -24,7 +27,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESUL
 /**
  * 新增收货地址页面
  * 说明：直接输入姓名、性别、电话、地址
- * Created by john on 2017/3/17.
+ * Created by sn on 2017/3/17.
  */
 public class AddNewAddressActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
@@ -41,6 +44,9 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -84,15 +90,12 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 String name = etName.getText().toString();
                 String phone = etPhone.getText().toString();
                 String address = etAddress.getText().toString();
-
-                intent.putExtra("name", name);
-                intent.putExtra("gender", gender == null ? "先生" : gender);
-                intent.putExtra("phone", phone);
-                intent.putExtra("address", address);
-
-                AddressBean addressBean = new AddressBean("1", "1", name, gender, phone, address);
-                setResult(ADD_NEW_ADREES_RESULT, intent);
+                //获取当前登录用户id
+                SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+                String userId = sharedPreferences.getString("userId", "");
+                AddressBean addressBean = new AddressBean(userId, name, gender, phone, address);
                 DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                setResult(ADD_NEW_ADREES_RESULT, intent);
                 finish();
                 break;
 

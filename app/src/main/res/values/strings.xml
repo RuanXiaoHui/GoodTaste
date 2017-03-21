@@ -3,8 +3,8 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="commom_ok">确定</string>
-    <string name="commom_cancle">取消</string>
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
     <!-- 动态权限申请 -->
     <string name="common_user_refuse_granted">用户拒绝了授权</string>
     <string name="common_user_already_granted">用户已经授权了</string>
@@ -23,6 +23,7 @@
 
     <!--确认订单页面-->
     <string name="activity_confirmOrder_title">确认订单</string>
+    <string name="activity_confirmOrder_toast">请输入地址</string>
     <string name="activity_confirmOrder_addAddress">新增地址</string>
     <string name="activity_confirmOrder_distributionCost">配送费</string>
     <string name="activity_confirmOrder_orderNote">口味、偏好</string>
@@ -31,6 +32,8 @@
     <string name="activity_confirmOrder_commit">提交订单</string>
     <!--收货地址页面-->
     <string name="activity_receiveAddress_title">收货地址</string>
+    <string name="activity_receiveAddress_deleteAddress">删除地址</string>
+    <string name="activity_receiveAddress_are_you_sure_delete_the_address">你确定要删除此地址吗？</string>
     <string name="activity_receiveAddress_addAddress">新增地址</string>
     <!--订单备注页面-->
     <string name="activity_remarkOrder_title">订单备注</string>
@@ -50,8 +53,8 @@
     <!--在线支付页面-->
     <string name="activity_onlinePayment_title">在线支付</string>
     <string name="activity_onlinePayment_outTakeOrder">外卖订单</string>
-    <string name="activity_onlinePayment_comfirmPayment">确认支付</string>
-    <string name="activity_onlinePayment_canclePayment">取消支付</string>
+    <string name="activity_onlinePayment_confirmPayment">确认支付</string>
+    <string name="activity_onlinePayment_cancelPayment">取消支付</string>
     <!--支付成功页面-->
     <string name="activity_paySuccess_title">支付成功</string>
     <string name="activity_paySuccess_success">支付成功！</string>
