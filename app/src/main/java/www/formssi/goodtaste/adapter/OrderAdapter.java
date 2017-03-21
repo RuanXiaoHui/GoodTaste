@@ -53,7 +53,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     @Override
     public void onBindViewHolder(final OrderHolder holder, final int position) {
         holder.tvShopName.setText(list.get(position).getShopName());
-        holder.tvPrice.setText(list.get(position).getActualPayment());
+        holder.tvPrice.setText("¥ " + list.get(position).getActualPayment());
         holder.imgShop.setImageResource(list.get(position).getShopPicture());
         holder.tvOrderTime.setText(list.get(position).getOrderTime());
         holder.tvOrderContent.setText(list.get(position).getOrderContent());
