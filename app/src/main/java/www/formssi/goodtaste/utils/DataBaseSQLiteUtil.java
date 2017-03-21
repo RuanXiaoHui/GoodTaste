@@ -6,12 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
@@ -28,6 +26,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_LOGIN_PWD;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_CONTENT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_NUMBER;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_STATUS;
@@ -164,6 +163,7 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
+        orderValues.put(COLUMN_ORDER_CONTENT, orderBean.getOrderContent()); // 订单内容
         orderValues.put(COLUMN_ORDER_TOTAL_MONEY, orderBean.getOrderTotalMoney()); // 总金额
         orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
