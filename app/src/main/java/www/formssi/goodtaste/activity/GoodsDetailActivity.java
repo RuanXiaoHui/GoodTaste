@@ -27,7 +27,6 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.widget.CustomScrollView;
-
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {

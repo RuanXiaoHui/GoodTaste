@@ -82,6 +82,7 @@ public class DataBaseSQLiteUtil {
 
     /**
      * 查找订单的方法
+     *
      * @param status 订单的状态 (状态在orderState类中)
      * @return
      */
@@ -415,6 +416,37 @@ public class DataBaseSQLiteUtil {
      */
     public static int userDeleteAddressById(String addressId) {
         return mDatabase.delete(TABLE_NAME_ADDRESS, COLUMN_ADDRESS_ID + "= ?", new String[]{addressId});
+    }
+
+    /**
+     * 为用户设置默认送餐地址
+     *
+     * @param bean
+     * @return
+     */
+    public static int setUserDefaultAddress(UserBean bean) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ADDRESS_ID, bean.getAddressId()); // 地址id
+        return mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_ID + "= ?", new String[]{bean.getUserId()});
+    }
+
+    /**
+     * 通过用户id获取用户默认送餐地址
+     *
+     * @param userId
+     * @return
+     */
+    public static AddressBean getUserDefaultAddress(int userId) {
+        String[] projection = {COLUMN_ADDRESS_ID}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_ID + "= ?",
+                new String[]{"" + userId}, null, null, null);
+        AddressBean bean = new AddressBean();
+        while (cursor.moveToNext()) {
+            String addressId = String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID)));
+            bean = getAddressById(addressId); // 查询地址
+        }
+        cursor.close();
+        return bean;
     }
 
     /**

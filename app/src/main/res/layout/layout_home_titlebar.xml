@@ -45,8 +45,7 @@
         android:orientation="horizontal">
         <TextView
             style="@style/style_home_top_bar_text"
-            android:text="@string/home_topbar_text_one"
-            android:layout_width="wrap_content"/>
+            android:text="@string/home_topbar_text_one"/>
         <TextView
             style="@style/style_home_top_bar_text"
             android:text="@string/home_topbar_text_two"/>
