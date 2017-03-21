@@ -69,7 +69,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        DataBaseSQLiteUtil.openDataBase();
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -100,7 +102,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         if (null != intent) {
             String orderId = intent.getStringExtra(ConstantConfig.INTENT_ORDER_ID);
             if (null != orderId && !"".equals(orderId)) {
+                DataBaseSQLiteUtil.openDataBase();
                 orderBean = DataBaseSQLiteUtil.getOrderBeansById(orderId).get(0); // 根据id查询订单详情数据
+                DataBaseSQLiteUtil.closeDataBase();
                 setOrderDetail(orderBean); // 展示订单详情信息
             }
             if (null != orderBean) {
@@ -194,7 +198,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             tvOrderTime.setText(orderBean.getOrderTime());
             tvOrderPayTime.setText(orderBean.getPayTime());
             int addressId = orderBean.getAddressId();
+            DataBaseSQLiteUtil.openDataBase();
             AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId));
+            DataBaseSQLiteUtil.closeDataBase();
             tvOrderAddress.setText(bean.toAddressString());
             switch (Integer.parseInt(orderBean.getStatus())) {
                 case OrderState.NOT_PAY: // 未支付
@@ -268,7 +274,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onDestroy() {
-        DataBaseSQLiteUtil.closeDataBase();
         super.onDestroy();
     }
 }
