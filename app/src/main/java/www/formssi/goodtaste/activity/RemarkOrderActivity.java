@@ -31,34 +31,24 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remark_order);
-        bindViiews();
-        tvTitle.setText(R.string.activity_remarkOrder_title);
     }
 
     @Override
     protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
-    }
-
-    /**
-     * 初始化，绑定控件
-     */
-    private void bindViiews() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         etRemarkOrder = (EditText) findViewById(R.id.et_RemarkOrderActivity_remark);
         btnOk = (Button) findViewById(R.id.btn_RemarkOrderActivity_ok);
+    }
 
+    @Override
+    protected void initData() {
+        //设置标题
+        tvTitle.setText(R.string.activity_remarkOrder_title);
+    }
+
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
         btnOk.setOnClickListener(this);
     }
@@ -69,7 +59,6 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v) {
-
         switch (v.getId()){
             case R.id.iv_backTitlebar_back:
                 finish();

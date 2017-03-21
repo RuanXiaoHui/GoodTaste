@@ -1,12 +1,12 @@
 package www.formssi.goodtaste.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,8 @@ public class OrderStateActivity extends BaseActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView tvBackTitleBarTitle;
+    private List<Fragment> fragments;
+    private OrderPagerAdapter orderPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +37,19 @@ public class OrderStateActivity extends BaseActivity {
     protected void initView() {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.vpOrderState);
-        tvBackTitleBarTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
     }
 
     @Override
     protected void initData() {
         FragmentManager fm = getSupportFragmentManager();
         int stateNum = getIntent().getIntExtra("stateNum", 0) - 1;//获取跳转的fragment
-        List<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(new OrderStateFragment(OrderState.NOT_PAY));
         fragments.add(new OrderStateFragment(OrderState.NOT_DELIVERY));
         fragments.add(new OrderStateFragment(OrderState.DELIVERY_ING));
         fragments.add(new OrderStateFragment(OrderState.NOT_COMMENT));
         fragments.add(new OrderStateFragment(OrderState.FINISH));
-        tvBackTitleBarTitle.setText(R.string.activity_order_my);
-        OrderPagerAdapter orderPagerAdapter = new OrderPagerAdapter(fm, fragments);
+        orderPagerAdapter = new OrderPagerAdapter(fm, fragments);
         viewPager.setAdapter(orderPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(stateNum);
@@ -59,10 +58,10 @@ public class OrderStateActivity extends BaseActivity {
     @Override
     protected void initListener() {
     }
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_backTitlebar_back:
+                startActivity(new Intent(OrderStateActivity.this, OrderDetailActivity.class));
                 finish();
                 break;
         }

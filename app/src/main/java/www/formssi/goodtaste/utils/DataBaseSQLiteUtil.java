@@ -6,20 +6,16 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.Editable;
-import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.OrderState;
-import www.formssi.goodtaste.constant.SQLiteConstant;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ACTUAL_PAY;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ADDRESS_ID;
@@ -29,6 +25,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_PRICE;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_LOGIN_PWD;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_CONTENT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_NUMBER;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_STATUS;
@@ -83,58 +80,39 @@ public class DataBaseSQLiteUtil {
     private static Context mContext = ContextUtil.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
-    //测试    订单插入方法
-    public static void insertOrder() {
-        openDataBase();
-        ContentValues values = new ContentValues();
-        values.put(SQLiteConstant.COLUMN_SHOP_NAME, "好味道");//名字
-        values.put(SQLiteConstant.COLUMN_SHOP_IMG_PATH, R.mipmap.food1 + "");//图片
-        values.put(SQLiteConstant.COLUMN_ORDER_STATUS, 1 + "");//状态
-        values.put(SQLiteConstant.COLUMN_ACTUAL_PAY, "23");//价格
-        values.put(SQLiteConstant.COLUMN_ORDER_NUMBER, "1234");//订单号
-        values.put(SQLiteConstant.COLUMN_ORDER_CONTENT, "宫保鸡丁");//内容
-        values.put(SQLiteConstant.COLUMN_ORDER_TIME, "2017-03-17 12:33");//下单时间
-        values.put(SQLiteConstant.COLUMN_PAY_TIME, "2017-03-17 12:33");//支付时间
-        values.put(SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY, "30");//总金额
-        values.put(SQLiteConstant.COLUMN_DISC_MONEY, "7");//优惠金额
-        mDatabase.insert("tb_order", null, values);
-        closeDataBase();
-    }
-
-
     /**
      * 查找订单的方法
-     *
      * @param status 订单的状态 (状态在orderState类中)
      * @return
      */
     public static List<OrderBean> queryOrder(int status) {
-        List<OrderBean> orderBeanList = new ArrayList<>();
         openDataBase();
+        String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_ORDER_NUMBER, COLUMN_ORDER_STATUS,
+                COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
+        String desc = COLUMN_ORDER_ID + " desc";//根据id降序
         Cursor cursor;
-        if (status == OrderState.ALL) {
-            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER, null);
-        } else {
-            cursor = mDatabase.rawQuery("select * from " + SQLiteConstant.TABLE_NAME_ORDER + " where " + SQLiteConstant.COLUMN_ORDER_STATUS + " = " + status, null);
+        List<OrderBean> orderBeanList = new ArrayList<>();
+        if (status == OrderState.ALL) {//查询全部
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, desc);
+        } else {//根据状态查询
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, desc);
         }
-        orderBeanList = new ArrayList<>();
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
-            orderBean.setOrderId(String.valueOf(cursor.getInt(0)));//id
-            orderBean.setShopName(cursor.getString(1));//商店名称
-            orderBean.setShopImgPath(cursor.getString(2));//商店图片
-            orderBean.setShopPicture(Integer.valueOf(cursor.getString(2)));//商店图片的资源id
-            orderBean.setStatus(cursor.getString(3));//订单状态
-            orderBean.setActualPayment(cursor.getString(6));//实付价格
-            orderBean.setOrderNum(cursor.getString(7));//订单号
-            orderBean.setOrderContent(cursor.getString(8));//订单内容
-            orderBean.setOrderTime(cursor.getString(10));//下单时间
+            orderBean.setOrderId(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_ID)));//id
+            orderBean.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME)));//商店名称
+            orderBean.setShopImgPath(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH)));//商店图片
+            orderBean.setShopPicture(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))));//商店图片的资源id
+            orderBean.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS)));//订单状态
+            orderBean.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY)));//实付价格
+            orderBean.setOrderNum(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)));//订单号
+            orderBean.setOrderContent(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_CONTENT)));//订单内容
+            orderBean.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME)));//下单时间
             orderBeanList.add(orderBean);
         }
         cursor.close();
         closeDataBase();
         return orderBeanList;
-
     }
 
     /**
@@ -163,7 +141,7 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
-     * 确认订单
+     * 生成订单
      *
      * @param orderBean
      * @param foodBeanList
@@ -177,7 +155,9 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
+        orderValues.put(COLUMN_ORDER_CONTENT, orderBean.getOrderContent()); // 订单内容
         orderValues.put(COLUMN_ORDER_TOTAL_MONEY, orderBean.getOrderTotalMoney()); // 总金额
+        orderValues.put(COLUMN_PACK_FEE, orderBean.getDistributingFee()); // 配送费
         orderValues.put(COLUMN_DISC_MONEY, orderBean.getDiscountMoney()); // 优惠金额
         orderValues.put(COLUMN_ACTUAL_PAY, orderBean.getActualPayment()); // 实付金额
         orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
@@ -190,7 +170,8 @@ public class DataBaseSQLiteUtil {
             orderDetailValues.put(COLUMN_FOOD_PRICE, fb.getGoodsMoney()); // 食品单价
             mDatabase.insert(TABLE_NAME_ORDER_DETAIL, null, orderDetailValues); // 插入订单详情表
         }
-        return mDatabase.insert(TABLE_NAME_ORDER, null, orderValues); // 插入订单表
+        long insert = mDatabase.insert(TABLE_NAME_ORDER, null, orderValues);
+        return insert; // 插入订单表
     }
 
     /**
@@ -214,35 +195,33 @@ public class DataBaseSQLiteUtil {
      */
     public static List<OrderBean> getOrderBeansById(String orderId) {
         String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
-                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
+                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY, COLUMN_PACK_FEE,
                 COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         OrderBean o = new OrderBean();
         List<OrderBean> list = new ArrayList<>();
-        for (int i = 0; i < resultCounts; i++) { //
-            int shopId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID));
-            String storeId = String.valueOf(shopId);
-            o.setStoreId(storeId); // 商店id
-            o.setShopBean(getShopById(storeId));
-            o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
-            o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
-            o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
-            o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
-            o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
-            o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
-            String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
-            o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
-            o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
-            o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
-            o.setOrderNum(orderNumber);
-            o.setFoodBeanList(getOrderDetailsBeansById(orderNumber));
-            list.add(o);
-            cursor.moveToNext();
+        if (null != cursor) {
+            while (cursor.moveToNext()) { //
+                int shopId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID));
+                String storeId = String.valueOf(shopId);
+                o.setStoreId(storeId); // 商店id
+                o.setShopBean(getShopById(storeId));
+                o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
+                o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
+                o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
+                o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
+                o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
+                o.setDiscountMoney(cursor.getString(cursor.getColumnIndex(COLUMN_DISC_MONEY))); // 优惠金额
+                o.setActualPayment(cursor.getString(cursor.getColumnIndex(COLUMN_ACTUAL_PAY))); // 实付金额
+                String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
+                o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
+                o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
+                o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
+                o.setOrderNum(orderNumber);
+                o.setFoodBeanList(getOrderDetailsBeansById(orderNumber));
+                list.add(o);
+            }
         }
         cursor.close();
         return list;
@@ -258,20 +237,16 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_PRICE, COLUMN_FOOD_BUY_COUNT}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, COLUMN_ORDER_NUMBER + "= ?",
                 new String[]{orderNumber}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         List<FoodBean> list = new ArrayList<>();
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()) {
             FoodBean food = new FoodBean();
             food.setGoodsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_FOOD_ID))));
             food.setGoodsName(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_NAME)));
             food.setGoodsMoney(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_PRICE)));
-            food.setGoodsNumber(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT));
+            food.setGoodsBuynumber(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_FOOD_BUY_COUNT))));
             list.add(food);
-            cursor.moveToNext();
         }
+        cursor.close();
         return list;
     }
 
@@ -291,7 +266,7 @@ public class DataBaseSQLiteUtil {
             return null;
         }
         ShopBean shopBean = new ShopBean();
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()) {
             shopBean.setShopId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_ID))));
             shopBean.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
             shopBean.setShopPic(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
@@ -300,8 +275,8 @@ public class DataBaseSQLiteUtil {
             shopBean.setShopCount(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_TOTAL_SELL))); // 销量
             shopBean.setShopMoney(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费
             shopBean.setShopAddress(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_ADDRESS))); // 商家地址
-            cursor.moveToNext();
         }
+        cursor.close();
         return shopBean;
     }
 
@@ -333,75 +308,16 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ? and "
                 + COLUMN_LOGIN_PWD + " = ? ", new String[]{tel, pwd}, null, null, null);
-
-//        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, null, null, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         UserBean bean = new UserBean();
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()) {
             bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
             bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
             bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
             bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
             cursor.moveToNext();
         }
+        cursor.close();
         return bean;
-    }
-
-    /**
-     * 根据用户手机查询用户
-     *
-     * @param tel
-     * @return null or user
-     */
-    public static UserBean queryUserByTel(String tel) {
-        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
-        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
-
-//        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, null, null, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
-        UserBean bean = new UserBean();
-        for (int i = 0; i < resultCounts; i++) {
-            bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
-            bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
-            bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
-            bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
-            cursor.moveToNext();
-        }
-        return bean;
-    }
-
-    /**
-     * 根据手机号修改用户名
-     *
-     * @param tel
-     * @param name
-     * @return true if success
-     */
-    public static boolean updateUserName(String tel, String name) {
-//        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, name);
-        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
-        return update > 0 ? true : false;
-    }
-    /**
-     * 根据旧手机号修改新手机号
-     *
-     * @param tel
-     * @param newtel
-     * @return true if success
-     */
-    public static boolean updateUserPhone(String tel, String newtel) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_PHONE, newtel);
-        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
-        return update > 0 ? true : false;
     }
 
     /**
@@ -411,13 +327,39 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static long userInsertAddress(AddressBean bean) {
-        ContentValues values = new ContentValues(); // 订单ContentValues
+        ContentValues values = new ContentValues();
         values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
-        values.put(COLUMN_TO_NAME, bean.getAddress()); // 姓名
-        values.put(COLUMN_TO_SEX, bean.getAddress()); // 性别
-        values.put(COLUMN_TO_PHONE, bean.getAddress()); // 电话
+        values.put(COLUMN_TO_NAME, bean.getName()); // 姓名
+        values.put(COLUMN_TO_SEX, bean.getGender()); // 性别
+        values.put(COLUMN_TO_PHONE, bean.getPhone()); // 电话
         values.put(COLUMN_TO_ADDRESS, bean.getAddress()); // 地址
         return mDatabase.insert(TABLE_NAME_ADDRESS, null, values); // 插入地址表
+    }
+
+    /**
+     * 用户修改地址
+     *
+     * @param bean
+     * @return
+     */
+    public static int userEditAddress(AddressBean bean) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_ID, bean.getUserId()); // 用户id
+        values.put(COLUMN_TO_NAME, bean.getName()); // 姓名
+        values.put(COLUMN_TO_SEX, bean.getGender()); // 性别
+        values.put(COLUMN_TO_PHONE, bean.getPhone()); // 电话
+        values.put(COLUMN_TO_ADDRESS, bean.getAddress()); // 地址
+        return mDatabase.update(TABLE_NAME_ADDRESS, values, COLUMN_ADDRESS_ID + "= ?", new String[]{bean.getAddressId()});
+    }
+
+    /**
+     * 用户通过地址id删除地址
+     *
+     * @param addressId
+     * @return
+     */
+    public static int userDeleteAddressById(String addressId) {
+        return mDatabase.delete(TABLE_NAME_ADDRESS, COLUMN_ADDRESS_ID + "= ?", new String[]{addressId});
     }
 
     /**
@@ -431,22 +373,18 @@ public class DataBaseSQLiteUtil {
                 , COLUMN_TO_PHONE, COLUMN_TO_ADDRESS}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_USER_ID + "= ?",
                 new String[]{"" + userId}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         List<AddressBean> list = new ArrayList<>();
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()) {
             AddressBean bean = new AddressBean();
             bean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))));
-            bean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
+            bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
             bean.setName(cursor.getString(cursor.getColumnIndex(COLUMN_TO_NAME)));
             bean.setGender(cursor.getString(cursor.getColumnIndex(COLUMN_TO_SEX)));
             bean.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_TO_PHONE)));
             bean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS)));
             list.add(bean);
-            cursor.moveToNext();
         }
+        cursor.close();
         return list;
     }
 
@@ -460,19 +398,15 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_ADDRESS_ID, COLUMN_TO_NAME, COLUMN_TO_PHONE, COLUMN_TO_SEX, COLUMN_TO_ADDRESS}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ADDRESS, projection, COLUMN_ADDRESS_ID + "= ?",
                 new String[]{id}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
         AddressBean addressBean = new AddressBean();
-        for (int i = 0; i < resultCounts; i++) {
+        while (cursor.moveToNext()) {
             addressBean.setAddressId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))));
             addressBean.setName(cursor.getString(cursor.getColumnIndex(COLUMN_TO_NAME))); // 收货人姓名
             addressBean.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_TO_PHONE))); // 收货人电话
             addressBean.setGender(cursor.getString(cursor.getColumnIndex(COLUMN_TO_SEX))); // 收货人性别
             addressBean.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TO_ADDRESS))); // 收货地址
-            cursor.moveToNext();
         }
+        cursor.close();
         return addressBean;
     }
 
@@ -530,19 +464,6 @@ public class DataBaseSQLiteUtil {
             db.execSQL(sql5); // 创建订单详情表
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
             db.execSQL(sql6); // 创建地址表
-//            ContentValues values = new ContentValues();
-//            /**
-//             * COLUMN_USER_ID, COLUMN_USER_NAME
-//             + " varchar(20),", COLUMN_USER_PHONE + " varchar(15),", COLUMN_USER_SEX + " varchar(5),",
-//             COLUMN_LOGIN_PWD + " varchar(20),", COLUMN_PAY_PWD + " varchar(6),", COLUMN_USER_IMG_PATH
-//             + " varchar(100),", COLUMN_ADDRESS_ID + " integer"
-//             */
-//            values.put(COLUMN_USER_NAME,"184");
-//            values.put(COLUMN_USER_PHONE,"184");
-//            values.put(COLUMN_USER_SEX,"184");
-//            values.put(COLUMN_USER_NAME,"184");
-//            db.insert(TABLE_NAME_USER,null,values);
-//            db.query(TABLE_NAME_USER,null,null,null,null,null,null,null);
         }
 
         @Override

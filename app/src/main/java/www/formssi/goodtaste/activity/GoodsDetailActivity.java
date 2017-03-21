@@ -15,12 +15,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -31,6 +29,7 @@ import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
+import static www.formssi.goodtaste.R.id.rlToolbar;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
@@ -43,7 +42,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private List<FoodBean> mFoodBean;        //右侧商品的ListView数据源
     private List<FoodBean> mRefreshBean;     //右侧筛选商品的ListView数据源
     private ImageView iv_backTitlebar_back;  //顶部的返回按钮
-    private RelativeLayout rlToolbar;        //顶部的TitleBar布局
+    private RelativeLayout rltToolbar;        //顶部的TitleBar布局
     private TextView tv_backTitlebar_title;  //顶部Title的标题
     private ImageView ivCar;                 //购物车的img
     private ImageView ivShopimg;             //商店图片
@@ -70,7 +69,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     protected  void initView() {
         scLayoutView= (CustomScrollView) findViewById(R.id.scLayoutView);
         rlView= (RelativeLayout) findViewById(R.id.rlView);
-        rlToolbar= (RelativeLayout) findViewById(R.id.rlToolbar);
+        rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitlebar_title= (TextView) findViewById(R.id.tv_backTitlebar_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
@@ -221,13 +220,13 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
 
         if (y<=0){
-            rlToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
+            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
             tv_backTitlebar_title.setVisibility(View.GONE);
         }else if(y>0&&y<=mHeight/3){
             tv_backTitlebar_title.setVisibility(View.VISIBLE);
             tv_backTitlebar_title.setTextColor(Color.argb(100,255,255,255));
             tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rlToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
+            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
 
         }else if (y>mHeight/3&&y<mHeight){
 
@@ -236,7 +235,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             tv_backTitlebar_title.setVisibility(View.VISIBLE);
             tv_backTitlebar_title.setTextColor(Color.argb((int)alpha,255,255,255));
             tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rlToolbar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
+            rltToolbar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
         }
     }
 }

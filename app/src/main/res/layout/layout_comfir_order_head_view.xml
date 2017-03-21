@@ -83,8 +83,7 @@
 
         <ImageView
             android:id="@+id/iv_ConfirmOrederActtivity_store"
-            style="@style/icon_normal"
-            android:src="@mipmap/ic_location" />
+            style="@style/icon_normal"/>
 
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_stroeName"

@@ -54,7 +54,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_OnlinePayment_canclePayment"
+                android:id="@+id/btn_OnlinePayment_cancelPayment"
                 style="@style/button_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -70,7 +70,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_OnlinePayment_comfirmPayment"
+                android:id="@+id/btn_OnlinePayment_confirmPayment"
                 style="@style/button_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
