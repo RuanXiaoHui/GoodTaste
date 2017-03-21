@@ -56,7 +56,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(R.string.activity_onlinePayment_title);
         intent = getIntent();
         //订单id
-        orderId = intent.getStringExtra("orderId");
+        orderId = intent.getStringExtra(INTENT_ORDER_ID);
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);

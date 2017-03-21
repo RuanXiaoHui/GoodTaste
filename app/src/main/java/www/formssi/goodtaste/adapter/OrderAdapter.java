@@ -71,7 +71,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, OnlinePaymentActivity.class));//点击去支付去往支付页面
+                        Intent intent = new Intent(context,OnlinePaymentActivity.class);
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_ID, list.get(position).getOrderId());
+                        intent.putExtra(ConstantConfig.INTENT_STORE_NAME, list.get(position).getShopName());
+                        intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, list.get(position).getActualPayment());
+                        context.startActivity(intent);
+//                        context.startActivity(new Intent(context, OnlinePaymentActivity.class));//点击去支付去往支付页面
                     }
                 });
                 break;
