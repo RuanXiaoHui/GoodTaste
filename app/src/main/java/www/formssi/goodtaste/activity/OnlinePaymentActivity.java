@@ -7,9 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 
 /**
  * 在线支付页面
@@ -22,21 +27,34 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private TextView tvTitle; //标题
     private TextView tvStoreName;//店名
     private TextView tvPrice;//总金额
-    private Button btnComfirmPayment; //确认支付
-    private Button btnCanclePayment; //取消支付
+    private Button btnConfirmPayment; //确认支付
+    private Button btnCancelPayment; //取消支付
     private Intent intent;
+    private String orderId; //订单id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
         DataBaseSQLiteUtil.openDataBase();
-        bindViews();
+    }
+
+    @Override
+    protected void initView() {
+        ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
+        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePayment_storeName);
+        tvPrice = (TextView) findViewById(R.id.tv_OnlinePayment_price);
+        btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePayment_confirmPayment);
+        btnCancelPayment = (Button) findViewById(R.id.btn_OnlinePayment_cancelPayment);
+    }
+
+    @Override
+    protected void initData() {
         tvTitle.setText(R.string.activity_onlinePayment_title);
         intent = getIntent();
         //订单id
-        String orderId = intent.getStringExtra("orderId");
-        DataBaseSQLiteUtil.payOrder(orderId);
+        orderId = intent.getStringExtra("orderId");
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);
@@ -45,20 +63,11 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvPrice.setText("¥" + totalPay);
     }
 
-    /**
-     * 初始化、绑定控件
-     */
-    private void bindViews() {
-        ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
-        tvStoreName = (TextView) findViewById(R.id.tv_OnlinePayment_storeName);
-        tvPrice = (TextView) findViewById(R.id.tv_OnlinePayment_price);
-        btnComfirmPayment = (Button) findViewById(R.id.btn_OnlinePayment_comfirmPayment);
-        btnCanclePayment = (Button) findViewById(R.id.btn_OnlinePayment_canclePayment);
-
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
-        btnComfirmPayment.setOnClickListener(this);
-        btnCanclePayment.setOnClickListener(this);
+        btnConfirmPayment.setOnClickListener(this);
+        btnCancelPayment.setOnClickListener(this);
     }
 
     /**
@@ -73,22 +82,24 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_comfirmPayment: //确认支付
-//                if(){
-                intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
-//                }else if(){
-//                    intent = new Intent(OnlinePaymentActivity.this,PayFailureActivity.class); //支付失败
-//                }
+            case R.id.btn_OnlinePayment_comfirmPayment: //确认支付按钮
+                int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
+                if (payOrder > 0) {
+                    intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
+                    intent.putExtra(INTENT_ORDER_ID, orderId);
+                } else {
+                    intent = new Intent(OnlinePaymentActivity.this, PayFailureActivity.class); //支付失败
+                }
                 startActivity(intent);
+                this.finish();
                 break;
 
-            case R.id.btn_OnlinePayment_canclePayment: //取消支付
+            case R.id.btn_OnlinePayment_canclePayment: //取消支付按钮
                 this.finish();
                 break;
 
             default:
                 break;
         }
-
     }
 }

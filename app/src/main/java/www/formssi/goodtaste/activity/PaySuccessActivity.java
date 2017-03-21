@@ -10,6 +10,8 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+
 /**
  * 支付成功页面
  * Created by john on 2017/3/20.
@@ -20,23 +22,33 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
     private Button btnPaySuccess; //确定
+    private String orderId;//订单id
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
-        bindViews();
-        tvTitle.setText(R.string.activity_paySuccess_title);
     }
 
-    /**
-     * 初始化、绑定控件
-     */
-    private void bindViews() {
+    @Override
+    protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         btnPaySuccess = (Button) findViewById(R.id.btn_paySuccess);
+    }
 
+    @Override
+    protected void initData() {
+        //设置标题
+        tvTitle.setText(R.string.activity_paySuccess_title);
+        //获取订单Id
+        intent = getIntent();
+        orderId = intent.getStringExtra(INTENT_ORDER_ID);
+    }
+
+    @Override
+    protected void initListener() {
         ivBack.setOnClickListener(this);
         btnPaySuccess.setOnClickListener(this);
     }
@@ -54,13 +66,14 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_paySuccess:  //确定按钮
+                Intent intent = new Intent(PaySuccessActivity.this,OrderDetailActivity.class);
+                intent.putExtra(INTENT_ORDER_ID,orderId);
+                startActivity(intent);
                 this.finish();
-//                Intent intent = new In
                 break;
 
             default:
                 break;
         }
-
     }
 }
