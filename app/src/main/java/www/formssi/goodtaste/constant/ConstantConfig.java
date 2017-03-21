@@ -20,6 +20,8 @@ public final class ConstantConfig {
     public static final int CALL_PHONE_REQUEST_CODE = 0x1000; // 拨号权限请求码
 
     public static final String INTENT_ORDER_ID = "OrderId";//orderFragment跳转到orderDetailActivity携带订单id的key
+    public static final String INTENT_STORE_NAME = "storeName";//storeName key
+    public static final String INTENT_ACTUAL_PAYMENT = "totalPay";//storeName key
 
 
     /**

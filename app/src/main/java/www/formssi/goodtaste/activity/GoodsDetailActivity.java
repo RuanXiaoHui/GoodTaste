@@ -15,10 +15,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -28,53 +30,48 @@ import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
+import static www.formssi.goodtaste.R.id.btnSubmintOrder;
+
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
-    private CustomScrollView scLayoutView;
-    private RelativeLayout rlView;
-    private ListView lvLeftMenu;
-    private ListView lvRightFoods;
-    private ShopBean mShopBean;
-    private List<GoodsMenu> mLeftMenu;
-    private List<FoodBean> mFoodBean;
-    private List<FoodBean> mRefreshBean;
-    private ImageView iv_backTitlebar_back;
-    private RelativeLayout rlToobar;
-    private TextView tv_backTitlebar_title;
-    private ImageView ivCar;                   //购物车的img
-    private ImageView ivShopimg;               //商店图片
-    private TextView ivShopTime;              //配送时间
-    private TextView ivShopDesc;              //店铺描述
+    private CustomScrollView scLayoutView;   //滑动的ScrollView
+    private RelativeLayout rlView;           //店铺背景布局
+    private ListView lvLeftMenu;             //左侧菜单的ListView
+    private ListView lvRightFoods;           //右侧的商品列表的ListView
+    private ShopBean mShopBean;              //商店的Bean
+    private List<GoodsMenu> mLeftMenu;       //左侧菜单的ListView数据源
+    private List<FoodBean> mFoodBean;        //右侧商品的ListView数据源
+    private List<FoodBean> mRefreshBean;     //右侧筛选商品的ListView数据源
+    private ImageView iv_backTitlebar_back;  //顶部的返回按钮
+    private RelativeLayout rlToolbar;        //顶部的TitleBar布局
+    private TextView tv_backTitlebar_title;  //顶部Title的标题
+    private ImageView ivCar;                 //购物车的img
+    private ImageView ivShopimg;             //商店图片
+    private TextView ivShopTime;             //配送时间
+    private TextView ivShopDesc;             //店铺描述
     private TextView ivShopBusinessHours;    //营业时间
-    private Button   btnSubmintOrder;        //下单按钮
+    private Button   btnSubmitOrder;         //下单按钮
     private TextView tvGoodsMoney;           //商品钱数
     private TextView tvShopMoney;            //配送费
-    private TextView tv_backTitlebar_center_title;   //商店标题
-    private ShopDataAdapter Adapter;
-    private List<FoodBean> mFoodbConfirm;
-    private int Money=0;
-    private int mHeight=0;
-
-    private Animation mCarAnimaton;
+    private ShopDataAdapter mShopDataAdapter;//商店商品的适配器
+    private List<FoodBean> mFoodConfirm;     //商店购物车
+    private int Money=0;                     //购买的总钱数
+    private int mHeight=0;                   //顶部背景图片的高度
+    private Animation mCarAnimation=null;    //购物车的添加购物动画
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_detail);
-        initView();
-        initScrollView();
-        initData();
-        initListener();
-
     }
 
-    private void initView() {
+    @Override
+    protected  void initView() {
         scLayoutView= (CustomScrollView) findViewById(R.id.scLayoutView);
         rlView= (RelativeLayout) findViewById(R.id.rlView);
-        rlToobar= (RelativeLayout) findViewById(R.id.rlToobar);
+        rlToolbar= (RelativeLayout) findViewById(R.id.rlToolbar);
         tv_backTitlebar_title= (TextView) findViewById(R.id.tv_backTitlebar_title);
-
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
         ivShopimg= (ImageView) findViewById(R.id.ivShopimg);
@@ -85,14 +82,16 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         tvGoodsMoney= (TextView) findViewById(R.id.tvGoodsMoney);
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
         ivCar= (ImageView) findViewById(R.id.ivCar);
-        btnSubmintOrder= (Button) findViewById(R.id.btnSubmintOrder);
-        mFoodbConfirm=new ArrayList<>();
+        btnSubmitOrder= (Button) findViewById(btnSubmintOrder);
+        mFoodConfirm=new ArrayList<>();
         scLayoutView.smoothScrollTo(0, 0);
-        btnSubmintOrder.setEnabled(false);
+        btnSubmitOrder.setEnabled(false);
         ivCar.setEnabled(false);
+        initScrollView();
     }
 
-    private void initData() {
+    @Override
+    protected  void initData() {
         mRefreshBean=new ArrayList<>();
         Intent intent=getIntent();
         mShopBean= (ShopBean) intent.getSerializableExtra("ShopBean");
@@ -104,17 +103,18 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
                 System.out.println(mFoodBean.get(i).getGoodsName());
             }
         }
-        mCarAnimaton= AnimationUtils.loadAnimation(this,R.anim.scale_goodsdetail_car);
+        mCarAnimation= AnimationUtils.loadAnimation(this,R.anim.scale_goodsdetail_car);
     }
 
-    private void initListener() {
+    @Override
+    protected  void initListener() {
         ivShopTime.setText("平均配送时间:"+mShopBean.getShopBusinessHours());
         ivShopDesc.setText("店家描述："+mShopBean.getShopDesc());
         ivShopBusinessHours.setText("营业时间："+mShopBean.getShopBusinessHours());
         tvShopMoney.setText("另需配送费"+mShopBean.getShopMoney()+"元");
         lvLeftMenu.setAdapter(new ShopMenuAdapter(mLeftMenu,this));
-        Adapter= new ShopDataAdapter(mRefreshBean,this);
-        lvRightFoods.setAdapter(Adapter);
+        mShopDataAdapter= new ShopDataAdapter(mRefreshBean,this);
+        lvRightFoods.setAdapter(mShopDataAdapter);
         setListViewHeightBasedOnChildren(lvRightFoods);
 
         lvLeftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,44 +128,42 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
                         data.add(mFoodBean.get(i));
                     }
                 }
-                Adapter.addData(data);
+                mShopDataAdapter.addData(data);
             }
         });
 
-        Adapter.setOnExtralClickListener(new ShopDataAdapter.OnExtralClickListener() {
+        mShopDataAdapter.setOnExtralClickListener(new ShopDataAdapter.OnExtralClickListener() {
             @Override
             public void onClickMoney(int vue, Map<String, FoodBean> beans) {
                 tvGoodsMoney.setText("￥"+vue+"元");
-
                 //判断一下，如果金额比之前的大，也就是点击了添加按钮，那么就会启动动画
                 if (vue>Money){
-                    ivCar.startAnimation(mCarAnimaton);
+                    ivCar.startAnimation(mCarAnimation);
                 }
-
                 Money=vue;
                 if (vue==0){
-                    btnSubmintOrder.setEnabled(false);
+                    btnSubmitOrder.setEnabled(false);
                     ivCar.setEnabled(false);
-                    btnSubmintOrder.setTextColor(getResources().getColor(R.color.gray));
+                    btnSubmitOrder.setTextColor(getResources().getColor(R.color.gray));
                 }else{
-                    btnSubmintOrder.setEnabled(true);
+                    btnSubmitOrder.setEnabled(true);
                     ivCar.setEnabled(true);
-                    btnSubmintOrder.setTextColor(getResources().getColor(R.color.white));
+                    btnSubmitOrder.setTextColor(getResources().getColor(R.color.white));
                 }
-                mFoodbConfirm.clear();
+                mFoodConfirm.clear();
                 for (Map.Entry<String ,FoodBean> bean:beans.entrySet()) {
-                    mFoodbConfirm.add(bean.getValue());
+                    mFoodConfirm.add(bean.getValue());
                 }
             }
         });
 
         //提交订单
-        btnSubmintOrder.setOnClickListener(new View.OnClickListener() {
+        btnSubmitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(GoodsDetailActivity.this,ConfirmOrderActivity.class);
                 intent.putExtra("ShopBeans",mShopBean);
-                intent.putExtra("foodBeans",(Serializable) mFoodbConfirm);
+                intent.putExtra("foodBeans",(Serializable) mFoodConfirm);
                 intent.putExtra("CountMoney",Money);
                 startActivity(intent);
             }
@@ -189,7 +187,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     }
 
-
     //初始化ScrollView，并测量顶部背景图高度
     private void initScrollView() {
         ViewTreeObserver vto = rlView.getViewTreeObserver();
@@ -204,7 +201,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     }
 
-
     public void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
@@ -216,24 +212,22 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
         }
-
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
 
-
     @Override
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
 
         if (y<=0){
-            rlToobar.setBackgroundColor(Color.argb(120,0, 149, 254));
+            rlToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
             tv_backTitlebar_title.setVisibility(View.GONE);
         }else if(y>0&&y<=mHeight/3){
             tv_backTitlebar_title.setVisibility(View.VISIBLE);
             tv_backTitlebar_title.setTextColor(Color.argb(100,255,255,255));
             tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rlToobar.setBackgroundColor(Color.argb(120,0, 149, 254));
+            rlToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
 
         }else if (y>mHeight/3&&y<mHeight){
 
@@ -242,9 +236,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             tv_backTitlebar_title.setVisibility(View.VISIBLE);
             tv_backTitlebar_title.setTextColor(Color.argb((int)alpha,255,255,255));
             tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rlToobar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
-
+            rlToolbar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
         }
-
     }
 }
