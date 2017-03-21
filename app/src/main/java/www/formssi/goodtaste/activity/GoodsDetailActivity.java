@@ -15,10 +15,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
@@ -27,6 +29,7 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.widget.CustomScrollView;
+
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
@@ -42,6 +45,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private ImageView iv_backTitlebar_back;  //顶部的返回按钮
     private RelativeLayout rltToolbar;        //顶部的TitleBar布局
     private TextView tv_backTitlebar_title;  //顶部Title的标题
+    private TextView tv_backTitlebar_center_title;
     private ImageView ivCar;                 //购物车的img
     private ImageView ivShopimg;             //商店图片
     private TextView ivShopTime;             //配送时间
@@ -72,6 +76,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitlebar_title= (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tv_backTitlebar_center_title= (TextView) findViewById(R.id.tv_backTitlebar_center_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
         ivShopimg= (ImageView) findViewById(R.id.ivShopimg);
@@ -97,6 +102,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         mShopBean= (ShopBean) intent.getSerializableExtra("ShopBean");
         mLeftMenu=mShopBean.getShopMenu();
         mFoodBean=mShopBean.getFoods();
+        tv_backTitlebar_title.setText(mShopBean.getShopName());
         for (int i = 0; i <mFoodBean.size() ; i++) {
             if (mFoodBean.get(i).getGoodsType().equals("1")){
                 mRefreshBean.add(mFoodBean.get(i));
@@ -178,13 +184,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         });
 
 
-        scLayoutView.setOnScrollView(new CustomScrollView.ScrollViewListener() {
-            @Override
-            public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
-
-            }
-        });
-
     }
 
     //初始化ScrollView，并测量顶部背景图高度
@@ -219,24 +218,27 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     @Override
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
-
         if (y<=0){
-            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
-            tv_backTitlebar_title.setVisibility(View.GONE);
-        }else if(y>0&&y<=mHeight/3){
+            rltToolbar.setBackgroundColor(Color.argb(255,0, 149, 254));
             tv_backTitlebar_title.setVisibility(View.VISIBLE);
-            tv_backTitlebar_title.setTextColor(Color.argb(100,255,255,255));
+            iv_backTitlebar_back.setVisibility(View.VISIBLE);
+            tv_backTitlebar_center_title.setVisibility(View.GONE);
+        }else if(y>0&&y<=mHeight/3){
+            double bf=((y*1.0)/mHeight);
+            double alpha=(bf*255)*3;
+            tv_backTitlebar_title.setVisibility(View.VISIBLE);
+            tv_backTitlebar_center_title.setVisibility(View.GONE);
+            tv_backTitlebar_title.setTextColor(Color.argb(255-(int)alpha,255,255,255));
             tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
-
-        }else if (y>mHeight/3&&y<mHeight){
-
+            iv_backTitlebar_back.setVisibility(View.VISIBLE);
+        }else if (y>mHeight/2&&y<mHeight){
             double bf=((y*1.0)/mHeight);
             double alpha=(bf*255);
-            tv_backTitlebar_title.setVisibility(View.VISIBLE);
-            tv_backTitlebar_title.setTextColor(Color.argb((int)alpha,255,255,255));
-            tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rltToolbar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
+            tv_backTitlebar_title.setVisibility(View.INVISIBLE);
+            tv_backTitlebar_center_title.setVisibility(View.VISIBLE);
+            tv_backTitlebar_center_title.setTextColor(Color.argb((int)alpha,255,255,255));
+            tv_backTitlebar_center_title.setText(mShopBean.getShopName());
+            iv_backTitlebar_back.setVisibility(View.INVISIBLE);
         }
     }
 }
