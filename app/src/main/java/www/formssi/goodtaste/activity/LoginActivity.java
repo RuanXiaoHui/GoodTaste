@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                 UserBean userBean = DataBaseSQLiteUtil.userLogin(telephone1, pass);
                 DataBaseSQLiteUtil.closeDataBase();
                 if (userBean != null) {
-
                     //登录设置
                     SharedPreferences.Editor editor = mContextSharedPreferences.edit();
                     editor.putString("telephone", telephone1);

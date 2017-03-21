@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.fragment.MineFragment;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 public class UpdateUserNameActivity extends AppCompatActivity {
 
@@ -20,11 +22,13 @@ public class UpdateUserNameActivity extends AppCompatActivity {
     private EditText etUpdateUsername;
     private Button btnUpdate;
     private ImageView ivReturn; //返回
+    private UserBean userBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user_name);
+        userBean = (UserBean) getIntent().getSerializableExtra("user");
         etUpdateUsername = (EditText) findViewById(R.id.et_update_username);
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         tvTitle.setText("修改用户名");
@@ -41,11 +45,16 @@ public class UpdateUserNameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String contents = etUpdateUsername.getText().toString();
                 if (!TextUtils.isEmpty(contents)) {
+
+                    DataBaseSQLiteUtil.openDataBase();
+                    DataBaseSQLiteUtil.updateUserName(userBean.getPhoneNumber(), contents);
+                    DataBaseSQLiteUtil.closeDataBase();
+
                     Intent intent = new Intent(MineFragment.MY_ACTION);
                     intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_USERNAME);
                     intent.putExtra(MineFragment.MyReceiver.RESULT, contents);
                     sendBroadcast(intent);
-                    setResult(RESULT_OK,intent);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
             }

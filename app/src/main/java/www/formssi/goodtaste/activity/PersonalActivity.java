@@ -142,6 +142,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.rl_personal_username: //更新用户名
                 Intent intent = new Intent(this, UpdateUserNameActivity.class);
+                intent.putExtra("user",user);
                 startActivityForResult(intent, REQ_USERNAME);
                 break;
 

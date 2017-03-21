@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="订单"
+            android:text="@string/activity_main_taborder"
             style="@style/text_large_white" />
     </RelativeLayout>
 
