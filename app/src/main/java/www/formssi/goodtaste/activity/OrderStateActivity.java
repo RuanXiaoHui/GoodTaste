@@ -73,7 +73,6 @@ public class OrderStateActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_backTitlebar_back:
-//                startActivity(new Intent(OrderStateActivity.this, OrderDetailActivity.class));
                 finish();
                 break;
         }
