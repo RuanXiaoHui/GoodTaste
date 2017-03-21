@@ -33,52 +33,30 @@ import static android.content.ContentValues.TAG;
  */
 public class OrderFragment extends Fragment implements View.OnClickListener {
 
-    RecyclerView rvOrderList;//显示所有订单的recycle人view
-    List<OrderBean> orders;//数据源
-    OrderAdapter orderAdapter;//适配器
-    LinearLayout lltNoOrder;//没有订单时显示的布局
-    Button btnGoSingle;//没有订单时显示的按钮
-    LinearLayout lltNotPay;//未支付的父布局
-    LinearLayout lltNotDelivery;//未配送的父布局
-    LinearLayout lltDeliveryIng;//送餐中的父布局
-    LinearLayout lltNotComment;//未评论的父布局
-    LinearLayout lltFinish;//已完成的父布局
+    private RecyclerView rvOrderList;//显示所有订单的recycle人view
+    private List<OrderBean> orders;//数据源
+    private OrderAdapter orderAdapter;//适配器
+    private LinearLayout lltNoOrder;//没有订单时显示的布局
+    private Button btnGoSingle;//没有订单时显示的按钮
+    private LinearLayout lltNotPay;//未支付的父布局
+    private LinearLayout lltNotDelivery;//未配送的父布局
+    private LinearLayout lltDeliveryIng;//送餐中的父布局
+    private LinearLayout lltNotComment;//未评论的父布局
+    private LinearLayout lltFinish;//已完成的父布局
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order, null);
         initView(v);
-        setOnClick();
-//        DataBaseSQLiteUtil.insertOrder();//测试
-        orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
-        if (orders.size() == 0) {//没有订单,则显示的布局
-            rvOrderList.setVisibility(View.GONE);
-            lltNoOrder.setVisibility(View.VISIBLE);
-
-        } else {//有订单时显示的布局
-            orderAdapter = new OrderAdapter(orders, getContext());
-            rvOrderList.setLayoutManager(new LinearLayoutManager(getContext()));
-            rvOrderList.setAdapter(orderAdapter);
-        }
-
+        initListener();
+        initData();
         return v;
     }
 
     /**
-     * 为控件添加监听事件
-     */
-    private void setOnClick() {
-        lltNotPay.setOnClickListener(this);
-        lltNotDelivery.setOnClickListener(this);
-        lltDeliveryIng.setOnClickListener(this);
-        lltNotComment.setOnClickListener(this);
-        lltFinish.setOnClickListener(this);
-        btnGoSingle.setOnClickListener(this);
-    }
-
-    /**
      * 初始化控件
+     *
      * @param v
      */
     private void initView(View v) {
@@ -92,6 +70,32 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         lltFinish = (LinearLayout) v.findViewById(R.id.lltFinish);
     }
 
+    /**
+     * 为控件添加监听事件
+     */
+    private void initListener() {
+        lltNotPay.setOnClickListener(this);
+        lltNotDelivery.setOnClickListener(this);
+        lltDeliveryIng.setOnClickListener(this);
+        lltNotComment.setOnClickListener(this);
+        lltFinish.setOnClickListener(this);
+        btnGoSingle.setOnClickListener(this);
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
+        if (orders.size() == 0) {//没有订单,则显示的布局
+            rvOrderList.setVisibility(View.GONE);
+            lltNoOrder.setVisibility(View.VISIBLE);
+        } else {//有订单时显示的布局
+            orderAdapter = new OrderAdapter(orders, getContext());
+            rvOrderList.setLayoutManager(new LinearLayoutManager(getContext()));
+            rvOrderList.setAdapter(orderAdapter);
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -102,30 +106,28 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                     ((MeOnClickListener) getActivity()).onBtnGoSingleClick();
                 }
                 break;
-            case R.id.lltNotPay://未支付,点击是进入OrderStateActivity,并且传入相应的参数,使进入界面为相应的界面
+            case R.id.lltNotPay://未支付
                 intent.putExtra("stateNum", OrderState.NOT_PAY);
                 startActivity(intent);
                 break;
-            case R.id.lltNotDelivery://未发货,同上
+            case R.id.lltNotDelivery://未发货 
                 intent.putExtra("stateNum", OrderState.NOT_DELIVERY);
                 startActivity(intent);
                 break;
-            case R.id.lltDeliveryIng://送餐中,同上
+            case R.id.lltDeliveryIng://送餐中 
                 intent.putExtra("stateNum", OrderState.DELIVERY_ING);
                 startActivity(intent);
                 break;
-            case R.id.lltNotComment://未评论,同上
+            case R.id.lltNotComment://未评论 
                 intent.putExtra("stateNum", OrderState.NOT_COMMENT);
                 startActivity(intent);
                 break;
-            case R.id.lltFinish://已完成,同上
+            case R.id.lltFinish://已完成 
                 intent.putExtra("stateNum", OrderState.FINISH);
                 startActivity(intent);
                 break;
         }
-
     }
-
 
     /**
      * 去下单按钮回调接口
