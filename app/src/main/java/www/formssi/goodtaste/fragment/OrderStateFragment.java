@@ -22,14 +22,13 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 public class OrderStateFragment extends Fragment {
 
 
-    RecyclerView rlvOrderState;//分类订单显示的列表
-    OrderAdapter orderAdapter;//分类订单的adapter
-    LinearLayout lltNoOrder;//没有订单时的父布局
-    List<OrderBean> orders;//数据源
-    int state = 0;//进入视图时显示的fragment
+    private RecyclerView rlvOrderState;//分类订单显示的列表
+    private OrderAdapter orderAdapter;//分类订单的adapter
+    private LinearLayout lltNoOrder;//没有订单时的父布局
+    private List<OrderBean> orders;//数据源
+    private int state = 0;//进入视图时显示的fragment
 
     /**
-     *
      * @param state 进入视图时显示的fragment
      */
     public OrderStateFragment(int state) {
@@ -41,8 +40,22 @@ public class OrderStateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
+        initView(v);
+        initData();
+        return v;
+    }
+
+    private void initView(View v) {
         rlvOrderState = (RecyclerView) v.findViewById(R.id.rlvOrderState);
         lltNoOrder = (LinearLayout) v.findViewById(R.id.lltNoOrder);
+    }
+
+
+//    private void initView(){
+//
+//    }
+
+    private void initData(){
         orders = DataBaseSQLiteUtil.queryOrder(state);
         if (orders.size() == 0) {
             rlvOrderState.setVisibility(View.GONE);
@@ -53,7 +66,6 @@ public class OrderStateFragment extends Fragment {
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
-        return v;
     }
 
 }

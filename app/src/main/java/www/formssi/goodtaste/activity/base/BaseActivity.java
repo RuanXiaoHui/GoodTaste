@@ -8,10 +8,19 @@ import android.support.v7.app.AppCompatActivity;
  * 邮箱：769006026@qq.com
  * project: GoodTaste
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
+        initData();
+        initListener();
+
     }
+
+
+    protected abstract void initView();         //初始化View
+    protected abstract void initData();        //初始化数据
+    protected abstract void initListener();    //初始化事件
 }

@@ -21,11 +21,14 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.AddressAdapter;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
+import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
 
 /**
  * 收货地址列表页面
@@ -33,7 +36,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
  * Created by john on 2017/3/16.
  */
 
-public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemLongClickListener{
+public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "ReceiveAddressActivity";
     private ImageView ivBack; //返回
@@ -41,9 +44,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     private ListView lvAddress; //地址列表
     private LinearLayout llt_ReceiveAddressActivity_addAddress; //新增地址栏
 
-    private List<Object> list;  //对象列表
-    private AddressBean addressBean; // 地址实体类
-    private  int addressId; //当前选中得item项位置
+    private List<AddressBean> addressBeanList = new ArrayList<>();  //对象列表
     private AddressAdapter addressAdapter; //适配器
     private Intent intent;
 
@@ -51,11 +52,10 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_address);
-
+        DataBaseSQLiteUtil.openDataBase();
         bindViews();
         tvTitle.setText(R.string.activity_receiveAddress_title);
         operateListView();
-
     }
 
     /**
@@ -70,21 +70,23 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         ivBack.setOnClickListener(this);
         llt_ReceiveAddressActivity_addAddress.setOnClickListener(this);
         lvAddress.setOnItemLongClickListener(this);
+        lvAddress.setOnItemClickListener(this);
     }
 
     /**
      * 点击事件
+     *
      * @param v
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_backTitlebar_back: //返回
                 this.finish();
                 break;
             case R.id.llt_ReceiveAddressActivity_addAddress: //新增地址
-                intent = new Intent(ReceiveAddressActivity.this,AddNewAddressActivity.class);
-                startActivityForResult(intent,ADD_NEW_ADREES_REQUEST);
+                intent = new Intent(ReceiveAddressActivity.this, AddNewAddressActivity.class);
+                startActivityForResult(intent, ADD_NEW_ADREES_REQUEST);
                 break;
             default:
                 break;
@@ -92,33 +94,29 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * 创建唯一id，可用来标识每个地址项
-     * @return
-     */
-    private String createAddressID() {
-        int hashCode = UUID.randomUUID().hashCode();
-        return Integer.toHexString(hashCode);
-    }
-
-    /**
      * 对ListView的操作
      */
     private void operateListView() {
         //添加数据
-        list = new ArrayList<Object>();
-        list.add(new AddressBean("",createAddressID(),"微微","女士","18376614562","深圳市罗湖XXXXX",false));
-        list.add(new AddressBean("",createAddressID(),"哈哈","女士","18376614562","深圳市罗湖XXXXX",false));
-        list.add(new AddressBean("",createAddressID(),"呵呵","女士","18376614562","深圳市罗湖XXXXX",false));
-        list.add(new AddressBean("",createAddressID(),"微微","女士","18376614562","深圳市罗湖XXXXX",false));
-        list.add(new AddressBean("",createAddressID(),"哈哈","女士","18376614562","深圳市罗湖XXXXX",false));
-        list.add(new AddressBean("",createAddressID(),"呵呵","女士","18376614562","深圳市罗湖XXXXX",false));
-        //添加适配器
-        addressAdapter = new AddressAdapter(list, ReceiveAddressActivity.this);
+        UserBean userBean = new UserBean();
+        userBean.setUserId("1");
+        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId())); // 根据地址id获取用户保存的地址列表
+        addressAdapter = new AddressAdapter(addressBeanList, this);
         lvAddress.setAdapter(addressAdapter);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        UserBean userBean = new UserBean();
+        userBean.setUserId("1");
+        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
+        addressAdapter.notifyDataSetChanged();
     }
 
     /**
      * 长按列表项，删除地址
+     *
      * @param parent
      * @param view
      * @param position
@@ -131,6 +129,26 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         return true;
     }
 
+    /**
+     * 点击列表项，选择收货地址
+     *
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        intent = new Intent();
+        AddressBean addressBean = addressBeanList.get(position);
+        intent.putExtra("name", addressBean.getName());
+        intent.putExtra("gender", addressBean.getGender());
+        intent.putExtra("phone", addressBean.getPhone());
+        intent.putExtra("address", addressBean.getAddress());
+        setResult(OREDER_REDDRESS_RESULT, intent);
+        this.finish();
+    }
+
     private void createDialog(final int position) {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(ReceiveAddressActivity.this);
@@ -140,7 +158,8 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                list.remove(position);
+                AddressBean addressBean = addressBeanList.remove(position);
+                DataBaseSQLiteUtil.userDeleteAddressById(addressBean.getAddressId());
                 addressAdapter.notifyDataSetChanged();
             }
         });
@@ -157,6 +176,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
 
     /**
      * 新增收货地址的返回结果处理
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -164,28 +184,28 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ADD_NEW_ADREES_REQUEST && resultCode == ADD_NEW_ADREES_RESULT){
+        if (data != null) {
+            if (requestCode == ADD_NEW_ADREES_REQUEST && resultCode == ADD_NEW_ADREES_RESULT) { //新增地址
 
-            String name = data.getStringExtra("name");
-            String gender = data.getStringExtra("gender");
-            String phone = data.getStringExtra("phone");
-            String address = data.getStringExtra("address");
-            Log.e(TAG, name+gender+phone+address);
+                String name = data.getStringExtra("name");
+                String gender = data.getStringExtra("gender");
+                String phone = data.getStringExtra("phone");
+                String address = data.getStringExtra("address");
+                Log.e(TAG, name + gender + phone + address);
 
-            //把填写的地址添加到列表中
-            list.add(new AddressBean("",createAddressID(),name,gender,phone,address,false));
-            addressAdapter.notifyDataSetChanged();
-            lvAddress.setSelection(list.size() - 1);
-
-        }else if((requestCode == EDIT_ADREES_REQUEST && resultCode == EDIT_ADREES_RESULT)){
-
-            Bundle bundle = data.getBundleExtra("returnEditAddressBeanBunlde");
-            AddressBean addressBean = (AddressBean) bundle.getSerializable("returnEditAddressBean");
-            int returnEditPosition = bundle.getInt("returnEditPosition");
-//            int addressId = Integer.parseInt(addressBean.getAddressId());
-            list.set(returnEditPosition,addressBean);
-            addressAdapter.notifyDataSetChanged();
-
+                //把填写的地址添加到列表中
+                AddressBean addressBean = new AddressBean("1", "1", name, gender, phone, address);
+                addressBeanList.add(addressBean);
+                addressAdapter.notifyDataSetChanged();
+                lvAddress.setSelection(addressBeanList.size() - 1);
+                DataBaseSQLiteUtil.userInsertAddress(addressBean);
+            } else if ((requestCode == EDIT_ADREES_REQUEST && resultCode == EDIT_ADREES_RESULT)) {  //编辑地址
+                Bundle bundle = data.getBundleExtra("returnEditAddressBeanBunlde");
+                AddressBean addressBean = (AddressBean) bundle.getSerializable("returnEditAddressBean");
+                DataBaseSQLiteUtil.userEditAddress(addressBean);
+                addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(addressBean.getUserId()));
+                addressAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

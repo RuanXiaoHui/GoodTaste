@@ -102,7 +102,6 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
             default:
                 break;
         }
-
     }
 
     @Override

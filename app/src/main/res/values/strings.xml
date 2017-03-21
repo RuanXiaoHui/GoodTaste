@@ -5,6 +5,17 @@
 
     <string name="commom_ok">确定</string>
     <string name="commom_cancle">取消</string>
+    <!-- 动态权限申请 -->
+    <string name="common_user_refuse_granted">用户拒绝了授权</string>
+    <string name="common_user_already_granted">用户已经授权了</string>
+    <string name="common_call_phone_not_granted">拨号权限未曾授权</string>
+
+    <string name="common_shop_default_phone">82258300</string>
+    <!-- 符号 -->
+    <string name="common_rmb_sign">¥</string>
+    <string name="common_multiple_sign">×</string>
+    <!-- 单位 -->
+    <string name="common_rmb_unit">元</string>
 
     <string name="activity_main_tabhome">主页</string>
     <string name="activity_main_taborder">订单</string>
@@ -12,6 +23,7 @@
 
     <!--确认订单页面-->
     <string name="activity_confirmOrder_title">确认订单</string>
+    <string name="activity_confirmOrder_addAddress">新增地址</string>
     <string name="activity_confirmOrder_distributionCost">配送费</string>
     <string name="activity_confirmOrder_orderNote">口味、偏好</string>
     <string name="activity_confirmOrder_orderRemarks">订单备注</string>
@@ -46,7 +58,8 @@
     <!--支付成功页面-->
     <string name="activity_payFailure_title">支付失败</string>
     <string name="activity_payFailure_failure">支付失败！</string>
-
+    <!-- 订单详情页面 -->
+    <string name="activity_order_my">我的订单</string>
     <string name="activity_order_info">订单信息</string>
     <string name="activity_order_status">订单状态</string>
     <string name="activity_order_complete">订单已完成</string>

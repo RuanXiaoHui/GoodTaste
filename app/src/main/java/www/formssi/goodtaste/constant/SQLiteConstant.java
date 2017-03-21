@@ -24,7 +24,7 @@ public class SQLiteConstant {
     public static final String COLUMN_USER_PHONE = "phone"; // 手机号
     public static final String COLUMN_USER_SEX = "sex"; // 性别
     public static final String COLUMN_LOGIN_PWD = "loginPwd"; // 登录密码
-    public static final String COLUMN_PAY_PWD = "pay_pwd"; // 支付密码
+    public static final String COLUMN_PAY_PWD = "payPwd"; // 支付密码
     public static final String COLUMN_USER_IMG_PATH = "userImgPath"; // 头像路径
 
     //商店表字段
@@ -87,7 +87,7 @@ public class SQLiteConstant {
             COLUMN_ORDER_TOTAL_MONEY + " varchar(10),", COLUMN_DISC_MONEY + " varchar(10),", COLUMN_ACTUAL_PAY
             + " varchar(10),", COLUMN_ORDER_NUMBER + " varchar(50),", COLUMN_ORDER_CONTENT + " varchar(50),",
             COLUMN_PAY_TIME + " varchar(50),", COLUMN_ORDER_TIME + " varchar(50),", COLUMN_ADDRESS_ID
-            + " integer,", COLUMN_SHOP_ID + " integer"};
+            + " integer,", COLUMN_PACK_FEE + " varchar(10),", COLUMN_SHOP_ID + " integer"};
     // 订单详情表的列名数组
     public static final String[] TABLE_ORDER_DETAIL_COLUMNS = new String[]{COLUMN_ORDER_DETAIL_ID,
             COLUMN_ORDER_NUMBER + " varchar(50),", COLUMN_FOOD_ID + " integer,", COLUMN_FOOD_NAME +

@@ -14,10 +14,14 @@ public final class ConstantConfig {
     public static final int ADD_NEW_ADREES_RESULT = 0x0004; // 新增地址结果码
     public static final int EDIT_ADREES_REQUEST = 0x0005; // 修改地址请求码
     public static final int EDIT_ADREES_RESULT = 0x0006; // 修改地址结果码
+    public static final int OREDER_REDDRESS_REQUEST = 0x0007; // 选择收货地址请求码
+    public static final int OREDER_REDDRESS_RESULT = 0x0008; // 选择收货地址结果码
 
     public static final int CALL_PHONE_REQUEST_CODE = 0x1000; // 拨号权限请求码
 
     public static final String INTENT_ORDER_ID = "OrderId";//orderFragment跳转到orderDetailActivity携带订单id的key
+    public static final String INTENT_STORE_NAME = "storeName";//storeName key
+    public static final String INTENT_ACTUAL_PAYMENT = "totalPay";//storeName key
 
 
     /**

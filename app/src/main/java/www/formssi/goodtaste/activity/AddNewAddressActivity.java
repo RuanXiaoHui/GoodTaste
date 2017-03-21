@@ -81,8 +81,6 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 intent.putExtra("phone", etPhone.getText().toString());
                 intent.putExtra("address", etAddress.getText().toString());
                 setResult(ADD_NEW_ADREES_RESULT, intent);
-                Log.e("name", etName.getText().toString());
-
                 finish();
                 break;
 
