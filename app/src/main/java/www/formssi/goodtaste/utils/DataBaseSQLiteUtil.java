@@ -322,6 +322,61 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
+     * 根据用户手机查询用户
+     *
+     * @param tel
+     * @return null or user
+     */
+    public static UserBean queryUserByTel(String tel) {
+        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
+        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
+
+//        Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, null, null, null, null, null);
+        int resultCounts = cursor.getCount();
+        if (resultCounts == 0 || !cursor.moveToFirst()) {
+            return null;
+        }
+        UserBean bean = new UserBean();
+        for (int i = 0; i < resultCounts; i++) {
+            bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
+            bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
+            bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
+            bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
+            cursor.moveToNext();
+        }
+        return bean;
+    }
+
+    /**
+     * 根据手机号修改用户名
+     *
+     * @param tel
+     * @param name
+     * @return true if success
+     */
+    public static boolean updateUserName(String tel, String name) {
+//        String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NAME, name);
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        return update > 0 ? true : false;
+    }
+
+    /**
+     * 根据旧手机号修改新手机号
+     *
+     * @param tel
+     * @param newtel
+     * @return true if success
+     */
+    public static boolean updateUserPhone(String tel, String newtel) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_PHONE, newtel);
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        return update > 0 ? true : false;
+    }
+
+    /**
      * 用户添加地址
      *
      * @param bean

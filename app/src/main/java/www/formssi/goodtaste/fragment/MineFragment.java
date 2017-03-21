@@ -46,20 +46,19 @@ import static android.R.attr.imageButtonStyle;
 public class MineFragment extends Fragment implements View.OnClickListener {
 
     public static final String MY_ACTION = "com.formssi.mine";
-    private static final String TAG = "MineFragment";
 
     private ImageView ivSetting; //设置图标
     private RelativeLayout rlPersonal; //个人中心
     private TextView tvAddress; //收货地址
     private TextView tvUserName; //用户名
     private TextView tvPhoneNum; //电话号码
-    private ImageView ivHeadPicture;
+    private ImageView ivHeadPicture; // 用户头像
 
     private Context mContext;
     private UserBean userBean;
-    private boolean hasLogin;
+    private boolean hasLogin; // 判断用户是否登录
     private String telephone;
-    private BroadcastReceiver mReceive;
+    private BroadcastReceiver mReceive; //接收用户信息改变的广播
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,6 +126,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * 根据手机号获取用户
+     */
     private void getUser() {
         telephone = SPUtils.getTel(getContext());
         DataBaseSQLiteUtil.openDataBase();

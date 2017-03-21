@@ -75,7 +75,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 editor.commit();
                 Intent intent = new Intent(MineFragment.MY_ACTION)
                         .putExtra("login", false)
-                        .putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_LOGIN_STATE);
+                        .putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_LOGOUT);
                 sendBroadcast(intent);
                 finish();
                 break;

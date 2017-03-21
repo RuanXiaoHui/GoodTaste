@@ -1,12 +1,9 @@
 package www.formssi.goodtaste.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +12,6 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.bean.UserBean;
-import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.SPUtils;

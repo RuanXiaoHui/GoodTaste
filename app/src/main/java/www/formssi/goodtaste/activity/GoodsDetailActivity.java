@@ -61,6 +61,9 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_detail);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override

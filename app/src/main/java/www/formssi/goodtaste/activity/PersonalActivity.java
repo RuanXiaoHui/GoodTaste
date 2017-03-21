@@ -1,6 +1,6 @@
 package www.formssi.goodtaste.activity;
 
-import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -14,22 +14,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.fragment.MineFragment;
+import www.formssi.goodtaste.utils.DialogUtils;
+import www.formssi.goodtaste.utils.ImageLoader;
+import www.formssi.goodtaste.utils.StringUtils;
 
 public class PersonalActivity extends BaseActivity implements View.OnClickListener {
 
+    public static final int REQ_CAMERA = 100; //相机请求码
     private static final int REQ_ALBUM = 200; //相册请求码
-    private static final int REQ_CARME = 100; //相机请求码
-    private static final int REQ_USERNAME = 400; //修改用户名
+    private static final int REQ_USERNAME = 300; //修改用户名
+    private static final int REQ_TEL = 400; //修改手机号
+
     private TextView tvTitle; //标题
     private TextView tvUserName; //用户名
     private TextView tvTelephone; //手机
@@ -40,8 +42,10 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout rlTelephone; //点击修改手机
     private RelativeLayout rlPayPassword; //点击修改支付密码
     private RelativeLayout rlLoginPassword; //点击登录密码
-    private File mPhotoFile; //拍照保存文件
-    private String saveDir = Environment.getExternalStorageDirectory().getPath() + "/goodtaste/";
+
+    private static String saveDir = Environment.getExternalStorageDirectory().getPath() + "/goodtaste/";
+    private static File mPhotoFile; //拍照保存文件
+    private Context mContext;
     private UserBean user;
 
     @Override
@@ -50,29 +54,11 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_personal);
         initView();
         initData();
-        fillData();
-        tvTitle.setText(R.string.fragment_personal_security);
+        initListener();
     }
 
-    private void initData() {
-        user = (UserBean) getIntent().getSerializableExtra("user");
-    }
-
-    private void fillData() {
-
-        String headProtrait = user.getHeadProtrait();
-        if (headProtrait != null) {
-            Picasso.with(this)
-                    .load(Uri.parse(headProtrait))
-                    .into(ivHeadPicture);
-        }
-        String userName = user.getUserName();
-        if (userName != null) {
-            tvUserName.setText(userName);
-        }
-    }
-
-    private void initView() {
+    @Override
+    protected void initView() {
         tvTitle = (TextView) findViewById(R.id.tv_backTitlebar_title);
         tvUserName = (TextView) findViewById(R.id.tv_personal_username);
         tvTelephone = (TextView) findViewById(R.id.tv_personal_phone);
@@ -83,7 +69,20 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
         rlTelephone = (RelativeLayout) findViewById(R.id.rl_personal_phone);
         rlPayPassword = (RelativeLayout) findViewById(R.id.rl_personal_pay_password);
         rlLoginPassword = (RelativeLayout) findViewById(R.id.rl_personal_login_password);
+    }
 
+    @Override
+    protected void initData() {
+        mContext = this;
+        tvTitle.setText(R.string.fragment_personal_security);
+        user = (UserBean) getIntent().getSerializableExtra("user");
+        ImageLoader.display(mContext, user.getHeadProtrait(), ivHeadPicture);
+        tvUserName.setText(user.getUserName());
+        tvTelephone.setText(StringUtils.hideTelephone(user.getPhoneNumber()));
+    }
+
+    @Override
+    protected void initListener() {
         ivReturn.setOnClickListener(this);
         rlPortrait.setOnClickListener(this);
         rlUsername.setOnClickListener(this);
@@ -99,65 +98,25 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.rl_personal_portrait:  //头像设置
-                AlertDialog.Builder builder = new AlertDialog.Builder(PersonalActivity.this);
-                builder.setTitle("上传头像");
-                builder.setItems(new String[]{"拍照", "从手机相册选择"},
-                        new DialogInterface.OnClickListener() {
-                            Intent intent;
-
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                switch (i) {
-                                    case 0: //拍照
-                                        String state = Environment.getExternalStorageState();
-                                        if (state.equals(Environment.MEDIA_MOUNTED)) {
-                                            mPhotoFile = new File(saveDir, "temp.jpg");
-                                            mPhotoFile.delete();
-                                            if (!mPhotoFile.getParentFile().exists()) {
-                                                try {
-                                                    mPhotoFile.getParentFile().mkdirs();
-                                                    mPhotoFile.createNewFile();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                    Toast.makeText(PersonalActivity.this, "照片创建失败!",
-                                                            Toast.LENGTH_LONG).show();
-                                                    return;
-                                                }
-                                            }
-                                        }
-                                        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
-                                        startActivityForResult(intent, REQ_CARME);
-                                        break;
-                                    case 1: //从相册选择
-                                        intent = new Intent(Intent.ACTION_PICK,
-                                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                        startActivityForResult(intent, REQ_ALBUM);
-                                        break;
-                                }
-                            }
-                        });
-                builder.show();
+                showChoiceHeadPicDialog();
                 break;
-
             case R.id.rl_personal_username: //更新用户名
                 Intent intent = new Intent(this, UpdateUserNameActivity.class);
-                intent.putExtra("user",user);
+                intent.putExtra("user", user);
                 startActivityForResult(intent, REQ_USERNAME);
                 break;
-
             case R.id.rl_personal_phone: //更改电话号码
                 Intent intent2 = new Intent(this, UpdateTelephoneActivity.class);
-                intent2.putExtra("tel",user.getPhoneNumber());
-                startActivityForResult(intent2, REQ_USERNAME);
+                intent2.putExtra("tel", user.getPhoneNumber());
+                startActivityForResult(intent2, REQ_TEL);
                 break;
             case R.id.rl_personal_login_password: //更在登录密码
                 Intent intent3 = new Intent(this, UpdateLoginPasswordActivity.class);
-                startActivityForResult(intent3, REQ_USERNAME);
+                startActivity(intent3);
                 break;
             case R.id.rl_personal_pay_password: //更改支付密码
                 Intent intent4 = new Intent(this, UpdatePayPasswordActivity.class);
-                startActivityForResult(intent4, REQ_USERNAME);
+                startActivity(intent4);
                 break;
         }
     }
@@ -174,7 +133,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra(MineFragment.MyReceiver.RESULT, uri);
                 sendBroadcast(intent);
             }
-            if (requestCode == REQ_CARME) { //相机
+            if (requestCode == REQ_CAMERA) { //相机
                 ivHeadPicture.setImageBitmap(BitmapFactory.decodeFile(mPhotoFile.getAbsolutePath()));
                 Intent intent = new Intent(MineFragment.MY_ACTION);
                 intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_CAMERA);
@@ -184,7 +143,58 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
             if (requestCode == REQ_USERNAME) { //用户名
                 tvUserName.setText(data.getStringExtra("result"));
             }
-
+            if (requestCode == REQ_TEL) { //手机号
+                tvTelephone.setText(StringUtils.hideTelephone(data.getStringExtra("result")));
+            }
         }
     }
+
+    private void showChoiceHeadPicDialog() {
+        DialogUtils.showChoiceHeadPicDialog(mContext, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case 0: //拍照
+                        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                            Toast.makeText(PersonalActivity.this, "手机存储不可用!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        mPhotoFile = new File(saveDir, "temp.jpg");
+                        if (!mPhotoFile.getParentFile().exists()) {
+                            try {
+                                mPhotoFile.getParentFile().mkdirs();
+                                mPhotoFile.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        camera();
+                        break;
+                    case 1: //从相册选择
+                        album();
+                        break;
+                }
+            }
+        }, "选择头像", "相机", "相册");
+    }
+
+    /**
+     * 调用系统相册选择照片
+     */
+    private void album() {
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQ_ALBUM);
+    }
+
+    /**
+     * 调用系统相机拍照
+     */
+    private void camera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
+        startActivityForResult(intent, REQ_CAMERA);
+    }
+
 }
