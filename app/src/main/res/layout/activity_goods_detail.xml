@@ -114,7 +114,7 @@
             android:id="@+id/ivCar"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="@mipmap/icon_car_pressed"
+            android:background="@drawable/selector_iv_car"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
 
