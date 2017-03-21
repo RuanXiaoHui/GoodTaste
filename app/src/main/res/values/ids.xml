@@ -16,6 +16,7 @@
     <item type="id" name="tv_order_discount_fee">false</item>
     <item type="id" name="tv_order_actual_pay">false</item>
     <item type="id" name="tv_order_time">false</item>
+    <item type="id" name="tv_order_arrival_time">false</item>
     <item type="id" name="tv_order_address">false</item>
     <item type="id" name="tv_order_pay_time">false</item>
     <item type="id" name="iv_order_shop_small_icon">false</item>

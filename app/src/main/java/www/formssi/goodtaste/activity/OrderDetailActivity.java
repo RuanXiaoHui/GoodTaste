@@ -51,6 +51,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView tvOrderNumber; // 订单号
     private TextView tvOrderTime; // 下单时间
     private TextView tvOrderPayTime; // 支付时间
+    private TextView tvOrderArrivalTime; // 到达时间
     private TextView tvOrderAddress; // 送餐地址
     private NoScrollListView lvFoodList; // 食品listView
     private ImageView btnBack; // 返回按钮
@@ -86,6 +87,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         tvOrderNumber = (TextView) findViewById(R.id.tv_order_number);
         tvOrderTime = (TextView) findViewById(R.id.tv_order_time);
         tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
+        tvOrderArrivalTime = (TextView) findViewById(R.id.tv_order_arrival_time);
         tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
         btnBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         btnOK = (Button) findViewById(R.id.btn_order_ok);
@@ -204,13 +206,15 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             tvOrderAddress.setText(bean.toAddressString());
             switch (Integer.parseInt(orderBean.getStatus())) {
                 case OrderState.NOT_PAY: // 未支付
-                    tvOrderStatus.setText(getString(R.string.order_state_not_pay));
+                    tvOrderStatus.setText(getString(R.string.order_state_notpay));
                     btnOK.setText(getString(R.string.activity_order_goto_pay));
-                    tvOrderPayTime.setText(getString(R.string.order_state_not_pay));
+                    tvOrderPayTime.setText(getString(R.string.order_state_notpay));
+                    tvOrderArrivalTime.setText(getString(R.string.order_state_notpay));
                     break;
                 case OrderState.NOT_DELIVERY: // 未配送
-                    tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery));
-                    btnOK.setText(getString(R.string.order_state_btn_not_delivery));
+                    tvOrderStatus.setText(getString(R.string.order_state_btn_notdelivery));
+                    btnOK.setText(getString(R.string.order_state_btn_notdelivery));
+                    tvOrderArrivalTime.setText(getString(R.string.order_state_notdelivery));
                     break;
             }
         }
