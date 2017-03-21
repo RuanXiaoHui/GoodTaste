@@ -4,28 +4,39 @@
               android:layout_height="25dp"
               android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/Sub"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/appColor"
-            android:gravity="center"
-            android:text="－"/>
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:minWidth="25dp"/>
-        <Button
-            android:id="@+id/Add"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:text="+"/>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="25dp"
+           android:orientation="horizontal">
+
+               <Button
+                   android:id="@+id/Sub"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:textStyle="bold"
+                   android:textColor="@color/appColor"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+                   android:background="@drawable/shape_btn_sub_number"
+                   android:text="－"/>
+               <TextView
+                   android:id="@+id/tv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:layout_gravity="center"
+                   android:minWidth="25dp"/>
+               <Button
+                   android:id="@+id/Add"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:textStyle="bold"
+                   android:textColor="#ffffff"
+                   android:gravity="center"
+                   android:background="@drawable/shape_btn_add_number"
+                   android:layout_gravity="center_vertical"
+                   android:text="+"/>
+
+       </LinearLayout>
 
 </LinearLayout>
