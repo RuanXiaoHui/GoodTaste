@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +9,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.Tab;
 import www.formssi.goodtaste.fragment.HomeFragment;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.fragment.OrderFragment;
 
-public class MainActivity extends BaseActivity implements OrderFragment.MeOnClickListener{
+public class MainActivity extends FragmentActivity implements OrderFragment.MeOnClickListener{
 
     private FragmentTabHost mTabhost;           //FragmentTabHost控件
     private int TabIcon[]={R.drawable.selector_tab_home,R.drawable.selector_tab_order,
@@ -29,23 +31,16 @@ public class MainActivity extends BaseActivity implements OrderFragment.MeOnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        initTabs();
         
     }
 
-    @Override
+
     protected  void initView() {
         mTabhost= (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabhost.setup(this,getSupportFragmentManager(),R.id.realcontent);
         mInflate=getLayoutInflater();
-    }
-
-    @Override
-    protected void initData() {
-        initTabs();
-    }
-
-    @Override
-    protected void initListener() {
     }
 
     /***
