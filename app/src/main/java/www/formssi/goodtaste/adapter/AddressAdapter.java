@@ -23,13 +23,14 @@ import www.formssi.goodtaste.bean.AddressBean;
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;
 
 /**
- * Created by john on 2017/3/17.
+ * 用户收货地址ListView适配器
+ * Created by sn on 2017/3/17.
  */
 
 public class AddressAdapter extends BaseAdapter {
 
-    protected List<AddressBean> list;
-    protected Context context;
+    protected List<AddressBean> list;  //地址对象集合
+    protected Context context; //上下文
 
     public AddressAdapter(List<AddressBean> list, Context context) {
         this.list = list;
@@ -62,7 +63,6 @@ public class AddressAdapter extends BaseAdapter {
             holder.tvReceiverPhone = (TextView) convertView.findViewById(R.id.tv_ReceiveAddressActivity_phone);
             holder.tvReceiverAddress = (TextView) convertView.findViewById(R.id.tv_ReceiveAddressActivity_address);
             holder.ibEdit = (ImageButton) convertView.findViewById(R.id.ib_ReceiveAddressActivity_edit);
-
             convertView.setTag(holder);
         } else {
             holder = (AddressViewHolder) convertView.getTag();
@@ -74,15 +74,12 @@ public class AddressAdapter extends BaseAdapter {
         holder.tvReceiverGender.setText(addressBean.getGender());
         holder.tvReceiverPhone.setText(addressBean.getPhone());
         holder.tvReceiverAddress.setText(addressBean.getAddress());
-
+        //编辑按钮监听事件
         holder.ibEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditAddressActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("editAddress", addressBean);
-                bundle.putInt("sendEditPosition", position);
-                intent.putExtra("editBundle", bundle);
+                intent.putExtra("addressId", addressBean.getAddressId());
                 ((ReceiveAddressActivity) context).startActivityForResult(intent, EDIT_ADREES_REQUEST);
             }
         });
@@ -95,7 +92,7 @@ public class AddressAdapter extends BaseAdapter {
         TextView tvReceiverGender; //性别
         TextView tvReceiverPhone; //电话
         TextView tvReceiverAddress;//地址
-        ImageButton ibEdit; //编辑
+        ImageButton ibEdit; //编辑按钮
     }
 
 }

@@ -17,10 +17,10 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
 /**
  * 订单备注页面
  * 说明：填写订单备注
- * Created by john on 2017/3/16.
+ * Created by sn on 2017/3/16.
  */
 
-public class RemarkOrderActivity extends BaseActivity implements View.OnClickListener{
+public class RemarkOrderActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView ivBack;//返回
     private TextView tvTitle; //标题
@@ -31,6 +31,9 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remark_order);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -55,11 +58,12 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
 
     /**
      * 点击事件
+     *
      * @param v
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_backTitlebar_back:
                 finish();
                 break;
@@ -67,8 +71,8 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_RemarkOrderActivity_ok:
                 Intent intent = new Intent();
                 String remarks = etRemarkOrder.getText().toString();
-                intent.putExtra("remarks",remarks);
-                setResult(ORDER_REMARK_RESULT,intent);
+                intent.putExtra("remarks", remarks);
+                setResult(ORDER_REMARK_RESULT, intent);
                 finish();
                 break;
 

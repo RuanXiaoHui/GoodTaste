@@ -8,7 +8,7 @@
     tools:context="www.formssi.goodtaste.activity.LoginActivity"
     android:weightSum="1">
 
-    <include layout="@layout/layout_back_titlebar" />
+    <include layout="@layout/layout_back_title_bar" />
 
         <EditText
             android:layout_marginTop="@dimen/medium_margin"

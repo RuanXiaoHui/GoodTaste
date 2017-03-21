@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.activity.GoodsDetailActivity">
 
-    <include layout="@layout/layout_back_titlebar"/>
+    <include layout="@layout/layout_back_title_bar"/>
 
     <www.formssi.goodtaste.widget.CustomScrollView
         android:id="@+id/scLayoutView"

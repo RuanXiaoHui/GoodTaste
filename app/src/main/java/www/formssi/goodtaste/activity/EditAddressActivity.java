@@ -16,12 +16,13 @@ import android.widget.Toast;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
 
 /**
  * 编辑收货地址页面
- * Created by john on 2017/3/17.
+ * Created by sn on 2017/3/17.
  */
 public class EditAddressActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
@@ -35,15 +36,17 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     private RadioButton rbLady; //女士
     private Button btnOk;//确定
     private String mGender; //获取性别
-    private int currentPosition;  //当前修改的地址在列表中的位置
-    private AddressBean addressBean;  //当前修改的列表项所对应的AddressBean实体类
+    private AddressBean addressBean;  //地址对象
+    private String addressId;  //地址id
     private Intent intent;
-    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -65,11 +68,9 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         tvTitle.setText(R.string.activity_editAddress_title);
         //获取传递参数，并显示数据
         intent = getIntent();
-        bundle = intent.getBundleExtra("editBundle");
-        currentPosition = bundle.getInt("sendEditPosition", 0);
-        addressBean = (AddressBean) bundle.getSerializable("editAddress");
-        String gender = addressBean.getGender();
-        showOldData(gender);
+        addressId = intent.getStringExtra("addressId");
+        addressBean = DataBaseSQLiteUtil.getAddressById(addressId);
+        showOldData(addressBean.getGender());
     }
 
     @Override
@@ -97,11 +98,8 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                 addressBean.setGender(mGender);
                 addressBean.setPhone(etPhone.getText().toString());
                 addressBean.setAddress(etAddress.getText().toString());
-
-                bundle = new Bundle();
-                bundle.putSerializable("returnEditAddressBean", addressBean);
-                bundle.putInt("returnEditPosition", currentPosition);
-                intent.putExtra("returnEditAddressBeanBundle", bundle);
+                //修改地址信息
+                DataBaseSQLiteUtil.userEditAddress(addressBean);
                 setResult(EDIT_ADREES_RESULT, intent);
                 this.finish();
                 break;
@@ -121,13 +119,11 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
      * 显示原来的数据
      */
     private void showOldData(String gender) {
-        tvTitle.setText(R.string.activity_editAddress_title);
         etName.setText(addressBean.getName());
-        if (gender.equals("先生")) {
+        if (gender.equals(R.string.activity_address_gentleman)) {
             rbGentleman.setChecked(true);
             rbLady.setChecked(false);
-
-        } else if (gender.equals("女士")) {
+        } else if (gender.equals(R.string.activity_address_lady)) {
             rbGentleman.setChecked(false);
             rbLady.setChecked(true);
         }

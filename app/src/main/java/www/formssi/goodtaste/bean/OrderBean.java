@@ -13,6 +13,7 @@ public class OrderBean {
     private String userId; // 用户id
     private String storeId; // 店铺id
     private String shopName; // 商店名称
+    private String shopPhone; // 商店电话
     private String shopImgPath; // 商店图像
     private int shopPicture; // 商店图像
     private String orderNum; // 订单号（参考）：店铺id（后三位） + 用户id（后三位） + 用户手机号（后四位） + 流水号（0000-9999）
@@ -37,6 +38,14 @@ public class OrderBean {
         this.orderTime = orderTime;
         this.orderContent = orderContent;
         this.status = status;
+    }
+
+    public String getShopPhone() {
+        return shopPhone;
+    }
+
+    public void setShopPhone(String shopPhone) {
+        this.shopPhone = shopPhone;
     }
 
     public ShopBean getShopBean() {

@@ -8,8 +8,7 @@
     tools:context="www.formssi.goodtaste.activity.ConfirmOrderActivity">
 
     <!--确认订单-->
-
-    <include layout="@layout/layout_back_titlebar" />
+    <include layout="@layout/layout_back_title_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/lv_ConfirmOrederActtivity_food"
+            android:id="@+id/lv_ConfirmOrderActivity_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/line_horizontal"
@@ -46,9 +45,9 @@
                 android:text="@string/activity_confirmOrder_toBePay" />
 
             <TextView
-                android:id="@+id/tv_ConfirmOrederActtivity_toBePay"
+                android:id="@+id/tv_ConfirmOrderActivity_toBePay"
                 style="@style/activity_text_normal_white"
-                android:layout_marginLeft="@dimen/common_margin_small"/>
+                android:layout_marginLeft="@dimen/common_margin_small" />
 
         </LinearLayout>
 
@@ -60,7 +59,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_ConfirmOrederActtivity_commitOrder"
+                android:id="@+id/btn_ConfirmOrderActivity_commitOrder"
                 style="@style/button_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

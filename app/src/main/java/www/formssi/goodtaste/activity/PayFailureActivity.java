@@ -17,7 +17,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
  * Created by john on 2017/3/20.
  */
 
-public class PayFailureActivity extends BaseActivity implements View.OnClickListener{
+public class PayFailureActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
@@ -27,6 +27,9 @@ public class PayFailureActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_failure);
+        initView();
+        initData();
+        initListener();
     }
 
     @Override
@@ -50,11 +53,12 @@ public class PayFailureActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 点击事件监听
+     *
      * @param v
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_backTitlebar_back:  //返回
                 this.finish();
                 break;

@@ -28,6 +28,9 @@ import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.widget.CustomScrollView;
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
+import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
+import static www.formssi.goodtaste.R.id.tv_backTitlebar_center_title;
+import static www.formssi.goodtaste.R.id.tv_backTitlebar_title;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
@@ -39,11 +42,11 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private List<GoodsMenu> mLeftMenu;       //左侧菜单的ListView数据源
     private List<FoodBean> mFoodBean;        //右侧商品的ListView数据源
     private List<FoodBean> mRefreshBean;     //右侧筛选商品的ListView数据源
-    private ImageView iv_backTitlebar_back;  //顶部的返回按钮
+    private ImageView iv_backTitleBar_back;  //顶部的返回按钮
     private RelativeLayout rltToolbar;        //顶部的TitleBar布局
-    private TextView tv_backTitlebar_title;  //顶部Title的标题
+    private TextView tv_backTitleBar_title;  //顶部Title的标题
+    private TextView tv_backTitleBar_center_title;
     private ImageView ivCar;                 //购物车的img
-    private ImageView ivShopimg;             //商店图片
     private TextView ivShopTime;             //配送时间
     private TextView ivShopDesc;             //店铺描述
     private TextView ivShopBusinessHours;    //营业时间
@@ -71,11 +74,11 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         scLayoutView= (CustomScrollView) findViewById(R.id.scLayoutView);
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
-        tv_backTitlebar_title= (TextView) findViewById(R.id.tv_backTitlebar_title);
+        tv_backTitleBar_title= (TextView) findViewById(tv_backTitlebar_title);
+        tv_backTitleBar_center_title= (TextView) findViewById(tv_backTitlebar_center_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
-        ivShopimg= (ImageView) findViewById(R.id.ivShopimg);
-        iv_backTitlebar_back= (ImageView) findViewById(R.id.iv_backTitlebar_back);
+        iv_backTitleBar_back= (ImageView) findViewById(iv_backTitlebar_back);
         ivShopTime= (TextView) findViewById(R.id.ivShopTime);
         ivShopDesc= (TextView) findViewById(R.id.ivShopDesc);
         ivShopBusinessHours= (TextView) findViewById(R.id.ivShopBusinessHours);
@@ -97,10 +100,10 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         mShopBean= (ShopBean) intent.getSerializableExtra("ShopBean");
         mLeftMenu=mShopBean.getShopMenu();
         mFoodBean=mShopBean.getFoods();
+        tv_backTitleBar_title.setText(mShopBean.getShopName());
         for (int i = 0; i <mFoodBean.size() ; i++) {
             if (mFoodBean.get(i).getGoodsType().equals("1")){
                 mRefreshBean.add(mFoodBean.get(i));
-                System.out.println(mFoodBean.get(i).getGoodsName());
             }
         }
         mCarAnimation= AnimationUtils.loadAnimation(this,R.anim.scale_goodsdetail_car);
@@ -122,7 +125,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GoodsMenu menu= mLeftMenu.get(position);
                 int  menuId=menu.getId();
-                List<FoodBean> data=new ArrayList<FoodBean>();
+                List<FoodBean> data=new ArrayList<>();
                 for (int i = 0; i <mFoodBean.size() ; i++) {
                     if (mFoodBean.get(i).getGoodsType().equals(String.valueOf(menuId))){
                         data.add(mFoodBean.get(i));
@@ -170,20 +173,13 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         });
 
         //返回
-        iv_backTitlebar_back.setOnClickListener(new View.OnClickListener() {
+        iv_backTitleBar_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-
-        scLayoutView.setOnScrollView(new CustomScrollView.ScrollViewListener() {
-            @Override
-            public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
-
-            }
-        });
 
     }
 
@@ -219,24 +215,27 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     @Override
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
-
         if (y<=0){
-            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
-            tv_backTitlebar_title.setVisibility(View.GONE);
+            rltToolbar.setBackgroundColor(Color.argb(255,0, 149, 254));
+            tv_backTitleBar_title.setVisibility(View.VISIBLE);
+            iv_backTitleBar_back.setVisibility(View.VISIBLE);
+            tv_backTitleBar_center_title.setVisibility(View.GONE);
         }else if(y>0&&y<=mHeight/3){
-            tv_backTitlebar_title.setVisibility(View.VISIBLE);
-            tv_backTitlebar_title.setTextColor(Color.argb(100,255,255,255));
-            tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rltToolbar.setBackgroundColor(Color.argb(120,0, 149, 254));
-
-        }else if (y>mHeight/3&&y<mHeight){
-
+            double bf=((y*1.0)/mHeight);
+            double alpha=(bf*255)*3;
+            tv_backTitleBar_title.setVisibility(View.VISIBLE);
+            tv_backTitleBar_center_title.setVisibility(View.GONE);
+            tv_backTitleBar_title.setTextColor(Color.argb(255-(int)alpha,255,255,255));
+            tv_backTitleBar_title.setText(mShopBean.getShopName());
+            iv_backTitleBar_back.setVisibility(View.VISIBLE);
+        }else if (y>mHeight/2&&y<mHeight){
             double bf=((y*1.0)/mHeight);
             double alpha=(bf*255);
-            tv_backTitlebar_title.setVisibility(View.VISIBLE);
-            tv_backTitlebar_title.setTextColor(Color.argb((int)alpha,255,255,255));
-            tv_backTitlebar_title.setText(mShopBean.getShopName());
-            rltToolbar.setBackgroundColor(Color.argb((int)alpha,0, 149, 254));
+            tv_backTitleBar_title.setVisibility(View.INVISIBLE);
+            tv_backTitleBar_center_title.setVisibility(View.VISIBLE);
+            tv_backTitleBar_center_title.setTextColor(Color.argb((int)alpha,255,255,255));
+            tv_backTitleBar_center_title.setText(mShopBean.getShopName());
+            iv_backTitleBar_back.setVisibility(View.INVISIBLE);
         }
     }
 }

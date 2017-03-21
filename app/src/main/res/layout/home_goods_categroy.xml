@@ -13,13 +13,14 @@
 
     <www.formssi.goodtaste.widget.Indicator
         android:id="@+id/IndicatorHome"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:layout_height="10dp"
         app:Indicator_radius="7"
         app:Indicator_number="2"
         app:Indicator_forecolor="@color/activity_main_indicator_fore"
         app:Indicator_bgcolor="@color/activity_main_indicator_bg"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="3dp">
     </www.formssi.goodtaste.widget.Indicator>
 
     <include layout="@layout/layout_home_favourable"/>

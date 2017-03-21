@@ -36,7 +36,9 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
-        DataBaseSQLiteUtil.openDataBase();
+        initView();
+        initData();
+        initListener();
     }
 
     @Override

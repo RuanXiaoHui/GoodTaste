@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.activity.UpdateUserNameActivity">
 
-    <include layout="@layout/layout_back_titlebar" />
+    <include layout="@layout/layout_back_title_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"

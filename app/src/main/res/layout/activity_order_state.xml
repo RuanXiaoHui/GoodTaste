@@ -7,29 +7,7 @@
     tools:context="www.formssi.goodtaste.activity.OrderStateActivity"
     android:orientation="vertical">
 
-<include layout="@layout/layout_back_titlebar"/>
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_height="50dp">-->
-        <!--<Button-->
-            <!--android:id="@+id/btnBack"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:background="@mipmap/ic_left_arrow"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:onClick="onClick"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--/>-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="我的订单"-->
-            <!--android:layout_gravity="center"-->
-            <!--style="@style/text_normal_black"-->
-            <!--/>-->
-
-    <!--</LinearLayout>-->
+<include layout="@layout/layout_back_title_bar"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"

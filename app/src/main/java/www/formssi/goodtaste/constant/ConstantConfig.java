@@ -3,7 +3,7 @@ package www.formssi.goodtaste.constant;
 /**
  * 常量类
  * 说明：包含Intent请求码、结果码等
- * Created by john on 2017/3/17.
+ * Created by sn on 2017/3/17.
  */
 
 public final class ConstantConfig {
@@ -22,7 +22,6 @@ public final class ConstantConfig {
     public static final String INTENT_ORDER_ID = "OrderId";//orderFragment跳转到orderDetailActivity携带订单id的key
     public static final String INTENT_STORE_NAME = "storeName";//storeName key
     public static final String INTENT_ACTUAL_PAYMENT = "totalPay";//storeName key
-
 
     /**
      *  mine
