@@ -6,27 +6,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.OrderDetailActivity;
 import www.formssi.goodtaste.activity.OrderStateActivity;
 import www.formssi.goodtaste.adapter.OrderAdapter;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * 订单页面
@@ -34,8 +27,6 @@ import static android.content.ContentValues.TAG;
 public class OrderFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView rvOrderList;//显示所有订单的recycle人view
-    private List<OrderBean> orders;//数据源
-    private OrderAdapter orderAdapter;//适配器
     private LinearLayout lltNoOrder;//没有订单时显示的布局
     private Button btnGoSingle;//没有订单时显示的按钮
     private LinearLayout lltNotPay;//未支付的父布局
@@ -47,7 +38,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_order, null);
+        View v = inflater.inflate(R.layout.fragment_order, container, false);
         initView(v);
         initListener();
         initData();
@@ -57,7 +48,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     /**
      * 初始化控件
      *
-     * @param v
+     * @param v 视图
      */
     private void initView(View v) {
         rvOrderList = (RecyclerView) v.findViewById(R.id.rvOrderList);
@@ -86,12 +77,12 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
      * 初始化数据
      */
     private void initData() {
-        orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
+        List<OrderBean> orders = DataBaseSQLiteUtil.queryOrder(OrderState.ALL);
         if (orders.size() == 0) {//没有订单,则显示的布局
             rvOrderList.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示的布局
-            orderAdapter = new OrderAdapter(orders, getContext());
+            OrderAdapter orderAdapter = new OrderAdapter(orders, getContext());
             rvOrderList.setLayoutManager(new LinearLayoutManager(getContext()));
             rvOrderList.setAdapter(orderAdapter);
         }
