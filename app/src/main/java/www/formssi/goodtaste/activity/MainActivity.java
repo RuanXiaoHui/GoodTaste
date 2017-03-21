@@ -33,15 +33,25 @@ public class MainActivity extends BaseActivity implements OrderFragment.MeOnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
         initTabs();
     }
 
-    private void initView() {
+    @Override
+    protected  void initView() {
         mTabhost= (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabhost.setup(this,getSupportFragmentManager(),R.id.realcontent);
         mInflate=getLayoutInflater();
+    }
+
+    @Override
+    protected void initData() {
+        initTabs();
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 
     private void initTabs() {
@@ -52,7 +62,6 @@ public class MainActivity extends BaseActivity implements OrderFragment.MeOnClic
         mTabs.add(tabHome);
         mTabs.add(tabHost);
         mTabs.add(tabCatgroy);
-
 
         for (Tab tab:mTabs) {
 
