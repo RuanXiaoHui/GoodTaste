@@ -319,8 +319,9 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ? and "
                 + COLUMN_LOGIN_PWD + " = ? ", new String[]{tel, pwd}, null, null, null);
-        UserBean bean = new UserBean();
+        UserBean bean = null;
         while (cursor.moveToNext()) {
+            bean = new UserBean();
             bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
             bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
             bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
@@ -342,17 +343,13 @@ public class DataBaseSQLiteUtil {
         openDataBase();
         String[] projection = {COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PHONE, COLUMN_USER_IMG_PATH}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_USER, projection, COLUMN_USER_PHONE + " = ?", new String[]{tel}, null, null, null);
-        int resultCounts = cursor.getCount();
-        if (resultCounts == 0 || !cursor.moveToFirst()) {
-            return null;
-        }
-        UserBean bean = new UserBean();
-        for (int i = 0; i < resultCounts; i++) {
+        UserBean bean = null;
+        if (cursor.moveToFirst()) {
+            bean = new UserBean();
             bean.setUserId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID))));
             bean.setUserName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME))); // 姓名
             bean.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE))); // 电话
             bean.setHeadProtrait(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMG_PATH))); // 头像地址
-            cursor.moveToNext();
         }
         cursor.close();
         closeDataBase();
@@ -402,6 +399,38 @@ public class DataBaseSQLiteUtil {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_IMG_PATH, newUrl);
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        closeDataBase();
+        return update > 0 ? true : false;
+    }
+
+    /**
+     * 根据手机号修改登录密码
+     *
+     * @param tel
+     * @param newLoginPassword
+     * @return true if success
+     */
+    public static boolean updateLoginPassword(String tel, String newLoginPassword) {
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LOGIN_PWD, newLoginPassword);
+        int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
+        closeDataBase();
+        return update > 0 ? true : false;
+    }
+
+    /**
+     * 根据手机号修改支付密码
+     *
+     * @param tel
+     * @param newpayPassword
+     * @return true if success
+     */
+    public static boolean updatePayPassword(String tel, String newpayPassword) {
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PAY_PWD, newpayPassword);
         int update = mDatabase.update(TABLE_NAME_USER, values, COLUMN_USER_PHONE + " = ? ", new String[]{tel});
         closeDataBase();
         return update > 0 ? true : false;

@@ -111,7 +111,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 intent2.putExtra("tel", user.getPhoneNumber());
                 startActivityForResult(intent2, REQ_TEL);
                 break;
-            case R.id.rl_personal_login_password: //更在登录密码
+            case R.id.rl_personal_login_password: //更改登录密码
                 Intent intent3 = new Intent(this, UpdateLoginPasswordActivity.class);
                 startActivity(intent3);
                 break;

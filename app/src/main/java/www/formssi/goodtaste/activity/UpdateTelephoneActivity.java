@@ -68,6 +68,9 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
         }
     }
 
+    /**
+     * 更新手机号码
+     */
     private void updateTelephone() {
         String oldTelephone = etTelephone.getText().toString();
         String newTelephone = etUpdateTelephone.getText().toString();

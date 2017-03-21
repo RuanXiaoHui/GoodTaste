@@ -50,7 +50,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etPayLoginPassword = (EditText) findViewById(R.id.et_login_pay_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        tvTitle.setText("登录");
+        tvTitle.setText("注册");
     }
 
     @Override
