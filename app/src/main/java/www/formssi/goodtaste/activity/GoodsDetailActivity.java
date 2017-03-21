@@ -33,6 +33,9 @@ import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
 import static www.formssi.goodtaste.R.id.btnSubmintOrder;
+import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
+import static www.formssi.goodtaste.R.id.tv_backTitlebar_center_title;
+import static www.formssi.goodtaste.R.id.tv_backTitlebar_title;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 

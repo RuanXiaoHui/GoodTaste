@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/small_margin"
-                android:drawableRight="@mipmap/ic_right_arrow_normal"
                 android:gravity="center"
                 android:text="@string/activity_order_complete" />
 
