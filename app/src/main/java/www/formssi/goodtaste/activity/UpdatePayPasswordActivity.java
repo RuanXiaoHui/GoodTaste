@@ -86,7 +86,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
 
     private void update(String newPayPwd) {
         if (TextUtils.isEmpty(newPayPwd)) {
-            ToastUtil.showToast("请输入新密码！");
+            ToastUtil.showToast("请输入新密码");
             return;
         }
         boolean result = DataBaseSQLiteUtil.updatePayPassword(mUserBean.getPhoneNumber(), newPayPwd);
