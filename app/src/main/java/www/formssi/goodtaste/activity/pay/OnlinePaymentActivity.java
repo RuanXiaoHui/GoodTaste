@@ -15,7 +15,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 
 /**
  * 在线支付页面
- * Created by john on 2017/3/20.
+ * Created by sn on 2017/3/20.
  */
 
 public class OnlinePaymentActivity extends BaseActivity implements View.OnClickListener {

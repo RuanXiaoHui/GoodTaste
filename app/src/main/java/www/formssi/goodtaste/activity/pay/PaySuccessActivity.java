@@ -15,7 +15,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 
 /**
  * 支付成功页面
- * Created by john on 2017/3/20.
+ * Created by sn on 2017/3/20.
  */
 
 public class PaySuccessActivity extends BaseActivity implements View.OnClickListener {

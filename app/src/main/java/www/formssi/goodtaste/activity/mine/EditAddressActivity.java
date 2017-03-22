@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
@@ -91,15 +92,22 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.btn_EditAddressActivity_ok: // 确定
-                intent = new Intent();
-                addressBean.setName(etName.getText().toString());
-                addressBean.setGender(mGender);
-                addressBean.setPhone(etPhone.getText().toString());
-                addressBean.setAddress(etAddress.getText().toString());
-                //修改地址信息
-                DataBaseSQLiteUtil.userEditAddress(addressBean);
-                setResult(EDIT_ADREES_RESULT, intent);
-                this.finish();
+                String phone = etPhone.getText().toString();
+                String address = etAddress.getText().toString();
+                String name = etName.getText().toString();
+                if (name.equals("") || phone.equals("") || mGender.equals("") || address.equals("")) {
+                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                } else {
+                    intent = new Intent();
+                    addressBean.setName(name);
+                    addressBean.setGender(mGender);
+                    addressBean.setPhone(phone);
+                    addressBean.setAddress(address);
+                    //修改地址信息
+                    DataBaseSQLiteUtil.userEditAddress(addressBean);
+                    setResult(EDIT_ADREES_RESULT, intent);
+                    this.finish();
+                }
                 break;
 
             default:

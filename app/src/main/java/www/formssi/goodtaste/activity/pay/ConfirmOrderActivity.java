@@ -171,6 +171,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 isAddressNull = false;
                 tvAddressNull.setVisibility(View.GONE);
                 showAddressDetail(addressBean);
+                userBean.setAddressId(addressBean.getAddressId());
             } else {//如果默认地址为空
                 List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
                 if (addressBeanList.size() <= 0) {
@@ -180,6 +181,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                     isAddressNull = false;
                     tvAddressNull.setVisibility(View.GONE);
                     showAddressDetail(addressBeanList.get(0));
+                    userBean.setAddressId(addressBeanList.get(0).getAddressId());
                 }
             }
         }
@@ -289,7 +291,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
         orderBean.setActualPayment((money + Integer.parseInt(shopBean.getShopMoney())) + "");//实付金额
         orderBean.setOrderTime(DateUtil.getCurrentTime()); //下单时间
-        orderBean.setAddressId(Integer.parseInt(userBean.getAddressId()));  //送餐地址Id
+        String addressId = userBean.getAddressId();
+        orderBean.setAddressId(Integer.parseInt((addressId == null) ? "-1" : addressId));  //送餐地址Id
     }
 
     /**
