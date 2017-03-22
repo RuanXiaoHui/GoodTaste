@@ -42,7 +42,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etUpdateLoginPassword = (EditText) findViewById(R.id.et_update_login_password);
         btnUpdateLoginPassword = (Button) findViewById(R.id.btn_update_login_password);
-        tvTitle.setText("修改登录密码");
+        tvTitle.setText(R.string.update_login_pwd);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
         String newPwd = etUpdateLoginPassword.getText().toString();
         if (TextUtils.equals(oldPwd, user.getLoginPassword())) {
             if (TextUtils.isEmpty(newPwd)) {
-                ToastUtil.showToast("请输入新密码！");
+                ToastUtil.showToast(getString(R.string.toast_enter_new_pwd));
                 return;
             }
             boolean updateResult = DataBaseSQLiteUtil.updateLoginPassword(user.getPhoneNumber(), newPwd);
@@ -83,7 +83,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
                 finish();
             }
         } else {
-            ToastUtil.showToast("旧密码不正确");
+            ToastUtil.showToast(getString(R.string.toast_old_pay_error));
         }
     }
 }

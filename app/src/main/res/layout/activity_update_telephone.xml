@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding"
-            android:text="旧手机号码"/>
+            android:text="@string/activity_update_telephone"/>
 
         <EditText
             android:id="@+id/et_telephone"
@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding"
             android:layout_marginLeft="@dimen/small_margin"
-            android:hint="请输入旧手机号码"
             android:maxLength="11"
             android:digits="0123456789"
             android:background="@null"/>
@@ -44,18 +43,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:padding="5dp"
+            android:padding="@dimen/small_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新手机号码"
+            android:text="@string/activity_update_telephone_new"
             />
         <EditText
             android:id="@+id/et_update_telephone"
-            android:padding="5dp"
-            android:layout_marginLeft="5dp"
+            android:padding="@dimen/small_padding"
+            android:layout_marginLeft="@dimen/small_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入新手机号码"
             android:maxLength="11"
             android:digits="0123456789"
             android:background="@null"/>
@@ -66,9 +64,9 @@
         android:id="@+id/btn_update_telephone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="绑定新手机"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/medium_padding"
+        android:text="@string/activity_bind"
         style="@style/button_blue_text_white"/>
 
 </LinearLayout>

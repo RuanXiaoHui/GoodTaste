@@ -1,16 +1,11 @@
 package www.formssi.goodtaste.activity.mine;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.Serializable;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
@@ -22,7 +17,7 @@ public class SettingSuggestionActivity extends BaseActivity implements View.OnCl
 
     private TextView tvTitle;
     private ImageView ivReturn;
-    private EditText etSuggsetion;
+    private EditText etSuggestion;
     private UserBean mUser;
 
     @Override
@@ -38,8 +33,8 @@ public class SettingSuggestionActivity extends BaseActivity implements View.OnCl
     protected void initView() {
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         ivReturn = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        etSuggsetion = (EditText) findViewById(R.id.et_suggestion_submit);
-        tvTitle.setText("意见反馈");
+        etSuggestion = (EditText) findViewById(R.id.et_suggestion_submit);
+        tvTitle.setText(R.string.activity_suggestion_title);
     }
 
     @Override
@@ -65,16 +60,15 @@ public class SettingSuggestionActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    private static final String TAG = "SettingSuggestionActivi";
     private void commit() {
-        String contents = etSuggsetion.getText().toString();
+        String contents = etSuggestion.getText().toString();
         if (TextUtils.isEmpty(contents)) {
-            ToastUtil.showToast("请输入反馈内容");
+            ToastUtil.showToast(getString(R.string.toast_suggestion_contents));
             return;
         }
         String userId = mUser.getUserId();
-        DataBaseSQLiteUtil.feedback(userId,contents);
-        ToastUtil.showToast("已收到反馈");
+        DataBaseSQLiteUtil.feedback(userId, contents);
+        ToastUtil.showToast(getString(R.string.toast_suggestion_commit));
         finish();
     }
 }

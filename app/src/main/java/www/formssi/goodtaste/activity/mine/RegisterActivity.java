@@ -19,6 +19,7 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.ToastUtil;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -28,7 +29,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private Button btnLogin; //登录
     private EditText etTelephone; //
     private EditText etLoginPassword; //登录密码
-    private EditText etPayLoginPassword; //zhifgu密码
+    private EditText etPayLoginPassword; //支付密码
     private SharedPreferences mContextSharedPreferences;
 
     @Override
@@ -48,7 +49,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         etPayLoginPassword = (EditText) findViewById(R.id.et_login_pay_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        tvTitle.setText("注册");
+        tvTitle.setText(getString(R.string.activity_register));
     }
 
     @Override
@@ -84,19 +85,21 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    /**
+     * 注册
+     */
     private void register() {
         String telephone1 = etTelephone.getText().toString();
         String pass = etLoginPassword.getText().toString();
         String pPwd = etPayLoginPassword.getText().toString();
         if (telephone1.length() != 11) {
-            Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
+            ToastUtil.showToast(getString(R.string.telephone_error));
             return;
         }
         if (TextUtils.isEmpty(pass)) {
-            Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
+            ToastUtil.showToast(getString(R.string.enter_pwd));
             return;
         }
-
         String id = Integer.toHexString(UUID.randomUUID().hashCode());
         String name = "_" + telephone1.substring(telephone1.length() - 4);
         String headUrl = "";
