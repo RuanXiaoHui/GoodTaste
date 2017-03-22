@@ -67,7 +67,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void initData() {
         //获取当前登录的用户id
         sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-        userId = sharedPreferences.getString(INTENT_USER_ID, "");
+        userId = sharedPreferences.getString(INTENT_USER_ID, "-1");
         //设置标题
         tvTitle.setText(R.string.activity_receiveAddress_title);
         //ListView操作
@@ -109,10 +109,10 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
      */
     private void operateListView() {
         //创建用户对象
-        UserBean userBean = new UserBean();
-        userBean.setUserId(userId);
+//        UserBean userBean = new UserBean();
+//        userBean.setUserId(userId);
         // 根据地址id获取用户保存的地址列表
-        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
+        addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userId));
         addressAdapter = new AddressAdapter(addressBeanList, this);
         lvAddress.setAdapter(addressAdapter);
     }
