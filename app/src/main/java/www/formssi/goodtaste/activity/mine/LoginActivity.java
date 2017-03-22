@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_regist:
+            case R.id.tv_register:
                 RegisterActivity.start(mContext);
                 break;
             case R.id.iv_backTitlebar_back:
