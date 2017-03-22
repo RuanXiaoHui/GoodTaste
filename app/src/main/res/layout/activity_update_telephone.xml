@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/fragment_mine_ll"
-    tools:context="www.formssi.goodtaste.activity.mine.UpdateTelephoneActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/fragment_mine_ll"
+              tools:context="www.formssi.goodtaste.activity.mine.UpdateTelephoneActivity">
 
     <include layout="@layout/layout_back_title_bar" />
 
@@ -36,7 +35,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:paddingTop="@dimen/line_height_low"
+        android:layout_marginTop="@dimen/line_height_low"
         android:padding="@dimen/medium_padding"
         android:background="@color/white"
         android:layout_width="match_parent"
