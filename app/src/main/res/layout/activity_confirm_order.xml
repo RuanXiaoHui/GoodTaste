@@ -4,6 +4,7 @@
     android:id="@+id/activity_payfor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray1"
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.activity.ConfirmOrderActivity">
 
@@ -14,7 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/common_padding_normal"
+        android:paddingBottom="@dimen/common_padding_normal">
 
         <ListView
             android:id="@+id/lv_ConfirmOrderActivity_food"

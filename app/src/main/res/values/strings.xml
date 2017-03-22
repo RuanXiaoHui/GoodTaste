@@ -23,6 +23,7 @@
 
     <!--确认订单页面-->
     <string name="activity_confirmOrder_title">确认订单</string>
+    <string name="activity_confirmOrder_please_login">请您先登录</string>
     <string name="activity_confirmOrder_toast">请输入地址</string>
     <string name="activity_confirmOrder_addAddress">新增地址</string>
     <string name="activity_confirmOrder_distributionCost">配送费</string>
