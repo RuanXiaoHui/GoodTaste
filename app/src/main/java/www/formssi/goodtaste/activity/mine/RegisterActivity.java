@@ -1,10 +1,9 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.mine;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
-import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {

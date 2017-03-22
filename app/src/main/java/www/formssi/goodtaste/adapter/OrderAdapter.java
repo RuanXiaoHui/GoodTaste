@@ -15,8 +15,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.OnlinePaymentActivity;
-import www.formssi.goodtaste.activity.OrderDetailActivity;
+import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
+import www.formssi.goodtaste.activity.order.OrderDetailActivity;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;

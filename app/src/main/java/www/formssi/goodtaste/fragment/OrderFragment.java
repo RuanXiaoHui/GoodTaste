@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.OrderStateActivity;
+import www.formssi.goodtaste.activity.order.OrderStateActivity;
 import www.formssi.goodtaste.adapter.OrderAdapter;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.OrderState;

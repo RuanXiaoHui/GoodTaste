@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.pay.ConfirmOrderActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.activity.mine.LoginActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
 import www.formssi.goodtaste.adapter.ShopMenuAdapter;
 import www.formssi.goodtaste.bean.FoodBean;

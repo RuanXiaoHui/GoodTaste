@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="@dimen/large_padding"
-    tools:context="www.formssi.goodtaste.activity.OrderDetailActivity">
+    tools:context="www.formssi.goodtaste.activity.order.OrderDetailActivity">
 
     <TextView
         android:id="@id/iv_order_item_food_name"
