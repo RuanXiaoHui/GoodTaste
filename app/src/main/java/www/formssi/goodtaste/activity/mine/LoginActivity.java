@@ -118,7 +118,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             setResult(RESULT_OK, intent);
             finish();
         } else {
-            ToastUtil.showToast("用户名或密码错误");
+            ToastUtil.showToast(getString(R.string.toast_login_error));
         }
     }
 }

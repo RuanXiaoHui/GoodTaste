@@ -157,6 +157,7 @@
     <string name="order_state_btn_finish">再来一单</string>
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
+    <string name="toast_login_error">用户名或密码错误</string>
 
 
 </resources>
