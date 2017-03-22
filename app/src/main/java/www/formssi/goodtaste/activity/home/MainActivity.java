@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.home;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

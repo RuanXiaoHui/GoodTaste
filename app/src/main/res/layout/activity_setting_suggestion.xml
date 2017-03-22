@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/fragment_mine_ll"
     android:orientation="vertical"
-    tools:context="www.formssi.goodtaste.activity.SettingSuggestionActivity">
+    tools:context="www.formssi.goodtaste.activity.mine.SettingSuggestionActivity">
 
     <include layout="@layout/layout_back_title_bar" />
 
@@ -19,6 +19,7 @@
         android:padding="10dp">
 
         <EditText
+            android:gravity="top|left"
             android:id="@+id/et_suggestion_submit"
             android:layout_width="match_parent"
             android:layout_height="120dp"

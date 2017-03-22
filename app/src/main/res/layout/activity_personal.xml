@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/fragment_mine_ll"
     android:orientation="vertical"
-    tools:context="www.formssi.goodtaste.activity.PersonalActivity">
+    tools:context="www.formssi.goodtaste.activity.mine.PersonalActivity">
 
     <include layout="@layout/layout_back_title_bar" />
 
@@ -49,7 +49,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
-                android:background="@color/black" />
+                android:background="@color/fragment_mine_ll" />
 
             <RelativeLayout
                 android:id="@+id/rl_personal_username"
@@ -91,12 +91,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="10dp"
-                    android:text="@string/fragment_personal_securitysetting" />
+                    android:text="@string/fragment_personal_securitysetting"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
-                    android:background="@color/black" />
+                    android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_personal_phone"
@@ -111,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:padding="10dp"
-                        android:text="@string/fragment_personal_phone" />
+                        android:text="@string/fragment_personal_phone"/>
 
                     <TextView
                         android:id="@+id/tv_personal_phone"
@@ -121,14 +121,14 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:padding="10dp" />
+                        android:padding="10dp"/>
 
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
-                    android:background="@color/black" />
+                    android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_personal_login_password"
@@ -143,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/medium_padding"
-                        android:text="@string/fragment_personal_login_password" />
+                        android:text="@string/fragment_personal_login_password"/>
 
                     <TextView
                         android:id="@+id/tv_personal_login_password"
@@ -153,14 +153,14 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:padding="10dp" />
+                        android:padding="10dp"/>
 
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
-                    android:background="@color/black" />
+                    android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_personal_pay_password"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:padding="10dp"
-                        android:text="@string/fragment_personal_pay_password" />
+                        android:text="@string/fragment_personal_pay_password"/>
 
                     <TextView
                         android:id="@+id/tv_personal_pay_password"
@@ -185,7 +185,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:padding="10dp" />
+                        android:padding="10dp"/>
 
                 </RelativeLayout>
 
