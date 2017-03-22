@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
@@ -91,20 +92,23 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 String name = etName.getText().toString();
                 String phone = etPhone.getText().toString();
                 String address = etAddress.getText().toString();
-                //获取当前登录用户id
-                SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
-                String userId = sharedPreferences.getString(INTENT_USER_ID, "");
-                AddressBean addressBean = new AddressBean(userId, name, gender, phone, address);
-                long addressId = DataBaseSQLiteUtil.userInsertAddress(addressBean);
-                //用户对象
-                UserBean userBean = new UserBean();
-                userBean.setUserId(userId);
-                userBean.setAddressId(addressId + "");
-                //设置默认地址
-                DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
-
-                setResult(ADD_NEW_ADREES_RESULT, intent);
-                finish();
+                if (name.equals("") || phone.equals("") || gender.equals("") || address.equals("")) {
+                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                } else {
+                    //获取当前登录用户id
+                    SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
+                    String userId = sharedPreferences.getString(INTENT_USER_ID, "");
+                    AddressBean addressBean = new AddressBean(userId, name, gender, phone, address);
+                    long addressId = DataBaseSQLiteUtil.userInsertAddress(addressBean);
+                    //用户对象
+                    UserBean userBean = new UserBean();
+                    userBean.setUserId(userId);
+                    userBean.setAddressId(addressId + "");
+                    //设置默认地址
+                    DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
+                    setResult(ADD_NEW_ADREES_RESULT, intent);
+                    finish();
+                }
                 break;
 
             default:
