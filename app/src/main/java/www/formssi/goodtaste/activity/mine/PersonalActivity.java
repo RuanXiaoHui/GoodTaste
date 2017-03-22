@@ -1,13 +1,18 @@
 package www.formssi.goodtaste.activity.mine;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -47,7 +52,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout rlPayPassword; //点击修改支付密码
     private RelativeLayout rlLoginPassword; //点击登录密码
 
-    private static String saveDir = Environment.getExternalStorageDirectory().getPath() + "/goodtaste/";
+    private static String saveDir = Environment.getExternalStorageDirectory() + "/goodtaste/";
     private static File mPhotoFile; //拍照保存文件
     private Context mContext;
     private UserBean user;
@@ -175,20 +180,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
 
                 switch (which) {
                     case 0: //拍照
-                        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                            ToastUtil.showToast(getString(R.string.toast_sdcard_error));
-                            return;
-                        }
-                        mPhotoFile = new File(saveDir, "temp.jpg");
-                        if (!mPhotoFile.getParentFile().exists()) {
-                            try {
-                                mPhotoFile.getParentFile().mkdirs();
-                                mPhotoFile.createNewFile();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        camera();
+                        reqPermission();
                         break;
                     case 1: //从相册选择
                         album();
@@ -196,6 +188,33 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 }
             }
         }, "选择头像", "相机", "相册");
+    }
+
+    private void reqPermission() {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PersonalActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                ToastUtil.showToast(getString(R.string.toast_sdcard_error));
+                return;
+            }
+            mPhotoFile = new File(saveDir, "temp.jpg");
+            if (!mPhotoFile.getParentFile().exists()) {
+                try {
+                    mPhotoFile.getParentFile().mkdirs();
+                    mPhotoFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            camera();
+        }
     }
 
     /**
