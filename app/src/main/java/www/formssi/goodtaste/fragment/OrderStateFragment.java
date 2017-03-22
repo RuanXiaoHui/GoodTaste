@@ -46,7 +46,7 @@ public class OrderStateFragment extends Fragment {
         lltNoOrder = (LinearLayout) v.findViewById(R.id.lltNoOrder);
     }
 
-    private void initData(){
+    private void initData() {
         List<OrderBean> orders = DataBaseSQLiteUtil.queryOrder(state);
         if (orders.size() == 0) {
             rlvOrderState.setVisibility(View.GONE);
