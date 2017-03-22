@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -91,6 +92,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
         hasLogin = sharedPreferences.getBoolean("login", false);
         telephone = SPUtils.getTel(getContext());
+        getUser();
     }
 
     private void initListener() {
@@ -101,10 +103,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
     private void validateView() {
         if (hasLogin) {
-            getUser();
             if (userBean != null) {
                 String headPortrait = userBean.getHeadProtrait();
-                ImageLoader.display(mContext,headPortrait,ivHeadPicture);
+                ImageLoader.display(mContext,Uri.parse(headPortrait),ivHeadPicture);
                 String userName = userBean.getUserName();
                 if (!TextUtils.isEmpty(userName)) {
                     tvUserName.setText(userName);
