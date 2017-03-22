@@ -1,12 +1,10 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.mine;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
@@ -27,9 +24,6 @@ import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_REQUEST;
-import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
-import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;
-import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
 

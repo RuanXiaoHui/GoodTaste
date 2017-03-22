@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,6 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_pay_password);
         initView();
         initData();
         initListener();
@@ -32,6 +31,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
 
     @Override
     protected void initView() {
+        setContentView(R.layout.activity_update_pay_password);
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etPayPwd = (EditText) findViewById(R.id.et_pay_password);
         etUpdatePwd = (EditText) findViewById(R.id.et_update_pay_password);

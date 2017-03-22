@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.mine;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

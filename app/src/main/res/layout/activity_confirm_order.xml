@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="www.formssi.goodtaste.activity.ConfirmOrderActivity">
+    tools:context="www.formssi.goodtaste.activity.pay.ConfirmOrderActivity">
 
     <!--确认订单-->
     <include layout="@layout/layout_back_title_bar" />

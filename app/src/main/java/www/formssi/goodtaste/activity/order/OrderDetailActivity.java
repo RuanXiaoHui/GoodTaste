@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.order;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;

@@ -6,13 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,24 +17,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
-
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.LoginActivity;
-import www.formssi.goodtaste.activity.PersonalActivity;
-import www.formssi.goodtaste.activity.ReceiveAddressActivity;
-import www.formssi.goodtaste.activity.SettingActivity;
+import www.formssi.goodtaste.activity.mine.LoginActivity;
+import www.formssi.goodtaste.activity.mine.PersonalActivity;
+import www.formssi.goodtaste.activity.mine.ReceiveAddressActivity;
+import www.formssi.goodtaste.activity.mine.SettingActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ImageLoader;
 import www.formssi.goodtaste.utils.SPUtils;
 import www.formssi.goodtaste.utils.StringUtils;
-
-import static android.R.attr.action;
-import static android.R.attr.imageButtonStyle;
 
 /**
  * A simple {@link Fragment} subclass.

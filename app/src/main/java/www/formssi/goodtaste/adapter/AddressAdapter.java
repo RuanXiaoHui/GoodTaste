@@ -2,22 +2,18 @@ package www.formssi.goodtaste.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.EditAddressActivity;
-import www.formssi.goodtaste.activity.ReceiveAddressActivity;
+import www.formssi.goodtaste.activity.mine.EditAddressActivity;
+import www.formssi.goodtaste.activity.mine.ReceiveAddressActivity;
 import www.formssi.goodtaste.bean.AddressBean;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_REQUEST;

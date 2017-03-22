@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.pay;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package www.formssi.goodtaste.activity;
+package www.formssi.goodtaste.activity.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,14 +16,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.activity.pay.ConfirmOrderActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.activity.mine.LoginActivity;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
 import www.formssi.goodtaste.adapter.ShopMenuAdapter;
 import www.formssi.goodtaste.bean.FoodBean;
@@ -31,9 +31,6 @@ import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.widget.CustomScrollView;
-
-import static www.formssi.goodtaste.R.id.btnSubmintOrder;
-import static www.formssi.goodtaste.R.id.iv_backTitlebar_back;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
 
@@ -79,17 +76,17 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rltToolbar= (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitleBar_title= (TextView) findViewById(R.id.tv_backTitleBar_title);
-        tv_backTitleBar_center_title= (TextView) findViewById(R.id.tv_backTitleBar_center_title);
+        tv_backTitleBar_center_title= (TextView) findViewById(R.id.tv_backTitlebar_center_title);
         lvLeftMenu= (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods= (ListView) findViewById(R.id.lvRightFoods);
-        iv_backTitleBar_back= (ImageView) findViewById(iv_backTitlebar_back);
+        iv_backTitleBar_back= (ImageView) findViewById(R.id.iv_backTitlebar_back);
         ivShopTime= (TextView) findViewById(R.id.ivShopTime);
         ivShopDesc= (TextView) findViewById(R.id.ivShopDesc);
         ivShopBusinessHours= (TextView) findViewById(R.id.ivShopBusinessHours);
         tvGoodsMoney= (TextView) findViewById(R.id.tvGoodsMoney);
         tvShopMoney= (TextView) findViewById(R.id.tvShopMoney);
         ivCar= (ImageView) findViewById(R.id.ivCar);
-        btnSubmitOrder= (Button) findViewById(btnSubmintOrder);
+        btnSubmitOrder= (Button) findViewById(R.id.btnSubmintOrder);
         mFoodConfirm=new ArrayList<>();
         scLayoutView.smoothScrollTo(0, 0);
         btnSubmitOrder.setEnabled(false);
