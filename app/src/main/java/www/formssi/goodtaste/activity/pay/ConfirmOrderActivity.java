@@ -28,6 +28,7 @@ import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
@@ -216,6 +217,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             // 同时设置用户的默认送餐地址为当前选中的地址
                             DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
                             DataBaseSQLiteUtil.closeDataBase();
+                            ContextUtil.getInstance().setFinishGoodsActivity(true);
                             intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
                             intent.putExtra(INTENT_ORDER_ID, orderId + "");
                             intent.putExtra("storeName", shopBean.getShopName());
