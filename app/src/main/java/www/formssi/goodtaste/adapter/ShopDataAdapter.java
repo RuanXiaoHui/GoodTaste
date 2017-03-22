@@ -24,19 +24,20 @@ public class ShopDataAdapter extends BaseAdapter {
 
     private List<FoodBean> mdatas;
     private LayoutInflater mInflater;
-    private int CountNumber=0;
-    private Map<String,FoodBean> mBeans;
+    private int CountNumber = 0;
+    private Map<String, FoodBean> mBeans;
 
     public ShopDataAdapter(List<FoodBean> mdatas, Context context) {
         this.mdatas = mdatas;
-        this.mInflater=LayoutInflater.from(context);
-        mBeans=new HashMap<String,FoodBean>();
+        this.mInflater = LayoutInflater.from(context);
+        mBeans = new HashMap<String, FoodBean>();
     }
 
     //////////////*对外提供接口//////////////
-    public interface  OnExtralClickListener{
-        void onClickMoney(int vue,Map<String,FoodBean> beans);
+    public interface OnExtralClickListener {
+        void onClickMoney(int vue, Map<String, FoodBean> beans);
     }
+
     public OnExtralClickListener onExtralClickListener;
 
     public void setOnExtralClickListener(OnExtralClickListener onExtralClickListener) {
@@ -60,48 +61,48 @@ public class ShopDataAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder=null;
-        if (view==null){
-            holder=new ViewHolder();
-            view=mInflater.inflate(R.layout.item_shop_listview,null);
-            holder.ivFoodIcon= (ImageView) view.findViewById(R.id.ivFoodIcon);
-            holder.tvFoodName= (TextView) view.findViewById(R.id.tvFoodName);
-            holder.tvFoodBuyNumber= (TextView) view.findViewById(R.id.tvFoodBuyNumber);
-            holder.tvFoodMoney= (TextView) view.findViewById(R.id.tvFoodMoney);
-            holder.numberSubAdd= (NumberSubAdd) view.findViewById(R.id.numberSubAdd);
+        ViewHolder holder = null;
+        if (view == null) {
+            holder = new ViewHolder();
+            view = mInflater.inflate(R.layout.item_shop_listview, null);
+            holder.ivFoodIcon = (ImageView) view.findViewById(R.id.ivFoodIcon);
+            holder.tvFoodName = (TextView) view.findViewById(R.id.tvFoodName);
+            holder.tvFoodBuyNumber = (TextView) view.findViewById(R.id.tvFoodBuyNumber);
+            holder.tvFoodMoney = (TextView) view.findViewById(R.id.tvFoodMoney);
+            holder.numberSubAdd = (NumberSubAdd) view.findViewById(R.id.numberSubAdd);
             view.setTag(holder);
-        }else{
-            holder= (ViewHolder) view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
-        FoodBean bean=mdatas.get(i);
+        FoodBean bean = mdatas.get(i);
         holder.ivFoodIcon.setImageResource(bean.getGoodsIcon());
         holder.tvFoodName.setText(bean.getGoodsName());
-        holder.tvFoodBuyNumber.setText("月销量："+bean.getGoodsNumber()+"份");
-        holder.tvFoodMoney.setText("￥"+bean.getGoodsMoney()+"元");
+        holder.tvFoodBuyNumber.setText("月销量：" + bean.getGoodsNumber() + "份");
+        holder.tvFoodMoney.setText("￥" + bean.getGoodsMoney() + "元");
         holder.numberSubAdd.setNubNumBerSubAddClick(new NumberSubAdd.NumBerSubAddClick() {
             @Override
             public void AddBtnOnClick(View v, int vue) {
-                if (onExtralClickListener!=null&&mdatas.get(i).getGoodsBuynumber()<=9){
+                if (onExtralClickListener != null && mdatas.get(i).getGoodsBuynumber() <= 9) {
                     mdatas.get(i).setGoodsBuynumber(vue);
-                    int price= Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
-                    CountNumber=CountNumber+price;
-                    mBeans.put(mdatas.get(i).getGoodsId(),mdatas.get(i));
-                    onExtralClickListener.onClickMoney(CountNumber,mBeans);
+                    int price = Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
+                    CountNumber = CountNumber + price;
+                    mBeans.put(mdatas.get(i).getGoodsId(), mdatas.get(i));
+                    onExtralClickListener.onClickMoney(CountNumber, mBeans);
                 }
             }
 
             @Override
             public void SubBtnOnclick(View v, int vue) {
-                if (onExtralClickListener!=null&&mdatas.get(i).getGoodsBuynumber()>=1){
-                    int price= Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
+                if (onExtralClickListener != null && mdatas.get(i).getGoodsBuynumber() >= 1) {
+                    int price = Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
                     mdatas.get(i).setGoodsBuynumber(vue);
-                    CountNumber=CountNumber-price;
-                    if (vue==0){
+                    CountNumber = CountNumber - price;
+                    if (vue == 0) {
                         mBeans.remove(mdatas.get(i).getGoodsId());
-                    }else{
-                        mBeans.put(mdatas.get(i).getGoodsId(),mdatas.get(i));
+                    } else {
+                        mBeans.put(mdatas.get(i).getGoodsId(), mdatas.get(i));
                     }
-                    onExtralClickListener.onClickMoney(CountNumber,mBeans);
+                    onExtralClickListener.onClickMoney(CountNumber, mBeans);
                 }
             }
         });
@@ -109,7 +110,7 @@ public class ShopDataAdapter extends BaseAdapter {
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         ImageView ivFoodIcon;
         TextView tvFoodName;
         TextView tvFoodBuyNumber;
@@ -117,7 +118,7 @@ public class ShopDataAdapter extends BaseAdapter {
         NumberSubAdd numberSubAdd;
     }
 
-    public void addData(List<FoodBean> data){
+    public void addData(List<FoodBean> data) {
         mdatas.clear();
         mdatas.addAll(data);
         this.notifyDataSetChanged();

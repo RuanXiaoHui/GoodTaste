@@ -18,16 +18,15 @@ import www.formssi.goodtaste.bean.ShopBean;
  * 邮箱：769006026@qq.com
  * project: GoodTaste
  */
-public class HomeGoodsBaseAdapter extends BaseAdapter{
+public class HomeGoodsBaseAdapter extends BaseAdapter {
     private List<ShopBean> mDatas;
     private LayoutInflater mInflater;
 
 
-    public HomeGoodsBaseAdapter(List<ShopBean> datas , Context mContext) {
+    public HomeGoodsBaseAdapter(List<ShopBean> datas, Context mContext) {
         mDatas = datas;
         mInflater = LayoutInflater.from(mContext);
     }
-
 
     @Override
     public int getCount() {
@@ -46,33 +45,34 @@ public class HomeGoodsBaseAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder=null;
-        if (convertView==null){
-            holder=new ViewHolder();
-            convertView=mInflater.inflate(R.layout.item_home_listview_goods,null);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.item_home_listview_goods, null);
 
-            holder.ivGoodsIcon= (ImageView) convertView.findViewById(R.id.ivGoodsIcon);
-            holder.tvShopName= (TextView) convertView.findViewById(R.id.tvShopName);
-            holder.tvShopDesc= (TextView) convertView.findViewById(R.id.tvShopDesc);
-            holder.tvShopCount= (TextView) convertView.findViewById(R.id.tvShopCount);
+            holder.ivGoodsIcon = (ImageView) convertView.findViewById(R.id.ivGoodsIcon);
+            holder.tvShopName = (TextView) convertView.findViewById(R.id.tvShopName);
+            holder.tvShopDesc = (TextView) convertView.findViewById(R.id.tvShopDesc);
+            holder.tvShopCount = (TextView) convertView.findViewById(R.id.tvShopCount);
             convertView.setTag(holder);
-        }else{
+        } else {
 
-            holder= (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        ShopBean bean=mDatas.get(position);
+        ShopBean bean = mDatas.get(position);
         holder.ivGoodsIcon.setImageResource(bean.getShopPic());
         holder.tvShopName.setText(bean.getShopName());
         holder.tvShopDesc.setText(bean.getShopDesc());
-        holder.tvShopCount.setText("月销量："+bean.getShopCount()+"份");
+        holder.tvShopCount.setText("月销量：" + bean.getShopCount() + "份");
 
         return convertView;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         ImageView ivGoodsIcon;
-        TextView  tvShopName;
-        TextView  tvShopDesc;
-        TextView  tvShopCount;
+        TextView tvShopName;
+        TextView tvShopDesc;
+        TextView tvShopCount;
 
     }
 }

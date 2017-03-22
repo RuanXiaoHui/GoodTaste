@@ -1,7 +1,9 @@
 package www.formssi.goodtaste.bean;
 
 /**
- * Created by qkldev003 on 2017/3/16.
+ * Created by Administrator on 2017/3/15.
+ * 邮箱：769006026@qq.com
+ * project: GoodTaste
  */
 public class Tab {
 

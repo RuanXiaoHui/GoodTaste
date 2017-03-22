@@ -20,7 +20,7 @@ public class MyPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view= mViews.get(position);
+        View view = mViews.get(position);
         container.addView(view);
         return view;
     }
@@ -39,6 +39,6 @@ public class MyPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return (view==object);
+        return (view == object);
     }
 }

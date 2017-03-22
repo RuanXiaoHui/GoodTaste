@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
  * 邮箱：769006026@qq.com
  * project: GoodTaste
  */
-public abstract  class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
+public abstract class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {

@@ -128,14 +128,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
 
     class OrderHolder extends RecyclerView.ViewHolder {
-        LinearLayout lltOrderItem;
-        TextView tvShopName;//商店名字
-        TextView tvOrderTime;//交易时间
-        TextView tvTransactionStatus;//交易状态
-        TextView tvOrderContent;//商品详情
-        TextView tvPrice;//商品单价
-        ImageView imgShop;//商店图片
-        Button btnStatusLogic;//状态逻辑按钮
+        private LinearLayout lltOrderItem;
+        private TextView tvShopName;//商店名字
+        private TextView tvOrderTime;//交易时间
+        private TextView tvTransactionStatus;//交易状态
+        private TextView tvOrderContent;//商品详情
+        private TextView tvPrice;//商品单价
+        private ImageView imgShop;//商店图片
+        private Button btnStatusLogic;//状态逻辑按钮
 
         OrderHolder(View itemView) {
             super(itemView);

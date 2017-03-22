@@ -23,7 +23,7 @@ public class ShopMenuAdapter extends BaseAdapter {
 
     public ShopMenuAdapter(List<GoodsMenu> mdatas, Context context) {
         this.mdatas = mdatas;
-        mInflater=LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -43,20 +43,20 @@ public class ShopMenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder=null;
-        if (view==null){
-            holder=new ViewHolder();
-            view=mInflater.inflate(R.layout.item_goods_leftmenu,null);
-            holder.tv= (TextView) view.findViewById(R.id.tvMenu);
+        ViewHolder holder = null;
+        if (view == null) {
+            holder = new ViewHolder();
+            view = mInflater.inflate(R.layout.item_goods_leftmenu, null);
+            holder.tv = (TextView) view.findViewById(R.id.tvMenu);
             view.setTag(holder);
-        }else{
-            holder= (ViewHolder) view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
         holder.tv.setText(mdatas.get(i).getName());
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         TextView tv;
     }
 }

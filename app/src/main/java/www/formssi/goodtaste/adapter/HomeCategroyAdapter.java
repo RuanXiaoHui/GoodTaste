@@ -25,7 +25,7 @@ public class HomeCategroyAdapter extends BaseAdapter {
 
     public HomeCategroyAdapter(List<HomeGoodsCategroyBean> datas, Context context) {
         mDatas = datas;
-        mInflater=LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -46,15 +46,15 @@ public class HomeCategroyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder=null;
-        if (convertView==null){
-            holder=new ViewHolder();
-            convertView=mInflater.inflate(R.layout.home_goods_gridview_item,null);
-            holder.ivHomeCategroy= (ImageView) convertView.findViewById(R.id.ivHomeCategroy);
-            holder.tvHomeCategroy= (TextView) convertView.findViewById(R.id.tvHomeCategroy);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.home_goods_gridview_item, null);
+            holder.ivHomeCategroy = (ImageView) convertView.findViewById(R.id.ivHomeCategroy);
+            holder.tvHomeCategroy = (TextView) convertView.findViewById(R.id.tvHomeCategroy);
             convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         holder.ivHomeCategroy.setImageResource(mDatas.get(position).getIcon());
@@ -63,7 +63,7 @@ public class HomeCategroyAdapter extends BaseAdapter {
         return convertView;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         TextView tvHomeCategroy;
         ImageView ivHomeCategroy;
     }

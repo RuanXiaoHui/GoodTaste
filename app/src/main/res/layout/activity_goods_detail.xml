@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="www.formssi.goodtaste.activity.home.GoodsDetailActivity">
 
-    <include layout="@layout/layout_back_title_bar"/>
+    <include layout="@layout/layout_back_title_bar" />
 
     <www.formssi.goodtaste.widget.CustomScrollView
         android:id="@+id/scLayoutView"
@@ -33,45 +33,50 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:background="@mipmap/icon_categroy_6"/>
+                    android:background="@mipmap/icon_categroy_6" />
+
                 <LinearLayout
                     android:id="@+id/llShop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/ivShopimg">
+                    android:layout_toRightOf="@+id/ivShopimg"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/ivShopTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#3e581b"
-                        android:text="平均配送时间：32分钟"/>
+                        android:text="平均配送时间：32分钟"
+                        android:textColor="#3e581b" />
+
                     <TextView
                         android:id="@+id/ivShopDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#3e581b"
-                        android:text="店家描述：小滨外卖，吃了爽到你骨子里"/>
+                        android:text="店家描述：小滨外卖，吃了爽到你骨子里"
+                        android:textColor="#3e581b" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/ivShopBusinessHours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#3e581b"
                     android:layout_below="@+id/llShop"
-                    android:layout_toRightOf="@+id/ivShopimg"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="营业时间：早上12:00-晚上22:00"/>
+                    android:layout_toRightOf="@+id/ivShopimg"
+                    android:text="营业时间：早上12:00-晚上22:00"
+                    android:textColor="#3e581b" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#bebebe"/>
+                android:background="#bebebe" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -80,23 +85,22 @@
                 <ListView
                     android:id="@+id/lvLeftMenu"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scrollbars="none"
                     android:listSelector="#dcdcdc"
-                    android:layout_height="match_parent"/>
+                    android:scrollbars="none" />
 
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#bebebe"/>
+                    android:background="#bebebe" />
 
                 <ListView
                     android:id="@+id/lvRightFoods"
                     android:layout_width="0dp"
-                    android:layout_weight="4"
-                    android:layout_height="match_parent">
-                </ListView>
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"></ListView>
 
             </LinearLayout>
 
@@ -115,48 +119,50 @@
             android:id="@+id/ivCar"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="@drawable/selector_iv_car"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_iv_car" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivCar"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ivCar"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvGoodsMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:text="￥0元"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="￥0元"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvShopMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="另需配送费4元"
                 android:textColor="#fff"
-                android:textSize="12sp"
-                android:text="另需配送费4元"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnSubmintOrder"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:textColor="#ffffff"
             android:background="@drawable/selector_btn_confirm"
-            android:text="去结算"/>
+            android:text="去结算"
+            android:textColor="#ffffff" />
 
     </RelativeLayout>
 

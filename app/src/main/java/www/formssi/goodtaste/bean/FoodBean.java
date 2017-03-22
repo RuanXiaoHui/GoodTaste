@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 邮箱：769006026@qq.com
  * project: GoodTaste
  */
-public class FoodBean  implements Serializable {
+public class FoodBean implements Serializable {
 
     private String goodsId;        //商品id
     private String goodsType;      //商品的类型 一般店铺进行分类的时候进行使用按照类型进行分类
@@ -22,6 +22,7 @@ public class FoodBean  implements Serializable {
     public FoodBean() {
 
     }
+
     public FoodBean(String goodsId, String goodsType, String goodsName, int goodsIcon, int goodsCount, float goodsSrart, String goodsMoney, int goodsNumber, int goodsBuynumber) {
         this.goodsId = goodsId;
         this.goodsType = goodsType;
@@ -33,23 +34,24 @@ public class FoodBean  implements Serializable {
         this.goodsNumber = goodsNumber;
         this.goodsBuynumber = goodsBuynumber;
     }
-    public FoodBean(String goodsId,String goodsType, String goodsName, int goodsIcon,int goodsCount, float goodsSrart, String  goodsMoney) {
+
+    public FoodBean(String goodsId, String goodsType, String goodsName, int goodsIcon, int goodsCount, float goodsSrart, String goodsMoney) {
         this.goodsId = goodsId;
-        this.goodsType=goodsType;
+        this.goodsType = goodsType;
         this.goodsName = goodsName;
-        this.goodsIcon=goodsIcon;
+        this.goodsIcon = goodsIcon;
         this.goodsCount = goodsCount;
         this.goodsSrart = goodsSrart;
-        this.goodsMoney=goodsMoney;
+        this.goodsMoney = goodsMoney;
     }
 
-    public FoodBean(String goodsId, String goodsName, int goodsIcon,int goodsCount, float goodsSrart, String  goodsMoney) {
+    public FoodBean(String goodsId, String goodsName, int goodsIcon, int goodsCount, float goodsSrart, String goodsMoney) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
-        this.goodsIcon=goodsIcon;
+        this.goodsIcon = goodsIcon;
         this.goodsCount = goodsCount;
         this.goodsSrart = goodsSrart;
-        this.goodsMoney=goodsMoney;
+        this.goodsMoney = goodsMoney;
     }
 
 
