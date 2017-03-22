@@ -88,6 +88,7 @@
 
     <!--分割线高度-->
     <dimen name="line_height_low">1dp</dimen>
+    <dimen name="line_height_normal">5dp</dimen>
     <dimen name="line_height_high">10dp</dimen>
 
     <!--列表分割线-->
