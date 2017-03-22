@@ -21,9 +21,9 @@ public class GoodsCarAdapter extends BaseAdapter {
     private List<FoodBean> mDatas;
     private LayoutInflater mInflater;
 
-    public GoodsCarAdapter(List<FoodBean> mDatas, Context context){
+    public GoodsCarAdapter(List<FoodBean> mDatas, Context context) {
         this.mDatas = mDatas;
-        this.mInflater=LayoutInflater.from(context);
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -43,24 +43,24 @@ public class GoodsCarAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder=null;
-        if (view==null){
-            holder=new ViewHolder();
-            view=mInflater.inflate(R.layout.item_listview_goods_car,null);
-            holder.tvCarGoodsName= (TextView) view.findViewById(R.id.tvCarGoodsName);
-            holder.tvCarGoodsMoney= (TextView) view.findViewById(R.id.tvCarGoodsMoney);
-            holder.tvCarGoodsNumber= (TextView) view.findViewById(R.id.tvCarGoodsNumber);
+        ViewHolder holder = null;
+        if (view == null) {
+            holder = new ViewHolder();
+            view = mInflater.inflate(R.layout.item_listview_goods_car, null);
+            holder.tvCarGoodsName = (TextView) view.findViewById(R.id.tvCarGoodsName);
+            holder.tvCarGoodsMoney = (TextView) view.findViewById(R.id.tvCarGoodsMoney);
+            holder.tvCarGoodsNumber = (TextView) view.findViewById(R.id.tvCarGoodsNumber);
             view.setTag(holder);
-        }else{
-            holder= (ViewHolder) view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
         holder.tvCarGoodsName.setText(mDatas.get(i).getGoodsName());
-        holder.tvCarGoodsMoney.setText(mDatas.get(i).getGoodsMoney()+"元");
-        holder.tvCarGoodsNumber.setText("x"+mDatas.get(i).getGoodsBuynumber());
+        holder.tvCarGoodsMoney.setText(mDatas.get(i).getGoodsMoney() + "元");
+        holder.tvCarGoodsNumber.setText("x" + mDatas.get(i).getGoodsBuynumber());
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         TextView tvCarGoodsName;
         TextView tvCarGoodsMoney;
         TextView tvCarGoodsNumber;

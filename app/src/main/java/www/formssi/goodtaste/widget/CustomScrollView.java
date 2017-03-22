@@ -15,9 +15,10 @@ public class CustomScrollView extends ScrollView {
 
 
     /***对外提供接口***/
-    public interface ScrollViewListener{
+    public interface ScrollViewListener {
         void OnScrollViewChangeListener(int x, int y, int oldx, int oldy);
     }
+
     public ScrollViewListener OnScrollView;
 
     public void setOnScrollView(ScrollViewListener onScrollView) {
@@ -39,9 +40,8 @@ public class CustomScrollView extends ScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-
-        if (OnScrollView!=null){
-            OnScrollView.OnScrollViewChangeListener(l,t,oldl,oldt);
+        if (OnScrollView != null) {
+            OnScrollView.OnScrollViewChangeListener(l, t, oldl, oldt);
         }
     }
 }

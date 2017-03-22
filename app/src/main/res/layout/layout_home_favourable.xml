@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/fragment_home_favourable_layout_paddingTop"
         android:background="@android:color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/fragment_home_favourable_layout_paddingTop">
+
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_home_favourable_layout_magin"
-            android:layout_height="wrap_content">
+            android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/fragment_home_favourable_text_size16"
-                    android:textStyle="bold"
-                    android:textColor="@color/fragment_favourable_title"
-                    android:text="@string/home_favourable_one_title"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/fragment_favourable_desc"
-                    android:textSize="@dimen/fragment_home_favourable_text_size12"
-                    android:text="@string/home_favourable_one_desc"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_one_title"
+                    android:textColor="@color/fragment_favourable_title"
+                    android:textSize="@dimen/fragment_home_favourable_text_size16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_one_desc"
+                    android:textColor="@color/fragment_favourable_desc"
+                    android:textSize="@dimen/fragment_home_favourable_text_size12" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="@dimen/fragment_home_favourable_img_width"
                 android:layout_height="@dimen/fragment_home_favourable_img_width"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/icon_favourable_one"/>
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_favourable_one" />
         </RelativeLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#ededed"/>
+            android:background="#ededed" />
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_home_favourable_layout_magin"
-            android:layout_height="wrap_content">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,87 +64,91 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/fragment_home_favourable_layout_magin"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/fragment_home_favourable_text_size16"
-                    android:textStyle="bold"
-                    android:textColor="@color/fragment_favourable_title"
-                    android:text="@string/home_favourable_two_title"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/fragment_favourable_desc"
-                    android:textSize="@dimen/fragment_home_favourable_text_size12"
-                    android:text="@string/home_favourable_two_desc"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_two_title"
+                    android:textColor="@color/fragment_favourable_title"
+                    android:textSize="@dimen/fragment_home_favourable_text_size16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_two_desc"
+                    android:textColor="@color/fragment_favourable_desc"
+                    android:textSize="@dimen/fragment_home_favourable_text_size12" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="@dimen/fragment_home_favourable_img_width"
                 android:layout_height="@dimen/fragment_home_favourable_img_width"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/fragment_home_favourable_layout_magin"
-                android:src="@mipmap/icon_favourable_two"/>
+                android:src="@mipmap/icon_favourable_two" />
         </RelativeLayout>
-
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ededed"/>
-
+        android:background="#ededed" />
     <!--第二行-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:orientation="horizontal">
+
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_home_favourable_layout_magin"
-            android:layout_height="wrap_content">
+            android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/fragment_home_favourable_text_size16"
-                    android:textStyle="bold"
+                    android:text="@string/home_favourable_three_title"
                     android:textColor="@color/fragment_favourable_title"
-                    android:text="@string/home_favourable_three_title"/>
+                    android:textSize="@dimen/fragment_home_favourable_text_size16"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_three_desc"
                     android:textColor="@color/fragment_favourable_desc"
-                    android:textSize="@dimen/fragment_home_favourable_text_size12"
-                    android:text="@string/home_favourable_three_desc"/>
+                    android:textSize="@dimen/fragment_home_favourable_text_size12" />
 
             </LinearLayout>
 
             <ImageView
                 android:layout_width="@dimen/fragment_home_favourable_img_width"
                 android:layout_height="@dimen/fragment_home_favourable_img_width"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/icon_favourable_three"/>
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_favourable_three" />
         </RelativeLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#ededed"/>
+            android:background="#ededed" />
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_home_favourable_layout_magin"
-            android:layout_height="wrap_content">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -149,29 +156,31 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/fragment_home_favourable_layout_magin"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/fragment_home_favourable_text_size16"
-                    android:textStyle="bold"
+                    android:text="@string/home_favourable_four_title"
                     android:textColor="@color/fragment_favourable_title"
-                    android:text="@string/home_favourable_four_title"/>
+                    android:textSize="@dimen/fragment_home_favourable_text_size16"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/home_favourable_four_desc"
                     android:textColor="@color/fragment_favourable_desc"
-                    android:textSize="@dimen/fragment_home_favourable_text_size12"
-                    android:text="@string/home_favourable_four_desc"/>
+                    android:textSize="@dimen/fragment_home_favourable_text_size12" />
 
             </LinearLayout>
 
             <ImageView
                 android:layout_width="@dimen/fragment_home_favourable_img_width"
                 android:layout_height="@dimen/fragment_home_favourable_img_width"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/fragment_home_favourable_layout_magin"
-                android:src="@mipmap/icon_favourable_four"/>
+                android:src="@mipmap/icon_favourable_four" />
         </RelativeLayout>
 
     </LinearLayout>

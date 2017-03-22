@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.home.GoodsDetailActivity;
 import www.formssi.goodtaste.adapter.HomeCategroyAdapter;
