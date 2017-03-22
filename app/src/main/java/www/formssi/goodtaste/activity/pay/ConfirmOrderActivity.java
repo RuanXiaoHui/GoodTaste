@@ -73,6 +73,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private UserBean userBean; //用户对象
     private boolean loginStatus;  //登录状态
     private AddressBean addressBean; //地址对象
+    private boolean isAddressNull = true; //地址是否为空
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,13 +168,16 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         if (userBean != null) {
             addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));
             if (addressBean.getAddress() != null) { //如果默认地址不为空
+                isAddressNull = false;
                 tvAddressNull.setVisibility(View.GONE);
                 showAddressDetail(addressBean);
             } else {//如果默认地址为空
                 List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
                 if (addressBeanList.size() <= 0) {
+                    isAddressNull = true;
                     tvAddressNull.setVisibility(View.VISIBLE);
                 } else {
+                    isAddressNull = false;
                     tvAddressNull.setVisibility(View.GONE);
                     showAddressDetail(addressBeanList.get(0));
                 }
@@ -215,7 +219,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 if (!loginStatus) { //用户未登录
                     intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
                 } else {//用户已登录
-                    if (null != addressBean.getAddressId() || "".equals(addressBean.getAddressId())) {//地址不为空
+                    if (!isAddressNull) {//地址不为空
                         long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
                         //提交订单成功
                         if (orderId > 0) {
@@ -285,7 +289,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
         orderBean.setActualPayment((money + Integer.parseInt(shopBean.getShopMoney())) + "");//实付金额
         orderBean.setOrderTime(DateUtil.getCurrentTime()); //下单时间
-        orderBean.setAddressId(1);  //送餐地址Id
+        orderBean.setAddressId(Integer.parseInt(userBean.getAddressId()));  //送餐地址Id
     }
 
     /**
