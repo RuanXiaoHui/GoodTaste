@@ -105,6 +105,6 @@ public class SQLiteConstant {
             COLUMN_TO_SEX + " varchar(5),", COLUMN_TO_PHONE + " varchar(15)"};
     // 地址表的列名数组
     public static final String[] TABLE_FEEDBACK_COLUMNS = new String[]{COLUMN_FEEDBACK_ID, COLUMN_FEEDBACK_UID
-            + " integer,", COLUMN_FEEDBACK_CONTENTS + " varchar(50)"};
+            + " varchar(7),", COLUMN_FEEDBACK_CONTENTS + " varchar(50)"};
 
 }

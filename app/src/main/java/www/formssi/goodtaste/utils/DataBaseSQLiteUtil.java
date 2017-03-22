@@ -452,6 +452,7 @@ public class DataBaseSQLiteUtil {
     public static void feedback(String uid, String contents) {
         openDataBase();
         ContentValues values = new ContentValues();
+        values.put("uid", uid);
         values.put("contents", contents);
         mDatabase.insert(TABLE_NAME_FEEDBACK, null, values);
         closeDataBase();

@@ -1,6 +1,5 @@
 package www.formssi.goodtaste.activity.order;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,14 +21,12 @@ import www.formssi.goodtaste.fragment.OrderStateFragment;
 /**
  * 订单分类的activity
  */
-public class OrderStateActivity extends BaseActivity implements View.OnClickListener{
+public class OrderStateActivity extends BaseActivity implements View.OnClickListener {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ImageView ivBackTitleBarBack;
     private TextView tvBackTitleBarTitle;
-    private List<Fragment> fragments;
-    private OrderPagerAdapter orderPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +50,13 @@ public class OrderStateActivity extends BaseActivity implements View.OnClickList
         tvBackTitleBarTitle.setText(R.string.activity_order_my);
         FragmentManager fm = this.getSupportFragmentManager();
         int stateNum = getIntent().getIntExtra("stateNum", 0) - 1;//获取跳转的fragment
-        fragments = new ArrayList<>();
+        List<Fragment> fragments = new ArrayList<>();
         fragments.add(new OrderStateFragment(OrderState.NOT_PAY));
         fragments.add(new OrderStateFragment(OrderState.NOT_DELIVERY));
         fragments.add(new OrderStateFragment(OrderState.DELIVERY_ING));
         fragments.add(new OrderStateFragment(OrderState.NOT_COMMENT));
         fragments.add(new OrderStateFragment(OrderState.FINISH));
-        orderPagerAdapter = new OrderPagerAdapter(fm, fragments);
+        OrderPagerAdapter orderPagerAdapter = new OrderPagerAdapter(fm, fragments);
         viewPager.setAdapter(orderPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(stateNum);
@@ -69,6 +66,7 @@ public class OrderStateActivity extends BaseActivity implements View.OnClickList
     protected void initListener() {
         ivBackTitleBarBack.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

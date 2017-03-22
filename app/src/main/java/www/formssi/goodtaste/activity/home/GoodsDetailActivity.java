@@ -32,6 +32,7 @@ import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
+import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
@@ -244,5 +245,16 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             tv_backTitleBar_center_title.setText(mShopBean.getShopName());
             iv_backTitleBar_back.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        System.out.print("Jinlaile------------");
+        if (ContextUtil.getInstance().isFinishGoodsActivity()){
+            ContextUtil.getInstance().setFinishGoodsActivity(false);
+            GoodsDetailActivity.this.finish();
+        }
+
     }
 }
