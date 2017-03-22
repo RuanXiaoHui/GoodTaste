@@ -43,6 +43,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.CALL_PHONE_REQUEST_C
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
+    private TextView tvOrderBackText; // 订单状详情
     private TextView tvOrderStatus; // 订单状态，根据状态来显示不同按钮
     private ImageView ivOrderShopImg; // 店铺图像
     private TextView tvOrderShopName; // 店铺名称
@@ -80,6 +81,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void initView() {
         lvFoodList = (NoScrollListView) findViewById(R.id.lv_order_food_list);
         ivOrderShopImg = (ImageView) findViewById(R.id.iv_order_shop_image);
+        tvOrderBackText = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tvOrderStatus = (TextView) findViewById(R.id.tv_order_status);
         tvOrderShopName = (TextView) findViewById(R.id.tv_order_shop_name);
         tvOrderPackFee = (TextView) findViewById(R.id.tv_order_pack_fee);
@@ -100,6 +102,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void initData() {
         rmbSign = getString(R.string.common_rmb_sign); // 人民币符号
         rmbUnit = getString(R.string.common_rmb_unit); // 人民币单位
+        tvOrderBackText.setText(getString(R.string.activity_order_detail_title));
         listFoodBean = new ArrayList<>(); // 食品列表根据订单详情里面的订单号查询出来
         intent = getIntent(); // 通过intent获取订单id
         if (null != intent) {
