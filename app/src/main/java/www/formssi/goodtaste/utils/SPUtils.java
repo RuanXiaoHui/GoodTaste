@@ -17,6 +17,12 @@ public class SPUtils {
         edit.putString(key,value);
         edit.commit();
     }
+    public static void putBoolean(Context context, String key, boolean value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean(key,value);
+        edit.commit();
+    }
 
     public static void updateTel(Context context, String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
