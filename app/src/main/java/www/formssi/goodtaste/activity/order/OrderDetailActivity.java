@@ -3,6 +3,7 @@ package www.formssi.goodtaste.activity.order;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
@@ -72,9 +73,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        initView();
-        initData();
-        initListener();
+        initView(); // 初始化控件
+        initData(); // 初始化数据
+        initListener(); // 初始化监听
     }
 
     @Override
@@ -112,7 +113,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                 setOrderDetail(orderBean); // 展示订单详情信息
             }
             if (null != orderBean) {
-                listFoodBean.addAll(orderBean.getFoodBeanList());
+                listFoodBean.addAll(orderBean.getFoodBeanList()); // 展示食物列表信息
                 adapter = new FoodListAdapter();
                 lvFoodList.setAdapter(adapter);
             }
@@ -121,6 +122,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initListener() {
+        tvOrderShopName.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -130,21 +132,23 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_order_shop_name: // 点击商家名称
+                //startActivity(new Intent(this, GoodsDetailActivity.class)); // 跳转到商家店铺
+                break;
             case R.id.iv_backTitlebar_back: // 返回按钮
-                finish();
+                finish(); // 结束当前
                 break;
             case R.id.btn_order_ok: // 根据状态改变按钮处理的业务
                 switch (Integer.parseInt(orderBean.getStatus())) {
                     case OrderState.NOT_PAY: // 未支付
-                       // 去支付
-                        Intent intent = new Intent(this,OnlinePaymentActivity.class);
+                        Intent intent = new Intent(this, OnlinePaymentActivity.class); // 去支付
                         intent.putExtra(ConstantConfig.INTENT_ORDER_ID, orderBean.getOrderId());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, orderBean.getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, orderBean.getActualPayment());
-                        startActivity(intent);
+                        startActivity(intent); // 跳转到支付页面
                         break;
                     case OrderState.NOT_DELIVERY: // 未配送
-                        showToast(getString(R.string.toast_order_remind));
+                        showToast(getString(R.string.toast_order_remind)); // 提醒商家
                         break;
                 }
                 break;
@@ -159,13 +163,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                         intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)); // 拨打商家电话的意图
                     } else {
                         String phone = orderBean.getShopPhone(); // 如果获取不到商家信息
-                        if(null != phone || "".equals(phone)){ // 就从订单里面获取商家电话，如果有
+                        if (null != phone || "".equals(phone)) { // 就从订单里面获取商家电话，如果有
                             intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)); // 拨打商家电话的意图
                         } else { // 如果没有电话
                             intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getString(R.string.common_shop_default_phone)));
                         }
                     }
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 设置意图新任务标志
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         showToast(getString(R.string.common_call_phone_not_granted));
                         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, CALL_PHONE_REQUEST_CODE);
@@ -198,28 +202,38 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     public void setOrderDetail(OrderBean orderBean) {
         if (null != orderBean) {
-            ivOrderShopImg.setImageResource(orderBean.getShopPicture());
-            tvOrderShopName.setText(orderBean.getShopName());
-            tvOrderNumber.setText(orderBean.getOrderNum());
-            tvOrderDiscount.setText(rmbSign + orderBean.getDiscountMoney() + rmbUnit);
-            tvOrderActualPay.setText(rmbSign + orderBean.getActualPayment() + rmbUnit);
-            tvOrderPackFee.setText(rmbSign + orderBean.getDistributingFee() + rmbUnit);
-            tvOrderTime.setText(orderBean.getOrderTime());
-            tvOrderPayTime.setText(orderBean.getPayTime());
-            int addressId = orderBean.getAddressId();
-            AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId));
-            tvOrderAddress.setText(bean.toAddressString());
-            switch (Integer.parseInt(orderBean.getStatus())) {
+            ivOrderShopImg.setImageResource(orderBean.getShopPicture()); // 显示商家图像
+            tvOrderShopName.setText(orderBean.getShopName()); // 显示商家名称
+            tvOrderNumber.setText(orderBean.getOrderNum()); // 显示订单号
+            tvOrderDiscount.setText(rmbSign + orderBean.getDiscountMoney() + rmbUnit); // 显示优惠金额
+            tvOrderActualPay.setText(rmbSign + orderBean.getActualPayment() + rmbUnit); // 显示实付金额
+            tvOrderPackFee.setText(rmbSign + orderBean.getDistributingFee() + rmbUnit); // 显示配送费
+            tvOrderTime.setText(orderBean.getOrderTime()); // 显示下单时间
+            tvOrderPayTime.setText(orderBean.getPayTime()); // 显示支付时间，如果已经支付
+            Drawable leftDrawable = getResources().getDrawable(orderBean.getShopPicture()); // 商家名称左图标
+            Drawable rightDrawable = getResources().getDrawable(R.mipmap.ic_right_arrow_normal); // 商家名称右图标
+            int w = (int) getResources().getDimension(R.dimen.icon_small_width); // 商家名称左图标宽度
+            int h = (int) getResources().getDimension(R.dimen.icon_small_hight); // 商家名称左图标高度
+            int padding = (int) getResources().getDimension(R.dimen.common_padding_normal); // 商家名称左图标padding
+            leftDrawable.setBounds(0, 0, w, h); // 设置商家名称左图标宽高
+            // 设置商家名称右图标宽高
+            rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
+            tvOrderShopName.setCompoundDrawablePadding(padding); // 设置商家名称左图标padding
+            tvOrderShopName.setCompoundDrawables(leftDrawable, null, rightDrawable, null); // 设置商家名称左、右图标
+            int addressId = orderBean.getAddressId(); // 获取地址id
+            AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId)); // 数据库查询地址信息
+            tvOrderAddress.setText(bean.toAddressString()); // 显示地址信息
+            switch (Integer.parseInt(orderBean.getStatus())) { // 根据订单状态分配任务
                 case OrderState.NOT_PAY: // 未支付
-                    tvOrderStatus.setText(getString(R.string.order_state_not_pay));
-                    btnOK.setText(getString(R.string.activity_order_goto_pay));
-                    tvOrderPayTime.setText(getString(R.string.order_state_not_pay));
-                    tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay));
+                    tvOrderStatus.setText(getString(R.string.order_state_not_pay)); // 显示支付状态：未支付
+                    btnOK.setText(getString(R.string.activity_order_goto_pay)); // 支付按钮
+                    tvOrderPayTime.setText(getString(R.string.order_state_not_pay)); // 显示支付时间，如果未支付，显示未支付
+                    tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay)); // 显示到达时间，如果未支付
                     break;
                 case OrderState.NOT_DELIVERY: // 未配送
-                    tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery));
-                    btnOK.setText(getString(R.string.order_state_btn_not_delivery));
-                    tvOrderArrivalTime.setText(getString(R.string.order_state_not_delivery));
+                    tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery)); // 显示订单状态：未配送
+                    btnOK.setText(getString(R.string.order_state_btn_not_delivery)); // 催单按钮
+                    tvOrderArrivalTime.setText(getString(R.string.order_state_not_delivery)); // 显示到达时间，如果未配送，显示未配送
                     break;
             }
         }
