@@ -9,7 +9,6 @@
     tools:context="www.formssi.goodtaste.activity.pay.ConfirmOrderActivity">
 
     <!--确认订单-->
-
     <include layout="@layout/layout_back_title_bar" />
 
     <View
