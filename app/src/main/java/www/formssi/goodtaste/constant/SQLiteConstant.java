@@ -61,7 +61,12 @@ public class SQLiteConstant {
     //订单详情表字段
     public static final String COLUMN_ORDER_DETAIL_ID = "oderDetailId"; // 订单详情id
 
-    //地址表字段
+    //反馈表字段
+    public static final String COLUMN_FEEDBACK_ID = "_id"; // id
+    public static final String COLUMN_FEEDBACK_UID = "uid"; // 评论者id
+    public static final String COLUMN_FEEDBACK_CONTENTS = "contents"; // 内容
+
+    // 地址表字段
     public static final String COLUMN_ADDRESS_ID = "addressId"; // 送餐地址id
     public static final String COLUMN_TO_NAME = "toName"; // 收货人姓名
     public static final String COLUMN_TO_SEX = "toSex"; // 收货人性别
@@ -98,5 +103,8 @@ public class SQLiteConstant {
     public static final String[] TABLE_ADDRESS_COLUMNS = new String[]{COLUMN_ADDRESS_ID, COLUMN_USER_ID
             + " integer,", COLUMN_TO_ADDRESS + " varchar(50),", COLUMN_TO_NAME + " varchar(20),",
             COLUMN_TO_SEX + " varchar(5),", COLUMN_TO_PHONE + " varchar(15)"};
+    // 地址表的列名数组
+    public static final String[] TABLE_FEEDBACK_COLUMNS = new String[]{COLUMN_FEEDBACK_ID, COLUMN_FEEDBACK_UID
+            + " integer,", COLUMN_FEEDBACK_CONTENTS + " varchar(50)"};
 
 }

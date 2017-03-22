@@ -53,6 +53,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_USER_SEX;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_NAME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.DB_VERSION;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_ADDRESS_COLUMNS;
+import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_FEEDBACK_COLUMNS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_FOOD_COLUMNS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_ADDRESS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.TABLE_NAME_FEEDBACK;
@@ -644,8 +645,8 @@ public class DataBaseSQLiteUtil {
             db.execSQL(sql5); // 创建订单详情表
             String sql6 = createTable(TABLE_NAME_ADDRESS, TABLE_ADDRESS_COLUMNS);
             db.execSQL(sql6); // 创建地址表
-            String sql7 = createTable(TABLE_NAME_FEEDBACK, TABLE_ADDRESS_COLUMNS);
-            db.execSQL("create table if not exits " + TABLE_NAME_FEEDBACK + "(_id integer primary key autoincrement,contents varchar(50),uid integer)"); // 创建地址表
+            String sql7 = createTable(TABLE_NAME_FEEDBACK, TABLE_FEEDBACK_COLUMNS);
+            db.execSQL(sql7); // 创建地址表
         }
 
         @Override
