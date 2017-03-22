@@ -41,7 +41,7 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
         etTelephone = (EditText) findViewById(R.id.et_telephone);
         etUpdateTelephone = (EditText) findViewById(R.id.et_update_telephone);
         btnUpdate = (Button) findViewById(R.id.btn_update_telephone);
-        tvTitle.setText("修改手机号码");
+        tvTitle.setText(R.string.update_telephone);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
         String newTelephone = etUpdateTelephone.getText().toString();
         if (TextUtils.equals(tel, oldTelephone)) {
             if (TextUtils.getTrimmedLength(newTelephone) != 11) {
-                ToastUtil.showToast("新手机号格式有误");
+                ToastUtil.showToast(getString(R.string.toast_phone_format_error));
                 return;
             }
             boolean b = DataBaseSQLiteUtil.updateUserPhone(tel, newTelephone);
@@ -90,7 +90,7 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
             setResult(RESULT_OK, intent);
             finish();
         } else {
-            ToastUtil.showToast("旧手机不匹配");
+            ToastUtil.showToast(getString(R.string.toast_phone_no_match));
         }
     }
 }

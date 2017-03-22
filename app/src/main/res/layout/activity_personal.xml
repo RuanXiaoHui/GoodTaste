@@ -48,7 +48,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.7dp"
+                android:layout_height="@dimen/line_height_low"
                 android:background="@color/fragment_mine_ll" />
 
             <RelativeLayout
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="5dp">
+                android:padding="@dimen/small_padding">
 
                 <TextView
                     style="@style/text_normal_black"
@@ -81,7 +81,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/small_margin"
                 android:background="@color/white"
                 android:orientation="vertical">
 
@@ -90,12 +90,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:padding="10dp"
+                    android:padding="@dimen/medium_padding"
                     android:text="@string/fragment_personal_securitysetting"/>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.7dp"
+                    android:layout_height="@dimen/line_height_low"
                     android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
@@ -120,14 +120,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:padding="10dp"/>
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:padding="@dimen/medium_padding"/>
 
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.7dp"
+                    android:layout_height="@dimen/line_height_low"
                     android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
@@ -152,14 +152,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:padding="10dp"/>
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:padding="@dimen/medium_padding"/>
 
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.7dp"
+                    android:layout_height="@dimen/line_height_low"
                     android:background="@color/fragment_mine_ll"/>
 
                 <RelativeLayout
@@ -167,14 +167,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:padding="5dp">
+                    android:padding="@dimen/small_padding">
 
                     <TextView
                         style="@style/text_normal_black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:padding="10dp"
+                        android:padding="@dimen/medium_padding"
                         android:text="@string/fragment_personal_pay_password"/>
 
                     <TextView
@@ -184,8 +184,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:padding="10dp"/>
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:padding="@dimen/medium_padding"/>
 
                 </RelativeLayout>
 

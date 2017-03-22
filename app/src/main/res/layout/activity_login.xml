@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/medium_padding"
-            android:hint="手机号码"
+            android:hint="@string/hint_login_telephone"
             android:digits="0123456789"
             android:maxLength="11"
             android:inputType="phone"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/line_height_low"
             android:padding="@dimen/medium_padding"
-            android:hint="密码"
+            android:hint="@string/login_hint_pwd"
             android:background="@color/white"/>
 
     <Button
@@ -42,7 +42,7 @@
     <TextView
         android:padding="8dp"
         android:textColor="#f00"
-        android:id="@+id/tv_regist"
+        android:id="@+id/tv_register"
         android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

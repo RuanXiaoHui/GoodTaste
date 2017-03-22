@@ -13,10 +13,10 @@
         android:id="@+id/ll_suggestion_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/small_margin"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="@dimen/medium_padding">
 
         <EditText
             android:gravity="top|left"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@null"
-            android:hint="感謝您的意見" />
+            android:hint="@string/hint_suggestion" />
 
     </LinearLayout>
 
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium_padding"
         android:padding="@dimen/medium_padding"
-        android:text="提交" />
+        android:text="@string/activity_suggestion_commit"/>
 
 </LinearLayout>

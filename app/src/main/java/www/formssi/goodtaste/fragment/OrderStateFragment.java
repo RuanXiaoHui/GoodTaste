@@ -24,17 +24,13 @@ public class OrderStateFragment extends Fragment {
     private LinearLayout lltNoOrder;//没有订单时的父布局
     private int state = 0;//进入视图时显示的fragment
 
-    /**
-     * @param state 进入视图时显示的fragment
-     */
     public OrderStateFragment(int state) {
         super();
         this.state = state;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
         initView(v);
         initData();

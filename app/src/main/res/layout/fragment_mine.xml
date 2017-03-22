@@ -63,16 +63,16 @@
                     android:id="@+id/rl_mine_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_margin_normal"
-                    android:layout_toRightOf="@+id/iv_mine_headprotrait"
-                    android:padding="@dimen/common_padding_small">
+                    android:padding="@dimen/common_padding_small"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true">
 
                     <TextView
                         android:id="@+id/tv_mine_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/common_margin_normal"
-                        android:text="立即登录"
+                        android:text="@string/activity_login"
                         android:textColor="@color/white" />
 
                     <TextView
@@ -81,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_mine_username"
                         android:layout_marginTop="@dimen/common_margin_normal"
-                        android:text="登陆后可享受更多特权"
+                        android:text="@string/fragment_mine_login"
                         android:textColor="@color/white" />
 
                 </RelativeLayout>

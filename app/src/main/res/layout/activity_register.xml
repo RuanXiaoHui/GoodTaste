@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/medium_padding"
-            android:hint="手机号码"
+            android:hint="@string/hint_login_telephone"
             android:digits="0123456789"
             android:maxLength="11"
             android:inputType="phone"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/line_height_low"
             android:padding="@dimen/medium_padding"
-            android:hint="密码"
+            android:hint="@string/login_hint_pwd"
             android:background="@color/white"/>
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/line_height_low"
         android:background="@color/white"
-        android:hint="支付密码"
+        android:hint="@string/fragment_personal_pay_password"
         android:padding="@dimen/medium_padding" />
 
     <Button

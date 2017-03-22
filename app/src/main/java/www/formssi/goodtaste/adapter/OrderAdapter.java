@@ -27,7 +27,6 @@ import www.formssi.goodtaste.utils.ContextUtil;
  * Created by GTs on 2017-03-16.
  */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
-
     private List<OrderBean> list;
     private Context context;
 
@@ -35,6 +34,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         this.list = list;
         this.context = context;
     }
+
     @Override
     public OrderHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
@@ -51,9 +51,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         initListener(holder, position);
     }
 
-    /**
-     * 绑定点击事件
-     */
     private void initListener(OrderHolder holder, final int position) {
         int status = Integer.valueOf(list.get(position).getStatus());//订单状态码
         holder.lltOrderItem.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +73,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, list.get(position).getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, list.get(position).getActualPayment());
                         context.startActivity(intent);
-//                        context.startActivity(new Intent(context, OnlinePaymentActivity.class));//点击去支付去往支付页面
                     }
                 });
                 break;

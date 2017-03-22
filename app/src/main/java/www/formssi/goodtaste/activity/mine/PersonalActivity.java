@@ -25,6 +25,7 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DialogUtils;
 import www.formssi.goodtaste.utils.ImageLoader;
 import www.formssi.goodtaste.utils.StringUtils;
+import www.formssi.goodtaste.utils.ToastUtil;
 
 public class PersonalActivity extends BaseActivity implements View.OnClickListener {
 
@@ -175,7 +176,7 @@ public class PersonalActivity extends BaseActivity implements View.OnClickListen
                 switch (which) {
                     case 0: //拍照
                         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                            Toast.makeText(PersonalActivity.this, "手机存储不可用!", Toast.LENGTH_LONG).show();
+                            ToastUtil.showToast(getString(R.string.toast_sdcard_error));
                             return;
                         }
                         mPhotoFile = new File(saveDir, "temp.jpg");

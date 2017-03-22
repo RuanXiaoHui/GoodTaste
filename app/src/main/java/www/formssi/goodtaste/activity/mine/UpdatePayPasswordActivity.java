@@ -24,6 +24,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update_pay_password);
         initView();
         initData();
         initListener();
@@ -31,11 +32,10 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_update_pay_password);
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etPayPwd = (EditText) findViewById(R.id.et_pay_password);
         etUpdatePwd = (EditText) findViewById(R.id.et_update_pay_password);
-        tvTitle.setText("修改支付密码");
+        tvTitle.setText(R.string.update_pay_pwd);
     }
 
     @Override
@@ -69,11 +69,11 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
         String newPayPwd = etUpdatePwd.getText().toString();
         if (!TextUtils.isEmpty(mUserBean.getPayPassword())) {
             if (TextUtils.isEmpty(oldPayPwd)) {
-                ToastUtil.showToast("请输入旧密码！");
+                ToastUtil.showToast(getString(R.string.toast_enter_old_pwd));
                 return;
             }
             if (!TextUtils.equals(oldPayPwd, mUserBean.getPayPassword())) {
-                ToastUtil.showToast("旧密码不正确！");
+                ToastUtil.showToast(getString(R.string.toast_old_pay_error));
                 return;
             }
             update(newPayPwd);
@@ -84,7 +84,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
 
     private void update(String newPayPwd) {
         if (TextUtils.isEmpty(newPayPwd)) {
-            ToastUtil.showToast("请输入新密码");
+            ToastUtil.showToast(getString(R.string.toast_enter_new_pwd));
             return;
         }
         boolean result = DataBaseSQLiteUtil.updatePayPassword(mUserBean.getPhoneNumber(), newPayPwd);
