@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!--订单食物列表顶部-->
     <LinearLayout
-        android:id="@+id/llt_ConfirmOrederActtivity_address"
+        android:id="@+id/llt_ConfirmOrderActivity_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -19,7 +20,7 @@
             android:src="@mipmap/ic_location" />
 
         <TextView
-            android:id="@+id/tv_ConfirmOrederActtivity_addressNull"
+            android:id="@+id/tv_ConfirmOrderActivity_addressNull"
             style="@style/activity_text_normal_blue"
             android:text="@string/activity_addNewAddress_title"
             android:visibility="gone" />
@@ -38,24 +39,24 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_ConfirmOrederActtivity_name"
+                    android:id="@+id/tv_ConfirmOrderActivity_name"
                     style="@style/activity_text_normal_black"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_ConfirmOrederActtivity_gender"
+                    android:id="@+id/tv_ConfirmOrderActivity_gender"
                     style="@style/activity_text_normal_black"
                     android:layout_marginLeft="@dimen/common_margin_small" />
 
                 <TextView
-                    android:id="@+id/tv_ConfirmOrederActtivity_phone"
+                    android:id="@+id/tv_ConfirmOrderActivity_phone"
                     style="@style/activity_text_normal_black"
                     android:layout_marginLeft="@dimen/common_margin_normal" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_ConfirmOrederActtivity_address"
+                android:id="@+id/tv_ConfirmOrderActivity_address"
                 style="@style/activity_text_small_gray"
                 android:layout_marginTop="@dimen/common_margin_normal" />
 
@@ -78,17 +79,14 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/common_padding_normal"
-        android:paddingLeft="@dimen/common_padding_medium"
-        android:paddingRight="@dimen/common_padding_medium"
-        android:paddingTop="@dimen/common_padding_normal">
+        android:padding="@dimen/common_padding_medium">
 
         <ImageView
-            android:id="@+id/iv_ConfirmOrederActtivity_store"
+            android:id="@+id/iv_ConfirmOrderActivity_store"
             style="@style/icon_normal" />
 
         <TextView
-            android:id="@+id/tv_ConfirmOrederActtivity_stroeName"
+            android:id="@+id/tv_ConfirmOrderActivity_storeName"
             style="@style/activity_text_normal_gray"
             android:layout_marginLeft="@dimen/common_margin_normal" />
 

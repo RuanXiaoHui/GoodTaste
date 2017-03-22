@@ -39,7 +39,7 @@
     <color name="fragment_mine_preferential">#f00</color>
     <color name="fragment_mine_integral">#194d19</color>
     <!-- 分割线 -->
-    <color name="line_horizontal">#efefef</color>
+    <color name="line_horizontal">#f5f5f5</color>
 
     <!-- 黑色字体 -->
     <color name="activity_text_black">#333333</color>
