@@ -7,7 +7,7 @@
         android:id="@+id/rltToolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_back_titlebar_hight"
-        android:background="@color/back_title_bar_background"
+        android:background="@color/appColor"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_back_titlebar_paddingLeft"
         android:paddingRight="@dimen/activity_back_titlebar_paddingRight">
@@ -26,7 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/activity_back_titlebar_marginLeft"
             android:layout_toRightOf="@+id/iv_backTitlebar_back"
-            android:textColor="@color/back_title_bar_titleColor"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/back_title_bar_titleColor"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
 
     </RelativeLayout>

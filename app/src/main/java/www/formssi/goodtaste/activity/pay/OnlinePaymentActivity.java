@@ -59,7 +59,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvStoreName.setText(storeName);
         //订单金额
         String totalPay = intent.getStringExtra("totalPay");
-        tvPrice.setText("¥" + totalPay);
+        tvPrice.setText(getString(R.string.common_rmb_sign) + totalPay);
     }
 
     @Override

@@ -203,6 +203,7 @@ public class DataBaseSQLiteUtil {
      * @return 订单列表
      */
     public static List<OrderBean> getOrderBeansById(String orderId) {
+        openDataBase();
         String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
                 , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY, COLUMN_PACK_FEE,
                 COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
@@ -233,6 +234,7 @@ public class DataBaseSQLiteUtil {
             }
         }
         cursor.close();
+        closeDataBase();
         return list;
     }
 
@@ -243,6 +245,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static List<FoodBean> getOrderDetailsBeansById(String orderNumber) {
+        openDataBase();
         String[] projection = {COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_PRICE, COLUMN_FOOD_BUY_COUNT}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER_DETAIL, projection, COLUMN_ORDER_NUMBER + "= ?",
                 new String[]{orderNumber}, null, null, null);
@@ -256,6 +259,7 @@ public class DataBaseSQLiteUtil {
             list.add(food);
         }
         cursor.close();
+        closeDataBase();
         return list;
     }
 
@@ -266,6 +270,7 @@ public class DataBaseSQLiteUtil {
      * @return
      */
     public static ShopBean getShopById(String id) {
+        openDataBase();
         String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_ADDRESS,
                 COLUMN_SHOP_PHONE, COLUMN_SHOP_SCORE, COLUMN_SHOP_TOTAL_SELL, COLUMN_PACK_FEE}; //
         Cursor cursor = mDatabase.query(TABLE_NAME_SHOP, projection, COLUMN_SHOP_ID + "= ?",
@@ -286,6 +291,7 @@ public class DataBaseSQLiteUtil {
             shopBean.setShopAddress(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_ADDRESS))); // 商家地址
         }
         cursor.close();
+        closeDataBase();
         return shopBean;
     }
 

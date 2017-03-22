@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layout_marginTop="@dimen/common_margin_small"
         android:orientation="vertical">
 
         <ListView
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_bottom_hight"
         android:gravity="center"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
