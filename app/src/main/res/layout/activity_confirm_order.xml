@@ -9,15 +9,12 @@
     tools:context="www.formssi.goodtaste.activity.pay.ConfirmOrderActivity">
 
     <!--确认订单-->
-    <LinearLayout
+    <include layout="@layout/layout_back_title_bar" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/common_margin_small">
-
-        <include layout="@layout/layout_back_title_bar" />
-
-    </LinearLayout>
+        android:layout_height="@dimen/line_height_normal"
+        android:background="@color/line_horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
