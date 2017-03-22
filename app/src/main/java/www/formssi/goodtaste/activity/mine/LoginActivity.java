@@ -49,8 +49,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         etTelephone = (EditText) findViewById(R.id.et_login_telephone);
         etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        mTvRegister = (TextView) findViewById(R.id.tv_regist);
-        tvTitle.setText("登录");
+        mTvRegister = (TextView) findViewById(R.id.tv_register);
+        tvTitle.setText(R.string.activity_login);
     }
 
     @Override
@@ -92,14 +92,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String telephone1 = etTelephone.getText().toString();
         String pass = etLoginPassword.getText().toString();
         if (telephone1.length() != 11) {
-            Toast.makeText(mContext, "手机号错误", Toast.LENGTH_LONG).show();
+            ToastUtil.showToast(getString(R.string.telephone_error));
             return;
         }
         if (TextUtils.isEmpty(pass)) {
-            Toast.makeText(mContext, "请输入密码", Toast.LENGTH_LONG).show();
+            ToastUtil.showToast(getString(R.string.enter_pwd));
             return;
         }
-
         UserBean userBean = DataBaseSQLiteUtil.userLogin(telephone1, pass);
         if (userBean != null) {
             //登录设置

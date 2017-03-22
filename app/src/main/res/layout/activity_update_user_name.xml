@@ -22,7 +22,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/small_margin"
             android:background="@null"
-            android:hint="用户名" />
+            android:hint="@string/fragment_personal_username" />
 
     </LinearLayout>
 
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium_margin"
-        android:text="确认修改" />
+        android:text="@string/fragment_personal_setting" />
 
 
 </LinearLayout>

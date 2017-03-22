@@ -100,8 +100,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (hasLogin) {
             getUser();
             if (userBean != null) {
-                String headProtrait = userBean.getHeadProtrait();
-                ImageLoader.display(mContext,headProtrait,ivHeadPicture);
+                String headPortrait = userBean.getHeadProtrait();
+                ImageLoader.display(mContext,headPortrait,ivHeadPicture);
                 String userName = userBean.getUserName();
                 if (!TextUtils.isEmpty(userName)) {
                     tvUserName.setText(userName);
