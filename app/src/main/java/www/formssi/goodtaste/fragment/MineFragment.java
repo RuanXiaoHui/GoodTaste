@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    private static final String TAG = "MineFragment";
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: ");
         mContext = getContext();
         initDate();
         validateView();
@@ -180,6 +183,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_LOGIN) { // 登录成功
                 hasLogin = true;
+                SPUtils.putBoolean(mContext,"login",hasLogin);
                 validateView();
 //                String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
 //                tvPhoneNum.setText(s);
@@ -189,9 +193,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tvPhoneNum.setText(s);
                 tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_LOGOUT) { // 登出
-                hasLogin = intent.getBooleanExtra("login", false);
+                hasLogin = false;
+                SPUtils.putBoolean(mContext,"login",hasLogin);
                 validateView();
             }
+
         }
     }
 }
