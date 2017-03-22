@@ -72,7 +72,9 @@ public class SettingSuggestionActivity extends BaseActivity implements View.OnCl
             ToastUtil.showToast("请输入反馈内容");
             return;
         }
-        DataBaseSQLiteUtil.feedback(mUser.getUserId(),contents);
-        ToastUtil.showToast("感谢来访");
+        String userId = mUser.getUserId();
+        DataBaseSQLiteUtil.feedback(userId,contents);
+        ToastUtil.showToast("已收到反馈");
+        finish();
     }
 }
