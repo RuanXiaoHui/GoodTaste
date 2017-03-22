@@ -3,7 +3,9 @@ package www.formssi.goodtaste.activity.home;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,12 +29,14 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.pay.ConfirmOrderActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.mine.LoginActivity;
+import www.formssi.goodtaste.adapter.GoodsCarAdapter;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
 import www.formssi.goodtaste.adapter.ShopMenuAdapter;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.GoodsMenu;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
+import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.widget.CustomScrollView;
 
 public class GoodsDetailActivity extends BaseActivity implements CustomScrollView.ScrollViewListener {
@@ -61,6 +66,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private int mHeight = 0;                   //顶部背景图片的高度
     private Animation mCarAnimation = null;    //购物车的添加购物动画
     private SharedPreferences mContextSharedPreferences;
+    private PopupWindow mPopWind;
 
 
     @Override
@@ -189,6 +195,23 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
                 finish();
             }
         });
+
+        ivCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View mView=getLayoutInflater().inflate(R.layout.layout_goods_car,null);
+                ListView mCarListView= (ListView) mView.findViewById(R.id.lvGoodsCar);
+                mCarListView.setAdapter(new GoodsCarAdapter(mFoodConfirm,GoodsDetailActivity.this));
+                setPopWinListViewHeight(mCarListView);
+                mPopWind=new PopupWindow(GoodsDetailActivity.this);
+                mPopWind.setContentView(mView);
+                mPopWind.setWindowLayoutMode(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPopWind.setFocusable(true);
+                mPopWind.setOutsideTouchable(true);
+                mPopWind.setBackgroundDrawable(new ColorDrawable(0));
+                mPopWind.showAtLocation(findViewById(R.id.rltGoodsPay), Gravity.BOTTOM,0,100);
+            }
+        });
     }
 
     //初始化ScrollView，并测量顶部背景图高度
@@ -244,5 +267,34 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             tv_backTitleBar_center_title.setText(mShopBean.getShopName());
             iv_backTitleBar_back.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (ContextUtil.getInstance().isFinishGoodsActivity()){
+            ContextUtil.getInstance().setFinishGoodsActivity(false);
+            GoodsDetailActivity.this.finish();
+        }
+    }
+
+    //计算PopWindow中ListView的高，当高度超过四百的时候，设置最大高度为400
+    public void setPopWinListViewHeight(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        if (params.height>400){
+            params.height=400;
+        }
+        listView.setLayoutParams(params);
     }
 }

@@ -28,6 +28,7 @@ import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
@@ -91,17 +92,17 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lvFood = (ListView) findViewById(R.id.lv_ConfirmOrderActivity_food);
         headView = getLayoutInflater().inflate(R.layout.layout_comfir_order_head_view, null);
         footView = getLayoutInflater().inflate(R.layout.layout_comfir_order_foot_view, null);
-        ivStore = (ImageView) headView.findViewById(R.id.iv_ConfirmOrederActtivity_store);
-        tvAddressNull = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_addressNull);
-        tvName = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_name);
-        tvGender = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_gender);
-        tvPhone = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_phone);
-        tvAddress = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_address);
-        lltAddress = (LinearLayout) headView.findViewById(R.id.llt_ConfirmOrederActtivity_address);
-        tvStoreName = (TextView) headView.findViewById(R.id.tv_ConfirmOrederActtivity_stroeName);
-        tvDistributionCost = (TextView) footView.findViewById(R.id.tv_ConfirmOrederActtivity_distributionCost);
-        tvRemarks = (TextView) footView.findViewById(R.id.tv_ConfirmOrederActtivity_remarks);
-        lltOrderRemarks = (LinearLayout) footView.findViewById(R.id.llt_ConfirmOrederActtivity_orderRemarks);
+        ivStore = (ImageView) headView.findViewById(R.id.iv_ConfirmOrderActivity_store);
+        tvAddressNull = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_addressNull);
+        tvName = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_name);
+        tvGender = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_gender);
+        tvPhone = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_phone);
+        tvAddress = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_address);
+        lltAddress = (LinearLayout) headView.findViewById(R.id.llt_ConfirmOrderActivity_address);
+        tvStoreName = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_storeName);
+        tvDistributionCost = (TextView) footView.findViewById(R.id.tv_ConfirmOrderActivity_distributionCost);
+        tvRemarks = (TextView) footView.findViewById(R.id.tv_ConfirmOrderActivity_remarks);
+        lltOrderRemarks = (LinearLayout) footView.findViewById(R.id.llt_ConfirmOrderActivity_orderRemarks);
     }
 
     @Override
@@ -119,17 +120,10 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             userBean.setUserId(userId);
             userBean.setPhoneNumber(telephone);
         }
-
         // 根据用户id显示默认收货地址
         showDefaultAddress();
-
         //获取商品详情页传递过来的数据
-        intent = getIntent();
-        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");
-        foodBeanList = new ArrayList<>();
-        foodBeanList.clear();
-        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans");
-        money = intent.getIntExtra("CountMoney", 0);
+        getIntentData();
         //设置标题
         tvTitle.setText(R.string.activity_confirmOrder_title);
         //创建订单
@@ -144,6 +138,26 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         tvDistributionCost.setText(shopBean.getShopMoney());
         //待支付
         tvToBePay.setText("¥" + (money + Integer.parseInt(shopBean.getShopMoney())));
+    }
+
+    @Override
+    protected void initListener() {
+        ivBack.setOnClickListener(this);
+        lltAddress.setOnClickListener(this);
+        lltOrderRemarks.setOnClickListener(this);
+        btnCommitOrder.setOnClickListener(this);
+    }
+
+    /**
+     * 获取Intent传递的值
+     */
+    public void getIntentData() {
+        intent = getIntent();
+        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");
+        foodBeanList = new ArrayList<>();
+        foodBeanList.clear();
+        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans");
+        money = intent.getIntExtra("CountMoney", 0);
     }
 
     /**
@@ -167,14 +181,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    protected void initListener() {
-        ivBack.setOnClickListener(this);
-        lltAddress.setOnClickListener(this);
-        lltOrderRemarks.setOnClickListener(this);
-        btnCommitOrder.setOnClickListener(this);
-    }
-
     private void showAddressDetail(AddressBean addressBean) {
         userBean.setAddressId(addressBean.getAddressId());
         tvName.setText(addressBean.getName());
@@ -195,12 +201,12 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
 
-            case R.id.llt_ConfirmOrederActtivity_address: //点击地址栏
+            case R.id.llt_ConfirmOrderActivity_address: //点击地址栏
                 intent = new Intent(ConfirmOrderActivity.this, ReceiveAddressActivity.class);
                 startActivityForResult(intent, OREDER_REDDRESS_REQUEST);
                 break;
 
-            case R.id.llt_ConfirmOrederActtivity_orderRemarks: //点击订单备注栏
+            case R.id.llt_ConfirmOrderActivity_orderRemarks: //点击订单备注栏
                 intent = new Intent(ConfirmOrderActivity.this, RemarkOrderActivity.class);
                 startActivityForResult(intent, ORDER_REMARK_REQUEST);
                 break;
@@ -209,17 +215,19 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 if (!loginStatus) { //用户未登录
                     intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
                 } else {//用户已登录
-                    if (addressBean != null) {//地址不为空
+                    if (null != addressBean.getAddressId() || "".equals(addressBean.getAddressId())) {//地址不为空
                         long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
                         //提交订单成功
                         if (orderId > 0) {
                             // 同时设置用户的默认送餐地址为当前选中的地址
                             DataBaseSQLiteUtil.setUserDefaultAddress(userBean);
                             DataBaseSQLiteUtil.closeDataBase();
+                            ContextUtil.getInstance().setFinishGoodsActivity(true);
                             intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
                             intent.putExtra(INTENT_ORDER_ID, orderId + "");
                             intent.putExtra("storeName", shopBean.getShopName());
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
+                            startActivity(intent);
                             finish();
                         }
                     } else {//地址为空
@@ -227,7 +235,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                         Toast.makeText(this, R.string.activity_confirmOrder_toast, Toast.LENGTH_SHORT).show();
                     }
                 }
-                startActivity(intent);
                 break;
 
             default:
@@ -313,14 +320,13 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             if (convertView == null) {
                 holder = new FoodViewHolder();
                 convertView = LayoutInflater.from(ConfirmOrderActivity.this).inflate(R.layout.item_confirm_order_food, parent, false);
-                holder.tvFoodName = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodName);
-                holder.tvFoodNumber = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodNumber);
-                holder.tvFoodPrice = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodPrice);
+                holder.tvFoodName = (TextView) convertView.findViewById(R.id.tv_ConfirmOrderActivity_foodName);
+                holder.tvFoodNumber = (TextView) convertView.findViewById(R.id.tv_ConfirmOrderActivity_foodNumber);
+                holder.tvFoodPrice = (TextView) convertView.findViewById(R.id.tv_ConfirmOrderActivity_foodPrice);
                 convertView.setTag(holder);
             } else {
                 holder = (FoodViewHolder) convertView.getTag();
             }
-
             //赋值
             FoodBean foodBean = getItem(position);
             holder.tvFoodName.setText(foodBean.getGoodsName());
