@@ -18,7 +18,9 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
+import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.SPUtils;
 import www.formssi.goodtaste.utils.ToastUtil;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
@@ -105,6 +107,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         String headUrl = "";
         UserBean user = new UserBean(id, name, headUrl, telephone1, pass, pPwd);
         DataBaseSQLiteUtil.userRegister(user);
+        SPUtils.updateTel(mContext, telephone1);
+        //将注册的用户信息返回MineFragment
+        Intent intent = new Intent(MineFragment.MY_ACTION);
+        intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_LOGIN);
+        intent.putExtra(MineFragment.MyReceiver.RESULT, user);
+        intent.putExtra("login", true);
+        sendBroadcast(intent);
+        setResult(RESULT_OK, intent);
         finish();
     }
 }

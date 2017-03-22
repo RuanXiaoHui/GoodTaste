@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
@@ -20,6 +21,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     private EditText etPayPwd;
     private EditText etUpdatePwd;
     private UserBean mUserBean;
+    private LinearLayout llPayPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
         etPayPwd = (EditText) findViewById(R.id.et_pay_password);
         etUpdatePwd = (EditText) findViewById(R.id.et_update_pay_password);
+        llPayPassword = (LinearLayout) findViewById(R.id.ll_pay_password);
         tvTitle.setText(R.string.update_pay_pwd);
     }
 
@@ -42,7 +45,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     protected void initData() {
         mUserBean = (UserBean) getIntent().getSerializableExtra("user");
         if (TextUtils.isEmpty(mUserBean.getPayPassword())) {
-            etPayPwd.setVisibility(View.GONE);
+            llPayPassword.setVisibility(View.GONE);
         }
     }
 

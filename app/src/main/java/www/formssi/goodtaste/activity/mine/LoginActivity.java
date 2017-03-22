@@ -24,6 +24,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int LOGIN = 7;
     Context mContext;
     private ImageView ivReturn; //返回
     private TextView tvTitle; //标题
@@ -74,7 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_register:
-                RegisterActivity.start(mContext);
+                startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class),LOGIN);
                 break;
             case R.id.iv_backTitlebar_back:
                 finish();
@@ -82,6 +83,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.btn_login:
                 login();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            finish();
         }
     }
 

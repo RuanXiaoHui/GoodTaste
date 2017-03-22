@@ -180,9 +180,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_LOGIN) { // 登录成功
                 hasLogin = true;
-                String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
-                tvPhoneNum.setText(s);
-                tvUserName.setText(userBean.getUserName());
+                validateView();
+//                String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
+//                tvPhoneNum.setText(s);
+//                tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_TELEPHONE) { // 修改手机号码
                 String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
                 tvPhoneNum.setText(s);
