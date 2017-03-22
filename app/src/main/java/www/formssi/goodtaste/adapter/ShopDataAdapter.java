@@ -85,12 +85,8 @@ public class ShopDataAdapter extends BaseAdapter {
                     mdatas.get(i).setGoodsBuynumber(vue);
                     int price= Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
                     CountNumber=CountNumber+price;
-                    System.out.print(CountNumber);
-
                     mBeans.put(mdatas.get(i).getGoodsId(),mdatas.get(i));
-
                     onExtralClickListener.onClickMoney(CountNumber,mBeans);
-
                 }
             }
 
@@ -100,12 +96,13 @@ public class ShopDataAdapter extends BaseAdapter {
                     int price= Integer.parseInt(mdatas.get(i).getGoodsMoney());//获得当前的选项的单价
                     mdatas.get(i).setGoodsBuynumber(vue);
                     CountNumber=CountNumber-price;
-
-                    mBeans.put(mdatas.get(i).getGoodsId(),mdatas.get(i));
-
+                    if (vue==0){
+                        mBeans.remove(mdatas.get(i).getGoodsId());
+                    }else{
+                        mBeans.put(mdatas.get(i).getGoodsId(),mdatas.get(i));
+                    }
                     onExtralClickListener.onClickMoney(CountNumber,mBeans);
                 }
-
             }
         });
         holder.numberSubAdd.setVue(bean.getGoodsBuynumber());

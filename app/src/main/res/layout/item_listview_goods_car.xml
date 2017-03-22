@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/tvCarGoodsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:text="好味道"/>
+
+        <TextView
+            android:id="@+id/tvCarGoodsMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvCarGoodsNumber"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp"
+            android:textColor="#f13535"
+            android:text="￥30"/>
+        <TextView
+            android:id="@+id/tvCarGoodsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textSize="12sp"
+            android:textColor="#686868"
+            android:text="X7"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
