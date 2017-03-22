@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.pay.ConfirmOrderActivity;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.mine.LoginActivity;
+import www.formssi.goodtaste.activity.pay.ConfirmOrderActivity;
 import www.formssi.goodtaste.adapter.GoodsCarAdapter;
 import www.formssi.goodtaste.adapter.ShopDataAdapter;
 import www.formssi.goodtaste.adapter.ShopMenuAdapter;
@@ -209,7 +209,16 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
                 mPopWind.setFocusable(true);
                 mPopWind.setOutsideTouchable(true);
                 mPopWind.setBackgroundDrawable(new ColorDrawable(0));
-                mPopWind.showAtLocation(findViewById(R.id.rltGoodsPay), Gravity.BOTTOM,0,100);
+                //显示在底部bar的上方
+                RelativeLayout rltLayout= (RelativeLayout) findViewById(R.id.rltGoodsPay);
+                mView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                int popupWidth = mView.getMeasuredWidth();
+                int popupHeight = mView.getMeasuredHeight();
+                int[] location = new int[2];
+                rltLayout.getLocationOnScreen(location);
+                mPopWind.showAtLocation(rltLayout, Gravity.NO_GRAVITY, (location[0] + rltLayout.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+
+
             }
         });
     }
