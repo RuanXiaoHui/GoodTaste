@@ -157,7 +157,12 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_ORDER_NUMBER, orderBean.getOrderNum()); // 订单号
         orderValues.put(COLUMN_SHOP_ID, shopBean.getShopId()); // 商店id
         orderValues.put(COLUMN_SHOP_NAME, shopBean.getShopName()); // 商店名称
-        orderValues.put(COLUMN_SHOP_PHONE, shopBean.getShopPhone()); // 商店电话
+        if(null != shopBean.getShopPhone() || "".equals(shopBean.getShopPhone())){
+            orderValues.put(COLUMN_SHOP_PHONE, shopBean.getShopPhone()); // 商店电话
+        }
+        if(null != orderBean.getShopPhone() || "".equals(orderBean.getShopPhone())){
+            orderValues.put(COLUMN_SHOP_PHONE, orderBean.getShopPhone()); // 商店电话
+        }
         orderValues.put(COLUMN_SHOP_IMG_PATH, shopBean.getShopPic()); // 商店图像
         orderValues.put(COLUMN_ORDER_STATUS, orderBean.getStatus()); // 订单状态
         orderValues.put(COLUMN_ORDER_CONTENT, orderBean.getOrderContent()); // 订单内容
@@ -219,6 +224,7 @@ public class DataBaseSQLiteUtil {
                 o.setShopBean(getShopById(storeId));
                 o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
                 o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
+                //o.setShopPhone(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_PHONE))); // 商店电话
                 o.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_STATUS))); // 订单状态
                 o.setOrderTotalMoney(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TOTAL_MONEY))); // 总金额
                 o.setDistributingFee(cursor.getString(cursor.getColumnIndex(COLUMN_PACK_FEE))); // 配送费

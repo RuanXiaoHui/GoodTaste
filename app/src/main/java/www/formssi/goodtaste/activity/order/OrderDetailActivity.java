@@ -150,12 +150,17 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_order_contact_business: // 联系商家按钮：拨打商家电话
                 // 调用系统拨号Action
                 if (null != orderBean) {
-                    ShopBean shopBean = orderBean.getShopBean();
-                    if (null != shopBean) {
-                        String phone = shopBean.getShopPhone();
-                        intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+                    ShopBean shopBean = orderBean.getShopBean(); // 商店实体对象
+                    if (null != shopBean) { // 如果数据库查到商店对象
+                        String phone = shopBean.getShopPhone(); // 获得商家电话
+                        intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)); // 拨打商家电话的意图
                     } else {
-                        intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getString(R.string.common_shop_default_phone)));
+                        String phone = orderBean.getShopPhone(); // 如果获取不到商家信息
+                        if(null != phone || "".equals(phone)){ // 就从订单里面获取商家电话，如果有
+                            intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)); // 拨打商家电话的意图
+                        } else { // 如果没有电话
+                            intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getString(R.string.common_shop_default_phone)));
+                        }
                     }
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
