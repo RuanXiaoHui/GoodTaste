@@ -22,11 +22,9 @@ import www.formssi.goodtaste.R;
  */
 public class NumberSubAdd extends LinearLayout implements View.OnClickListener {
     private LayoutInflater mInflate;
-
     private Button btnAdd;
     private Button btnSub;
     private TextView tv;
-
     private int maxNum;
     private int minNum;
     private int vue;
@@ -89,51 +87,37 @@ public class NumberSubAdd extends LinearLayout implements View.OnClickListener {
             TintTypedArray Array= TintTypedArray.obtainStyledAttributes(context,attrs, R.styleable.NumberSubAdd,defStyleAttr,0);
             int minNum1=Array.getInt(R.styleable.NumberSubAdd_minVue,0);
             setMinNum(minNum1);
-
             int maxNum1=Array.getInt(R.styleable.NumberSubAdd_maxVue,10);
             setMaxNum(maxNum1);
-
             int vue1=Array.getInt(R.styleable.NumberSubAdd_vue,1);
             setVue(vue1);
-
-
             Drawable AddDrawable=Array.getDrawable(R.styleable.NumberSubAdd_AddBackground);
             Drawable SubDrawable=Array.getDrawable(R.styleable.NumberSubAdd_SubBackground);
             Drawable TextDrawable=Array.getDrawable(R.styleable.NumberSubAdd_textViewBackground);
-
             setButtonAddBackgroud(AddDrawable);
             setButtonSubBackgroud(SubDrawable);
-            setTexViewtBackground(TextDrawable);
+            setTexViewBackground(TextDrawable);
             Array.recycle();
-
         }
     }
 
     private void init() {
         View view=mInflate.inflate(R.layout.addsub_item,this,true);
-
         btnAdd= (Button) view.findViewById(R.id.Add);
         btnSub= (Button) view.findViewById(R.id.Sub);
         tv= (TextView) view.findViewById(R.id.tv);
-
         btnAdd.setOnClickListener(this);
         btnSub.setOnClickListener(this);
 
     }
     @Override
     public void onClick(View view) {
-
-
-
         if (R.id.Add==view.getId()){
-
             AddNumber();
             if (nubNumBerSubAddClick!=null){
                 nubNumBerSubAddClick.AddBtnOnClick(view,vue);
             }
-
         }else if(R.id.Sub==view.getId()){
-
             SubNumber();
             if (nubNumBerSubAddClick!=null){
                 nubNumBerSubAddClick.SubBtnOnclick(view,vue);
@@ -147,7 +131,6 @@ public class NumberSubAdd extends LinearLayout implements View.OnClickListener {
             btnSub.setEnabled(true);
         }
         tv.setText(vue+"");
-
     }
     //减法
     private void SubNumber(){
@@ -157,23 +140,18 @@ public class NumberSubAdd extends LinearLayout implements View.OnClickListener {
         tv.setText(vue+"");
     }
 
-    public void setTexViewtBackground(Drawable drawable){
-
+    public void setTexViewBackground(Drawable drawable){
         tv.setBackgroundDrawable(drawable);
-
     }
 
     public void setTextViewBackground(int drawableId){
-
-        setTexViewtBackground(getResources().getDrawable(drawableId));
-
+        setTexViewBackground(getResources().getDrawable(drawableId));
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setButtonAddBackgroud(Drawable backgroud){
         this.btnAdd.setBackground(backgroud);
     }
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setButtonSubBackgroud(Drawable backgroud){

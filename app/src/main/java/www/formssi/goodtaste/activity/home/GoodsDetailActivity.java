@@ -199,26 +199,24 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         ivCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View mView=getLayoutInflater().inflate(R.layout.layout_goods_car,null);
-                ListView mCarListView= (ListView) mView.findViewById(R.id.lvGoodsCar);
-                mCarListView.setAdapter(new GoodsCarAdapter(mFoodConfirm,GoodsDetailActivity.this));
+                View mView = getLayoutInflater().inflate(R.layout.layout_goods_car, null);
+                ListView mCarListView = (ListView) mView.findViewById(R.id.lvGoodsCar);
+                mCarListView.setAdapter(new GoodsCarAdapter(mFoodConfirm, GoodsDetailActivity.this));
                 setPopWinListViewHeight(mCarListView);
-                mPopWind=new PopupWindow(GoodsDetailActivity.this);
+                mPopWind = new PopupWindow(GoodsDetailActivity.this);
                 mPopWind.setContentView(mView);
-                mPopWind.setWindowLayoutMode(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPopWind.setWindowLayoutMode(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 mPopWind.setFocusable(true);
                 mPopWind.setOutsideTouchable(true);
                 mPopWind.setBackgroundDrawable(new ColorDrawable(0));
                 //显示在底部bar的上方
-                RelativeLayout rltLayout= (RelativeLayout) findViewById(R.id.rltGoodsPay);
+                RelativeLayout rltLayout = (RelativeLayout) findViewById(R.id.rltGoodsPay);
                 mView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
                 int popupWidth = mView.getMeasuredWidth();
                 int popupHeight = mView.getMeasuredHeight();
                 int[] location = new int[2];
                 rltLayout.getLocationOnScreen(location);
                 mPopWind.showAtLocation(rltLayout, Gravity.NO_GRAVITY, (location[0] + rltLayout.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
-
-
             }
         });
     }
@@ -281,7 +279,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (ContextUtil.getInstance().isFinishGoodsActivity()){
+        if (ContextUtil.getInstance().isFinishGoodsActivity()) {
             ContextUtil.getInstance().setFinishGoodsActivity(false);
             GoodsDetailActivity.this.finish();
         }
@@ -301,8 +299,8 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        if (params.height>400){
-            params.height=400;
+        if (params.height > 400) {
+            params.height = 400;
         }
         listView.setLayoutParams(params);
     }
