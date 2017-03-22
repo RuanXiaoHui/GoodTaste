@@ -15,7 +15,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     protected abstract void initView();         //初始化View
     protected abstract void initData();        //初始化数据
     protected abstract void initListener();    //初始化事件

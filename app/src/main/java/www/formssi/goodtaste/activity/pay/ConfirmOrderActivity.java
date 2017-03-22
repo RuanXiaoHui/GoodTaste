@@ -112,7 +112,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
         loginStatus = sharedPreferences.getBoolean("login", false);
         if (!loginStatus) { //用户未登录
-            Toast.makeText(this, "请先登录账号！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.activity_confirmOrder_please_login, Toast.LENGTH_SHORT).show();
         } else {//用户已登录
             String userId = sharedPreferences.getString(INTENT_USER_ID, "-1");
             String telephone = sharedPreferences.getString("telephone", "");
@@ -121,21 +121,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         }
 
         // 根据用户id显示默认收货地址
-        if (userBean != null) {
-            addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));
-            if (addressBean.getAddress() != null) { //如果默认地址不为空
-                tvAddressNull.setVisibility(View.GONE);
-                showAddressDetail(addressBean);
-            } else {//如果默认地址为空
-                List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
-                if (addressBeanList.size() <= 0) {
-                    tvAddressNull.setVisibility(View.VISIBLE);
-                } else {
-                    tvAddressNull.setVisibility(View.GONE);
-                    showAddressDetail(addressBeanList.get(0));
-                }
-            }
-        }
+        showDefaultAddress();
 
         //获取商品详情页传递过来的数据
         intent = getIntent();
@@ -158,6 +144,27 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         tvDistributionCost.setText(shopBean.getShopMoney());
         //待支付
         tvToBePay.setText("¥" + (money + Integer.parseInt(shopBean.getShopMoney())));
+    }
+
+    /**
+     * 根据用户id显示默认收货地址
+     */
+    private void showDefaultAddress() {
+        if (userBean != null) {
+            addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));
+            if (addressBean.getAddress() != null) { //如果默认地址不为空
+                tvAddressNull.setVisibility(View.GONE);
+                showAddressDetail(addressBean);
+            } else {//如果默认地址为空
+                List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
+                if (addressBeanList.size() <= 0) {
+                    tvAddressNull.setVisibility(View.VISIBLE);
+                } else {
+                    tvAddressNull.setVisibility(View.GONE);
+                    showAddressDetail(addressBeanList.get(0));
+                }
+            }
+        }
     }
 
     @Override
@@ -306,9 +313,9 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             if (convertView == null) {
                 holder = new FoodViewHolder();
                 convertView = LayoutInflater.from(ConfirmOrderActivity.this).inflate(R.layout.item_confirm_order_food, parent, false);
-                holder.tvfoodName = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodName);
-                holder.tvfoodNumber = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodNumber);
-                holder.tvfoodPrice = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodPrice);
+                holder.tvFoodName = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodName);
+                holder.tvFoodNumber = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodNumber);
+                holder.tvFoodPrice = (TextView) convertView.findViewById(R.id.tv_ConfirmOrederActtivity_foodPrice);
                 convertView.setTag(holder);
             } else {
                 holder = (FoodViewHolder) convertView.getTag();
@@ -316,16 +323,16 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
             //赋值
             FoodBean foodBean = getItem(position);
-            holder.tvfoodName.setText(foodBean.getGoodsName());
-            holder.tvfoodNumber.setText("x" + foodBean.getGoodsBuynumber());
-            holder.tvfoodPrice.setText("¥" + Integer.valueOf(foodBean.getGoodsMoney()) * foodBean.getGoodsBuynumber());
+            holder.tvFoodName.setText(foodBean.getGoodsName());
+            holder.tvFoodNumber.setText(getString(R.string.common_rmb_sign) + foodBean.getGoodsBuynumber());
+            holder.tvFoodPrice.setText(getString(R.string.common_rmb_sign) + Integer.valueOf(foodBean.getGoodsMoney()) * foodBean.getGoodsBuynumber());
             return convertView;
         }
     }
 
     public class FoodViewHolder {
-        TextView tvfoodName; //食物名称
-        TextView tvfoodNumber; //购买数量
-        TextView tvfoodPrice; //食物价格
+        TextView tvFoodName; //食物名称
+        TextView tvFoodNumber; //购买数量
+        TextView tvFoodPrice; //食物价格
     }
 }

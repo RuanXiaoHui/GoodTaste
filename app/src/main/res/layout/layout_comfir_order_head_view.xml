@@ -9,6 +9,7 @@
         android:id="@+id/llt_ConfirmOrederActtivity_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/common_margin_medium">
@@ -74,6 +75,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/common_padding_normal"
@@ -83,7 +85,7 @@
 
         <ImageView
             android:id="@+id/iv_ConfirmOrederActtivity_store"
-            style="@style/icon_normal"/>
+            style="@style/icon_normal" />
 
         <TextView
             android:id="@+id/tv_ConfirmOrederActtivity_stroeName"
