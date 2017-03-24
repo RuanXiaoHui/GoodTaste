@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,114 +10,31 @@
         android:background="@color/appColor">
 
         <TextView
+            style="@style/text_large_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="订单"
-            style="@style/text_large_white" />
+            android:text="订单" />
     </RelativeLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        app:tabIndicatorColor="@color/appColor"
+        app:tabIndicatorHeight="1dp"
+        app:tabSelectedTextColor="@color/appColor">
 
-        <LinearLayout
-            android:id="@+id/lltNotPay"
-            style="@style/order_fragment_state_llt">
+    </android.support.design.widget.TabLayout>
 
-            <ImageView
-                style="@style/order_fragment_state_img"
-                android:src="@mipmap/ic_unpaid" />
-
-            <TextView
-                style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_not_pay"
-
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lltNotDelivery"
-            style="@style/order_fragment_state_llt">
-
-            <ImageView
-                style="@style/order_fragment_state_img"
-                android:src="@mipmap/ic_notdelivery" />
-
-            <TextView
-                style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_not_delivery" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lltDeliveryIng"
-            style="@style/order_fragment_state_llt">
-
-            <ImageView
-                style="@style/order_fragment_state_img"
-
-                android:src="@mipmap/ic_notreceive" />
-
-            <TextView
-                style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_delivery_ing" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lltNotComment"
-            style="@style/order_fragment_state_llt">
-
-            <ImageView
-                style="@style/order_fragment_state_img"
-
-                android:src="@mipmap/ic_notcomment" />
-
-            <TextView
-                style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_not_comment" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lltFinish"
-            style="@style/order_fragment_state_llt">
-
-            <ImageView
-                style="@style/order_fragment_state_img"
-                android:src="@mipmap/ic_finish" />
-
-            <TextView
-                style="@style/order_fragment_state_tv"
-                android:text="@string/order_state_finish" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <ImageView style="@style/thin_dividing_line" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvOrderList"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpOrderState"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_text">
 
-    </android.support.v7.widget.RecyclerView>
+    </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        android:id="@+id/lltNoOrder"
-        style="@style/order_fragment_no_order_llt">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_order_tv_content" />
-
-        <Button
-            android:id="@+id/btnGoSingle"
-            style="@style/order_fragment_no_order_btn"
-             />
-    </LinearLayout>
 </LinearLayout>

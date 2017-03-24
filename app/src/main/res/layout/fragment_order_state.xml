@@ -18,12 +18,12 @@
         style="@style/order_fragment_no_order_llt">
 
         <TextView
-            android:textSize="@dimen/text_size_large"
-            android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您还没有相关的订单" />
+            android:text="@string/no_order_tv_content" />
 
+        <Button
+            android:id="@+id/btnGoSingle"
+            style="@style/order_fragment_no_order_btn" />
     </LinearLayout>
-
 </FrameLayout>

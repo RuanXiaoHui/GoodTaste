@@ -18,8 +18,9 @@ import www.formssi.goodtaste.bean.Tab;
 import www.formssi.goodtaste.fragment.HomeFragment;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.fragment.OrderFragment;
+import www.formssi.goodtaste.fragment.OrderStateFragment;
 
-public class MainActivity extends FragmentActivity implements OrderFragment.MeOnClickListener{
+public class MainActivity extends FragmentActivity implements OrderStateFragment.MeOnClickListener{
 
     private FragmentTabHost mTabhost;           //FragmentTabHost控件
     private int TabIcon[]={R.drawable.selector_tab_home,R.drawable.selector_tab_order,
@@ -76,7 +77,7 @@ public class MainActivity extends FragmentActivity implements OrderFragment.MeOn
     }
 
     /**
-     * 回调orderFragment里面的监听事件
+     * 回调orderStateFragment里面的监听事件
      */
     @Override
     public void onBtnGoSingleClick() {

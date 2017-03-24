@@ -37,7 +37,6 @@
         <activity android:name=".activity.mine.UpdatePayPasswordActivity" />
         <activity android:name=".activity.mine.AddNewAddressActivity" />
         <activity android:name=".activity.mine.EditAddressActivity" />
-        <activity android:name=".activity.order.OrderStateActivity" />
         <activity android:name=".activity.pay.OnlinePaymentActivity" />
         <activity android:name=".activity.pay.PaySuccessActivity" />
         <activity android:name=".activity.pay.PayFailureActivity" />
