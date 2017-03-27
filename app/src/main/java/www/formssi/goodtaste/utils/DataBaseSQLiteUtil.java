@@ -203,6 +203,18 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
+     * 根据订单id更新订单状态
+     */
+    public static int updateOrderState(String orderId,int state){
+        openDataBase();
+        ContentValues values = new ContentValues(); // 订单ContentValues
+        values.put(COLUMN_ORDER_STATUS, state); // 修改订单状态
+        int update = mDatabase.update(TABLE_NAME_ORDER, values, COLUMN_ORDER_ID + "= ?", new String[]{orderId});
+        closeDataBase();
+        return update;
+    }
+
+    /**
      * 通过id查询订单表
      *
      * @return 订单列表
