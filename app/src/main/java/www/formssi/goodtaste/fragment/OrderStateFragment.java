@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -25,6 +30,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     private LinearLayout lltNoOrder;//没有订单时的父布局
     private int state = 0;//进入视图时显示的fragment
     private Button btnGoSingle;//没有订单时显示的按钮
+    OrderAdapter orderAdapter;
 
     public OrderStateFragment(int state) {
         super();
@@ -34,6 +40,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
+        EventBus.getDefault().register(this);
         initView(v);
         initData();
         initListener();
@@ -58,10 +65,21 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
-            OrderAdapter orderAdapter = new OrderAdapter(orders, getContext());
+            orderAdapter = new OrderAdapter(orders, getContext());
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRefresh(String str){//EventBus接收器，运行在主线程
+        initData();
     }
 
     private void initListener() {
