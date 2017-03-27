@@ -99,9 +99,9 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 boolean genderEmpty = TextUtils.isEmpty(gender);
                 boolean addressEmpty = TextUtils.isEmpty(address);
                 if (nameEmpty || genderEmpty || addressEmpty) {
-                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.activity_address_please_enter_a_complete_message, Toast.LENGTH_SHORT).show();
                 } else if (!phoneIsEleven) {
-                    Toast.makeText(this, "请输入11位手机号！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
                 } else {
                     //获取当前登录用户id
                     SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);

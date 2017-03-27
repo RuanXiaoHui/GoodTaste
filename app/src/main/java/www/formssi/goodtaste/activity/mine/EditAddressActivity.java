@@ -103,9 +103,9 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                 boolean genderEmpty = TextUtils.isEmpty(mGender);
                 boolean addressEmpty = TextUtils.isEmpty(address);
                 if (nameEmpty || genderEmpty || addressEmpty) {
-                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.activity_address_please_enter_a_complete_message, Toast.LENGTH_SHORT).show();
                 } else if (!phoneIsEleven) {
-                    Toast.makeText(this, "请输入11位手机号！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
                 } else {
                     intent = new Intent();
                     addressBean.setName(name);

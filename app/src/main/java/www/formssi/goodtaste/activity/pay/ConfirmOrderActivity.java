@@ -127,7 +127,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         getIntentData();
         //设置标题
         tvTitle.setText(R.string.activity_confirmOrder_title);
-
         //获取食物列表数据并显示
         operateListView();
         //商店图片

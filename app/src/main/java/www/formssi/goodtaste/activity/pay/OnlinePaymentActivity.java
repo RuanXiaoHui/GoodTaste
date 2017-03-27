@@ -26,8 +26,8 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private TextView tvPrice;//总金额
     private Button btnConfirmPayment; //确认支付
     private Button btnCancelPayment; //取消支付
-    private Intent intent;
     private String orderId; //订单id
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -51,6 +51,8 @@
     <string name="activity_address_phoneNumber">收货人电话</string>
     <string name="activity_address_address">地址</string>
     <string name="activity_address_addressDetail">详细地址</string>
+    <string name="activity_address_please_enter_a_complete_message">请输入完整的信息！</string>
+    <string name="activity_address_please_enter_11_phone_number">请输入11位手机号码!</string>
     <!--在线支付页面-->
     <string name="activity_onlinePayment_title">在线支付</string>
     <string name="activity_onlinePayment_outTakeOrder">外卖订单</string>
