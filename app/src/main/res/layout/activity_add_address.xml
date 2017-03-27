@@ -85,6 +85,7 @@
             android:layout_alignLeft="@+id/et_AddNewAddressActivity_name"
             android:layout_alignRight="@+id/et_AddNewAddressActivity_name"
             android:layout_toRightOf="@+id/tv_AddNewAddressActivity_phone"
+            android:maxLength="11"
             android:hint="@string/activity_address_phoneNumber"
             android:inputType="phone" />
 

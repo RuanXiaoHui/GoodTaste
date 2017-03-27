@@ -83,6 +83,7 @@
             android:layout_alignBottom="@+id/tv_EditAddressActivity_phone"
             android:layout_alignLeft="@+id/et_EditAddressActivity_name"
             android:layout_alignRight="@+id/et_EditAddressActivity_name"
+            android:maxLength="11"
             android:layout_toRightOf="@+id/tv_EditAddressActivity_phone"
             android:inputType="phone" />
 

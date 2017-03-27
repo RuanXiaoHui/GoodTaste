@@ -27,7 +27,10 @@ public class StringUtils {
      * @return
      */
     public static boolean checkPhoneIsEleven(String phone) {
-        return (null != phone && !TextUtils.isEmpty(phone) && TextUtils.getTrimmedLength(phone) == 11);
+        boolean phoneIsNull = (null == phone);
+        boolean phoneIsEmpty = (TextUtils.isEmpty(phone));
+        boolean phoneIsEleven = (TextUtils.getTrimmedLength(phone) == 11);
+        return (!phoneIsNull && !phoneIsEmpty && phoneIsEleven);
     }
 
 }

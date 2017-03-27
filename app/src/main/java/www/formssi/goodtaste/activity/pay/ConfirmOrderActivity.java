@@ -127,8 +127,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         getIntentData();
         //设置标题
         tvTitle.setText(R.string.activity_confirmOrder_title);
-        //创建订单
-        createOrder();
+
         //获取食物列表数据并显示
         operateListView();
         //商店图片
@@ -222,6 +221,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                     intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
                 } else {//用户已登录
                     if (!isAddressNull) {//地址不为空
+                        //创建订单
+                        createOrder();
                         long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
                         //提交订单成功
                         if (orderId > 0) {
@@ -254,7 +255,10 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             if (requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT) { //订单备注返回数据
                 tvRemarks.setText(data.getStringExtra("remarks"));
             } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址,返回选中的地址
+                isAddressNull = false;
                 tvAddressNull.setVisibility(View.GONE);
+                String addressId = data.getStringExtra("addressId");
+                userBean.setAddressId(addressId);
                 tvName.setText(data.getStringExtra("name"));
                 tvGender.setText(data.getStringExtra("gender"));
                 tvPhone.setText(data.getStringExtra("phone"));

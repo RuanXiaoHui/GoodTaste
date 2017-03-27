@@ -143,6 +143,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent = new Intent();
         AddressBean addressBean = addressBeanList.get(position);
+        intent.putExtra("addressId", addressBean.getAddressId());
         intent.putExtra("name", addressBean.getName());
         intent.putExtra("gender", addressBean.getGender());
         intent.putExtra("phone", addressBean.getPhone());
