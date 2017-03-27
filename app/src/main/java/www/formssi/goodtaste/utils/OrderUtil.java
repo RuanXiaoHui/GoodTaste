@@ -1,8 +1,13 @@
 package www.formssi.goodtaste.utils;
 
+import android.os.Handler;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.utils.DateUtil.YYYYMMDDHHMMSS;
 import static www.formssi.goodtaste.utils.DateUtil.getCurrentDate;
@@ -96,6 +101,25 @@ public final class OrderUtil {
                 break;
         }
         return result;
+    }
+
+    /**
+     * 催单，并发货
+     *
+     * @param orderId
+     */
+    public static void reminderOrder(final String orderId) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 修改订单状态为送餐中
+                if (DataBaseSQLiteUtil.updateOrderState(orderId, OrderState.DELIVERY_ING) > 0) {
+                    String msg = "商家已发货";
+                    ToastUtil.showToast(msg);
+                    EventBus.getDefault().post(msg); // 发送修改成功信息
+                }
+            }
+        }, 3000); // 三秒后修改订单状态为送餐中
     }
 
 }

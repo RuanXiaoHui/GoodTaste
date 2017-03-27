@@ -2,9 +2,7 @@ package www.formssi.goodtaste.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +10,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import www.formssi.goodtaste.R;
-import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.activity.order.OrderDetailActivity;
+import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ClickUtil;
-import www.formssi.goodtaste.utils.ContextUtil;
-import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.OrderUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
 
 /**
@@ -75,7 +69,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context,OnlinePaymentActivity.class);
+                        Intent intent = new Intent(context, OnlinePaymentActivity.class);
                         intent.putExtra(ConstantConfig.INTENT_ORDER_ID, list.get(position).getOrderId());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, list.get(position).getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, list.get(position).getActualPayment());
@@ -100,17 +94,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                     @Override
                     public void onClick(View v) {
                         ToastUtil.showToast(R.string.toast_order_remind);
-                        if (ClickUtil.isFastClick(3000)) {//三秒内重复点击也只执行一次
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int i = DataBaseSQLiteUtil.updateOrderState(list.get(position).getOrderId(), OrderState.DELIVERY_ING);//修改订单状态为送货中
-                                    if (i==1){//修改成功
-                                        ToastUtil.showToast("商家已发货");
-                                        EventBus.getDefault().post("");//发送修改成功信息
-                                    }
-                                }
-                            }, 3000);//三秒后修改订单状态为送餐中
+                        if (ClickUtil.isFastClick(3000)) { // 三秒内重复点击也只执行一次
+                            OrderUtil.reminderOrder(list.get(position).getOrderId()); // 催单操作
                         }
                     }
                 });

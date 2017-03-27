@@ -221,9 +221,10 @@ public class DataBaseSQLiteUtil {
      */
     public static List<OrderBean> getOrderBeansById(String orderId) {
         openDataBase();
-        String[] projection = {COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME, COLUMN_ORDER_STATUS
-                , COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY, COLUMN_PACK_FEE,
-                COLUMN_SHOP_PHONE, COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
+        String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME,
+                COLUMN_ORDER_STATUS, COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
+                COLUMN_PACK_FEE, COLUMN_SHOP_PHONE, COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME,
+                COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         OrderBean o = new OrderBean();
@@ -234,6 +235,7 @@ public class DataBaseSQLiteUtil {
                 String storeId = String.valueOf(shopId);
                 o.setStoreId(storeId); // 商店id
                 o.setShopBean(getShopById(storeId));
+                o.setOrderId(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_ID))); // 订单编号
                 o.setShopPicture(cursor.getInt(cursor.getColumnIndex(COLUMN_SHOP_IMG_PATH))); // 商店图像
                 o.setShopName(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))); // 商店名称
                 o.setShopPhone(cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_PHONE))); // 商店电话

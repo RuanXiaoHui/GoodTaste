@@ -95,6 +95,7 @@
     <string name="activity_order_distribute_info">配送信息</string>
     <string name="activity_order_arrival_time">到达时间：</string>
     <string name="activity_order_arrival_time_text">2017-03-16 11:49</string>
+    <string name="activity_order_arrival_time_plan">预计30分钟后送达</string>
     <string name="activity_order_distribute_address">送餐地址：</string>
     <string name="activity_order_distribute_address_text">海外联谊大厦2210室</string>
     <string name="activity_order_distributor">送餐员：</string>
