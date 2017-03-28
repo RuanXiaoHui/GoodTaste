@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
-                android:text="¥18元"
+                android:text="¥18"
                 android:textColor="#ff1010"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="16dp"
                 app:AddBackground="@drawable/shape_btn_add_number"
                 app:SubBackground="@drawable/shape_btn_sub_number"
                 app:maxVue="10"

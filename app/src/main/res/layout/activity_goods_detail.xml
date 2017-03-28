@@ -24,57 +24,91 @@
             <RelativeLayout
                 android:id="@+id/rlView"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:background="@mipmap/icon_shop">
-
+                android:layout_height="180dp">
                 <ImageView
-                    android:id="@+id/ivShopimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="@mipmap/icon_categroy_6" />
+                    android:id="@+id/ivGoodsInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+                </ImageView>
 
-                <LinearLayout
-                    android:id="@+id/llShop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/ivShopimg"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/ivShopTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="平均配送时间：32分钟"
-                        android:textColor="#3e581b" />
-
-                    <TextView
-                        android:id="@+id/ivShopDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="店家描述：小滨外卖，吃了爽到你骨子里"
-                        android:textColor="#3e581b" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/ivShopBusinessHours"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/llShop"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/ivShopimg"
-                    android:text="营业时间：早上12:00-晚上22:00"
-                    android:textColor="#3e581b" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:background="#bebebe" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/ivRight"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/icon_goods_time" />
+
+                    <TextView
+                        android:id="@+id/ivShopTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/ivRight"
+                        android:text="平均配送时间：32分钟" />
+                </RelativeLayout>
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="5dp">
+
+                   <ImageView
+                       android:id="@+id/ivbottom"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:src="@mipmap/icon_goods_time" />
+
+                   <TextView
+                       android:id="@+id/ivShopBusinessHours"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_toRightOf="@+id/ivbottom"
+                       android:layout_marginLeft="8dp"
+                       android:text="营业时间：早上12:00-晚上22:00" />
+               </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/ivDesc"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/icon_goods_desc" />
+
+                    <TextView
+                        android:id="@+id/ivShopDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/ivDesc"
+                        android:text="店家描述：本店的味道有点偏辛辣，不吃辣的请备注下" />
+                </RelativeLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
                 android:background="#bebebe" />
 
             <LinearLayout
@@ -89,8 +123,6 @@
                     android:layout_weight="1"
                     android:listSelector="#dcdcdc"
                     android:scrollbars="none" />
-
-
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -113,14 +145,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#99414548">
+        android:background="#303030">
 
         <ImageView
             android:id="@+id/ivCar"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:background="@drawable/selector_iv_car" />
 
         <LinearLayout
@@ -158,7 +190,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/selector_btn_confirm"
             android:text="去结算"

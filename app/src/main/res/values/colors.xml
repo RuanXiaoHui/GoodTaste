@@ -45,6 +45,6 @@
     <!--activity 按钮背景颜色 -->
     <color name="positive_green">#74b481</color>
     <color name="negative_black">#303030</color>
-    <color name="activity_goodsdetail_btn_confirm_pressed">#56d077</color>
+    <color name="activity_goodsdetail_btn_confirm_pressed">#74b481</color>
     <color name="activity_goodsdetail_btn_confirm_normal">#5b9b6d</color>
 </resources>

@@ -60,6 +60,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private Button btnSubmitOrder;           //下单按钮
     private TextView tvGoodsMoney;           //商品钱数
     private TextView tvShopMoney;            //配送费
+    private ImageView ivGoodsInfo;               //商家信息图片展示
     private ShopDataAdapter mShopDataAdapter;//商店商品的适配器
     private List<FoodBean> mFoodConfirm;     //商店购物车
     private int Money = 0;                     //购买的总钱数
@@ -85,6 +86,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         rltToolbar = (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitleBar_title = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tv_backTitleBar_center_title = (TextView) findViewById(R.id.tv_backTitlebar_center_title);
+        ivGoodsInfo= (ImageView) findViewById(R.id.ivGoodsInfo);
         lvLeftMenu = (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods = (ListView) findViewById(R.id.lvRightFoods);
         iv_backTitleBar_back = (ImageView) findViewById(R.id.iv_backTitlebar_back);
@@ -111,6 +113,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         mLeftMenu = mShopBean.getShopMenu();
         mFoodBean = mShopBean.getFoods();
         tv_backTitleBar_title.setText(mShopBean.getShopName());
+        ivGoodsInfo.setBackgroundResource(R.mipmap.icon_goods);
         for (int i = 0; i < mFoodBean.size(); i++) {
             if (mFoodBean.get(i).getGoodsType().equals("1")) {
                 mRefreshBean.add(mFoodBean.get(i));
@@ -121,7 +124,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     @Override
     protected void initListener() {
-        ivShopTime.setText("平均配送时间:" + mShopBean.getShopBusinessHours());
+        ivShopTime.setText("平均配送时间:" + mShopBean.getDistributionTime());
         ivShopDesc.setText("店家描述：" + mShopBean.getShopDesc());
         ivShopBusinessHours.setText("营业时间：" + mShopBean.getShopBusinessHours());
         tvShopMoney.setText("另需配送费" + mShopBean.getShopMoney() + "元");
@@ -254,10 +257,11 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
         if (y <= 0) {
             rltToolbar.setBackgroundColor(Color.argb(255, 0, 149, 254));
+            tv_backTitleBar_title.setTextColor(Color.argb(255 , 255, 255, 255));
             tv_backTitleBar_title.setVisibility(View.VISIBLE);
             iv_backTitleBar_back.setVisibility(View.VISIBLE);
             tv_backTitleBar_center_title.setVisibility(View.GONE);
-        } else if (y > 0 && y <= mHeight / 3) {
+        } else if (y > 5 && y <= mHeight / 3) {
             double bf = ((y * 1.0) / mHeight);
             double alpha = (bf * 255) * 3;
             tv_backTitleBar_title.setVisibility(View.VISIBLE);
