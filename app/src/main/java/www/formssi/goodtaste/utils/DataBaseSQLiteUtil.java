@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_LOGIN_PWD;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_CONTENT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_ID;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_NUMBER;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_REMARKS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_STATUS;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TIME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ORDER_TOTAL_MONEY;
@@ -172,6 +174,11 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_ACTUAL_PAY, orderBean.getActualPayment()); // 实付金额
         orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
         orderValues.put(COLUMN_ADDRESS_ID, orderBean.getAddressId()); // 地址id
+        String remarks = orderBean.getRemarks();
+        if(TextUtils.isEmpty(remarks)){
+            remarks = "没有备注。";
+        }
+        orderValues.put(COLUMN_ORDER_REMARKS, remarks); // 订单备注
         for (FoodBean fb : foodBeanList) {
             ContentValues orderDetailValues = new ContentValues(); // 订单详情ContentValues
             orderDetailValues.put(COLUMN_ORDER_NUMBER, orderBean.getOrderNum()); // 订单号
@@ -224,7 +231,7 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME,
                 COLUMN_ORDER_STATUS, COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
                 COLUMN_PACK_FEE, COLUMN_SHOP_PHONE, COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME,
-                COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
+                COLUMN_ORDER_REMARKS, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         OrderBean o = new OrderBean();
@@ -248,6 +255,7 @@ public class DataBaseSQLiteUtil {
                 o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
                 o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
                 o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
+                o.setRemarks(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_REMARKS))); // 订单备注
                 o.setOrderNum(orderNumber);
                 o.setFoodBeanList(getOrderDetailsBeansById(orderNumber));
                 list.add(o);

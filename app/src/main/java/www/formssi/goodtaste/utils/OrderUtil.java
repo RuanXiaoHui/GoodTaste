@@ -4,9 +4,13 @@ import android.os.Handler;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.bean.ShopBean;
+import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.utils.DateUtil.YYYYMMDDHHMMSS;
@@ -20,7 +24,51 @@ import static www.formssi.goodtaste.utils.DateUtil.getCurrentDate;
 public final class OrderUtil {
 
     public static void main(String[] a) {
-        System.out.print("订单号：" + getOrderNumber("17607842058"));
+        System.out.println("订单号：" + getOrderNumber("17607842058"));
+        OrderBean orderBean = new OrderBean();
+        orderBean.setDistributingFee("4.0");
+        orderBean.setDiscountMoney("10.0");
+        orderBean.setOrderTotalMoney("28.89");
+        System.out.println("实付金额：" + getOrderActualPayment(orderBean));
+    }
+
+    /**
+     * 下单操作
+     * 说明：首次下单或者再来一单时调用
+     *
+     * @param shopBean
+     * @param bean 需要setDistributingFee、setDiscountMoney、setOrderTotalMoney
+     * @param userBean
+     * @return
+     */
+    public static OrderBean addOrder(ShopBean shopBean, OrderBean bean, UserBean userBean) {
+        OrderBean orderBean = new OrderBean();
+        orderBean.setShopBean(shopBean); //商店实体类
+        orderBean.setOrderNum(OrderUtil.getOrderNumber(userBean.getPhoneNumber()));//订单号
+        orderBean.setStatus(OrderState.NOT_PAY + "");//订单状态
+        orderBean.setOrderTotalMoney(bean.getOrderTotalMoney());//订单总金额
+        orderBean.setOrderContent(OrderUtil.createOrderContent(shopBean.getFoods()));//订单内容
+        orderBean.setShopPhone(shopBean.getShopPhone());
+        orderBean.setDiscountMoney(bean.getDiscountMoney()); //优惠金额
+        orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
+        orderBean.setActualPayment(getOrderActualPayment(bean));//实付金额
+        orderBean.setOrderTime(DateUtil.getCurrentTime()); //下单时间
+        String addressId = userBean.getAddressId();
+        orderBean.setAddressId(Integer.parseInt((addressId == null) ? "-1" : addressId));  //送餐地址Id
+        return orderBean;
+    }
+
+    /**
+     * 计算实付金额
+     *
+     * @param orderBean
+     * @return
+     */
+    public static String getOrderActualPayment(OrderBean orderBean) {
+        BigDecimal distributingFee = new BigDecimal(orderBean.getDistributingFee()); // 配送费
+        BigDecimal discountMoney = new BigDecimal(orderBean.getDiscountMoney()); // 优惠金额
+        BigDecimal totalMoney = new BigDecimal(orderBean.getOrderTotalMoney()); // 优惠金额
+        return totalMoney.add(distributingFee.subtract(discountMoney)).toString();
     }
 
     /**

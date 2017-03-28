@@ -62,6 +62,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView tvOrderPayTime; // 支付时间
     private TextView tvOrderArrivalTime; // 到达时间
     private TextView tvOrderAddress; // 送餐地址
+    private TextView tvOrderRemarks; // 送餐地址
     private NoScrollListView lvFoodList; // 食品listView
     private ImageView btnBack; // 返回按钮
     private Button btnOK; // 确认按钮：根据状态显示不同文字：去支付、评价、再来一单
@@ -99,6 +100,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
         tvOrderArrivalTime = (TextView) findViewById(R.id.tv_order_arrival_time);
         tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
+        tvOrderRemarks = (TextView) findViewById(R.id.tv_order_remarks);
         btnBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         btnOK = (Button) findViewById(R.id.btn_order_ok);
         btnCancel = (Button) findViewById(R.id.btn_order_cancel);
@@ -226,6 +228,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             int addressId = orderBean.getAddressId(); // 获取地址id
             AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId)); // 数据库查询地址信息
             tvOrderAddress.setText(bean.toAddressString()); // 显示地址信息
+            tvOrderRemarks.setText(orderBean.getRemarks()); // 显示备注信息
             switch (Integer.parseInt(orderBean.getStatus())) { // 根据订单状态分配任务
                 case OrderState.NOT_PAY: // 未支付
                     tvOrderStatus.setText(getString(R.string.order_state_not_pay)); // 显示支付状态：未支付
