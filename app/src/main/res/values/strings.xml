@@ -27,6 +27,8 @@
     <string name="activity_confirmOrder_toast">请输入地址</string>
     <string name="activity_confirmOrder_addAddress">新增地址</string>
     <string name="activity_confirmOrder_distributionCost">配送费</string>
+    <string name="activity_confirmOrder_redPackets">红包</string>
+    <string name="activity_confirmOrder_coupon">优惠劵</string>
     <string name="activity_confirmOrder_orderNote">口味、偏好</string>
     <string name="activity_confirmOrder_orderRemarks">订单备注</string>
     <string name="activity_confirmOrder_toBePay">待支付</string>

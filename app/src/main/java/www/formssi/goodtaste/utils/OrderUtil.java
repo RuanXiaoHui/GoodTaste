@@ -85,7 +85,7 @@ public final class OrderUtil {
     public static String getFoodTotalMoney(FoodBean foodBean) {
         BigDecimal number = new BigDecimal(foodBean.getGoodsBuynumber()); // 数量
         BigDecimal price = new BigDecimal(foodBean.getGoodsMoney()); // 单价
-        return number.multiply(price).setScale(2,BigDecimal.ROUND_HALF_UP).toString();
+        return number.multiply(price).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
     }
 
     /**
