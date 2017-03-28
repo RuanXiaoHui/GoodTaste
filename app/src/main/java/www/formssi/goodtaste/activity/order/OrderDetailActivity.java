@@ -237,7 +237,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay)); // 显示到达时间，如果未支付
                     break;
                 case OrderState.NOT_DELIVERY: // 未配送
-                    OrderUtil.reminderOrder(orderBean.getOrderId()); // 催单操作
                     tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery)); // 显示订单状态：未配送
                     btnOK.setText(getString(R.string.order_state_btn_not_delivery)); // 催单按钮
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_delivery)); // 显示到达时间，如果未配送，显示未配送
