@@ -31,6 +31,7 @@ public final class ConstantConfig {
 
     //EventBean 携带的action
     public static final String PAY_COUNT_DOWN_TIME = "pay_for_order_count_down";//支付订单倒计时
-
+    public static final String REMIND_ORDER = "reminderOrder"; // 催单
+    public static final String CONFIRM_RECEIPT = "confirmReceipt"; // 确认收货
 
 }

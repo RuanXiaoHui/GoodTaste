@@ -27,6 +27,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
@@ -34,6 +35,7 @@ import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ClickUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
 
@@ -161,8 +163,17 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                             OrderUtil.reminderOrder(orderBean.getOrderId()); // 催单操作
                         }
                         break;
-                    case OrderState.DELIVERY_ING: // 配送中
+                    case OrderState.DELIVERY_ING: // 配送中，需要确认收货，确认之后生成到达时间
                         showToast(getString(R.string.activity_order_arrival_time_plan)); // 预计送达时间
+                        // 选择收货时间
+                        orderBean.setArrivalTime(DateUtil.getCurrentTime()); // 送达时间
+                        OrderUtil.confirmReceipt(orderBean); // 确认收货
+                        break;
+                    case OrderState.NOT_COMMENT: // 未评论，跳转到评论页面
+                        //showToast(getString(R.string.activity_order_arrival_time)); // 送达时间
+                        break;
+                    case OrderState.FINISH: // 已完成，跳转到购物车结算页面
+                        //showToast(getString(R.string.activity_order_arrival_time)); // 送达时间
                         break;
                 }
                 break;
@@ -196,8 +207,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRefresh(String str){ // EventBus接收器，运行在主线程
+    public void onEvenBusMain(EventBean eventBean) { // EventBus接收器，运行在主线程
         initData(); // 更新数据
+        switch (eventBean.getAction()){
+            case ConstantConfig.REMIND_ORDER:
+
+                break;
+        }
     }
 
     /**
@@ -231,7 +247,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             tvOrderRemarks.setText(orderBean.getRemarks()); // 显示备注信息
             switch (Integer.parseInt(orderBean.getStatus())) { // 根据订单状态分配任务
                 case OrderState.NOT_PAY: // 未支付
-                    tvOrderStatus.setText(getString(R.string.order_state_not_pay)); // 显示支付状态：未支付
+                    tvOrderStatus.setText(getString(R.string.activity_order_waiting_for_payment)); // 显示支付状态：未支付
                     btnOK.setText(getString(R.string.activity_order_goto_pay)); // 支付按钮
                     tvOrderPayTime.setText(getString(R.string.order_state_not_pay)); // 显示支付时间，如果未支付，显示未支付
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay)); // 显示到达时间，如果未支付
@@ -241,10 +257,19 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     btnOK.setText(getString(R.string.order_state_btn_not_delivery)); // 催单按钮
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_delivery)); // 显示到达时间，如果未配送，显示未配送
                     break;
-                case OrderState.DELIVERY_ING: // 正在配送
+                case OrderState.DELIVERY_ING: // 正在配送，等待确认收货，确认之后生成到达时间
                     tvOrderStatus.setText(getString(R.string.order_state_delivery_ing)); // 显示订单状态：已配送
-                    btnOK.setText(getString(R.string.order_state_btn_delivery_ing)); // 查看进度
+                    btnOK.setText(getString(R.string.activity_order_waiting_for_confirm_receipt)); // 查看进度
                     tvOrderArrivalTime.setText(getString(R.string.activity_order_arrival_time_plan)); // 显示到达时间，如果未到达，显示预计送达时间
+                    break;
+                case OrderState.NOT_COMMENT: // 未评论
+                    tvOrderStatus.setText(getString(R.string.activity_order_waiting_for_comment)); // 显示订单状态：等待评价
+                    btnOK.setText(R.string.activity_order_goto_comment); // 去评价
+                    tvOrderArrivalTime.setText(orderBean.getArrivalTime()); // 显示到达时间
+                    break;
+                case OrderState.FINISH: // 已完成
+                    tvOrderStatus.setText(getString(R.string.activity_order_complete)); // 显示订单状态：已完成
+                    btnOK.setText(getString(R.string.activity_order_again)); // 再来一单
                     break;
             }
         }

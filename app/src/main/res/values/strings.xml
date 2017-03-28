@@ -74,11 +74,12 @@
     <string name="activity_order_status">订单状态</string>
     <string name="activity_order_complete">订单已完成</string>
     <string name="activity_order_waiting_for_payment">等待支付</string>
+    <string name="activity_order_waiting_for_confirm_receipt">确认收货</string>
     <string name="activity_order_waiting_for_comment">等待评价</string>
     <string name="activity_order_waiting_for_business_orders">等待商家接单</string>
     <string name="activity_order_again">再来一单</string>
     <string name="activity_order_goto_pay">去支付</string>
-    <string name="activity_order_goto_comment">评价</string>
+    <string name="activity_order_goto_comment">去评价</string>
     <string name="activity_order_cancel">取消订单</string>
     <string name="activity_order_store_name">店铺名称</string>
     <string name="activity_order_food_name">酸菜肉丝</string>
