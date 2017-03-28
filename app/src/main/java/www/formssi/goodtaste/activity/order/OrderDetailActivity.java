@@ -295,8 +295,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             FoodBean bean = getItem(position);
             holder.tvFoodName.setText(bean.getGoodsName());
             holder.tvFoodCount.setText(getString(R.string.common_multiple_sign) + bean.getGoodsBuynumber());
-            holder.tvFoodPrice.setText(rmbSign + (Integer.parseInt(bean.getGoodsMoney()) *
-                    bean.getGoodsBuynumber()) + rmbUnit);
+            holder.tvFoodPrice.setText(rmbSign + OrderUtil.getFoodTotalMoney(bean) + rmbUnit);
             return convertView;
         }
     }

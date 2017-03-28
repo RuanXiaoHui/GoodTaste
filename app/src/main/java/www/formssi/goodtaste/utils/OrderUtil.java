@@ -30,6 +30,10 @@ public final class OrderUtil {
         orderBean.setDiscountMoney("10.0");
         orderBean.setOrderTotalMoney("28.89");
         System.out.println("实付金额：" + getOrderActualPayment(orderBean));
+        FoodBean foodBean = new FoodBean();
+        foodBean.setGoodsBuynumber(7);
+        foodBean.setGoodsMoney("12.5");
+        System.out.println("食品金额：" + getFoodTotalMoney(foodBean));
     }
 
     /**
@@ -37,7 +41,7 @@ public final class OrderUtil {
      * 说明：首次下单或者再来一单时调用
      *
      * @param shopBean
-     * @param bean 需要setDistributingFee、setDiscountMoney、setOrderTotalMoney
+     * @param bean     需要setDistributingFee、setDiscountMoney、setOrderTotalMoney
      * @param userBean
      * @return
      */
@@ -68,7 +72,20 @@ public final class OrderUtil {
         BigDecimal distributingFee = new BigDecimal(orderBean.getDistributingFee()); // 配送费
         BigDecimal discountMoney = new BigDecimal(orderBean.getDiscountMoney()); // 优惠金额
         BigDecimal totalMoney = new BigDecimal(orderBean.getOrderTotalMoney()); // 优惠金额
-        return totalMoney.add(distributingFee.subtract(discountMoney)).toString();
+        String total = totalMoney.add(distributingFee.subtract(discountMoney)).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+        return total;
+    }
+
+    /**
+     * 计算食品总金额
+     *
+     * @param foodBean
+     * @return
+     */
+    public static String getFoodTotalMoney(FoodBean foodBean) {
+        BigDecimal number = new BigDecimal(foodBean.getGoodsBuynumber()); // 数量
+        BigDecimal price = new BigDecimal(foodBean.getGoodsMoney()); // 单价
+        return number.multiply(price).setScale(2,BigDecimal.ROUND_HALF_UP).toString();
     }
 
     /**
