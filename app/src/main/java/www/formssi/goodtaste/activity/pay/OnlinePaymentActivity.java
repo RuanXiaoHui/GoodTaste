@@ -16,9 +16,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
 
 /**
  * 在线支付页面
@@ -123,27 +125,29 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     /**
      * EventBus处理事件
      *
-     * @param time
+     * @param eventBean
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusMain(Integer time) {
-        Log.e(TAG, "onEventBusMain: " + time);
-        int minute = 0; //分
-        int second = 0;  //秒
-        String strTime = null;
-        if (time >= 0) {
-            minute = time / 60;
-            if (minute < 60) {
-                second = time % 60;
-                strTime = unitFormat(minute) + ":" + unitFormat(second);
-                if (strTime.equals("00:00")) {
-                    btnConfirmPayment.setText("支付超时");
-                    btnConfirmPayment.setEnabled(false);
-                }else {
-                    btnConfirmPayment.setEnabled(true);
+    public void onEventBusMain(EventBean eventBean) {
+        if (eventBean.getAction().equals(PAY_COUNT_DOWN_TIME)) {
+            int time = eventBean.getCountDownTime();
+            int minute = 0; //分
+            int second = 0;  //秒
+            String strTime = null;
+            if (time >= 0) {
+                minute = time / 60;
+                if (minute < 60) {
+                    second = time % 60;
+                    strTime = unitFormat(minute) + ":" + unitFormat(second);
+                    if (strTime.equals("00:00")) {
+                        btnConfirmPayment.setText("支付超时");
+                        btnConfirmPayment.setEnabled(false);
+                    } else {
+                        btnConfirmPayment.setEnabled(true);
+                    }
                 }
+                tv_CountDown.setText(strTime);
             }
-            tv_CountDown.setText(strTime);
         }
     }
 
@@ -155,6 +159,5 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
             result = "" + i;
         return result;
     }
-
 
 }

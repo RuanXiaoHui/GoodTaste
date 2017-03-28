@@ -25,6 +25,7 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.mine.LoginActivity;
 import www.formssi.goodtaste.activity.mine.ReceiveAddressActivity;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
@@ -42,6 +43,7 @@ import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
+import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
 
 /**
  * 确认订单页面
@@ -310,7 +312,10 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             while (i > 0) {
                 i--;
                 Log.e(TAG, "run: "+i);
-                EventBus.getDefault().post(i);
+                EventBean eventBean = new EventBean();
+                eventBean.setAction(PAY_COUNT_DOWN_TIME);
+                eventBean.setCountDownTime(i);
+                EventBus.getDefault().post(eventBean);
                 try {
                     sleep(1000);
                 } catch (InterruptedException e) {
