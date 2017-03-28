@@ -1,7 +1,8 @@
 package www.formssi.goodtaste.bean;
 
 /**
- * Created by john on 2017/3/28.
+ * EventBus传递的Bean类
+ * Created by sn on 2017/3/28.
  */
 
 public class EventBean {
