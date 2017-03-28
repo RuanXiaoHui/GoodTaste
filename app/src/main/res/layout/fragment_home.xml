@@ -6,14 +6,21 @@
               tools:context="www.formssi.goodtaste.fragment.HomeFragment">
 
     <include layout="@layout/layout_home_titlebar"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srlHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lvHomeGoods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#e7e7e7"
+            android:layout_marginTop="5dp"
+            android:dividerHeight="1dp">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     
-  <ListView
-      android:id="@+id/lvHomeGoods"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:divider="#e7e7e7"
-      android:layout_marginTop="5dp"
-      android:dividerHeight="1dp">
-  </ListView>
 
 </LinearLayout>
