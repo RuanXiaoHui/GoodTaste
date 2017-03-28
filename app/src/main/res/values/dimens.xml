@@ -33,6 +33,7 @@
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_super">28sp</dimen>
 
     <!-- 通用margin -->
     <dimen name="small_margin">5dp</dimen>

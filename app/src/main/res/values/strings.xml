@@ -58,6 +58,7 @@
     <!--在线支付页面-->
     <string name="activity_onlinePayment_title">在线支付</string>
     <string name="activity_onlinePayment_outTakeOrder">外卖订单</string>
+    <string name="activity_onlinePayment_the_rest_of_pay_time">支付剩余时间</string>
     <string name="activity_onlinePayment_confirmPayment">确认支付</string>
     <string name="activity_onlinePayment_cancelPayment">取消支付</string>
     <!--支付成功页面-->

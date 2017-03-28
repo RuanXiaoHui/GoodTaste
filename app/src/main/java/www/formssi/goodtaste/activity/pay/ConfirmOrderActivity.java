@@ -3,6 +3,7 @@ package www.formssi.goodtaste.activity.pay;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -247,6 +250,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             intent.putExtra("storeName", shopBean.getShopName());
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
                             startActivity(intent);
+                            CountDownThread thread = new CountDownThread();
+                            thread.start();
                             finish();
                         }
                     } else {//地址为空
@@ -290,6 +295,29 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lvFood.addFooterView(footView);
         //添加适配器
         lvFood.setAdapter(new FoodListAdapter(foodBeanList));
+    }
+
+    private static final String TAG = "ConfirmOrderActivity";
+    /**
+     * 支付倒计时线程
+     */
+    class CountDownThread extends Thread {
+
+        @Override
+        public void run() {
+            super.run();
+            int i = 10;
+            while (i > 0) {
+                i--;
+                Log.e(TAG, "run: "+i);
+                EventBus.getDefault().post(i);
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
