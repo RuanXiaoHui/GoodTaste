@@ -7,10 +7,12 @@ import org.greenrobot.eventbus.EventBus;
 import java.math.BigDecimal;
 import java.util.List;
 
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.utils.DateUtil.YYYYMMDDHHMMSS;
@@ -180,11 +182,31 @@ public final class OrderUtil {
                 // 修改订单状态为送餐中
                 if (DataBaseSQLiteUtil.updateOrderState(orderId, OrderState.DELIVERY_ING) > 0) {
                     String msg = "商家已发货";
+                    EventBean eventBean = new EventBean();
+                    eventBean.setAction(ConstantConfig.REMIND_ORDER);
+                    eventBean.setMessage(msg);
                     ToastUtil.showToast(msg);
-                    EventBus.getDefault().post(msg); // 发送修改成功信息
+                    EventBus.getDefault().post(eventBean); // 发送修改成功信息
                 }
             }
         }, 3000); // 三秒后修改订单状态为送餐中
+    }
+
+    /**
+     * 确认收货
+     *
+     * @param orderBean
+     */
+    public static void confirmReceipt(final OrderBean orderBean) {
+        // 修改订单状态为未评价
+        if (DataBaseSQLiteUtil.confirmReceiptOrder(orderBean) > 0) {
+            String msg = "未评价";
+            EventBean eventBean = new EventBean();
+            eventBean.setAction(ConstantConfig.CONFIRM_RECEIPT);
+            eventBean.setMessage(msg);
+            ToastUtil.showToast(msg);
+            EventBus.getDefault().post(eventBean);
+        }
     }
 
 }

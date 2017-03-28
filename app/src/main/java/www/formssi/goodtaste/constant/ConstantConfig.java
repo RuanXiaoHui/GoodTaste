@@ -2,7 +2,7 @@ package www.formssi.goodtaste.constant;
 
 /**
  * 常量类
- * 说明：包含Intent请求码、结果码等
+ * 说明：包含Intent请求码、结果码、action等
  * Created by sn on 2017/3/17.
  */
 
@@ -25,8 +25,13 @@ public final class ConstantConfig {
     public static final String INTENT_ACTUAL_PAYMENT = "totalPay";//storeName key
 
     /**
-     *  mine
+     * mine
      */
     public static final String SP_NAME = "sp_name";//SP的文件名
+
+    //EventBean 携带的action
+    public static final String PAY_COUNT_DOWN_TIME = "pay_for_order_count_down";//支付订单倒计时
+    public static final String REMIND_ORDER = "reminderOrder"; // 催单
+    public static final String CONFIRM_RECEIPT = "confirmReceipt"; // 确认收货
 
 }

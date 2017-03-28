@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.adapter.OrderAdapter;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
@@ -78,7 +78,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRefresh(String str){//EventBus接收器，运行在主线程
+    public void onRefresh(EventBean eventBean){//EventBus接收器，运行在主线程
         initData();
     }
 

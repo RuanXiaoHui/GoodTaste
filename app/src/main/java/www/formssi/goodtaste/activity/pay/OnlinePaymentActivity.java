@@ -2,16 +2,25 @@ package www.formssi.goodtaste.activity.pay;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
 
 /**
  * 在线支付页面
@@ -22,6 +31,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
 
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
+    private TextView tv_CountDown; //支付倒计时
     private TextView tvStoreName;//店名
     private TextView tvPrice;//总金额
     private Button btnConfirmPayment; //确认支付
@@ -33,15 +43,23 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
+        EventBus.getDefault().register(this);
         initView();
         initData();
         initListener();
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
+        tv_CountDown = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_countDown);
         tvStoreName = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_storeName);
         tvPrice = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_price);
         btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePaymentActivity_confirmPayment);
@@ -101,4 +119,45 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
+
+    private static final String TAG = "OnlinePaymentActivity";
+
+    /**
+     * EventBus处理事件
+     *
+     * @param eventBean
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBusMain(EventBean eventBean) {
+        if (eventBean.getAction().equals(PAY_COUNT_DOWN_TIME)) {
+            int time = eventBean.getCountDownTime();
+            int minute = 0; //分
+            int second = 0;  //秒
+            String strTime = null;
+            if (time >= 0) {
+                minute = time / 60;
+                if (minute < 60) {
+                    second = time % 60;
+                    strTime = unitFormat(minute) + ":" + unitFormat(second);
+                    if (strTime.equals("00:00")) {
+                        btnConfirmPayment.setText("支付超时");
+                        btnConfirmPayment.setEnabled(false);
+                    } else {
+                        btnConfirmPayment.setEnabled(true);
+                    }
+                }
+                tv_CountDown.setText(strTime);
+            }
+        }
+    }
+
+    public static String unitFormat(int i) {
+        String result = null;
+        if (i >= 0 && i < 10)
+            result = "0" + Integer.toString(i);
+        else
+            result = "" + i;
+        return result;
+    }
+
 }

@@ -20,6 +20,7 @@ import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ACTUAL_PAY;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ADDRESS_ID;
+import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_ARRIVAL_TIME;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_DISC_MONEY;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_BUY_COUNT;
 import static www.formssi.goodtaste.constant.SQLiteConstant.COLUMN_FOOD_ID;
@@ -175,7 +176,7 @@ public class DataBaseSQLiteUtil {
         orderValues.put(COLUMN_ORDER_TIME, orderBean.getOrderTime()); // 下单时间
         orderValues.put(COLUMN_ADDRESS_ID, orderBean.getAddressId()); // 地址id
         String remarks = orderBean.getRemarks();
-        if(TextUtils.isEmpty(remarks)){
+        if (TextUtils.isEmpty(remarks)) {
             remarks = "没有备注。";
         }
         orderValues.put(COLUMN_ORDER_REMARKS, remarks); // 订单备注
@@ -210,9 +211,25 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
+     * 确认收货，并选择收货时间
+     *
+     * @param orderBean
+     * @return
+     */
+    public static int confirmReceiptOrder(OrderBean orderBean) {
+        openDataBase();
+        ContentValues values = new ContentValues(); // 订单ContentValues
+        values.put(COLUMN_ORDER_STATUS, OrderState.NOT_COMMENT); // 订单状态置为已收货（未评价）
+        values.put(COLUMN_ARRIVAL_TIME, orderBean.getArrivalTime()); // 送达时间
+        int update = mDatabase.update(TABLE_NAME_ORDER, values, COLUMN_ORDER_ID + "= ?", new String[]{orderBean.getOrderId()});
+        closeDataBase();
+        return update;
+    }
+
+    /**
      * 根据订单id更新订单状态
      */
-    public static int updateOrderState(String orderId,int state){
+    public static int updateOrderState(String orderId, int state) {
         openDataBase();
         ContentValues values = new ContentValues(); // 订单ContentValues
         values.put(COLUMN_ORDER_STATUS, state); // 修改订单状态
@@ -231,7 +248,7 @@ public class DataBaseSQLiteUtil {
         String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_ID, COLUMN_SHOP_IMG_PATH, COLUMN_SHOP_NAME,
                 COLUMN_ORDER_STATUS, COLUMN_ORDER_TOTAL_MONEY, COLUMN_DISC_MONEY, COLUMN_ACTUAL_PAY,
                 COLUMN_PACK_FEE, COLUMN_SHOP_PHONE, COLUMN_ORDER_NUMBER, COLUMN_ORDER_TIME,
-                COLUMN_ORDER_REMARKS, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID};
+                COLUMN_ORDER_REMARKS, COLUMN_PAY_TIME, COLUMN_ADDRESS_ID, COLUMN_ARRIVAL_TIME};
         Cursor cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_ID + "= ?",
                 new String[]{orderId}, null, null, null);
         OrderBean o = new OrderBean();
@@ -254,6 +271,7 @@ public class DataBaseSQLiteUtil {
                 String orderNumber = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_NUMBER)); // 订单号
                 o.setOrderTime(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_TIME))); // 下单时间
                 o.setPayTime(cursor.getString(cursor.getColumnIndex(COLUMN_PAY_TIME))); // 支付时间
+                o.setArrivalTime(cursor.getString(cursor.getColumnIndex(COLUMN_ARRIVAL_TIME))); // 到达时间
                 o.setAddressId(cursor.getInt(cursor.getColumnIndex(COLUMN_ADDRESS_ID))); // 送餐地址id
                 o.setRemarks(cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_REMARKS))); // 订单备注
                 o.setOrderNum(orderNumber);

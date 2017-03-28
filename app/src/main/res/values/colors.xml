@@ -42,6 +42,7 @@
     <color name="activity_text_white">#ffffff</color>
     <!-- 蓝色字体 -->
     <color name="activity_text_blue">#1296db</color>
+    <color name="activity_text_red">#F06560</color>
     <!--activity 按钮背景颜色 -->
     <color name="positive_green">#74b481</color>
     <color name="negative_black">#303030</color>
