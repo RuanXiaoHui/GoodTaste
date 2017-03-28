@@ -37,43 +37,6 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private String orderId; //订单id
     private Intent intent;
 
-//    private Handler handler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            if (msg.what == 1) {
-//                int time = (int) msg.obj;
-//                int minute = 0; //分
-//                int second = 0;  //秒
-//                String strTime = null;
-//                if (time > 0) {
-//                    minute = time / 60;
-//                    if (minute < 60) {
-//                        second = time % 60;
-//                        strTime = unitFormat(minute) + ":" + unitFormat(second);
-//                    }
-//                    tv_CountDown.setText(strTime);
-//                }
-//                if (time == 1) {
-//                    btnConfirmPayment.setText("支付超时");
-//                    btnCancelPayment.setEnabled(false);
-//                } else if (time > 1) {
-//                    btnCancelPayment.setEnabled(true);
-//                }
-//            }
-//        }
-//    };
-
-    public static String unitFormat(int i) {
-        String result = null;
-        if (i >= 0 && i < 10)
-            result = "0" + Integer.toString(i);
-        else
-            result = "" + i;
-        return result;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,5 +146,15 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
             tv_CountDown.setText(strTime);
         }
     }
+
+    public static String unitFormat(int i) {
+        String result = null;
+        if (i >= 0 && i < 10)
+            result = "0" + Integer.toString(i);
+        else
+            result = "" + i;
+        return result;
+    }
+
 
 }

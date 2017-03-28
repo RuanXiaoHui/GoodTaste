@@ -306,7 +306,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void run() {
             super.run();
-            int i = 10;
+            int i = 900;
             while (i > 0) {
                 i--;
                 Log.e(TAG, "run: "+i);
