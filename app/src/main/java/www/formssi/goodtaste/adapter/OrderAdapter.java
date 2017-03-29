@@ -11,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.order.OrderDetailActivity;
 import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
@@ -71,8 +74,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                     public void onClick(View v) {
                         Intent intent = new Intent(context, OnlinePaymentActivity.class);
                         intent.putExtra(ConstantConfig.INTENT_ORDER_ID, list.get(position).getOrderId());
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_NUM, list.get(position).getOrderNum());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, list.get(position).getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, list.get(position).getActualPayment());
+                        EventBean eventBean = new EventBean();
+                        eventBean.setAction(list.get(position).getOrderNum());
+                        EventBus.getDefault().post(eventBean);
                         context.startActivity(intent);
                     }
                 });

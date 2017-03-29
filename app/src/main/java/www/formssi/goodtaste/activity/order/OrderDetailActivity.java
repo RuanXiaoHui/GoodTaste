@@ -153,8 +153,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     case OrderState.NOT_PAY: // 未支付
                         Intent intent = new Intent(this, OnlinePaymentActivity.class); // 去支付
                         intent.putExtra(ConstantConfig.INTENT_ORDER_ID, orderBean.getOrderId());
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_NUM, orderBean.getOrderNum());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, orderBean.getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, orderBean.getActualPayment());
+                        EventBean eventBean = new EventBean();
+                        eventBean.setAction(orderBean.getOrderNum());
+                        EventBus.getDefault().post(eventBean);
                         startActivity(intent); // 跳转到支付页面
                         break;
                     case OrderState.NOT_DELIVERY: // 未配送

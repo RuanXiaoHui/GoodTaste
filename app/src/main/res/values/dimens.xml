@@ -6,7 +6,7 @@
     <!--padding公共正常间距-->
     <dimen name="common_padding_small">5dp</dimen>
     <dimen name="common_padding_normal">10dp</dimen>
-    <dimen name="common_padding_medium">15dp</dimen>
+    <dimen name="common_padding_medium">16dp</dimen>
     <dimen name="common_padding_large">20dp</dimen>
 
     <!--margin公共正常间距-->

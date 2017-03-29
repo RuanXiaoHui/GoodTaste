@@ -21,6 +21,7 @@ public final class ConstantConfig {
 
     public static final String INTENT_USER_ID = "userId";//用户id
     public static final String INTENT_ORDER_ID = "orderId";//orderFragment跳转到orderDetailActivity携带订单id的key
+    public static final String INTENT_ORDER_NUM = "orderNum";//orderFragment跳转到orderDetailActivity携带订单id的key
     public static final String INTENT_STORE_NAME = "storeName";//storeName key
     public static final String INTENT_ACTUAL_PAYMENT = "totalPay";//storeName key
 

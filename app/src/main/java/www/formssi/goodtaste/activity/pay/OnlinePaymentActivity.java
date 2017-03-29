@@ -1,9 +1,13 @@
 package www.formssi.goodtaste.activity.pay;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +22,10 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.DateUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
 import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
 
 /**
@@ -31,35 +37,30 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
 
     private ImageView ivBack;// 返回
     private TextView tvTitle; //标题
-    private TextView tv_CountDown; //支付倒计时
+    private TextView tvCountDown; //支付倒计时
     private TextView tvStoreName;//店名
     private TextView tvPrice;//总金额
     private Button btnConfirmPayment; //确认支付
     private Button btnCancelPayment; //取消支付
     private String orderId; //订单id
+    private String orderNum; //订单号
     private Intent intent;
+    private long currentTimeMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
-        EventBus.getDefault().register(this);
         initView();
         initData();
         initListener();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
     protected void initView() {
         ivBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         tvTitle = (TextView) findViewById(R.id.tv_backTitleBar_title);
-        tv_CountDown = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_countDown);
+        tvCountDown = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_countDown);
         tvStoreName = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_storeName);
         tvPrice = (TextView) findViewById(R.id.tv_OnlinePaymentActivity_price);
         btnConfirmPayment = (Button) findViewById(R.id.btn_OnlinePaymentActivity_confirmPayment);
@@ -69,9 +70,18 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initData() {
         tvTitle.setText(R.string.activity_onlinePayment_title);
+        //获取上一个页面传过来的订单id、订单号
         intent = getIntent();
-        //订单id
         orderId = intent.getStringExtra(INTENT_ORDER_ID);
+        orderNum = intent.getStringExtra(INTENT_ORDER_NUM);
+
+        SharedPreferences sharedPreferences = OnlinePaymentActivity.this.getSharedPreferences("countTime", MODE_PRIVATE);
+        long orderTimeMillis = sharedPreferences.getLong("orderTimeMillis", 0);
+        Log.i("订单时间 long   ", orderTimeMillis + "");
+        //计算时间差
+        currentTimeMillis = System.currentTimeMillis();
+        long orderMillisUntilFinished = 900*1000 - DateUtil.getTimeChange(orderNum, orderTimeMillis, currentTimeMillis);
+        getCountDownTime(orderMillisUntilFinished);
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);
@@ -86,6 +96,9 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         btnConfirmPayment.setOnClickListener(this);
         btnCancelPayment.setOnClickListener(this);
     }
+
+    private CountDownTimer timer;
+
 
     /**
      * 点击事件监听
@@ -120,37 +133,55 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    private static final String TAG = "OnlinePaymentActivity";
-
     /**
-     * EventBus处理事件
+     * 获取倒计时
      *
-     * @param eventBean
      */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusMain(EventBean eventBean) {
-        if (eventBean.getAction().equals(PAY_COUNT_DOWN_TIME)) {
-            int time = eventBean.getCountDownTime();
-            int minute = 0; //分
-            int second = 0;  //秒
-            String strTime = null;
-            if (time >= 0) {
-                minute = time / 60;
+    private void getCountDownTime(long orderMillisUntilFinished) {
+        timer = new CountDownTimer(orderMillisUntilFinished, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int minute = (int) (millisUntilFinished / 1000 / 60); //分
+                int second = 0;  //秒
+                String strTime = null;
                 if (minute < 60) {
-                    second = time % 60;
+                    second = (int) (millisUntilFinished / 1000 % 60);
                     strTime = unitFormat(minute) + ":" + unitFormat(second);
-                    if (strTime.equals("00:00")) {
-                        btnConfirmPayment.setText("支付超时");
-                        btnConfirmPayment.setEnabled(false);
-                    } else {
-                        btnConfirmPayment.setEnabled(true);
-                    }
+                    Log.i("在线支付倒计时", strTime);
+
                 }
-                tv_CountDown.setText(strTime);
+                if(TextUtils.isEmpty(strTime)){
+                    tvCountDown.setText("订单超时");
+                    btnConfirmPayment.setText("支付超时");
+                    btnConfirmPayment.setEnabled(false);
+                } else {
+                    tvCountDown.setText(strTime);
+                    btnConfirmPayment.setEnabled(true);
+                }
+
             }
-        }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        timer.start();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+    }
+
+    /**
+     * 倒计时显示格式
+     *
+     * @param i
+     * @return
+     */
     public static String unitFormat(int i) {
         String result = null;
         if (i >= 0 && i < 10)
