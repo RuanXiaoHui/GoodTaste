@@ -154,7 +154,7 @@
     <string name="hint_old_pwd">旧密码</string>
     <string name="hint_new_pwd">新密码</string>
 
-    <!--homeFragment-->
+    <!--HomeFragment-->
     <string name="home_favourable_one_title">天天特价</string>
     <string name="home_favourable_one_desc">美食一折起</string>
     <string name="home_favourable_two_title">霸王餐</string>
@@ -169,6 +169,12 @@
     <string name="home_topbar_text_two">必胜客</string>
     <string name="home_topbar_text_three">鸭血粉丝</string>
     <string name="home_topbar_text_four">澳门皇茶</string>
+
+    <!--GoodsDetailActivitty-->
+    <string name="activity_goods_avg_time">平均配送时间:</string>
+    <string name="activity_goods_desc">店家描述：</string>
+    <string name="activity_goods_business_time">营业时间：</string>
+    <string name="activity_goods_distribution_money">另需配送费</string>
 
     <!--Toast-->
     <string name="toast_order_remind">已提醒商家</string>

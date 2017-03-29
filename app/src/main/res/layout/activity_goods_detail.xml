@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -30,7 +29,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp">
                 </ImageView>
-
             </RelativeLayout>
 
             <View
@@ -46,47 +44,60 @@
                 android:orientation="vertical"
                 android:layout_marginTop="8dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:id="@+id/ivone"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@mipmap/icon_goods_time" />
-
-                    <TextView
-                        android:id="@+id/ivShopTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@+id/ivone"
-                        android:text="平均配送时间：32分钟" />
-                </RelativeLayout>
-
                <RelativeLayout
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="8dp">
+                   android:layout_height="wrap_content">
+
+                   <RelativeLayout
+                       android:id="@+id/rltGoodsone"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp">
+
+                       <ImageView
+                           android:id="@+id/ivone"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:src="@mipmap/icon_goods_time" />
+
+                       <TextView
+                           android:id="@+id/ivShopTime"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="8dp"
+                           android:layout_toRightOf="@+id/ivone"/>
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/rltGoodsone"
+                       android:layout_marginTop="8dp">
+
+                       <ImageView
+                           android:id="@+id/ivtwo"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:layout_centerVertical="true"
+                           android:src="@mipmap/icon_goods_time" />
+
+                       <TextView
+                           android:id="@+id/ivShopBusinessHours"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_toRightOf="@+id/ivtwo"
+                           android:layout_marginLeft="8dp"/>
+                   </RelativeLayout>
 
                    <ImageView
-                       android:id="@+id/ivtwo"
-                       android:layout_width="20dp"
-                       android:layout_height="20dp"
+                       android:id="@+id/ivGoodsPhone"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:layout_alignParentRight="true"
                        android:layout_centerVertical="true"
-                       android:src="@mipmap/icon_goods_time" />
-
-                   <TextView
-                       android:id="@+id/ivShopBusinessHours"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_toRightOf="@+id/ivtwo"
-                       android:layout_marginLeft="8dp"
-                       android:text="营业时间：早上12:00-晚上22:00" />
+                       android:layout_marginRight="16dp"
+                       android:src="@mipmap/icon_setting_call"/>
                </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,8 +115,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/ivthree"
                         android:singleLine="true"
-                        android:maxLength="22"
-                        android:text="店家描述：本店味道有点偏辛辣，不吃辣请备注下" />
+                        android:maxLength="22"/>
                 </RelativeLayout>
             </LinearLayout>
             <View
@@ -135,7 +145,8 @@
                     android:id="@+id/lvRightFoods"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"></ListView>
+                    android:layout_weight="4">
+                </ListView>
 
             </LinearLayout>
 
@@ -181,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="另需配送费4元"
+                android:text="另需配送费0元"
                 android:textColor="#fff"
                 android:textSize="12sp" />
         </LinearLayout>
