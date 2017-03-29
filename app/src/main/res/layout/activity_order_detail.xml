@@ -43,23 +43,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_margin="@dimen/small_margin"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@id/btn_order_cancel"
-                    style="@style/button_blue_text_white"
+                    android:textColor="@color/appColor"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
-                    android:background="@drawable/selector_button_normal"
+                    android:background="@drawable/selector_button_translate"
                     android:text="@string/activity_order_cancel"
                     android:visibility="gone" />
 
                 <Button
                     android:id="@id/btn_order_ok"
-                    style="@style/button_blue_text_white"
+                    android:textColor="@color/appColor"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
-                    android:background="@drawable/selector_button_normal"
+                    android:background="@drawable/selector_button_translate"
                     android:text="@string/activity_order_again" />
             </LinearLayout>
 
@@ -172,14 +173,15 @@
 
             <Button
                 android:id="@id/btn_order_contact_business"
-                style="@style/button_text_white"
+                android:textColor="@color/appColor"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_small_height"
                 android:layout_gravity="center"
-                android:background="@drawable/selector_button_normal"
-                android:drawableLeft="@mipmap/ic_telephone_normal"
+                android:background="@drawable/selector_button_translate"
+                android:drawableLeft="@mipmap/ic_shop_phone"
                 android:drawablePadding="@dimen/small_padding"
                 android:padding="@dimen/small_padding"
+                android:layout_margin="@dimen/small_margin"
                 android:text="@string/activity_order_contact_shop" />
 
             <View
