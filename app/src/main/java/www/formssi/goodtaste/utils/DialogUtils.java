@@ -12,11 +12,11 @@ public class DialogUtils {
 
     /**
      *
-     * @param context
-     * @param listener
-     * @param title
-     * @param item1
-     * @param item2
+     * @param context 上下文
+     * @param listener 监听事件
+     * @param title 标题
+     * @param item1 事件1
+     * @param item2 事件2
      */
     public static void showChoiceHeadPicDialog(final Context context, DialogInterface.OnClickListener listener, String title, String item1, String item2) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

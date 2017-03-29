@@ -11,6 +11,7 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
@@ -43,7 +44,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
 
     @Override
     protected void initData() {
-        mUserBean = (UserBean) getIntent().getSerializableExtra("user");
+        mUserBean = (UserBean) getIntent().getSerializableExtra(ConstantConfig.USER);
         if (TextUtils.isEmpty(mUserBean.getPayPassword())) {
             llPayPassword.setVisibility(View.GONE);
         }
@@ -68,8 +69,8 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
     }
 
     private void updatePayPwd() {
-        String oldPayPwd = etPayPwd.getText().toString();
-        String newPayPwd = etUpdatePwd.getText().toString();
+        String oldPayPwd = etPayPwd.getText().toString().trim();
+        String newPayPwd = etUpdatePwd.getText().toString().trim();
         if (!TextUtils.isEmpty(mUserBean.getPayPassword())) {
             if (TextUtils.isEmpty(oldPayPwd)) {
                 ToastUtil.showToast(getString(R.string.toast_enter_old_pwd));
@@ -91,9 +92,10 @@ public class UpdatePayPasswordActivity extends BaseActivity implements View.OnCl
             return;
         }
         boolean result = DataBaseSQLiteUtil.updatePayPassword(mUserBean.getPhoneNumber(), newPayPwd);
+        mUserBean.setPayPassword(newPayPwd);
         if (result) {
             sendBroadcast(new Intent(MineFragment.MY_ACTION));
-            setResult(RESULT_OK, new Intent().putExtra("result", newPayPwd));
+            setResult(RESULT_OK, new Intent().putExtra(ConstantConfig.RESULT, mUserBean));
             finish();
         }
     }

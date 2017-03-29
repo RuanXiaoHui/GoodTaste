@@ -132,6 +132,8 @@
     <string name="update_pay_pwd">修改支付密码</string>
     <string name="update_login_pwd">修改登录密码</string>
     <string name="commit">确定</string>
+    <string name="modify">修改</string>
+    <string name="not_set">未设置</string>
 
     <!-- settingsuggestion -->
     <string name="activity_suggestion_title">意见反馈</string>
@@ -189,7 +191,5 @@
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
     <string name="activity_bind">绑定新手机</string>
-
-
 
 </resources>

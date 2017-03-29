@@ -28,5 +28,7 @@ public final class ConstantConfig {
      *  mine
      */
     public static final String SP_NAME = "sp_name";//SP的文件名
-
+    public static final String LOGIN = "login"; //登录
+    public static final String USER = "user"; //用户信息
+    public static final String RESULT = "result"; //返回
 }
