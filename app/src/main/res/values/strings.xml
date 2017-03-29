@@ -206,7 +206,8 @@
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
     <string name="activity_bind">绑定新手机</string>
-
+    <!--加载更多-->
+    <string name="text_load_more">加载更多...</string>
 
 
 </resources>
