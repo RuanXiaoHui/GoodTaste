@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.List;
 
@@ -37,13 +34,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return R.layout.item_order;
+    }
+
+    @Override
     public OrderHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new OrderHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final OrderHolder holder, int position) {
+    public void onBindViewHolder(OrderAdapter.OrderHolder holder, int position) {
         holder.tvShopName.setText(list.get(position).getShopName());
         holder.tvPrice.setText("¥ " + list.get(position).getActualPayment());
         holder.imgShop.setImageResource(list.get(position).getShopPicture());
@@ -51,6 +53,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.tvOrderContent.setText(list.get(position).getOrderContent());
         initListener(holder, position);
     }
+
 
     private void initListener(OrderHolder holder, final int position) {
         int status = Integer.valueOf(list.get(position).getStatus());//订单状态码
@@ -156,6 +159,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
             imgShop = (ImageView) itemView.findViewById(R.id.imgShop);
             btnStatusLogic = (Button) itemView.findViewById(R.id.btnStatusLogic);
+        }
+    }
+
+    class LoadMoreHolder extends RecyclerView.ViewHolder {
+
+        public LoadMoreHolder(View itemView) {
+            super(itemView);
+
         }
     }
 }
