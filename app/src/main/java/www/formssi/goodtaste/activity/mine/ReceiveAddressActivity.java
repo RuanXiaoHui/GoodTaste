@@ -19,7 +19,6 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.adapter.AddressAdapter;
 import www.formssi.goodtaste.bean.AddressBean;
-import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
@@ -144,6 +143,7 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent = new Intent();
         AddressBean addressBean = addressBeanList.get(position);
+        intent.putExtra("addressId", addressBean.getAddressId());
         intent.putExtra("name", addressBean.getName());
         intent.putExtra("gender", addressBean.getGender());
         intent.putExtra("phone", addressBean.getPhone());

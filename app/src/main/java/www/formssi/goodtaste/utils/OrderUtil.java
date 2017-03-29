@@ -1,8 +1,19 @@
 package www.formssi.goodtaste.utils;
 
+import android.os.Handler;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.math.BigDecimal;
 import java.util.List;
 
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
+import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.bean.ShopBean;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
+import www.formssi.goodtaste.constant.OrderState;
 
 import static www.formssi.goodtaste.utils.DateUtil.YYYYMMDDHHMMSS;
 import static www.formssi.goodtaste.utils.DateUtil.getCurrentDate;
@@ -15,7 +26,68 @@ import static www.formssi.goodtaste.utils.DateUtil.getCurrentDate;
 public final class OrderUtil {
 
     public static void main(String[] a) {
-        System.out.print("订单号：" + getOrderNumber("17607842058"));
+        System.out.println("订单号：" + getOrderNumber("17607842058"));
+        OrderBean orderBean = new OrderBean();
+        orderBean.setDistributingFee("4.0");
+        orderBean.setDiscountMoney("10.0");
+        orderBean.setOrderTotalMoney("28.89");
+        System.out.println("实付金额：" + getOrderActualPayment(orderBean));
+        FoodBean foodBean = new FoodBean();
+        foodBean.setGoodsBuynumber(7);
+        foodBean.setGoodsMoney("12.5");
+        System.out.println("食品金额：" + getFoodTotalMoney(foodBean));
+    }
+
+    /**
+     * 下单操作
+     * 说明：首次下单或者再来一单时调用
+     *
+     * @param shopBean
+     * @param bean     需要setDistributingFee、setDiscountMoney、setOrderTotalMoney
+     * @param userBean
+     * @return
+     */
+    public static OrderBean addOrder(ShopBean shopBean, OrderBean bean, UserBean userBean) {
+        OrderBean orderBean = new OrderBean();
+        orderBean.setShopBean(shopBean); //商店实体类
+        orderBean.setOrderNum(OrderUtil.getOrderNumber(userBean.getPhoneNumber()));//订单号
+        orderBean.setStatus(OrderState.NOT_PAY + "");//订单状态
+        orderBean.setOrderTotalMoney(bean.getOrderTotalMoney());//订单总金额
+        orderBean.setOrderContent(OrderUtil.createOrderContent(shopBean.getFoods()));//订单内容
+        orderBean.setShopPhone(shopBean.getShopPhone());
+        orderBean.setDiscountMoney(bean.getDiscountMoney()); //优惠金额
+        orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
+        orderBean.setActualPayment(getOrderActualPayment(bean));//实付金额
+        orderBean.setOrderTime(DateUtil.getCurrentTime()); //下单时间
+        String addressId = userBean.getAddressId();
+        orderBean.setAddressId(Integer.parseInt((addressId == null) ? "-1" : addressId));  //送餐地址Id
+        return orderBean;
+    }
+
+    /**
+     * 计算实付金额
+     *
+     * @param orderBean
+     * @return
+     */
+    public static String getOrderActualPayment(OrderBean orderBean) {
+        BigDecimal distributingFee = new BigDecimal(orderBean.getDistributingFee()); // 配送费
+        BigDecimal discountMoney = new BigDecimal(orderBean.getDiscountMoney()); // 优惠金额
+        BigDecimal totalMoney = new BigDecimal(orderBean.getOrderTotalMoney()); // 优惠金额
+        String total = totalMoney.add(distributingFee.subtract(discountMoney)).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+        return total;
+    }
+
+    /**
+     * 计算食品总金额
+     *
+     * @param foodBean
+     * @return
+     */
+    public static String getFoodTotalMoney(FoodBean foodBean) {
+        BigDecimal number = new BigDecimal(foodBean.getGoodsBuynumber()); // 数量
+        BigDecimal price = new BigDecimal(foodBean.getGoodsMoney()); // 单价
+        return number.multiply(price).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
     }
 
     /**
@@ -96,6 +168,45 @@ public final class OrderUtil {
                 break;
         }
         return result;
+    }
+
+    /**
+     * 催单，并发货
+     *
+     * @param orderId
+     */
+    public static void reminderOrder(final String orderId) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 修改订单状态为送餐中
+                if (DataBaseSQLiteUtil.updateOrderState(orderId, OrderState.DELIVERY_ING) > 0) {
+                    String msg = "商家已发货";
+                    EventBean eventBean = new EventBean();
+                    eventBean.setAction(ConstantConfig.REMIND_ORDER);
+                    eventBean.setMessage(msg);
+                    ToastUtil.showToast(msg);
+                    EventBus.getDefault().post(eventBean); // 发送修改成功信息
+                }
+            }
+        }, 3000); // 三秒后修改订单状态为送餐中
+    }
+
+    /**
+     * 确认收货
+     *
+     * @param orderBean
+     */
+    public static void confirmReceipt(final OrderBean orderBean) {
+        // 修改订单状态为未评价
+        if (DataBaseSQLiteUtil.confirmReceiptOrder(orderBean) > 0) {
+            String msg = "未评价";
+            EventBean eventBean = new EventBean();
+            eventBean.setAction(ConstantConfig.CONFIRM_RECEIPT);
+            eventBean.setMessage(msg);
+            ToastUtil.showToast(msg);
+            EventBus.getDefault().post(eventBean);
+        }
     }
 
 }

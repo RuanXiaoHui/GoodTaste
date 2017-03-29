@@ -4,26 +4,28 @@
     android:layout_height="match_parent"
     tools:context="www.formssi.goodtaste.fragment.OrderStateFragment">
 
-
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/swipeOrderState"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlvOrderState"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    </android.support.v7.widget.RecyclerView>
-
+        android:scrollbars="vertical"
+        android:layout_height="match_parent"/>
+</android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:id="@+id/lltNoOrder"
         style="@style/order_fragment_no_order_llt">
 
         <TextView
-            android:textSize="@dimen/text_size_large"
-            android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您还没有相关的订单" />
+            android:text="@string/no_order_tv_content" />
 
+        <Button
+            android:id="@+id/btnGoSingle"
+            style="@style/order_fragment_no_order_btn" />
     </LinearLayout>
-
 </FrameLayout>

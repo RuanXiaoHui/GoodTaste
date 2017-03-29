@@ -27,6 +27,8 @@
     <string name="activity_confirmOrder_toast">请输入地址</string>
     <string name="activity_confirmOrder_addAddress">新增地址</string>
     <string name="activity_confirmOrder_distributionCost">配送费</string>
+    <string name="activity_confirmOrder_redPackets">红包</string>
+    <string name="activity_confirmOrder_coupon">优惠劵</string>
     <string name="activity_confirmOrder_orderNote">口味、偏好</string>
     <string name="activity_confirmOrder_orderRemarks">订单备注</string>
     <string name="activity_confirmOrder_toBePay">待支付</string>
@@ -51,9 +53,12 @@
     <string name="activity_address_phoneNumber">收货人电话</string>
     <string name="activity_address_address">地址</string>
     <string name="activity_address_addressDetail">详细地址</string>
+    <string name="activity_address_please_enter_a_complete_message">请输入完整的信息！</string>
+    <string name="activity_address_please_enter_11_phone_number">请输入11位手机号码!</string>
     <!--在线支付页面-->
     <string name="activity_onlinePayment_title">在线支付</string>
     <string name="activity_onlinePayment_outTakeOrder">外卖订单</string>
+    <string name="activity_onlinePayment_the_rest_of_pay_time">支付剩余时间</string>
     <string name="activity_onlinePayment_confirmPayment">确认支付</string>
     <string name="activity_onlinePayment_cancelPayment">取消支付</string>
     <!--支付成功页面-->
@@ -69,11 +74,12 @@
     <string name="activity_order_status">订单状态</string>
     <string name="activity_order_complete">订单已完成</string>
     <string name="activity_order_waiting_for_payment">等待支付</string>
+    <string name="activity_order_waiting_for_confirm_receipt">确认收货</string>
     <string name="activity_order_waiting_for_comment">等待评价</string>
     <string name="activity_order_waiting_for_business_orders">等待商家接单</string>
     <string name="activity_order_again">再来一单</string>
     <string name="activity_order_goto_pay">去支付</string>
-    <string name="activity_order_goto_comment">评价</string>
+    <string name="activity_order_goto_comment">去评价</string>
     <string name="activity_order_cancel">取消订单</string>
     <string name="activity_order_store_name">店铺名称</string>
     <string name="activity_order_food_name">酸菜肉丝</string>
@@ -92,9 +98,12 @@
     <string name="activity_order_time_text">2017-03-16 11:09</string>
     <string name="activity_order_payment_time">支付时间：</string>
     <string name="activity_order_payment_time_text">2017-03-16 11:12</string>
+    <string name="activity_order_remarks">备注信息：</string>
+    <string name="activity_order_remarks_text">没有备注。</string>
     <string name="activity_order_distribute_info">配送信息</string>
     <string name="activity_order_arrival_time">到达时间：</string>
     <string name="activity_order_arrival_time_text">2017-03-16 11:49</string>
+    <string name="activity_order_arrival_time_plan">预计30分钟后送达</string>
     <string name="activity_order_distribute_address">送餐地址：</string>
     <string name="activity_order_distribute_address_text">海外联谊大厦2210室</string>
     <string name="activity_order_distributor">送餐员：</string>
@@ -147,7 +156,7 @@
     <string name="hint_old_pwd">旧密码</string>
     <string name="hint_new_pwd">新密码</string>
 
-    <!--homeFragment-->
+    <!--HomeFragment-->
     <string name="home_favourable_one_title">天天特价</string>
     <string name="home_favourable_one_desc">美食一折起</string>
     <string name="home_favourable_two_title">霸王餐</string>
@@ -162,6 +171,12 @@
     <string name="home_topbar_text_two">必胜客</string>
     <string name="home_topbar_text_three">鸭血粉丝</string>
     <string name="home_topbar_text_four">澳门皇茶</string>
+
+    <!--GoodsDetailActivitty-->
+    <string name="activity_goods_avg_time">平均配送时间:</string>
+    <string name="activity_goods_desc">店家描述：</string>
+    <string name="activity_goods_business_time">营业时间：</string>
+    <string name="activity_goods_distribution_money">另需配送费</string>
 
     <!--Toast-->
     <string name="toast_order_remind">已提醒商家</string>
@@ -191,5 +206,7 @@
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
     <string name="activity_bind">绑定新手机</string>
+
+
 
 </resources>

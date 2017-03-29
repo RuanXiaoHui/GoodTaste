@@ -78,7 +78,7 @@ public class ShopDataAdapter extends BaseAdapter {
         holder.ivFoodIcon.setImageResource(bean.getGoodsIcon());
         holder.tvFoodName.setText(bean.getGoodsName());
         holder.tvFoodBuyNumber.setText("月销量：" + bean.getGoodsNumber() + "份");
-        holder.tvFoodMoney.setText("￥" + bean.getGoodsMoney() + "元");
+        holder.tvFoodMoney.setText("￥" + bean.getGoodsMoney());
         holder.numberSubAdd.setNubNumBerSubAddClick(new NumberSubAdd.NumBerSubAddClick() {
             @Override
             public void AddBtnOnClick(View v, int vue) {

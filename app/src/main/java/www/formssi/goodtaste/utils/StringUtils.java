@@ -9,6 +9,7 @@ import android.text.TextUtils;
 public class StringUtils {
     /**
      * 隐藏手机号码
+     *
      * @param tel
      * @return
      */
@@ -18,4 +19,18 @@ public class StringUtils {
         }
         return tel.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
+
+    /**
+     * 判断是否为11位手机号
+     *
+     * @param phone
+     * @return
+     */
+    public static boolean checkPhoneIsEleven(String phone) {
+        boolean phoneIsNull = (null == phone);
+        boolean phoneIsEmpty = (TextUtils.isEmpty(phone));
+        boolean phoneIsEleven = (TextUtils.getTrimmedLength(phone) == 11);
+        return (!phoneIsNull && !phoneIsEmpty && phoneIsEleven);
+    }
+
 }

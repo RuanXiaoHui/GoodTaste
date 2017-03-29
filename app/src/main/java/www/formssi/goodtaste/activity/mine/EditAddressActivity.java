@@ -3,6 +3,7 @@ package www.formssi.goodtaste.activity.mine;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import www.formssi.goodtaste.bean.AddressBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.EDIT_ADREES_RESULT;
+import static www.formssi.goodtaste.utils.StringUtils.checkPhoneIsEleven;
 
 /**
  * 编辑收货地址页面
@@ -69,7 +71,8 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         intent = getIntent();
         addressId = intent.getStringExtra("addressId");
         addressBean = DataBaseSQLiteUtil.getAddressById(addressId);
-        showOldData(addressBean.getGender());
+        mGender = addressBean.getGender();
+        showOldData(mGender);
     }
 
     @Override
@@ -92,11 +95,17 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.btn_EditAddressActivity_ok: // 确定
-                String phone = etPhone.getText().toString();
-                String address = etAddress.getText().toString();
-                String name = etName.getText().toString();
-                if (name.equals("") || phone.equals("") || mGender.equals("") || address.equals("")) {
-                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                String phone = etPhone.getText().toString().trim();
+                String address = etAddress.getText().toString().trim();
+                String name = etName.getText().toString().trim();
+                boolean nameEmpty = TextUtils.isEmpty(name);
+                boolean phoneIsEleven = checkPhoneIsEleven(phone);
+                boolean genderEmpty = TextUtils.isEmpty(mGender);
+                boolean addressEmpty = TextUtils.isEmpty(address);
+                if (nameEmpty || genderEmpty || addressEmpty) {
+                    Toast.makeText(this, R.string.activity_address_please_enter_a_complete_message, Toast.LENGTH_SHORT).show();
+                } else if (!phoneIsEleven) {
+                    Toast.makeText(this, R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
                 } else {
                     intent = new Intent();
                     addressBean.setName(name);

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.ADD_NEW_ADREES_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
+import static www.formssi.goodtaste.utils.StringUtils.checkPhoneIsEleven;
 
 /**
  * 新增收货地址页面
@@ -89,11 +91,17 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
 
             case R.id.btn_AddNewAddressActivity_ok: // 确定
                 Intent intent = new Intent();
-                String name = etName.getText().toString();
-                String phone = etPhone.getText().toString();
-                String address = etAddress.getText().toString();
-                if (name.equals("") || phone.equals("") || gender.equals("") || address.equals("")) {
-                    Toast.makeText(this, "请输入完整的信息！", Toast.LENGTH_SHORT).show();
+                String name = etName.getText().toString().trim();
+                String phone = etPhone.getText().toString().trim();
+                String address = etAddress.getText().toString().trim();
+                boolean nameEmpty = TextUtils.isEmpty(name);
+                boolean phoneIsEleven = checkPhoneIsEleven(phone);
+                boolean genderEmpty = TextUtils.isEmpty(gender);
+                boolean addressEmpty = TextUtils.isEmpty(address);
+                if (nameEmpty || genderEmpty || addressEmpty) {
+                    Toast.makeText(this, R.string.activity_address_please_enter_a_complete_message, Toast.LENGTH_SHORT).show();
+                } else if (!phoneIsEleven) {
+                    Toast.makeText(this,R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
                 } else {
                     //获取当前登录用户id
                     SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);

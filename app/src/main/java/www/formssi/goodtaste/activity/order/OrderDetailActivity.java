@@ -15,7 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +27,20 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.bean.AddressBean;
+import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
+import www.formssi.goodtaste.utils.ClickUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.DateUtil;
+import www.formssi.goodtaste.utils.OrderUtil;
 import www.formssi.goodtaste.widget.NoScrollListView;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.CALL_PHONE_REQUEST_CODE;
+import static www.formssi.goodtaste.utils.ToastUtil.showToast;
 
 /**
  * 订单详情Activity类
@@ -56,6 +64,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView tvOrderPayTime; // 支付时间
     private TextView tvOrderArrivalTime; // 到达时间
     private TextView tvOrderAddress; // 送餐地址
+    private TextView tvOrderRemarks; // 送餐地址
     private NoScrollListView lvFoodList; // 食品listView
     private ImageView btnBack; // 返回按钮
     private Button btnOK; // 确认按钮：根据状态显示不同文字：去支付、评价、再来一单
@@ -65,7 +74,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private OrderBean orderBean; // 订单实体
     private FoodListAdapter adapter; // 适配器
     private Intent intent; // 获取上一个intent
-    private Toast toast; // 吐司
     private String rmbSign; // 人民币符号
     private String rmbUnit; // 人民币单位
 
@@ -73,6 +81,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
+        EventBus.getDefault().register(this); // 注册EventBus
         initView(); // 初始化控件
         initData(); // 初始化数据
         initListener(); // 初始化监听
@@ -93,6 +102,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
         tvOrderArrivalTime = (TextView) findViewById(R.id.tv_order_arrival_time);
         tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
+        tvOrderRemarks = (TextView) findViewById(R.id.tv_order_remarks);
         btnBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
         btnOK = (Button) findViewById(R.id.btn_order_ok);
         btnCancel = (Button) findViewById(R.id.btn_order_cancel);
@@ -143,12 +153,31 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     case OrderState.NOT_PAY: // 未支付
                         Intent intent = new Intent(this, OnlinePaymentActivity.class); // 去支付
                         intent.putExtra(ConstantConfig.INTENT_ORDER_ID, orderBean.getOrderId());
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_NUM, orderBean.getOrderNum());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, orderBean.getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, orderBean.getActualPayment());
+                        EventBean eventBean = new EventBean();
+                        eventBean.setAction(orderBean.getOrderNum());
+                        EventBus.getDefault().post(eventBean);
                         startActivity(intent); // 跳转到支付页面
                         break;
                     case OrderState.NOT_DELIVERY: // 未配送
                         showToast(getString(R.string.toast_order_remind)); // 提醒商家
+                        if (ClickUtil.isFastClick(3000)) { // 三秒内重复点击也只执行一次
+                            OrderUtil.reminderOrder(orderBean.getOrderId()); // 催单操作
+                        }
+                        break;
+                    case OrderState.DELIVERY_ING: // 配送中，需要确认收货，确认之后生成到达时间
+                        showToast(getString(R.string.activity_order_arrival_time_plan)); // 预计送达时间
+                        // 选择收货时间
+                        orderBean.setArrivalTime(DateUtil.getCurrentTime()); // 送达时间
+                        OrderUtil.confirmReceipt(orderBean); // 确认收货
+                        break;
+                    case OrderState.NOT_COMMENT: // 未评论，跳转到评论页面
+                        //showToast(getString(R.string.activity_order_arrival_time)); // 送达时间
+                        break;
+                    case OrderState.FINISH: // 已完成，跳转到购物车结算页面
+                        //showToast(getString(R.string.activity_order_arrival_time)); // 送达时间
                         break;
                 }
                 break;
@@ -181,18 +210,14 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    /**
-     * 防止多次吐司
-     *
-     * @param tip
-     */
-    public void showToast(String tip) {
-        if (toast == null) { // 如果为空
-            toast = Toast.makeText(this, tip, Toast.LENGTH_SHORT);
-        } else {
-            toast.setText(tip);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvenBusMain(EventBean eventBean) { // EventBus接收器，运行在主线程
+        initData(); // 更新数据
+        switch (eventBean.getAction()){
+            case ConstantConfig.REMIND_ORDER:
+
+                break;
         }
-        toast.show();
     }
 
     /**
@@ -223,9 +248,10 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             int addressId = orderBean.getAddressId(); // 获取地址id
             AddressBean bean = DataBaseSQLiteUtil.getAddressById(String.valueOf(addressId)); // 数据库查询地址信息
             tvOrderAddress.setText(bean.toAddressString()); // 显示地址信息
+            tvOrderRemarks.setText(orderBean.getRemarks()); // 显示备注信息
             switch (Integer.parseInt(orderBean.getStatus())) { // 根据订单状态分配任务
                 case OrderState.NOT_PAY: // 未支付
-                    tvOrderStatus.setText(getString(R.string.order_state_not_pay)); // 显示支付状态：未支付
+                    tvOrderStatus.setText(getString(R.string.activity_order_waiting_for_payment)); // 显示支付状态：未支付
                     btnOK.setText(getString(R.string.activity_order_goto_pay)); // 支付按钮
                     tvOrderPayTime.setText(getString(R.string.order_state_not_pay)); // 显示支付时间，如果未支付，显示未支付
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay)); // 显示到达时间，如果未支付
@@ -234,6 +260,20 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery)); // 显示订单状态：未配送
                     btnOK.setText(getString(R.string.order_state_btn_not_delivery)); // 催单按钮
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_delivery)); // 显示到达时间，如果未配送，显示未配送
+                    break;
+                case OrderState.DELIVERY_ING: // 正在配送，等待确认收货，确认之后生成到达时间
+                    tvOrderStatus.setText(getString(R.string.order_state_delivery_ing)); // 显示订单状态：已配送
+                    btnOK.setText(getString(R.string.activity_order_waiting_for_confirm_receipt)); // 查看进度
+                    tvOrderArrivalTime.setText(getString(R.string.activity_order_arrival_time_plan)); // 显示到达时间，如果未到达，显示预计送达时间
+                    break;
+                case OrderState.NOT_COMMENT: // 未评论
+                    tvOrderStatus.setText(getString(R.string.activity_order_waiting_for_comment)); // 显示订单状态：等待评价
+                    btnOK.setText(R.string.activity_order_goto_comment); // 去评价
+                    tvOrderArrivalTime.setText(orderBean.getArrivalTime()); // 显示到达时间
+                    break;
+                case OrderState.FINISH: // 已完成
+                    tvOrderStatus.setText(getString(R.string.activity_order_complete)); // 显示订单状态：已完成
+                    btnOK.setText(getString(R.string.activity_order_again)); // 再来一单
                     break;
             }
         }
@@ -270,7 +310,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            FoodViewHolder holder = null;
+            FoodViewHolder holder;
             if (convertView == null) {
                 holder = new FoodViewHolder();
                 convertView = LayoutInflater.from(OrderDetailActivity.this).inflate(R.layout.item_order_food_list_viewl, null);
@@ -284,8 +324,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             FoodBean bean = getItem(position);
             holder.tvFoodName.setText(bean.getGoodsName());
             holder.tvFoodCount.setText(getString(R.string.common_multiple_sign) + bean.getGoodsBuynumber());
-            holder.tvFoodPrice.setText(rmbSign + (Integer.parseInt(bean.getGoodsMoney()) *
-                    bean.getGoodsBuynumber()) + rmbUnit);
+            holder.tvFoodPrice.setText(rmbSign + OrderUtil.getFoodTotalMoney(bean) + rmbUnit);
             return convertView;
         }
     }
@@ -299,5 +338,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this); // 反注册EventBus
     }
 }

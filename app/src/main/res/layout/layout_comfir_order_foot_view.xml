@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llt_foodList_headView"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:background="@color/activity_common_background_gray1"
     android:orientation="vertical">
 
@@ -40,10 +40,64 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height_low"
+            android:background="@color/line_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_padding_medium">
+
+            <TextView
+                style="@style/activity_text_normal_black"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/activity_confirmOrder_redPackets" />
+
+            <TextView
+                android:id="@+id/tv_ConfirmOrderActivity_redPackets"
+                style="@style/activity_text_normal_black"
+                android:layout_marginLeft="@dimen/common_margin_normal" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height_low"
+            android:background="@color/line_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_padding_medium">
+
+            <TextView
+                style="@style/activity_text_normal_black"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/activity_confirmOrder_coupon" />
+
+            <TextView
+                android:id="@+id/tv_ConfirmOrderActivity_coupon"
+                style="@style/activity_text_normal_black"
+                android:layout_marginLeft="@dimen/common_margin_normal" />
+
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/llt_ConfirmOrderActivity_orderRemarks"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -82,7 +136,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/line_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"

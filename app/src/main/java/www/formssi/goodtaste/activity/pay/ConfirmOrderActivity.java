@@ -3,6 +3,7 @@ package www.formssi.goodtaste.activity.pay;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,12 @@ import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
-import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
-import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
@@ -57,6 +57,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private TextView tvAddressNull; //送餐地址为空
     private TextView tvStoreName; //店铺名
     private TextView tvDistributionCost; //配送费
+    private TextView tvRedPackets; //红包
     private TextView tvRemarks; //订单备注
     private TextView tvToBePay; //待支付
     private Button btnCommitOrder; //提交订单
@@ -65,7 +66,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private LinearLayout lltOrderRemarks; //订单备注栏
     private View headView; //列表头部
     private View footView; //列表尾部
-    private OrderBean orderBean; //订单实体类
+    private OrderBean orderBean = new OrderBean(); //订单实体类
     private List<FoodBean> foodBeanList;  //食物列表
     private Intent intent;
     private ShopBean shopBean; //商店对象
@@ -102,6 +103,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lltAddress = (LinearLayout) headView.findViewById(R.id.llt_ConfirmOrderActivity_address);
         tvStoreName = (TextView) headView.findViewById(R.id.tv_ConfirmOrderActivity_storeName);
         tvDistributionCost = (TextView) footView.findViewById(R.id.tv_ConfirmOrderActivity_distributionCost);
+        tvRedPackets = (TextView) footView.findViewById(R.id.tv_ConfirmOrderActivity_redPackets);
         tvRemarks = (TextView) footView.findViewById(R.id.tv_ConfirmOrderActivity_remarks);
         lltOrderRemarks = (LinearLayout) footView.findViewById(R.id.llt_ConfirmOrderActivity_orderRemarks);
     }
@@ -127,8 +129,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         getIntentData();
         //设置标题
         tvTitle.setText(R.string.activity_confirmOrder_title);
-        //创建订单
-        createOrder();
         //获取食物列表数据并显示
         operateListView();
         //商店图片
@@ -136,9 +136,15 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         //店名
         tvStoreName.setText(shopBean.getShopName());
         //配送费
-        tvDistributionCost.setText(shopBean.getShopMoney());
-        //待支付
-        tvToBePay.setText("¥" + (money + Integer.parseInt(shopBean.getShopMoney())));
+        tvDistributionCost.setText(getString(R.string.common_rmb_sign) + shopBean.getShopMoney());
+        //红包（优惠金额）
+        tvRedPackets.setText(getString(R.string.common_rmb_sign) + "2.14");
+        OrderBean orderBean = new OrderBean();
+        orderBean.setDiscountMoney("2.14");//优惠金额
+        orderBean.setDistributingFee(shopBean.getShopMoney()); //配送费
+        orderBean.setOrderTotalMoney(money + "");  //总金额
+        //实付金额
+        tvToBePay.setText(getString(R.string.common_rmb_sign) + OrderUtil.getOrderActualPayment(orderBean));
     }
 
     @Override
@@ -222,6 +228,13 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                     intent = new Intent(ConfirmOrderActivity.this, LoginActivity.class);
                 } else {//用户已登录
                     if (!isAddressNull) {//地址不为空
+                        //创建订单
+                        OrderBean bean = new OrderBean();
+                        bean.setDiscountMoney("2.14");//优惠金额
+                        bean.setDistributingFee(shopBean.getShopMoney()); //配送费
+                        bean.setOrderTotalMoney(money + "");  //总金额
+                        orderBean = OrderUtil.addOrder(shopBean, bean, userBean);
+                        orderBean.setRemarks(tvRemarks.getText().toString());
                         long orderId = DataBaseSQLiteUtil.addOrder(orderBean, foodBeanList);
                         //提交订单成功
                         if (orderId > 0) {
@@ -231,8 +244,16 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             ContextUtil.getInstance().setFinishGoodsActivity(true);
                             intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
                             intent.putExtra(INTENT_ORDER_ID, orderId + "");
+                            intent.putExtra(INTENT_ORDER_NUM, orderBean.getOrderNum() + "");
                             intent.putExtra("storeName", shopBean.getShopName());
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
+                            //记录提交订单时间
+                            SharedPreferences sharedPreferences = ConfirmOrderActivity.this.getSharedPreferences("countTime", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            long orderTimeMillis = System.currentTimeMillis();
+                            Log.i("提交订单时间 long    ", orderTimeMillis + "");
+                            editor.putLong("orderTimeMillis", orderTimeMillis);
+                            editor.commit();
                             startActivity(intent);
                             finish();
                         }
@@ -252,9 +273,13 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             if (requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT) { //订单备注返回数据
-                tvRemarks.setText(data.getStringExtra("remarks"));
+                String remarks = data.getStringExtra("remarks");
+                tvRemarks.setText(remarks);
             } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址,返回选中的地址
+                isAddressNull = false;
                 tvAddressNull.setVisibility(View.GONE);
+                String addressId = data.getStringExtra("addressId");
+                userBean.setAddressId(addressId);
                 tvName.setText(data.getStringExtra("name"));
                 tvGender.setText(data.getStringExtra("gender"));
                 tvPhone.setText(data.getStringExtra("phone"));
@@ -273,26 +298,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lvFood.addFooterView(footView);
         //添加适配器
         lvFood.setAdapter(new FoodListAdapter(foodBeanList));
-    }
-
-    /**
-     * 创建订单
-     */
-    private void createOrder() {
-        //创建一个订单对象
-        orderBean = new OrderBean();
-        orderBean.setShopBean(shopBean); //商店实体类
-        orderBean.setOrderNum(OrderUtil.getOrderNumber(userBean.getPhoneNumber()));//订单号
-        orderBean.setStatus(OrderState.NOT_PAY + "");//订单状态
-        orderBean.setOrderTotalMoney(money + "");//订单总金额
-        orderBean.setOrderContent(OrderUtil.createOrderContent(foodBeanList));//订单内容
-        orderBean.setShopPhone(shopBean.getShopPhone());
-        orderBean.setDiscountMoney("0"); //优惠金额
-        orderBean.setDistributingFee(shopBean.getShopMoney());//配送费
-        orderBean.setActualPayment((money + Integer.parseInt(shopBean.getShopMoney())) + "");//实付金额
-        orderBean.setOrderTime(DateUtil.getCurrentTime()); //下单时间
-        String addressId = userBean.getAddressId();
-        orderBean.setAddressId(Integer.parseInt((addressId == null) ? "-1" : addressId));  //送餐地址Id
     }
 
     /**
@@ -338,7 +343,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
             FoodBean foodBean = getItem(position);
             holder.tvFoodName.setText(foodBean.getGoodsName());
             holder.tvFoodNumber.setText(getString(R.string.common_rmb_sign) + foodBean.getGoodsBuynumber());
-            holder.tvFoodPrice.setText(getString(R.string.common_rmb_sign) + Integer.valueOf(foodBean.getGoodsMoney()) * foodBean.getGoodsBuynumber());
+            holder.tvFoodPrice.setText(getString(R.string.common_rmb_sign) + OrderUtil.getFoodTotalMoney(foodBean));
             return convertView;
         }
     }

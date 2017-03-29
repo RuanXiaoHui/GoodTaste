@@ -6,7 +6,7 @@
     <!--padding公共正常间距-->
     <dimen name="common_padding_small">5dp</dimen>
     <dimen name="common_padding_normal">10dp</dimen>
-    <dimen name="common_padding_medium">15dp</dimen>
+    <dimen name="common_padding_medium">16dp</dimen>
     <dimen name="common_padding_large">20dp</dimen>
 
     <!--margin公共正常间距-->
@@ -33,6 +33,7 @@
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_super">28sp</dimen>
 
     <!-- 通用margin -->
     <dimen name="small_margin">5dp</dimen>
@@ -59,8 +60,8 @@
 
     <!--activity的返回标题栏-->
     <dimen name="activity_back_titlebar_hight">50dp</dimen>
-    <dimen name="activity_back_titlebar_paddingLeft">15dp</dimen>
-    <dimen name="activity_back_titlebar_paddingRight">15dp</dimen>
+    <dimen name="activity_back_titlebar_paddingLeft">16dp</dimen>
+    <dimen name="activity_back_titlebar_paddingRight">16dp</dimen>
     <dimen name="activity_back_titlebar_marginLeft">15dp</dimen>
 
     <!--底部栏高的 -->

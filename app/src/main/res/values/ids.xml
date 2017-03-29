@@ -18,6 +18,7 @@
     <item type="id" name="tv_order_time">false</item>
     <item type="id" name="tv_order_arrival_time">false</item>
     <item type="id" name="tv_order_address">false</item>
+    <item type="id" name="tv_order_remarks">false</item>
     <item type="id" name="tv_order_pay_time">false</item>
     <item type="id" name="iv_order_shop_small_icon">false</item>
     <item type="id" name="iv_order_item_food_name">false</item>

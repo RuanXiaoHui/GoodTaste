@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -22,6 +21,8 @@ import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.SPUtils;
 import www.formssi.goodtaste.utils.ToastUtil;
+
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -106,8 +107,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         String name = "_" + telephone1.substring(telephone1.length() - 4);
         String headUrl = "";
         UserBean user = new UserBean(id, name, headUrl, telephone1, pass, pPwd);
-        DataBaseSQLiteUtil.userRegister(user);
+        long uid = DataBaseSQLiteUtil.userRegister(user);
         SPUtils.updateTel(mContext, telephone1);
+        SPUtils.putString(mContext, INTENT_USER_ID, uid + "");
         //将注册的用户信息返回MineFragment
         Intent intent = new Intent(MineFragment.MY_ACTION);
         intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_LOGIN);
