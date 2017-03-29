@@ -1,9 +1,12 @@
 package www.formssi.goodtaste.activity.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -58,6 +61,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private TextView ivShopDesc;             //店铺描述
     private TextView ivShopBusinessHours;    //营业时间
     private Button btnSubmitOrder;           //下单按钮
+    private ImageView ivGoodsPhone;             //商家电话
     private TextView tvGoodsMoney;           //商品钱数
     private TextView tvShopMoney;            //配送费
     private ImageView ivGoodsInfo;               //商家信息图片展示
@@ -68,7 +72,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     private Animation mCarAnimation = null;    //购物车的添加购物动画
     private SharedPreferences mContextSharedPreferences;
     private PopupWindow mPopWind;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         rltToolbar = (RelativeLayout) findViewById(R.id.rltToolbar);
         tv_backTitleBar_title = (TextView) findViewById(R.id.tv_backTitleBar_title);
         tv_backTitleBar_center_title = (TextView) findViewById(R.id.tv_backTitlebar_center_title);
-        ivGoodsInfo= (ImageView) findViewById(R.id.ivGoodsInfo);
+        ivGoodsInfo = (ImageView) findViewById(R.id.ivGoodsInfo);
         lvLeftMenu = (ListView) findViewById(R.id.lvLeftMenu);
         lvRightFoods = (ListView) findViewById(R.id.lvRightFoods);
         iv_backTitleBar_back = (ImageView) findViewById(R.id.iv_backTitlebar_back);
@@ -97,6 +100,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         tvShopMoney = (TextView) findViewById(R.id.tvShopMoney);
         ivCar = (ImageView) findViewById(R.id.ivCar);
         btnSubmitOrder = (Button) findViewById(R.id.btnSubmintOrder);
+        ivGoodsPhone = (ImageView) findViewById(R.id.ivGoodsPhone);
         mFoodConfirm = new ArrayList<>();
         scLayoutView.smoothScrollTo(0, 0);
         btnSubmitOrder.setEnabled(false);
@@ -114,6 +118,10 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
         mFoodBean = mShopBean.getFoods();
         tv_backTitleBar_title.setText(mShopBean.getShopName());
         ivGoodsInfo.setBackgroundResource(R.mipmap.icon_goods);
+        ivShopTime.setText(getString(R.string.activity_goods_avg_time) + mShopBean.getDistributionTime() + "");
+        ivShopDesc.setText(getString(R.string.activity_goods_desc) + mShopBean.getShopDesc() + "");
+        ivShopBusinessHours.setText(getString(R.string.activity_goods_business_time) + mShopBean.getShopBusinessHours() + "");
+        tvShopMoney.setText(getString(R.string.activity_goods_distribution_money) + mShopBean.getShopMoney() + "元");
         for (int i = 0; i < mFoodBean.size(); i++) {
             if (mFoodBean.get(i).getGoodsType().equals("1")) {
                 mRefreshBean.add(mFoodBean.get(i));
@@ -124,10 +132,6 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
 
     @Override
     protected void initListener() {
-        ivShopTime.setText("平均配送时间:" + mShopBean.getDistributionTime());
-        ivShopDesc.setText("店家描述：" + mShopBean.getShopDesc());
-        ivShopBusinessHours.setText("营业时间：" + mShopBean.getShopBusinessHours());
-        tvShopMoney.setText("另需配送费" + mShopBean.getShopMoney() + "元");
         lvLeftMenu.setAdapter(new ShopMenuAdapter(mLeftMenu, this));
         mShopDataAdapter = new ShopDataAdapter(mRefreshBean, this);
         lvRightFoods.setAdapter(mShopDataAdapter);
@@ -199,6 +203,27 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
             }
         });
 
+        //拨打商家电话
+        ivGoodsPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               AlertDialog.Builder builder= new AlertDialog.Builder(GoodsDetailActivity.this);
+                builder.setMessage("确定拨打商家电话嘛？")
+                        .setNegativeButton("取消",null)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (mShopBean.getShopPhone()!=null){
+                                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mShopBean.getShopPhone()));
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                builder.show();
+            }
+        });
+
         ivCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,7 +282,7 @@ public class GoodsDetailActivity extends BaseActivity implements CustomScrollVie
     public void OnScrollViewChangeListener(int x, int y, int oldx, int oldy) {
         if (y <= 0) {
             rltToolbar.setBackgroundColor(Color.argb(255, 0, 149, 254));
-            tv_backTitleBar_title.setTextColor(Color.argb(255 , 255, 255, 255));
+            tv_backTitleBar_title.setTextColor(Color.argb(255, 255, 255, 255));
             tv_backTitleBar_title.setVisibility(View.VISIBLE);
             iv_backTitleBar_back.setVisibility(View.VISIBLE);
             tv_backTitleBar_center_title.setVisibility(View.GONE);

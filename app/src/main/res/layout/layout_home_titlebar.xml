@@ -37,6 +37,7 @@
         android:layout_marginLeft="@dimen/fragment_home_topbar_magin10"
         android:layout_marginRight="@dimen/fragment_home_topbar_magin10"
         android:layout_marginTop="@dimen/fragment_home_topbar_magin5"
+        android:textSize="16sp"
         android:hint="@string/home_topbar_et_hint"/>
     <LinearLayout
         android:layout_width="match_parent"

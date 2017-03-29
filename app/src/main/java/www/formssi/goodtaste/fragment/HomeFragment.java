@@ -4,14 +4,17 @@ package www.formssi.goodtaste.fragment;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +30,6 @@ import www.formssi.goodtaste.utils.GoodsDataUtils;
 import www.formssi.goodtaste.widget.Indicator;
 import www.formssi.goodtaste.widget.MyOnPageChangeListener;
 
-import static www.formssi.goodtaste.R.id.vpHomeCategroy;
-
 /***
  * HomeFragment
  */
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
     private List<View> views;
     private ListView lvHomeGoods;
     private List<ShopBean> mDatas;
+    private SwipeRefreshLayout srlHome;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,8 +73,9 @@ public class HomeFragment extends Fragment {
 
     private void initView() {
         lvHomeGoods = (ListView) mView.findViewById(R.id.lvHomeGoods);
+        srlHome= (SwipeRefreshLayout) mView.findViewById(R.id.srlHome);
         View Layout_View = mInflater.inflate(R.layout.home_goods_categroy, null);
-        vpHomeCateGroy = (ViewPager) Layout_View.findViewById(vpHomeCategroy);
+        vpHomeCateGroy = (ViewPager) Layout_View.findViewById(R.id.vpHomeCategroy);
         IndicatorHome = (Indicator) Layout_View.findViewById(R.id.IndicatorHome);
         View mGrid1 = mInflater.inflate(R.layout.home_goods_gridview, null);
         GridView gridView_one = (GridView) mGrid1.findViewById(R.id.gvHomeCategroy);
@@ -80,6 +83,9 @@ public class HomeFragment extends Fragment {
         View mGrid2 = mInflater.inflate(R.layout.home_goods_gridview, null);
         GridView gridView_two = (GridView) mGrid2.findViewById(R.id.gvHomeCategroy);
         gridView_two.setAdapter(new HomeCategroyAdapter(good_Data2, getActivity()));
+        //设置下拉刷新按钮的样式
+        srlHome.setProgressViewOffset(true,0,50);
+        srlHome.setColorSchemeResources(R.color.appColor);
         views = new ArrayList<>();
         views.add(mGrid1);
         views.add(mGrid2);
@@ -89,7 +95,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initListener() {
-        /**饰品分类的ViewPager滑动监听，这里面进行了抽取掉两个不常用的方法**/
+        /**商品分类的ViewPager滑动监听，这里面进行了抽取掉两个不常用的方法**/
         vpHomeCateGroy.setOnPageChangeListener(new MyOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -107,5 +113,21 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        /*****设置SwipeRefreshLayout的下拉刷新监听事件*/
+        srlHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "数据刷新成功", Toast.LENGTH_SHORT).show();
+                        srlHome.setRefreshing(false);
+                    }
+                },2000);
+
+            }
+        });
+
     }
 }
