@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -12,7 +13,9 @@ import java.util.Locale;
 public final class DateUtil {
 
     public static void main(String[] a) {
-        System.out.print(getCurrentDate("ss秒"));
+        System.out.println(getCurrentDate("ss秒"));
+        System.out.println(getDateMillis("2017-03-30 09:22:00"));
+        System.out.println(System.currentTimeMillis());
     }
 
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
@@ -41,9 +44,8 @@ public final class DateUtil {
      * @param orderTimeMillis
      * @return
      */
-    public static long getTimeChange(String orderNum,long orderTimeMillis,long currentTimeMillis) {
+    public static long getTimeChange(long orderTimeMillis,long currentTimeMillis) {
         long changeTimeMillis =currentTimeMillis - orderTimeMillis;
-//        long changeTimeSecond = changeTimeMillis / 1000;
         return changeTimeMillis;
     }
 
@@ -59,6 +61,21 @@ public final class DateUtil {
 
     }
 
+    /**
+     * 获取当前日期： 20160709 yyyyMMdd
+     *
+     * @return 20160709
+     */
+    public static long getDateMillis(String data) {
+        DateFormat format = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS, Locale.CHINA);
+        long time = 0;
+        try {
+            time = format.parse(data).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
 
     /**
      * 获取当前日期： 20160709 yyyyMMdd
