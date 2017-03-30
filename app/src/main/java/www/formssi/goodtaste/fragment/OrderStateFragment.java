@@ -114,7 +114,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
         btnGoSingle.setOnClickListener(this);
         swipeOrderState.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh() {//模拟下拉刷新延时
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -139,6 +139,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
 
     /**
      * 实现LoadMoreAdapter里面的接口
+     *
+     * @return 查询到订单的数量
      */
     @Override
     public int onLoadMoreClickListener() {
