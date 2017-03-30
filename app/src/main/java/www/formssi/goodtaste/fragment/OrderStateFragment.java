@@ -58,6 +58,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
         Log.e("state", "onCreateView:    " + state);
         initView(v);
+        initData();
         initListener();
         return v;
     }
@@ -84,6 +85,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
+            rlvOrderState.setVisibility(View.VISIBLE);
+            lltNoOrder.setVisibility(View.GONE);
             adapter = new OrderAdapter(orders, getContext(), downTimer);
             orderAdapter = new LoadMoreAdapter(adapter, this);//加载更多...
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
