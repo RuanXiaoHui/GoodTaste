@@ -1,12 +1,8 @@
 package www.formssi.goodtaste.activity.pay;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,19 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
-import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
-import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_TIME_MILLIS;
 
 /**
  * 在线支付页面
@@ -75,7 +66,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         intent = getIntent();
         orderId = intent.getStringExtra(INTENT_ORDER_ID);
         orderNum = intent.getStringExtra(INTENT_ORDER_NUM);
-        orderTimeMillis = intent.getLongExtra("orderTimeMillis", 0);
+        orderTimeMillis = intent.getLongExtra(INTENT_ORDER_TIME_MILLIS, 0);
         //计算时间差
         currentTimeMillis = System.currentTimeMillis();
         long orderMillisUntilFinished = 900 * 1000 - DateUtil.getTimeChange(orderTimeMillis, currentTimeMillis);

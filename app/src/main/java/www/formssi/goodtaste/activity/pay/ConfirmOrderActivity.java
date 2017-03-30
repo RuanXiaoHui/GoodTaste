@@ -3,7 +3,6 @@ package www.formssi.goodtaste.activity.pay;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,7 @@ import www.formssi.goodtaste.utils.OrderUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_TIME_MILLIS;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
@@ -250,7 +250,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             String orderTime = orderBean.getOrderTime();
                             long orderTimeMillis = DateUtil.getDateMillis(orderTime);
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
-                            intent.putExtra("orderTimeMillis", orderTimeMillis);
+                            intent.putExtra(INTENT_ORDER_TIME_MILLIS, orderTimeMillis);
                             startActivity(intent);
                             finish();
                         }

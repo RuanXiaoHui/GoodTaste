@@ -89,24 +89,24 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
-        lvFoodList = (NoScrollListView) findViewById(R.id.lv_order_food_list);
-        ivOrderShopImg = (ImageView) findViewById(R.id.iv_order_shop_image);
+        lvFoodList = (NoScrollListView) findViewById(R.id.lvOrderFoodList);
+        ivOrderShopImg = (ImageView) findViewById(R.id.ivOrderShopImage);
         tvOrderBackText = (TextView) findViewById(R.id.tv_backTitleBar_title);
-        tvOrderStatus = (TextView) findViewById(R.id.tv_order_status);
-        tvOrderShopName = (TextView) findViewById(R.id.tv_order_shop_name);
-        tvOrderPackFee = (TextView) findViewById(R.id.tv_order_pack_fee);
-        tvOrderDiscount = (TextView) findViewById(R.id.tv_order_discount_fee);
-        tvOrderActualPay = (TextView) findViewById(R.id.tv_order_actual_pay);
-        tvOrderNumber = (TextView) findViewById(R.id.tv_order_number);
-        tvOrderTime = (TextView) findViewById(R.id.tv_order_time);
-        tvOrderPayTime = (TextView) findViewById(R.id.tv_order_pay_time);
-        tvOrderArrivalTime = (TextView) findViewById(R.id.tv_order_arrival_time);
-        tvOrderAddress = (TextView) findViewById(R.id.tv_order_address);
-        tvOrderRemarks = (TextView) findViewById(R.id.tv_order_remarks);
+        tvOrderStatus = (TextView) findViewById(R.id.tvOrderStatus);
+        tvOrderShopName = (TextView) findViewById(R.id.tvOrderShopName);
+        tvOrderPackFee = (TextView) findViewById(R.id.tvOrderPackFee);
+        tvOrderDiscount = (TextView) findViewById(R.id.tvOrderDiscountFee);
+        tvOrderActualPay = (TextView) findViewById(R.id.tvOrderActualPay);
+        tvOrderNumber = (TextView) findViewById(R.id.tvOrderNumber);
+        tvOrderTime = (TextView) findViewById(R.id.tvOrderTime);
+        tvOrderPayTime = (TextView) findViewById(R.id.tvOrderPayTime);
+        tvOrderArrivalTime = (TextView) findViewById(R.id.tvOrderArrivalTime);
+        tvOrderAddress = (TextView) findViewById(R.id.tvOrderAddress);
+        tvOrderRemarks = (TextView) findViewById(R.id.tvOrderRemarks);
         btnBack = (ImageView) findViewById(R.id.iv_backTitlebar_back);
-        btnOK = (Button) findViewById(R.id.btn_order_ok);
-        btnCancel = (Button) findViewById(R.id.btn_order_cancel);
-        btnContactBusiness = (Button) findViewById(R.id.btn_order_contact_business);
+        btnOK = (Button) findViewById(R.id.btnOrderOk);
+        btnCancel = (Button) findViewById(R.id.btnOrderCancel);
+        btnContactBusiness = (Button) findViewById(R.id.btnOrderContactBusiness);
     }
 
     @Override
@@ -142,13 +142,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_order_shop_name: // 点击商家名称
+            case R.id.tvOrderShopName: // 点击商家名称
                 //startActivity(new Intent(this, GoodsDetailActivity.class)); // 跳转到商家店铺
                 break;
             case R.id.iv_backTitlebar_back: // 返回按钮
                 finish(); // 结束当前
                 break;
-            case R.id.btn_order_ok: // 根据状态改变按钮处理的业务
+            case R.id.btnOrderOk: // 根据状态改变按钮处理的业务
                 switch (Integer.parseInt(orderBean.getStatus())) {
                     case OrderState.NOT_PAY: // 未支付
                         Intent intent = new Intent(this, OnlinePaymentActivity.class); // 去支付
@@ -156,9 +156,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                         intent.putExtra(ConstantConfig.INTENT_ORDER_NUM, orderBean.getOrderNum());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, orderBean.getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, orderBean.getActualPayment());
-                        EventBean eventBean = new EventBean();
-                        eventBean.setAction(orderBean.getOrderNum());
-                        EventBus.getDefault().post(eventBean);
+                        long orderTimeMillis = DateUtil.getDateMillis(orderBean.getOrderTime());
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_TIME_MILLIS, orderTimeMillis);
                         startActivity(intent); // 跳转到支付页面
                         break;
                     case OrderState.NOT_DELIVERY: // 未配送
@@ -181,9 +180,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                         break;
                 }
                 break;
-            case R.id.btn_order_cancel: // 根据状态改变按钮处理的业务
+            case R.id.btnOrderCancel: // 根据状态改变按钮处理的业务
                 break;
-            case R.id.btn_order_contact_business: // 联系商家按钮：拨打商家电话
+            case R.id.btnOrderContactBusiness: // 联系商家按钮：拨打商家电话
                 // 调用系统拨号Action
                 if (null != orderBean) {
                     ShopBean shopBean = orderBean.getShopBean(); // 商店实体对象
@@ -314,9 +313,9 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             if (convertView == null) {
                 holder = new FoodViewHolder();
                 convertView = LayoutInflater.from(OrderDetailActivity.this).inflate(R.layout.item_order_food_list_viewl, null);
-                holder.tvFoodName = (TextView) convertView.findViewById(R.id.iv_order_item_food_name);
-                holder.tvFoodCount = (TextView) convertView.findViewById(R.id.iv_order_item_food_count);
-                holder.tvFoodPrice = (TextView) convertView.findViewById(R.id.iv_order_item_food_price);
+                holder.tvFoodName = (TextView) convertView.findViewById(R.id.ivOrderItemFoodName);
+                holder.tvFoodCount = (TextView) convertView.findViewById(R.id.ivOrderItemFoodCount);
+                holder.tvFoodPrice = (TextView) convertView.findViewById(R.id.ivOrderItemFoodPrice);
                 convertView.setTag(holder);
             } else {
                 holder = (FoodViewHolder) convertView.getTag();

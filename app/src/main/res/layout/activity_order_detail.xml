@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@id/iv_order_shop_image"
+                android:id="@id/ivOrderShopImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -30,7 +30,7 @@
                 android:src="@mipmap/ic_store_default_picture_normal" />
 
             <TextView
-                android:id="@id/tv_order_status"
+                android:id="@id/tvOrderStatus"
                 style="@style/text_normal_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@id/btn_order_cancel"
+                    android:id="@id/btnOrderCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
                     android:background="@drawable/selector_button_translate"
@@ -56,7 +56,7 @@
                     android:visibility="gone" />
 
                 <Button
-                    android:id="@id/btn_order_ok"
+                    android:id="@id/btnOrderOk"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
                     android:background="@drawable/selector_button_translate"
@@ -70,7 +70,7 @@
                 android:background="@color/line_horizontal" />
 
             <TextView
-                android:id="@id/tv_order_shop_name"
+                android:id="@id/tvOrderShopName"
                 style="@style/text_normal_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:background="@color/line_horizontal" />
 
             <www.formssi.goodtaste.widget.NoScrollListView
-                android:id="@id/lv_order_food_list"
+                android:id="@id/lvOrderFoodList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@color/line_horizontal"
@@ -111,7 +111,7 @@
                     android:text="@string/activity_order_distribute_fee" />
 
                 <TextView
-                    android:id="@id/tv_order_pack_fee"
+                    android:id="@id/tvOrderPackFee"
                     style="@style/text_small_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                     android:text="@string/activity_order_discount" />
 
                 <TextView
-                    android:id="@id/tv_order_discount_fee"
+                    android:id="@id/tvOrderDiscountFee"
                     style="@style/text_small_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                     android:text="@string/activity_order_actual_payment" />
 
                 <TextView
-                    android:id="@id/tv_order_actual_pay"
+                    android:id="@id/tvOrderActualPay"
                     style="@style/text_small_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@id/btn_order_contact_business"
+                android:id="@id/btnOrderContactBusiness"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_small_height"
                 android:layout_gravity="center"
