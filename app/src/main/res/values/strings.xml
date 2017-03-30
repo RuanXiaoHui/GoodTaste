@@ -67,7 +67,7 @@
     <!--支付成功页面-->
     <string name="activity_payFailure_title">支付失败</string>
     <string name="activity_payFailure_failure">支付失败！</string>
-    <!-- 订单详情页面 -->
+    <!-- 订单页面 -->
     <string name="activity_order_my">我的订单</string>
     <string name="activity_order_detail_title">订单详情</string>
     <string name="activity_order_info">订单信息</string>
@@ -111,6 +111,11 @@
     <string name="activity_order_distribute_address_text">海外联谊大厦2210室</string>
     <string name="activity_order_distributor">送餐员：</string>
     <string name="activity_order_distributor_text">陈芝泽，15899861849</string>
+    <string name="activity_order_commit_success">订单提交成功</string>
+    <string name="activity_order_tracking">订单跟踪</string>
+    <string name="activity_order_has_payed">订单已支付</string>
+    <string name="activity_order_delivery_ing_">配送中</string>
+    <string name="activity_order_waiting_for_receipting">待收货</string>
 
     <!-- Mine-->
     <string name="fragment_mine_me">我的</string>
