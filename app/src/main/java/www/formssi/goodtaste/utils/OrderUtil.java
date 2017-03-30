@@ -1,6 +1,10 @@
 package www.formssi.goodtaste.utils;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -207,6 +211,57 @@ public final class OrderUtil {
             ToastUtil.showToast(msg);
             EventBus.getDefault().post(eventBean);
         }
+    }
+
+    /**
+     * 获取订单倒计时
+     * @param orderMillisUntilFinished  剩余时间 单位毫秒
+     * @param tv  显示倒计时
+     * @param btn  在线支付按钮
+     * @param tvText
+     * @param btnText
+     * @return
+     */
+    public static CountDownTimer setCountDownTime(long orderMillisUntilFinished, final TextView tv, final String tvText, final Button btn, final String btnText) {
+
+        CountDownTimer timer = new CountDownTimer(orderMillisUntilFinished, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int minute = (int) (millisUntilFinished / 1000 / 60); //分
+                int second = 0;  //秒
+                String strTime = null;
+                if (minute < 60) {
+                    second = (int) ((millisUntilFinished / 1000 % 60));
+                    strTime = unitFormat(minute) + ":" + unitFormat(second);
+                }
+                tv.setText(strTime);
+                btn.setEnabled(true);
+            }
+
+            @Override
+            public void onFinish() {
+                tv.setText(tvText);
+                btn.setText(btnText);
+                btn.setEnabled(false);
+            }
+        };
+        return timer;
+    }
+
+    /**
+     * 倒计时显示格式
+     *
+     * @param i
+     * @return
+     */
+    public static String unitFormat(int i) {
+        String result = null;
+        if (i >= 0 && i < 10)
+            result = "0" + Integer.toString(i);
+        else
+            result = "" + i;
+        return result;
     }
 
 }

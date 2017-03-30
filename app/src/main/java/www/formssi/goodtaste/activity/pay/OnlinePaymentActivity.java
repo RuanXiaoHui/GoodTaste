@@ -14,6 +14,7 @@ import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.DateUtil;
+import www.formssi.goodtaste.utils.OrderUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
@@ -37,7 +38,8 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private String orderNum; //订单号
     private long orderTimeMillis; //订单提交时间
     private Intent intent;
-    private long currentTimeMillis;
+    private long currentTimeMillis;  //倒计时处理对象
+    private CountDownTimer countDownTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,9 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         orderTimeMillis = intent.getLongExtra(INTENT_ORDER_TIME_MILLIS, 0);
         //计算时间差
         currentTimeMillis = System.currentTimeMillis();
-        long orderMillisUntilFinished = 900 * 1000 - DateUtil.getTimeChange(orderTimeMillis, currentTimeMillis);
-        getCountDownTime(orderMillisUntilFinished);
+        long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, currentTimeMillis);
+        countDownTime = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvCountDown, "订单超时", btnConfirmPayment, "支付超时");
+        countDownTime.start();
         //店名
         String storeName = intent.getStringExtra("storeName");
         tvStoreName.setText(storeName);
@@ -85,9 +88,6 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         btnConfirmPayment.setOnClickListener(this);
         btnCancelPayment.setOnClickListener(this);
     }
-
-    private CountDownTimer timer;
-
 
     /**
      * 点击事件监听
@@ -122,61 +122,11 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    /**
-     * 获取倒计时
-     */
-    private void getCountDownTime(long orderMillisUntilFinished) {
-        timer = new CountDownTimer(orderMillisUntilFinished, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                int minute = (int) (millisUntilFinished / 1000 / 60); //分
-                int second = 0;  //秒
-                String strTime = null;
-                if (minute < 60) {
-                    second = (int) (millisUntilFinished / 1000 % 60);
-                    strTime = unitFormat(minute) + ":" + unitFormat(second);
-                    Log.i("在线支付倒计时", strTime);
-
-                }
-                if (TextUtils.isEmpty(strTime)) {
-                    tvCountDown.setText("订单超时");
-                    btnConfirmPayment.setText("支付超时");
-                    btnConfirmPayment.setEnabled(false);
-                } else {
-                    tvCountDown.setText(strTime);
-                    btnConfirmPayment.setEnabled(true);
-                }
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
-        timer.start();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (countDownTime != null) {
+            countDownTime.cancel();
+        }
     }
-
-    /**
-     * 倒计时显示格式
-     *
-     * @param i
-     * @return
-     */
-    public static String unitFormat(int i) {
-        String result = null;
-        if (i >= 0 && i < 10)
-            result = "0" + Integer.toString(i);
-        else
-            result = "" + i;
-        return result;
-    }
-
 }
