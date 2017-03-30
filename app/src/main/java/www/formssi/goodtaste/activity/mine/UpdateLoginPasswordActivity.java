@@ -13,6 +13,7 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
@@ -47,7 +48,7 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
 
     @Override
     protected void initData() {
-        user = (UserBean) getIntent().getSerializableExtra("user");
+        user = (UserBean) getIntent().getSerializableExtra(ConstantConfig.USER);
     }
 
     @Override
@@ -69,17 +70,18 @@ public class UpdateLoginPasswordActivity extends BaseActivity implements View.On
     }
 
     private void updateLoginPwd() {
-        String oldPwd = etLoginPassword.getText().toString();
-        String newPwd = etUpdateLoginPassword.getText().toString();
+        String oldPwd = etLoginPassword.getText().toString().trim();
+        String newPwd = etUpdateLoginPassword.getText().toString().trim();
         if (TextUtils.equals(oldPwd, user.getLoginPassword())) {
             if (TextUtils.isEmpty(newPwd)) {
                 ToastUtil.showToast(getString(R.string.toast_enter_new_pwd));
                 return;
             }
             boolean updateResult = DataBaseSQLiteUtil.updateLoginPassword(user.getPhoneNumber(), newPwd);
+            user.setLoginPassword(newPwd);
             if (updateResult) {
                 sendBroadcast(new Intent(MineFragment.MY_ACTION));
-                setResult(RESULT_OK, new Intent().putExtra("result", newPwd));
+                setResult(RESULT_OK, new Intent().putExtra(ConstantConfig.RESULT, user));
                 finish();
             }
         } else {

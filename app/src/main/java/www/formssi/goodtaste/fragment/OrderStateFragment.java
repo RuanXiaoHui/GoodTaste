@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import www.formssi.goodtaste.adapter.LoadMoreAdapter;
 import www.formssi.goodtaste.adapter.OrderAdapter;
 import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
 
@@ -47,7 +49,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
-        EventBus.getDefault().register(this);
+        Log.e("state", "onCreateView:    "+state );
         initView(v);
         initData();
         initListener();
@@ -58,6 +60,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
         initData();//再次回到页面刷新数据
+        EventBus.getDefault().register(this);
     }
 
     private void initView(View v) {
@@ -88,10 +91,13 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
         EventBus.getDefault().unregister(this);
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRefresh(EventBean eventBean) {//EventBus接收器，运行在主线程
-        if (REMIND_ORDER.equals(eventBean.getAction())) {
-            initData();
+        switch (eventBean.getAction()) {
+            case ConstantConfig.REMIND_ORDER:
+                initData();
+                break;
         }
     }
 
@@ -104,9 +110,9 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void run() {
                         swipeOrderState.setRefreshing(false);
-                        ToastUtil.showToast("已刷新");
+                        initData();
                     }
-                },2000);
+                }, 2000);
             }
         });
     }

@@ -35,4 +35,7 @@ public final class ConstantConfig {
     public static final String REMIND_ORDER = "reminderOrder"; // 催单
     public static final String CONFIRM_RECEIPT = "confirmReceipt"; // 确认收货
 
+    public static final String LOGIN = "login"; //登录
+    public static final String USER = "user"; //用户信息
+    public static final String RESULT = "result"; //返回
 }

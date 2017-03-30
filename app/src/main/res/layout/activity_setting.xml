@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/fragment_mine_ll"
-    android:orientation="vertical"
-    tools:context="www.formssi.goodtaste.activity.mine.SettingActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/fragment_mine_ll"
+              android:orientation="vertical"
+              tools:context="www.formssi.goodtaste.activity.mine.SettingActivity">
 
-    <include layout="@layout/layout_back_title_bar" />
+    <include layout="@layout/layout_back_title_bar"/>
 
     <LinearLayout
         android:id="@+id/ll_setting_servicetel"
@@ -27,7 +27,7 @@
             android:drawableLeft="@mipmap/icon_setting_call"
             android:drawablePadding="@dimen/medium_padding"
             android:padding="@dimen/small_padding"
-            android:text="@string/activity_setting_service" />
+            android:text="@string/activity_setting_service"/>
 
     </LinearLayout>
 
@@ -48,7 +48,7 @@
             android:drawableLeft="@mipmap/icon_setting_opinion"
             android:drawablePadding="@dimen/medium_padding"
             android:padding="@dimen/small_padding"
-            android:text="@string/activity_setting_suggestion" />
+            android:text="@string/activity_setting_suggestion"/>
 
     </LinearLayout>
 
@@ -69,17 +69,19 @@
             android:drawableLeft="@mipmap/icon_setting_check"
             android:drawablePadding="@dimen/medium_padding"
             android:padding="@dimen/small_padding"
-            android:text="@string/activity_setting_check" />
+            android:text="@string/activity_setting_check"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_exit"
-        style="@style/button_blue_text_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_margin="@dimen/large_margin"
+        android:background="@color/blue"
         android:padding="@dimen/medium_padding"
-        android:text="@string/activity_setting_exit" />
+        android:text="@string/activity_setting_exit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_normal"/>
 
 </LinearLayout>

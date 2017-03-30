@@ -70,6 +70,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     }
 
     private static final String TAG = "MineFragment";
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -90,7 +91,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
     private void initDate() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(ConstantConfig.SP_NAME, Context.MODE_PRIVATE);
-        hasLogin = sharedPreferences.getBoolean("login", false);
+        hasLogin = sharedPreferences.getBoolean(ConstantConfig.LOGIN, false);
         telephone = SPUtils.getTel(getContext());
         getUser();
     }
@@ -105,7 +106,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (hasLogin) {
             if (userBean != null) {
                 String headPortrait = userBean.getHeadProtrait();
-                ImageLoader.display(mContext,Uri.parse(headPortrait),ivHeadPicture);
+                Log.e(TAG, "validateView: " + headPortrait);
+                if (TextUtils.isEmpty(headPortrait)) {
+                    ivHeadPicture.setImageResource(R.mipmap.icon_mine_headprotrait);
+                } else {
+                    ImageLoader.displayHead(mContext, Uri.parse(headPortrait), ivHeadPicture);
+                }
                 String userName = userBean.getUserName();
                 if (!TextUtils.isEmpty(userName)) {
                     tvUserName.setText(userName);
@@ -115,8 +121,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         } else {
             ivHeadPicture.setImageResource(R.mipmap.icon_mine_headprotrait);
-            tvUserName.setText("");
-            tvPhoneNum.setText("");
+            tvUserName.setText("请登录");
+            tvPhoneNum.setText("登陆后可享受更多特权");
         }
     }
 
@@ -126,12 +132,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private void getUser() {
         telephone = SPUtils.getTel(getContext());
         userBean = DataBaseSQLiteUtil.queryUserByTel(telephone);
-    }
-
-    @Override
-    public void onDestroy() {
-        getContext().unregisterReceiver(mReceive);
-        super.onDestroy();
     }
 
     @Override
@@ -145,12 +145,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.iv_setting:
                 intent = new Intent(getActivity(), SettingActivity.class);
-                intent.putExtra("user",userBean);
+                intent.putExtra(ConstantConfig.USER, userBean);
                 startActivity(intent);
                 break;
             case R.id.rl_mine_personal:
                 intent = new Intent(getActivity(), PersonalActivity.class);
-                intent.putExtra("user", userBean);
+                intent.putExtra(ConstantConfig.USER, userBean);
                 startActivity(intent);
                 break;
             case R.id.tv_mine_address:
@@ -163,42 +163,44 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public class MyReceiver extends BroadcastReceiver {
 
         public static final String CODE = "code"; // code 的 key
-        public static final String RESULT = "result"; // 结果的key
 
+        public static final String RESULT = "result"; // 结果的key
         public static final int TYPE_CAMERA = 1; // 相机
         public static final int TYPE_ALBUM = 2; // 相册
         public static final int TYPE_USERNAME = 3; // 用户名
         public static final int TYPE_TELEPHONE = 4; // 电话号码
         public static final int TYPE_LOGOUT = 5; // 登出
         public static final int TYPE_LOGIN = 6; // 登录
+        public static final int TYPE_CUT = 7; // 裁剪
 
         @Override
         public void onReceive(Context context, Intent intent) {
             getUser();
             int codeType = intent.getIntExtra(CODE, -1);
-            if (codeType == TYPE_ALBUM) { //相册
-                ImageLoader.display(mContext,userBean.getHeadProtrait(),ivHeadPicture);
-            } else if (codeType == TYPE_CAMERA) { // 相机
-                ImageLoader.display(mContext,userBean.getHeadProtrait(),ivHeadPicture);
+            if (codeType == TYPE_CUT) { //头像剪裁后返回
+                ImageLoader.displayHead(mContext, Uri.parse(userBean.getHeadProtrait()), ivHeadPicture);
             } else if (codeType == TYPE_USERNAME) { // 修改用户名
                 tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_LOGIN) { // 登录成功
                 hasLogin = true;
-                SPUtils.putBoolean(mContext,"login",hasLogin);
+                SPUtils.putBoolean(mContext, ConstantConfig.LOGIN, hasLogin);
                 validateView();
-//                String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
-//                tvPhoneNum.setText(s);
-//                tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_TELEPHONE) { // 修改手机号码
                 String s = StringUtils.hideTelephone(userBean.getPhoneNumber());
                 tvPhoneNum.setText(s);
                 tvUserName.setText(userBean.getUserName());
             } else if (codeType == TYPE_LOGOUT) { // 登出
                 hasLogin = false;
-                SPUtils.putBoolean(mContext,"login",hasLogin);
+                SPUtils.putBoolean(mContext, ConstantConfig.LOGIN, hasLogin);
                 validateView();
             }
-
         }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(mReceive);
+        super.onDestroy();
     }
 }

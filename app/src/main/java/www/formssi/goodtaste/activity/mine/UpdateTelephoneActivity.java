@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
+import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 import www.formssi.goodtaste.utils.SPUtils;
@@ -23,6 +25,7 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
     private EditText etTelephone; //原手机号码
     private EditText etUpdateTelephone; //新手机号码
     private Button btnUpdate; //确认绑定手机
+    private UserBean mUserBean;
     private String tel;
 
     @Override
@@ -46,7 +49,8 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initData() {
-        tel = getIntent().getStringExtra("tel");
+        mUserBean = (UserBean) getIntent().getSerializableExtra(ConstantConfig.USER);
+        tel = mUserBean.getPhoneNumber();
     }
 
     @Override
@@ -72,8 +76,8 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
      * 更新手机号码
      */
     private void updateTelephone() {
-        String oldTelephone = etTelephone.getText().toString();
-        String newTelephone = etUpdateTelephone.getText().toString();
+        String oldTelephone = etTelephone.getText().toString().trim();
+        String newTelephone = etUpdateTelephone.getText().toString().trim();
         if (TextUtils.equals(tel, oldTelephone)) {
             if (TextUtils.getTrimmedLength(newTelephone) != 11) {
                 ToastUtil.showToast(getString(R.string.toast_phone_format_error));
@@ -83,9 +87,10 @@ public class UpdateTelephoneActivity extends BaseActivity implements View.OnClic
             if (b) {
                 SPUtils.updateTel(this, newTelephone);
             }
+            mUserBean.setPhoneNumber(newTelephone);
             Intent intent = new Intent(MineFragment.MY_ACTION);
             intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_TELEPHONE);
-            intent.putExtra(MineFragment.MyReceiver.RESULT, newTelephone);
+            intent.putExtra(MineFragment.MyReceiver.RESULT, mUserBean);
             sendBroadcast(intent);
             setResult(RESULT_OK, intent);
             finish();
