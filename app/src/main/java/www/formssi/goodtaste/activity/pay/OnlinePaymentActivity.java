@@ -3,8 +3,6 @@ package www.formssi.goodtaste.activity.pay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,7 +70,9 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         //计算时间差
         currentTimeMillis = System.currentTimeMillis();
         long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, currentTimeMillis);
-        countDownTime = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvCountDown, "订单超时", btnConfirmPayment, "支付超时");
+        countDownTime = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvCountDown, null,
+                getString(R.string.activity_order_state_time_out), btnConfirmPayment,
+                getString(R.string.activity_order_time_out));
         countDownTime.start();
         //店名
         String storeName = intent.getStringExtra("storeName");
@@ -104,6 +104,9 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_OnlinePaymentActivity_confirmPayment: //确认支付按钮
                 int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
                 if (payOrder > 0) {
+                    if (countDownTime != null) {
+                        countDownTime.cancel();
+                    }
                     intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
                     intent.putExtra(INTENT_ORDER_ID, orderId);
                 } else {

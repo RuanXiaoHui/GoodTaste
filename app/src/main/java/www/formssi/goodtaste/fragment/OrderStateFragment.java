@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,9 +27,6 @@ import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
-import www.formssi.goodtaste.utils.ToastUtil;
-
-import static www.formssi.goodtaste.constant.ConstantConfig.REMIND_ORDER;
 
 /**
  * 订单分类的fragment
@@ -40,6 +38,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     private Button btnGoSingle;//没有订单时显示的按钮
     private LoadMoreAdapter orderAdapter;
     private SwipeRefreshLayout swipeOrderState;
+    private CountDownTimer downTimer; // 倒计时器
+    private OrderAdapter adapter;
 
     public OrderStateFragment(int state) {
         super();
@@ -49,7 +49,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
-        Log.e("state", "onCreateView:    "+state );
+        Log.e("state", "onCreateView:    " + state);
         initView(v);
         initData();
         initListener();
@@ -79,15 +79,19 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
-            orderAdapter = new LoadMoreAdapter(new OrderAdapter(orders, getContext()));//加载更多...
+            adapter = new OrderAdapter(orders, getContext(), downTimer);
+            this.orderAdapter = new LoadMoreAdapter(adapter);//加载更多...
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
-            rlvOrderState.setAdapter(orderAdapter);
+            rlvOrderState.setAdapter(this.orderAdapter);
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        if(null != adapter){
+            adapter.cancelTimer();
+        }
         EventBus.getDefault().unregister(this);
     }
 
