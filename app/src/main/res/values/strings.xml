@@ -78,6 +78,9 @@
     <string name="activity_order_waiting_for_comment">等待评价</string>
     <string name="activity_order_waiting_for_business_orders">等待商家接单</string>
     <string name="activity_order_again">再来一单</string>
+    <string name="activity_order_time_out">订单超时</string>
+    <string name="activity_order_pay_time_rest">支付剩余时间：</string>
+    <string name="activity_order_state_time_out">订单已超时</string>
     <string name="activity_order_goto_pay">去支付</string>
     <string name="activity_order_goto_comment">去评价</string>
     <string name="activity_order_cancel">取消订单</string>

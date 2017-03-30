@@ -19,7 +19,7 @@ public final class ConstantConfig {
 
     public static final int CALL_PHONE_REQUEST_CODE = 0x1000; // 拨号权限请求码
 
-    public static final int ORDER_TIME_MAX_CAN_PAY = 15; // 订单最大可支付时间 单位是秒
+    public static final int ORDER_TIME_MAX_CAN_PAY = 900; // 订单最大可支付时间 单位是秒
 
     public static final String INTENT_USER_ID = "userId";//用户id
     public static final String INTENT_ORDER_ID = "orderId";//orderFragment跳转到orderDetailActivity携带订单id的key

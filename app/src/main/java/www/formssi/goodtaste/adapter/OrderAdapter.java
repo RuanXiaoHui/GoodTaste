@@ -2,11 +2,15 @@ package www.formssi.goodtaste.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,6 +24,7 @@ import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ClickUtil;
+import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 import www.formssi.goodtaste.utils.ToastUtil;
 
@@ -30,10 +35,12 @@ import www.formssi.goodtaste.utils.ToastUtil;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
     private List<OrderBean> list;
     private Context context;
+    private CountDownTimer downTimer; // 倒计时器
 
-    public OrderAdapter(List<OrderBean> list, Context context) {
+    public OrderAdapter(List<OrderBean> list, Context context, CountDownTimer downTimer) {
         this.list = list;
         this.context = context;
+        this.downTimer = downTimer;
     }
 
     @Override
@@ -72,6 +79,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             case OrderState.NOT_PAY://未支付
                 holder.tvTransactionStatus.setText(R.string.order_state_not_pay);
                 holder.btnStatusLogic.setText(R.string.order_state_btn_not_pay);
+                long orderTimeMillis = DateUtil.getDateMillis(list.get(position).getOrderTime());
+                long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis,
+                        System.currentTimeMillis());
+                downTimer = OrderUtil.setCountDownTime(orderMillisUntilFinished,
+                        holder.tvTransactionStatus, // 支付状态
+                        context.getResources().getString(R.string.activity_order_pay_time_rest),
+                        context.getResources().getString(R.string.activity_order_state_time_out),
+                        holder.btnStatusLogic, // 按钮
+                        context.getResources().getString(R.string.activity_order_time_out));
+                downTimer.start(); // 订单剩余支付时间倒计时开始
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,6 +97,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                         intent.putExtra(ConstantConfig.INTENT_ORDER_NUM, list.get(position).getOrderNum());
                         intent.putExtra(ConstantConfig.INTENT_STORE_NAME, list.get(position).getShopName());
                         intent.putExtra(ConstantConfig.INTENT_ACTUAL_PAYMENT, list.get(position).getActualPayment());
+                        long orderTimeMillis = DateUtil.getDateMillis(list.get(position).getOrderTime());
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_TIME_MILLIS, orderTimeMillis);
                         EventBean eventBean = new EventBean();
                         eventBean.setAction(list.get(position).getOrderNum());
                         EventBus.getDefault().post(eventBean);
@@ -169,4 +188,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         }
     }
 
+    public void cancelTimer(){
+        if(null != downTimer){
+            downTimer.cancel();
+        }
+    }
 }

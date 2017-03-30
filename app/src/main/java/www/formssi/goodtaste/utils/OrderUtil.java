@@ -2,7 +2,6 @@ package www.formssi.goodtaste.utils;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -215,14 +214,18 @@ public final class OrderUtil {
 
     /**
      * 获取订单倒计时
-     * @param orderMillisUntilFinished  剩余时间 单位毫秒
-     * @param tv  显示倒计时
-     * @param btn  在线支付按钮
+     *
+     * @param orderMillisUntilFinished 剩余时间 单位毫秒
+     * @param tv                       显示倒计时
+     * @param btn                      在线支付按钮
+     * @param tip can null
      * @param tvText
      * @param btnText
      * @return
      */
-    public static CountDownTimer setCountDownTime(long orderMillisUntilFinished, final TextView tv, final String tvText, final Button btn, final String btnText) {
+    public static CountDownTimer setCountDownTime(long orderMillisUntilFinished, final TextView tv,
+                                                  final String tip, final String tvText,
+                                                  final Button btn, final String btnText) {
 
         CountDownTimer timer = new CountDownTimer(orderMillisUntilFinished, 1000) {
 
@@ -235,7 +238,7 @@ public final class OrderUtil {
                     second = (int) ((millisUntilFinished / 1000 % 60));
                     strTime = unitFormat(minute) + ":" + unitFormat(second);
                 }
-                tv.setText(strTime);
+                tv.setText(((tip == null) ? "" : tip) + strTime);
                 btn.setEnabled(true);
             }
 

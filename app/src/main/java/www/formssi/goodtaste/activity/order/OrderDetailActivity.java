@@ -77,7 +77,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private Intent intent; // 获取上一个intent
     private String rmbSign; // 人民币符号
     private String rmbUnit; // 人民币单位
-    private CountDownTimer downTimer;
+    private CountDownTimer downTimer; // 倒计时器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,10 +123,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             if (null != orderId && !"".equals(orderId)) {
                 orderBean = DataBaseSQLiteUtil.getOrderBeansById(orderId).get(0); // 根据id查询订单详情数据
                 setOrderDetail(orderBean); // 展示订单详情信息
-                long orderTimeMillis = DateUtil.getDateMillis(orderBean.getOrderTime());
-                long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, System.currentTimeMillis());
-                downTimer = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvOrderStatus, "订单超时", btnOK, "订单超时");
-                downTimer.start();
             }
             if (null != orderBean) {
                 listFoodBean.addAll(orderBean.getFoodBeanList()); // 展示食物列表信息
@@ -260,6 +256,17 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     btnOK.setText(getString(R.string.activity_order_goto_pay)); // 支付按钮
                     tvOrderPayTime.setText(getString(R.string.order_state_not_pay)); // 显示支付时间，如果未支付，显示未支付
                     tvOrderArrivalTime.setText(getString(R.string.order_state_not_pay)); // 显示到达时间，如果未支付
+                    long orderTimeMillis = DateUtil.getDateMillis(orderBean.getOrderTime());
+                    long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, System.currentTimeMillis());
+                    downTimer = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvOrderStatus,
+                            getString(R.string.activity_order_pay_time_rest),
+                            getString(R.string.activity_order_state_time_out), btnOK,
+                            getString(R.string.activity_order_time_out));
+                    downTimer.start(); // 订单剩余支付时间倒计时开始
+                    if(!btnOK.isEnabled()){
+                        //btnOK.setEnabled(true);
+                        //btnOK.setText(getString(R.string.activity_order_again)); // 再来一单
+                    }
                     break;
                 case OrderState.NOT_DELIVERY: // 未配送
                     tvOrderStatus.setText(getString(R.string.order_state_btn_not_delivery)); // 显示订单状态：未配送

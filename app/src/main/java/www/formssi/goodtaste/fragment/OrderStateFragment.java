@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -37,6 +38,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     private Button btnGoSingle;//没有订单时显示的按钮
     private LoadMoreAdapter orderAdapter;
     private SwipeRefreshLayout swipeOrderState;
+    private CountDownTimer downTimer; // 倒计时器
+    private OrderAdapter adapter;
     private int page = 0;
 
     public List<OrderBean> getOrders() {
@@ -81,7 +84,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
-            orderAdapter = new LoadMoreAdapter(new OrderAdapter(orders, getContext()), this);//加载更多...
+            adapter = new OrderAdapter(orders, getContext(), downTimer);
+            orderAdapter = new LoadMoreAdapter(adapter, this);//加载更多...
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
@@ -90,6 +94,9 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     @Override
     public void onStop() {
         super.onStop();
+        if(null != adapter){
+            adapter.cancelTimer();
+        }
         EventBus.getDefault().unregister(this);
     }
 

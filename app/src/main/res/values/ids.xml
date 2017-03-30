@@ -16,7 +16,7 @@
     <item type="id" name="tvOrderAddress">false</item>
     <item type="id" name="tvOrderRemarks">false</item>
     <item type="id" name="tvOrderPayTime">false</item>
-    <item type="id" name="ivOrderShopSmallIcon">false</item>3
+    <item type="id" name="ivOrderShopSmallIcon">false</item>
     <item type="id" name="ivOrderItemFoodName">false</item>
     <item type="id" name="ivOrderItemFoodCount">false</item>
     <item type="id" name="ivOrderItemFoodPrice">false</item>
