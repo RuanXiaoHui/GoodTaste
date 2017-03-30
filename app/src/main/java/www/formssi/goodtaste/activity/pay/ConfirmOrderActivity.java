@@ -81,9 +81,9 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
-        initView();
-        initData();
-        initListener();
+        initView();     //初始化控件
+        initData();     //初始化数据
+        initListener(); //初始化监听事件
     }
 
     @Override
@@ -160,11 +160,12 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
      * 获取Intent传递的值
      */
     public void getIntentData() {
+        //通过intent获取上一页面传递的商店对象、选购食物列表
         intent = getIntent();
-        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");
+        shopBean = (ShopBean) intent.getSerializableExtra("ShopBeans");  //商店对象
         foodBeanList = new ArrayList<>();
         foodBeanList.clear();
-        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans");
+        foodBeanList = (List<FoodBean>) intent.getSerializableExtra("foodBeans"); //选购的食物列表
         money = intent.getIntExtra("CountMoney", 0);
     }
 
@@ -173,33 +174,37 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
      */
     private void showDefaultAddress() {
         if (userBean != null) {
-            addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));
+            addressBean = DataBaseSQLiteUtil.getUserDefaultAddress(Integer.parseInt(userBean.getUserId()));//通过用户id获取默认送餐地址
             if (addressBean.getAddress() != null) { //如果默认地址不为空
-                isAddressNull = false;
-                tvAddressNull.setVisibility(View.GONE);
-                showAddressDetail(addressBean);
-                userBean.setAddressId(addressBean.getAddressId());
+                isAddressNull = false;  //地址状态不为空
+                tvAddressNull.setVisibility(View.GONE); //隐藏“新增地址”的字体提示
+                showAddressDetail(addressBean); //显示地址信息
+                userBean.setAddressId(addressBean.getAddressId()); //为用户设置该地址的地址id
             } else {//如果默认地址为空
-                List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId()));
-                if (addressBeanList.size() <= 0) {
-                    isAddressNull = true;
-                    tvAddressNull.setVisibility(View.VISIBLE);
-                } else {
-                    isAddressNull = false;
-                    tvAddressNull.setVisibility(View.GONE);
-                    showAddressDetail(addressBeanList.get(0));
-                    userBean.setAddressId(addressBeanList.get(0).getAddressId());
+                List<AddressBean> addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userBean.getUserId())); //通过用户id获取送餐地址列表
+                if (addressBeanList.size() <= 0) { //如果送餐地址列表为空
+                    isAddressNull = true; //地址状态为空
+                    tvAddressNull.setVisibility(View.VISIBLE); //显示“新增地址”的字体提示
+                } else {//如果送餐地址列表不为空
+                    isAddressNull = false; //地址状态部位空
+                    tvAddressNull.setVisibility(View.GONE); //隐藏“新增地址”的字体提示
+                    showAddressDetail(addressBeanList.get(0)); //显示第一个送餐地址的地址信息
+                    userBean.setAddressId(addressBeanList.get(0).getAddressId()); //为用户设置该地址的地址id
                 }
             }
         }
     }
 
+    /**
+     * 显示地址信息
+     * @param addressBean  地址对象
+     */
     private void showAddressDetail(AddressBean addressBean) {
-        userBean.setAddressId(addressBean.getAddressId());
-        tvName.setText(addressBean.getName());
-        tvGender.setText(addressBean.getGender());
-        tvPhone.setText(addressBean.getPhone());
-        tvAddress.setText(addressBean.getAddress());
+        userBean.setAddressId(addressBean.getAddressId()); //为当前用户设置该地址id
+        tvName.setText(addressBean.getName());      //姓名
+        tvGender.setText(addressBean.getGender());  //性别
+        tvPhone.setText(addressBean.getPhone());    //电话
+        tvAddress.setText(addressBean.getAddress());//地址
     }
 
     /**
@@ -270,17 +275,17 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             if (requestCode == ORDER_REMARK_REQUEST && resultCode == ORDER_REMARK_RESULT) { //订单备注返回数据
-                String remarks = data.getStringExtra("remarks");
+                String remarks = data.getStringExtra("remarks");   //备注信息
                 tvRemarks.setText(remarks);
-            } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址,返回选中的地址
+            } else if (requestCode == OREDER_REDDRESS_REQUEST && resultCode == OREDER_REDDRESS_RESULT) { //选择收货地址,返回选中的地址到提交订单页面
                 isAddressNull = false;
                 tvAddressNull.setVisibility(View.GONE);
                 String addressId = data.getStringExtra("addressId");
                 userBean.setAddressId(addressId);
-                tvName.setText(data.getStringExtra("name"));
-                tvGender.setText(data.getStringExtra("gender"));
-                tvPhone.setText(data.getStringExtra("phone"));
-                tvAddress.setText(data.getStringExtra("address"));
+                tvName.setText(data.getStringExtra("name"));       //显示名字
+                tvGender.setText(data.getStringExtra("gender"));   //显示性别
+                tvPhone.setText(data.getStringExtra("phone"));     //显示电话
+                tvAddress.setText(data.getStringExtra("address")); //显示地址
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -346,8 +351,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     }
 
     public class FoodViewHolder {
-        TextView tvFoodName; //食物名称
+        TextView tvFoodName;   //食物名称
         TextView tvFoodNumber; //购买数量
-        TextView tvFoodPrice; //食物价格
+        TextView tvFoodPrice;  //食物价格
     }
 }

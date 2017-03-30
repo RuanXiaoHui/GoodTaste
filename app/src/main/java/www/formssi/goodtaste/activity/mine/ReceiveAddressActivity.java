@@ -34,7 +34,6 @@ import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESU
 
 public class ReceiveAddressActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
-    private static final String TAG = "ReceiveAddressActivity";
     private ImageView ivBack; //返回
     private TextView tvTitle; //标题
     private ListView lvAddress; //地址列表
@@ -49,9 +48,9 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_address);
-        initView();
-        initData();
-        initListener();
+        initView();     //初始化控件
+        initData();     //初始化数据
+        initListener(); //初始化监听事件
     }
 
     @Override
@@ -89,15 +88,13 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_backTitlebar_back: //返回
+            case R.id.iv_backTitlebar_back: //返回按钮
                 this.finish();
                 break;
-
             case R.id.llt_ReceiveAddressActivity_addAddress: //新增地址
                 intent = new Intent(ReceiveAddressActivity.this, AddNewAddressActivity.class);
                 startActivityForResult(intent, ADD_NEW_ADREES_REQUEST);
                 break;
-
             default:
                 break;
         }
@@ -107,9 +104,6 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
      * 对ListView的操作
      */
     private void operateListView() {
-        //创建用户对象
-//        UserBean userBean = new UserBean();
-//        userBean.setUserId(userId);
         // 根据地址id获取用户保存的地址列表
         addressBeanList = DataBaseSQLiteUtil.queryAddressByUserId(Integer.parseInt(userId));
         addressAdapter = new AddressAdapter(addressBeanList, this);
@@ -143,11 +137,11 @@ public class ReceiveAddressActivity extends BaseActivity implements View.OnClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent = new Intent();
         AddressBean addressBean = addressBeanList.get(position);
-        intent.putExtra("addressId", addressBean.getAddressId());
-        intent.putExtra("name", addressBean.getName());
-        intent.putExtra("gender", addressBean.getGender());
-        intent.putExtra("phone", addressBean.getPhone());
-        intent.putExtra("address", addressBean.getAddress());
+        intent.putExtra("addressId", addressBean.getAddressId()); //地址id
+        intent.putExtra("name", addressBean.getName());           //收货人
+        intent.putExtra("gender", addressBean.getGender());       //性别
+        intent.putExtra("phone", addressBean.getPhone());         //电话
+        intent.putExtra("address", addressBean.getAddress());     //地址
         setResult(OREDER_REDDRESS_RESULT, intent);
         this.finish();
     }

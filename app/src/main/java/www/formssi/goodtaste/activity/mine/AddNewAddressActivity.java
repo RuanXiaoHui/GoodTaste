@@ -35,22 +35,22 @@ import static www.formssi.goodtaste.utils.StringUtils.checkPhoneIsEleven;
  */
 public class AddNewAddressActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    private ImageView ivBack;  //返回
-    private TextView tvTitle; //标题
-    private EditText etName; //姓名
-    private EditText etPhone; //电话
-    private EditText etAddress; //地址
+    private ImageView ivBack;    //返回
+    private TextView tvTitle;    //标题
+    private EditText etName;     //姓名
+    private EditText etPhone;    //电话
+    private EditText etAddress;  //地址
     private RadioGroup rgGender; //性别
-    private Button btnOk;//确定
-    private String gender; //获取性别
+    private Button btnOk;        //确定
+    private String gender;       //获取性别
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
-        initView();
-        initData();
-        initListener();
+        initView();      //初始化控件
+        initData();      // 初始化数据
+        initListener();  //初始化监听事件
     }
 
     @Override
@@ -88,7 +88,6 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
             case R.id.iv_backTitlebar_back:  //返回
                 this.finish();
                 break;
-
             case R.id.btn_AddNewAddressActivity_ok: // 确定
                 Intent intent = new Intent();
                 String name = etName.getText().toString().trim();
@@ -101,7 +100,7 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 if (nameEmpty || genderEmpty || addressEmpty) {
                     Toast.makeText(this, R.string.activity_address_please_enter_a_complete_message, Toast.LENGTH_SHORT).show();
                 } else if (!phoneIsEleven) {
-                    Toast.makeText(this,R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.activity_address_please_enter_11_phone_number, Toast.LENGTH_SHORT).show();
                 } else {
                     //获取当前登录用户id
                     SharedPreferences sharedPreferences = getSharedPreferences(ConstantConfig.SP_NAME, MODE_PRIVATE);
@@ -118,7 +117,6 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                     finish();
                 }
                 break;
-
             default:
                 break;
         }
