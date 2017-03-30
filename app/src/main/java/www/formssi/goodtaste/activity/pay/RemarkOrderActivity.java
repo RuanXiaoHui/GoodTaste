@@ -31,9 +31,9 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remark_order);
-        initView();
-        initData();
-        initListener();
+        initView();      //初始化控件
+        initData();      //初始化数据
+        initListener();  //初始化监听事件
     }
 
     @Override
@@ -56,26 +56,19 @@ public class RemarkOrderActivity extends BaseActivity implements View.OnClickLis
         btnOk.setOnClickListener(this);
     }
 
-    /**
-     * 点击事件
-     *
-     * @param v
-     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_backTitlebar_back:
+            case R.id.iv_backTitlebar_back: //返回按钮
                 finish();
                 break;
-
-            case R.id.btn_RemarkOrderActivity_ok:
+            case R.id.btn_RemarkOrderActivity_ok: //确定按钮
                 Intent intent = new Intent();
-                String remarks = etRemarkOrder.getText().toString();
+                String remarks = etRemarkOrder.getText().toString();  //备注内容
                 intent.putExtra("remarks", remarks);
                 setResult(ORDER_REMARK_RESULT, intent);
                 finish();
                 break;
-
             default:
                 break;
         }

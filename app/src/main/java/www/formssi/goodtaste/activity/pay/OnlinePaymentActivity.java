@@ -37,15 +37,15 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private long orderTimeMillis; //订单提交时间
     private Intent intent;
     private long currentTimeMillis;  //倒计时处理对象
-    private CountDownTimer countDownTime;
+    private CountDownTimer countDownTime;  //倒计时
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment);
-        initView();
-        initData();
-        initListener();
+        initView();      //初始化控件
+        initData();      //初始化数据
+        initListener();  //初始化监听事件
     }
 
     @Override
@@ -64,12 +64,14 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(R.string.activity_onlinePayment_title);
         //获取上一个页面传过来的订单id、订单号
         intent = getIntent();
-        orderId = intent.getStringExtra(INTENT_ORDER_ID);
-        orderNum = intent.getStringExtra(INTENT_ORDER_NUM);
-        orderTimeMillis = intent.getLongExtra(INTENT_ORDER_TIME_MILLIS, 0);
+        orderId = intent.getStringExtra(INTENT_ORDER_ID);   //订单id
+        orderNum = intent.getStringExtra(INTENT_ORDER_NUM); //订单号
+        orderTimeMillis = intent.getLongExtra(INTENT_ORDER_TIME_MILLIS, 0); //创建订单时间
         //计算时间差
         currentTimeMillis = System.currentTimeMillis();
+        //获取订单支付剩余时间
         long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, currentTimeMillis);
+        //获取CountdownTimer对象，并启动倒计时
         countDownTime = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvCountDown, null,
                 getString(R.string.activity_order_state_time_out), btnConfirmPayment,
                 getString(R.string.activity_order_time_out));
@@ -89,18 +91,12 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         btnCancelPayment.setOnClickListener(this);
     }
 
-    /**
-     * 点击事件监听
-     *
-     * @param v
-     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_backTitlebar_back: //返回
                 this.finish();
                 break;
-
             case R.id.btn_OnlinePaymentActivity_confirmPayment: //确认支付按钮
                 int payOrder = DataBaseSQLiteUtil.payOrder(orderId);
                 if (payOrder > 0) {
@@ -108,18 +104,16 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                         countDownTime.cancel();
                     }
                     intent = new Intent(OnlinePaymentActivity.this, PaySuccessActivity.class); //支付成功
-                    intent.putExtra(INTENT_ORDER_ID, orderId);
+                    intent.putExtra(INTENT_ORDER_ID, orderId); //传递订单号
                 } else {
                     intent = new Intent(OnlinePaymentActivity.this, PayFailureActivity.class); //支付失败
                 }
                 startActivity(intent);
                 this.finish();
                 break;
-
             case R.id.btn_OnlinePaymentActivity_cancelPayment: //取消支付按钮
                 this.finish();
                 break;
-
             default:
                 break;
         }

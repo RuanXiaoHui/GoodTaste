@@ -30,9 +30,9 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
-        initView();
-        initData();
-        initListener();
+        initView();     //初始化控件
+        initData();     //初始化数据
+        initListener(); //初始化监听事件
     }
 
     @Override
@@ -57,11 +57,6 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
         btnPaySuccess.setOnClickListener(this);
     }
 
-    /**
-     * 点击事件监听
-     *
-     * @param v
-     */
     @Override
     public void onClick(View v) {
 
@@ -69,14 +64,12 @@ public class PaySuccessActivity extends BaseActivity implements View.OnClickList
             case R.id.iv_backTitlebar_back:  //返回
                 this.finish();
                 break;
-
             case R.id.btn_paySuccess:  //确定按钮
                 Intent intent = new Intent(PaySuccessActivity.this, OrderDetailActivity.class);
-                intent.putExtra(INTENT_ORDER_ID, orderId);
+                intent.putExtra(INTENT_ORDER_ID, orderId); //订单id
                 startActivity(intent);
                 this.finish();
                 break;
-
             default:
                 break;
         }
