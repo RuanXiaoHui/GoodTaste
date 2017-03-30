@@ -1,6 +1,7 @@
 package www.formssi.goodtaste.fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,7 +31,7 @@ import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 /**
  * 订单分类的fragment
  */
-public class OrderStateFragment extends Fragment implements View.OnClickListener {
+public class OrderStateFragment extends Fragment implements View.OnClickListener, LoadMoreAdapter.OnLoadMoreClickListener {
     private RecyclerView rlvOrderState;//分类订单显示的列表
     private LinearLayout lltNoOrder;//没有订单时的父布局
     private int state = 0;//进入视图时显示的fragment
@@ -84,7 +85,7 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
             adapter = new OrderAdapter(orders, getContext(), downTimer);
-            orderAdapter = new LoadMoreAdapter(adapter);//加载更多...
+            orderAdapter = new LoadMoreAdapter(adapter, this);//加载更多...
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
