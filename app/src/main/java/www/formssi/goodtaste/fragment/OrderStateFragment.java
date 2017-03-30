@@ -26,20 +26,24 @@ import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
-import www.formssi.goodtaste.utils.ToastUtil;
-
-import static www.formssi.goodtaste.constant.ConstantConfig.REMIND_ORDER;
 
 /**
  * 订单分类的fragment
  */
-public class OrderStateFragment extends Fragment implements View.OnClickListener {
+public class OrderStateFragment extends Fragment implements View.OnClickListener, LoadMoreAdapter.OnLoadMoreClickListener {
     private RecyclerView rlvOrderState;//分类订单显示的列表
     private LinearLayout lltNoOrder;//没有订单时的父布局
     private int state = 0;//进入视图时显示的fragment
     private Button btnGoSingle;//没有订单时显示的按钮
     private LoadMoreAdapter orderAdapter;
     private SwipeRefreshLayout swipeOrderState;
+    private int page = 0;
+
+    public List<OrderBean> getOrders() {
+        return orders;
+    }
+
+    private List<OrderBean> orders;
 
     public OrderStateFragment(int state) {
         super();
@@ -49,9 +53,8 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_order_state, container, false);
-        Log.e("state", "onCreateView:    "+state );
+        Log.e("state", "onCreateView:    " + state);
         initView(v);
-        initData();
         initListener();
         return v;
     }
@@ -68,18 +71,17 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
         rlvOrderState = (RecyclerView) v.findViewById(R.id.rlvOrderState);
         lltNoOrder = (LinearLayout) v.findViewById(R.id.lltNoOrder);
         btnGoSingle = (Button) v.findViewById(R.id.btnGoSingle);
-        //设置下拉刷新按钮的样式
-//        swipeOrderState.setProgressViewOffset(true,0,);
         swipeOrderState.setColorSchemeResources(R.color.appColor);
     }
 
     private void initData() {
-        List<OrderBean> orders = DataBaseSQLiteUtil.queryOrder(state);
+        page = 0;
+        orders = DataBaseSQLiteUtil.queryOrder(state, 0, 5);
         if (orders.size() == 0) {//如果没有该类型订单,显示去下单按钮
             rlvOrderState.setVisibility(View.GONE);
             lltNoOrder.setVisibility(View.VISIBLE);
         } else {//有订单时显示订单列表
-            orderAdapter = new LoadMoreAdapter(new OrderAdapter(orders, getContext()));//加载更多...
+            orderAdapter = new LoadMoreAdapter(new OrderAdapter(orders, getContext()), this);//加载更多...
             rlvOrderState.setLayoutManager(new LinearLayoutManager(getContext()));
             rlvOrderState.setAdapter(orderAdapter);
         }
@@ -126,6 +128,18 @@ public class OrderStateFragment extends Fragment implements View.OnClickListener
                 }
                 break;
         }
+    }
+
+    /**
+     * 实现LoadMoreAdapter里面的接口
+     */
+    @Override
+    public int onLoadMoreClickListener() {
+        page = page + 5;
+        List loadMoreList = DataBaseSQLiteUtil.queryOrder(state, page, 5);
+        orders.addAll(loadMoreList);
+        orderAdapter.notifyDataSetChanged();
+        return loadMoreList.size();
     }
 
     /**

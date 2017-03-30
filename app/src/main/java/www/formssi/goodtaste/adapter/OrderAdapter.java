@@ -152,7 +152,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         private ImageView imgShop;//商店图片
         private Button btnStatusLogic;//状态逻辑按钮
 
-        OrderHolder(View itemView) {
+        public OrderHolder(View itemView) {
             super(itemView);
             initView(itemView);
         }
@@ -169,11 +169,4 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         }
     }
 
-    class LoadMoreHolder extends RecyclerView.ViewHolder {
-
-        public LoadMoreHolder(View itemView) {
-            super(itemView);
-
-        }
-    }
 }
