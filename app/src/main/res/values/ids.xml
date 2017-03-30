@@ -13,6 +13,7 @@
     <item type="id" name="tvOrderActualPay">false</item>
     <item type="id" name="tvOrderTime">false</item>
     <item type="id" name="tvOrderArrivalTime">false</item>
+    <item type="id" name="tvOrderDeliveryTime">false</item>
     <item type="id" name="tvOrderAddress">false</item>
     <item type="id" name="tvOrderRemarks">false</item>
     <item type="id" name="tvOrderPayTime">false</item>

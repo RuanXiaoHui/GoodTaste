@@ -42,7 +42,7 @@
         <activity android:name=".activity.pay.PayFailureActivity" />
         <activity android:name=".activity.mine.LoginActivity" />
         <activity android:name=".activity.mine.RegisterActivity" />
-
+        <activity android:name=".activity.order.OrderTrackingActivity" />
     </application>
 
 </manifest>

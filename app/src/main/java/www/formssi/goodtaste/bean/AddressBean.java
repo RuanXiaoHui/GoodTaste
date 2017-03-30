@@ -19,7 +19,7 @@ public class AddressBean implements Serializable {
     }
 
     public String toAddressString() {
-        return name + ' ' + gender + '\n' + phone + '\n' + address;
+        return name + ' ' + gender + "\n\n" + phone + "\n\n" + address;
     }
 
     public AddressBean(String userId, String name, String gender, String phone, String address) {

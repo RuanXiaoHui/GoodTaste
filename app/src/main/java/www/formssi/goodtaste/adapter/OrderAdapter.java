@@ -18,6 +18,7 @@ import java.util.List;
 
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.order.OrderDetailActivity;
+import www.formssi.goodtaste.activity.order.OrderTrackingActivity;
 import www.formssi.goodtaste.activity.pay.OnlinePaymentActivity;
 import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.OrderBean;
@@ -144,6 +145,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 holder.btnStatusLogic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = new Intent(context, OrderTrackingActivity.class);
+                        intent.putExtra(ConstantConfig.INTENT_ORDER_ID, list.get(position).getOrderId());
+                        context.startActivity(intent);
                     }
                 });
                 break;

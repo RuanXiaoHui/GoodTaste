@@ -105,14 +105,12 @@
                 android:layout_margin="@dimen/large_margin">
 
                 <TextView
-                    style="@style/text_small_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/activity_order_distribute_fee" />
 
                 <TextView
                     android:id="@id/tvOrderPackFee"
-                    style="@style/text_small_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -130,7 +128,6 @@
                 android:layout_margin="@dimen/large_margin">
 
                 <TextView
-                    style="@style/text_small_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/activity_order_discount" />

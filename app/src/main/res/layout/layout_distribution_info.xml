@@ -22,7 +22,6 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
@@ -30,10 +29,10 @@
 
         <TextView
             android:id="@id/tvOrderAddress"
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/large_margin"
             android:text="@string/activity_order_distribute_address_text" />
 
     </LinearLayout>
@@ -49,7 +48,6 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
@@ -57,7 +55,6 @@
 
         <TextView
             android:id="@id/tvOrderArrivalTime"
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
@@ -76,14 +73,12 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
             android:text="@string/activity_order_distributor" />
 
         <TextView
-            style="@style/text_small_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
