@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import www.formssi.goodtaste.R;
+import www.formssi.goodtaste.fragment.OrderStateFragment;
 
 /**
  * Created by GTs on 2017-03-28.
@@ -15,9 +17,12 @@ import www.formssi.goodtaste.R;
 public class LoadMoreAdapter extends RecyclerView.Adapter {
 
     private OrderAdapter orderAdapter;
+    private OrderStateFragment orderStateFragment;
 
-    public LoadMoreAdapter(OrderAdapter orderAdapter){
+
+    public LoadMoreAdapter(OrderAdapter orderAdapter,OrderStateFragment orderStateFragment){
         this.orderAdapter = orderAdapter;
+        this.orderStateFragment = orderStateFragment;
     }
 
     @Override
@@ -33,7 +38,16 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof LoadingItemHolder){
+            final LoadingItemHolder loadHold = (LoadingItemHolder) holder;
+            loadHold.lltLoadMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (orderStateFragment.onLoadMoreClickListener() == 0){
+                        loadHold.tvLoad.setText("没有更多了");
+                    }
 
+                }
+            });
         }else {
             orderAdapter.onBindViewHolder((OrderAdapter.OrderHolder) holder,position);
         }
@@ -67,10 +81,16 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
 
 
     class LoadingItemHolder extends RecyclerView.ViewHolder{
-        LinearLayout lltLoadMore;
+        private LinearLayout lltLoadMore;
+        private TextView tvLoad;
         public LoadingItemHolder(View itemView) {
             super(itemView);
             lltLoadMore = (LinearLayout) itemView.findViewById(R.id.lltLoadMore);
+            tvLoad = (TextView) itemView.findViewById(R.id.tvLoad);
         }
+    }
+
+    public interface OnLoadMoreClickListener{
+        int onLoadMoreClickListener();
     }
 }

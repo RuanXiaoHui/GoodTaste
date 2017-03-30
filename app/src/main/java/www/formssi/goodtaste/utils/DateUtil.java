@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_TIME_MAX_CAN_PAY;
+
 /**
  * 日期工具类
  *
@@ -39,14 +41,15 @@ public final class DateUtil {
     }
 
     /**
-     * 获取时间差
+     * 获取订单剩余支付时间
      *
      * @param orderTimeMillis
+     * @param currentTimeMillis
      * @return
      */
-    public static long getTimeChange(long orderTimeMillis,long currentTimeMillis) {
+    public static long getOrderMillisUntilFinished(long orderTimeMillis,long currentTimeMillis) {
         long changeTimeMillis =currentTimeMillis - orderTimeMillis;
-        return changeTimeMillis;
+        return ORDER_TIME_MAX_CAN_PAY * 1000 - changeTimeMillis;
     }
 
     /**
