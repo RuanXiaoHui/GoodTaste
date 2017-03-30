@@ -45,9 +45,9 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
-        initView();
-        initData();
-        initListener();
+        initView();      //初始化控件
+        initData();      //初始化数据
+        initListener();  //初始化监听事件
     }
 
     @Override
@@ -65,13 +65,16 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initData() {
-        //编辑地址
+        //设置标题
         tvTitle.setText(R.string.activity_editAddress_title);
-        //获取传递参数，并显示数据
+        //获取上一页面传递过来的地址id
         intent = getIntent();
         addressId = intent.getStringExtra("addressId");
+        //通过订单id获取地址对象
         addressBean = DataBaseSQLiteUtil.getAddressById(addressId);
+        //获取性别
         mGender = addressBean.getGender();
+        //打开修改地址页面，显示暂未修改的信息
         showOldData(mGender);
     }
 
@@ -93,11 +96,10 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
             case R.id.iv_backTitlebar_back:  //返回
                 this.finish();
                 break;
-
             case R.id.btn_EditAddressActivity_ok: // 确定
-                String phone = etPhone.getText().toString().trim();
-                String address = etAddress.getText().toString().trim();
-                String name = etName.getText().toString().trim();
+                String name = etName.getText().toString().trim();        //收货人
+                String phone = etPhone.getText().toString().trim();      //电话
+                String address = etAddress.getText().toString().trim();  //地址信息
                 boolean nameEmpty = TextUtils.isEmpty(name);
                 boolean phoneIsEleven = checkPhoneIsEleven(phone);
                 boolean genderEmpty = TextUtils.isEmpty(mGender);
@@ -118,32 +120,37 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
                     this.finish();
                 }
                 break;
-
             default:
                 break;
         }
     }
 
+    /**
+     * 单选按钮
+     *
+     * @param group
+     * @param checkedId
+     */
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         RadioButton rbGender = (RadioButton) findViewById(checkedId);
-        mGender = rbGender.getText().toString();
+        mGender = rbGender.getText().toString();  //性别
     }
 
     /**
      * 显示原来的数据
      */
     private void showOldData(String gender) {
-        etName.setText(addressBean.getName());
-        if (gender.equals(getString(R.string.activity_address_gentleman))) {
+        etName.setText(addressBean.getName()); //显示姓名
+        if (gender.equals(getString(R.string.activity_address_gentleman))) {  //如果对象中性别为先生，选中先生单选按钮
             rbGentleman.setChecked(true);
             rbLady.setChecked(false);
-        } else if (gender.equals(getString(R.string.activity_address_lady))) {
+        } else if (gender.equals(getString(R.string.activity_address_lady))) {//如果对象中性别为女士，选中男士单选按钮
             rbGentleman.setChecked(false);
             rbLady.setChecked(true);
         }
-        addressBean.setGender(gender);
-        etPhone.setText(addressBean.getPhone());
-        etAddress.setText(addressBean.getAddress());
+        addressBean.setGender(gender); //在地址对象中设置性别
+        etPhone.setText(addressBean.getPhone()); //显示电话
+        etAddress.setText(addressBean.getAddress());  //显示地址
     }
 }
