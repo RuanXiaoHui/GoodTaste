@@ -209,7 +209,8 @@
     <string name="no_order_tv_content">还没有订单</string>
     <string name="activity_bind">绑定新手机</string>
     <!--加载更多-->
-    <string name="text_load_more">加载更多...</string>
+    <string name="text_load_more">点击加载更多</string>
+    <string name="text_load_no_more">拉到底了~</string>
 
 
 

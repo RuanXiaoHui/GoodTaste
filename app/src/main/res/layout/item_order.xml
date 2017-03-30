@@ -45,14 +45,6 @@
                 android:text="2017-03-12 11:30"
                 android:textSize="12sp" />
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/llt"
-            android:src="@mipmap/ic_right_arrow" />
-
         <TextView
             android:id="@+id/tvTransactionStatus"
             android:layout_width="wrap_content"
