@@ -91,7 +91,7 @@ public class DataBaseSQLiteUtil {
      * @param status 订单的状态 (状态在orderState类中)
      * @return
      */
-    public static List<OrderBean> queryOrder(int status) {
+    public static List<OrderBean> queryOrder(int status,int page,int count) {
         openDataBase();
         String[] projection = {COLUMN_ORDER_ID, COLUMN_SHOP_NAME, COLUMN_SHOP_IMG_PATH, COLUMN_ORDER_NUMBER, COLUMN_ORDER_STATUS,
                 COLUMN_ORDER_CONTENT, COLUMN_ACTUAL_PAY, COLUMN_ORDER_TIME};
@@ -99,9 +99,9 @@ public class DataBaseSQLiteUtil {
         Cursor cursor;
         List<OrderBean> orderBeanList = new ArrayList<>();
         if (status == OrderState.ALL) {//查询全部
-            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, desc);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, null, null, null, null, desc,page+","+count);
         } else {//根据状态查询
-            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, desc);
+            cursor = mDatabase.query(TABLE_NAME_ORDER, projection, COLUMN_ORDER_STATUS + "= ?", new String[]{status + ""}, null, null, desc,page+","+count);
         }
         while (cursor.moveToNext()) {
             OrderBean orderBean = new OrderBean();
