@@ -44,6 +44,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
     private Button btnCancelPayment; //取消支付
     private String orderId; //订单id
     private String orderNum; //订单号
+    private long orderTimeMillis; //订单提交时间
     private Intent intent;
     private long currentTimeMillis;
 
@@ -74,13 +75,10 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
         intent = getIntent();
         orderId = intent.getStringExtra(INTENT_ORDER_ID);
         orderNum = intent.getStringExtra(INTENT_ORDER_NUM);
-
-        SharedPreferences sharedPreferences = OnlinePaymentActivity.this.getSharedPreferences("countTime", MODE_PRIVATE);
-        long orderTimeMillis = sharedPreferences.getLong("orderTimeMillis", 0);
-        Log.i("订单时间 long   ", orderTimeMillis + "");
+        orderTimeMillis = intent.getLongExtra("orderTimeMillis", 0);
         //计算时间差
         currentTimeMillis = System.currentTimeMillis();
-        long orderMillisUntilFinished = 900*1000 - DateUtil.getTimeChange(orderNum, orderTimeMillis, currentTimeMillis);
+        long orderMillisUntilFinished = 900 * 1000 - DateUtil.getTimeChange(orderTimeMillis, currentTimeMillis);
         getCountDownTime(orderMillisUntilFinished);
         //店名
         String storeName = intent.getStringExtra("storeName");
@@ -135,7 +133,6 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
 
     /**
      * 获取倒计时
-     *
      */
     private void getCountDownTime(long orderMillisUntilFinished) {
         timer = new CountDownTimer(orderMillisUntilFinished, 1000) {
@@ -151,7 +148,7 @@ public class OnlinePaymentActivity extends BaseActivity implements View.OnClickL
                     Log.i("在线支付倒计时", strTime);
 
                 }
-                if(TextUtils.isEmpty(strTime)){
+                if (TextUtils.isEmpty(strTime)) {
                     tvCountDown.setText("订单超时");
                     btnConfirmPayment.setText("支付超时");
                     btnConfirmPayment.setEnabled(false);

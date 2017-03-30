@@ -30,6 +30,7 @@ import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
+import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
@@ -246,14 +247,10 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             intent.putExtra(INTENT_ORDER_ID, orderId + "");
                             intent.putExtra(INTENT_ORDER_NUM, orderBean.getOrderNum() + "");
                             intent.putExtra("storeName", shopBean.getShopName());
+                            String orderTime = orderBean.getOrderTime();
+                            long orderTimeMillis = DateUtil.getDateMillis(orderTime);
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
-                            //记录提交订单时间
-                            SharedPreferences sharedPreferences = ConfirmOrderActivity.this.getSharedPreferences("countTime", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            long orderTimeMillis = System.currentTimeMillis();
-                            Log.i("提交订单时间 long    ", orderTimeMillis + "");
-                            editor.putLong("orderTimeMillis", orderTimeMillis);
-                            editor.commit();
+                            intent.putExtra("orderTimeMillis", orderTimeMillis);
                             startActivity(intent);
                             finish();
                         }
