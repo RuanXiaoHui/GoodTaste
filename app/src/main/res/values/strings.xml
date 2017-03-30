@@ -141,6 +141,8 @@
     <string name="update_pay_pwd">修改支付密码</string>
     <string name="update_login_pwd">修改登录密码</string>
     <string name="commit">确定</string>
+    <string name="modify">修改</string>
+    <string name="not_set">未设置</string>
 
     <!-- settingsuggestion -->
     <string name="activity_suggestion_title">意见反馈</string>
@@ -189,8 +191,6 @@
     <string name="toast_enter_new_pwd">请输入新密码!</string>
 
     <!--订单状态-->
-
-    <string name="order_state_all">全部</string>
     <string name="order_state_not_pay">未支付</string>
     <string name="order_state_not_delivery">未配送</string>
     <string name="order_state_delivery_ing">送餐中</string>
@@ -206,8 +206,7 @@
     <string name="order_btn_go_single">去下单</string>
     <string name="no_order_tv_content">还没有订单</string>
     <string name="activity_bind">绑定新手机</string>
-    <!--加载更多-->
-    <string name="text_load_more">加载更多...</string>
+
 
 
 </resources>

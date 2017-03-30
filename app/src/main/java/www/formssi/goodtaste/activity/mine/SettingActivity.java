@@ -48,7 +48,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initData() {
-        mUser = (UserBean) getIntent().getSerializableExtra("user");
+        mUser = (UserBean) getIntent().getSerializableExtra(ConstantConfig.USER);
     }
 
     @Override

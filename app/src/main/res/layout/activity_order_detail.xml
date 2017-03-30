@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_back_title_bar"/>
+    <include layout="@layout/layout_back_title_bar" />
 
     <View
         android:layout_width="match_parent"
@@ -42,25 +42,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@id/btn_order_cancel"
-                    style="@style/button_blue_text_white"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
-                    android:background="@drawable/selector_button_normal"
+                    android:background="@drawable/selector_button_translate"
                     android:text="@string/activity_order_cancel"
+                    android:textColor="@color/appColor"
                     android:visibility="gone" />
 
                 <Button
                     android:id="@id/btn_order_ok"
-                    style="@style/button_blue_text_white"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_small_height"
-                    android:background="@drawable/selector_button_normal"
-                    android:text="@string/activity_order_again" />
+                    android:background="@drawable/selector_button_translate"
+                    android:text="@string/activity_order_again"
+                    android:textColor="@color/appColor" />
             </LinearLayout>
 
             <View
@@ -89,6 +90,8 @@
                 android:id="@id/lv_order_food_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:divider="@color/line_horizontal"
+                android:dividerHeight="@dimen/line_height_low"
                 android:scrollbars="none" />
 
             <View
@@ -172,15 +175,16 @@
 
             <Button
                 android:id="@id/btn_order_contact_business"
-                style="@style/button_text_white"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_small_height"
                 android:layout_gravity="center"
-                android:background="@drawable/selector_button_normal"
-                android:drawableLeft="@mipmap/ic_telephone_normal"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/selector_button_translate"
+                android:drawableLeft="@mipmap/ic_shop_phone"
                 android:drawablePadding="@dimen/small_padding"
                 android:padding="@dimen/small_padding"
-                android:text="@string/activity_order_contact_shop" />
+                android:text="@string/activity_order_contact_shop"
+                android:textColor="@color/appColor" />
 
             <View
                 android:layout_width="match_parent"

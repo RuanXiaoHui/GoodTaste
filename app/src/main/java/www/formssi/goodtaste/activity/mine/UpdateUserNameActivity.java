@@ -12,6 +12,7 @@ import android.widget.TextView;
 import www.formssi.goodtaste.R;
 import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.bean.UserBean;
+import www.formssi.goodtaste.constant.ConstantConfig;
 import www.formssi.goodtaste.fragment.MineFragment;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
 
@@ -43,8 +44,10 @@ public class UpdateUserNameActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
-        userBean = (UserBean) getIntent().getSerializableExtra("user");
-        etUpdateUsername.setText(userBean.getUserName());
+        userBean = (UserBean) getIntent().getSerializableExtra(ConstantConfig.USER);
+        String userName = userBean.getUserName();
+        etUpdateUsername.setText(userName);
+        etUpdateUsername.setSelection(userName.length()); //图标停留在最后一个字
     }
 
     @Override
@@ -60,17 +63,25 @@ public class UpdateUserNameActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.btn_update:
-                String contents = etUpdateUsername.getText().toString();
-                if (!TextUtils.isEmpty(contents)) {
-                    DataBaseSQLiteUtil.updateUserName(userBean.getPhoneNumber(), contents);
-                    Intent intent = new Intent(MineFragment.MY_ACTION);
-                    intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_USERNAME);
-                    intent.putExtra(MineFragment.MyReceiver.RESULT, contents);
-                    sendBroadcast(intent);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
+                updateUserName();
                 break;
+        }
+    }
+
+    /**
+     * 更新用户名
+     */
+    private void updateUserName() {
+        String contents = etUpdateUsername.getText().toString().trim();
+        if (!TextUtils.isEmpty(contents)) {
+            DataBaseSQLiteUtil.updateUserName(userBean.getPhoneNumber(), contents);
+            userBean.setUserName(contents);
+            Intent intent = new Intent(MineFragment.MY_ACTION);
+            intent.putExtra(MineFragment.MyReceiver.CODE, MineFragment.MyReceiver.TYPE_USERNAME);
+            intent.putExtra(MineFragment.MyReceiver.RESULT, userBean);
+            sendBroadcast(intent);
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 }

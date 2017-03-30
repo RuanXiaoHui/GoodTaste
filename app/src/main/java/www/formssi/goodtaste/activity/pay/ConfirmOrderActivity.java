@@ -15,8 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,25 +23,22 @@ import www.formssi.goodtaste.activity.base.BaseActivity;
 import www.formssi.goodtaste.activity.mine.LoginActivity;
 import www.formssi.goodtaste.activity.mine.ReceiveAddressActivity;
 import www.formssi.goodtaste.bean.AddressBean;
-import www.formssi.goodtaste.bean.EventBean;
 import www.formssi.goodtaste.bean.FoodBean;
 import www.formssi.goodtaste.bean.OrderBean;
 import www.formssi.goodtaste.bean.ShopBean;
 import www.formssi.goodtaste.bean.UserBean;
 import www.formssi.goodtaste.constant.ConstantConfig;
-import www.formssi.goodtaste.constant.OrderState;
 import www.formssi.goodtaste.utils.ContextUtil;
 import www.formssi.goodtaste.utils.DataBaseSQLiteUtil;
-import www.formssi.goodtaste.utils.DateUtil;
 import www.formssi.goodtaste.utils.OrderUtil;
 
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_ID;
+import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_ORDER_NUM;
 import static www.formssi.goodtaste.constant.ConstantConfig.INTENT_USER_ID;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.ORDER_REMARK_RESULT;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_REQUEST;
 import static www.formssi.goodtaste.constant.ConstantConfig.OREDER_REDDRESS_RESULT;
-import static www.formssi.goodtaste.constant.ConstantConfig.PAY_COUNT_DOWN_TIME;
 
 /**
  * 确认订单页面
@@ -249,11 +244,17 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                             ContextUtil.getInstance().setFinishGoodsActivity(true);
                             intent = new Intent(ConfirmOrderActivity.this, OnlinePaymentActivity.class);
                             intent.putExtra(INTENT_ORDER_ID, orderId + "");
+                            intent.putExtra(INTENT_ORDER_NUM, orderBean.getOrderNum() + "");
                             intent.putExtra("storeName", shopBean.getShopName());
                             intent.putExtra("totalPay", (money + Integer.parseInt(shopBean.getShopMoney())) + "");
+                            //记录提交订单时间
+                            SharedPreferences sharedPreferences = ConfirmOrderActivity.this.getSharedPreferences("countTime", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            long orderTimeMillis = System.currentTimeMillis();
+                            Log.i("提交订单时间 long    ", orderTimeMillis + "");
+                            editor.putLong("orderTimeMillis", orderTimeMillis);
+                            editor.commit();
                             startActivity(intent);
-                            CountDownThread thread = new CountDownThread();
-                            thread.start();
                             finish();
                         }
                     } else {//地址为空
@@ -297,32 +298,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         lvFood.addFooterView(footView);
         //添加适配器
         lvFood.setAdapter(new FoodListAdapter(foodBeanList));
-    }
-
-    private static final String TAG = "ConfirmOrderActivity";
-    /**
-     * 支付倒计时线程
-     */
-    class CountDownThread extends Thread {
-
-        @Override
-        public void run() {
-            super.run();
-            int i = 900;
-            while (i > 0) {
-                i--;
-                Log.e(TAG, "run: "+i);
-                EventBean eventBean = new EventBean();
-                eventBean.setAction(PAY_COUNT_DOWN_TIME);
-                eventBean.setCountDownTime(i);
-                EventBus.getDefault().post(eventBean);
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     /**

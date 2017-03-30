@@ -11,8 +11,8 @@ import java.util.Locale;
  */
 public final class DateUtil {
 
-    public static void main(String[] a){
-        System.out.print(getCurrentDate(YYYYMMDDHHMMSS));
+    public static void main(String[] a) {
+        System.out.print(getCurrentDate("ss秒"));
     }
 
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
@@ -23,7 +23,7 @@ public final class DateUtil {
 
     /**
      * 获取当前自定义格式的日期
-     *
+     * <p>
      * yyyy-MM-dd HH:mm:ss
      *
      * @param template
@@ -36,6 +36,18 @@ public final class DateUtil {
     }
 
     /**
+     * 获取时间差
+     *
+     * @param orderTimeMillis
+     * @return
+     */
+    public static long getTimeChange(String orderNum,long orderTimeMillis,long currentTimeMillis) {
+        long changeTimeMillis =currentTimeMillis - orderTimeMillis;
+//        long changeTimeSecond = changeTimeMillis / 1000;
+        return changeTimeMillis;
+    }
+
+    /**
      * 获取当前时间（yyyy-MM-dd HH:mm:ss）
      *
      * @return yyyy-MM-dd HH:mm:ss
@@ -44,7 +56,9 @@ public final class DateUtil {
         DateFormat format = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS, Locale.CHINA);
         String time = format.format(System.currentTimeMillis());
         return time;
+
     }
+
 
     /**
      * 获取当前日期： 20160709 yyyyMMdd
