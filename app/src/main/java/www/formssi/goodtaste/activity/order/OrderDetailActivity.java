@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -76,6 +77,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private Intent intent; // 获取上一个intent
     private String rmbSign; // 人民币符号
     private String rmbUnit; // 人民币单位
+    private CountDownTimer downTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +123,10 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             if (null != orderId && !"".equals(orderId)) {
                 orderBean = DataBaseSQLiteUtil.getOrderBeansById(orderId).get(0); // 根据id查询订单详情数据
                 setOrderDetail(orderBean); // 展示订单详情信息
+                long orderTimeMillis = DateUtil.getDateMillis(orderBean.getOrderTime());
+                long orderMillisUntilFinished = DateUtil.getOrderMillisUntilFinished(orderTimeMillis, System.currentTimeMillis());
+                downTimer = OrderUtil.setCountDownTime(orderMillisUntilFinished, tvOrderStatus, "订单超时", btnOK, "订单超时");
+                downTimer.start();
             }
             if (null != orderBean) {
                 listFoodBean.addAll(orderBean.getFoodBeanList()); // 展示食物列表信息
@@ -212,7 +218,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvenBusMain(EventBean eventBean) { // EventBus接收器，运行在主线程
         initData(); // 更新数据
-        switch (eventBean.getAction()){
+        switch (eventBean.getAction()) {
             case ConstantConfig.REMIND_ORDER:
 
                 break;
@@ -338,5 +344,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this); // 反注册EventBus
+        if (null != downTimer) {
+            downTimer.cancel();
+        }
     }
 }
